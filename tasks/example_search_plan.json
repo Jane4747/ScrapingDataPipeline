@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "task_id": "health-search-plan-example",
+  "title": "医疗健康企业资料检索计划",
+  "question": "寻找企业公开披露的医疗装备及智慧康养部署、试点、验收和规划材料。",
+  "source_config": "../configs/medical_equipment_sources.json",
+  "topic_profile": "../configs/topics/health_deployment.json",
+  "allow_network": false,
+  "stages": ["discovery"],
+  "discovery": {"provider": "plan", "max_queries": 6}
+}

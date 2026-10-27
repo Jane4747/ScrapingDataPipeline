@@ -1,0 +1,60 @@
+{
+  "id": "20261015-caict-health",
+  "created_at": "2026-10-15 20:06:00",
+  "updated_at": "2026-10-15 20:10:00",
+  "status": "completed",
+  "requirement": "爬取 https://www.caict.ac.cn/kxyj/ 里关于医疗、健康的网页。",
+  "theme": "中国信通院科研能力栏目中与医疗、健康相关的页面",
+  "delivery": "excel",
+  "tool": "crawl4ai",
+  "route": {
+    "tool": "crawl4ai",
+    "ambiguous": false,
+    "note": "列表页对普通请求返回 412，需要浏览器翻页。"
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "requirement",
+      "at": "2026-10-15 20:01:00",
+      "text": "爬取 https://www.caict.ac.cn/kxyj/ 里关于医疗、健康的网页。"
+    },
+    {
+      "id": "theme",
+      "parent": "need",
+      "kind": "decision",
+      "at": "2026-10-15 20:04:00",
+      "text": "主题限定为医疗和健康。医药、卫生、数字健康、健康医疗算在内。标题里单独出现的「健康发展」不算。"
+    },
+    {
+      "id": "delivery",
+      "parent": "theme",
+      "kind": "decision",
+      "at": "2026-10-15 20:04:00",
+      "text": "交付 Excel。字段为栏目、标题、日期、链接、命中词、列表页。"
+    },
+    {
+      "id": "tool",
+      "parent": "delivery",
+      "kind": "choice",
+      "at": "2026-10-15 20:05:00",
+      "text": "用 crawl4ai 翻页抓取蓝皮书、ICT深度观察、权威数据、专题报告、CAICT观点。",
+      "tool": "crawl4ai"
+    },
+    {
+      "id": "run",
+      "parent": "tool",
+      "kind": "action",
+      "at": "2026-10-15 20:10:00",
+      "text": "五个栏目共翻了 119 个列表页，脚本是 scripts/caict_kxyj_health.py。"
+    },
+    {
+      "id": "output",
+      "parent": "run",
+      "kind": "result",
+      "at": "2026-10-15 20:10:00",
+      "text": "命中 23 条。Excel：outputs/caict-kxyj-health/caict_kxyj_health.xlsx。"
+    }
+  ]
+}

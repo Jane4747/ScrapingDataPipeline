@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "topic": "智能医疗装备技术研究",
+  "sources": [
+    {
+      "id": "genertec_health",
+      "name": "通用技术集团医疗板块",
+      "seeds": ["https://www.gt.cn/hxzy/ykytjk/ylyw/", "https://www.gt.cn/hxzy/ykytjk/ylqx/index.html"],
+      "allowed_domains": ["gt.cn"]
+    },
+    {
+      "id": "cr_healthcare",
+      "name": "华润健康",
+      "seeds": ["https://www.crhealthcare.com.hk/zjwm/"],
+      "allowed_domains": ["crhealthcare.com.hk"]
+    },
+    {
+      "id": "sinopharm_healthcare",
+      "name": "国药医疗",
+      "seeds": ["https://www.sinopharm.com/2025-06/06/c_20161.htm"],
+      "allowed_domains": ["sinopharm.com"]
+    },
+    {
+      "id": "cecloud",
+      "name": "中国电子云",
+      "seeds": ["https://cecloud.com/product/", "https://cecloud.com/solution/7038090634791489536.html", "https://cecloud.com/solution/7038090579556700160.html"],
+      "allowed_domains": ["cecloud.com"]
+    },
+    {
+      "id": "shecc",
+      "name": "电科数字",
+      "seeds": ["https://www.shecc.com/index.html"],
+      "allowed_domains": ["shecc.com"]
+    },
+    {
+      "id": "china_mobile",
+      "name": "中国移动医疗行业团队",
+      "seeds": ["https://chinamobileltd.com/sc/esg/sd/2023_ashare/04.pdf"],
+      "allowed_domains": ["chinamobileltd.com"]
+    },
+    {
+      "id": "china_telecom",
+      "name": "中国电信天翼云医疗业务",
+      "seeds": ["https://www.ctyun.cn/newsboard/1000129825"],
+      "allowed_domains": ["ctyun.cn"]
+    },
+    {
+      "id": "china_unicom",
+      "name": "中国联通医疗行业团队",
+      "seeds": ["https://www.chinaunicom.com.hk/sc/esg/social.php"],
+      "allowed_domains": ["chinaunicom.com.hk"]
+    },
+    {
+      "id": "shandong_healthcare",
+      "name": "山东健康集团",
+      "seeds": ["https://www.shandonghealthcare.com/p1/64877.html"],
+      "allowed_domains": ["shandonghealthcare.com"]
+    },
+    {
+      "id": "beijing_elderly_care",
+      "name": "北京康养",
+      "seeds": ["https://www.powerbeijing.com/invesm_s7.html"],
+      "allowed_domains": ["powerbeijing.com"]
+    },
+    {
+      "id": "inspur_health",
+      "name": "浪潮健康",
+      "seeds": ["https://www.inspur.com/lcjtww/jkyldsj/index.html"],
+      "allowed_domains": ["inspur.com"]
+    },
+    {
+      "id": "yunnan_investment_health",
+      "name": "云投医疗／云投康养",
+      "seeds": ["https://gzw.yn.gov.cn/xwzx/ssqy/202606/t20260623_3053589.html"],
+      "allowed_domains": ["gzw.yn.gov.cn"]
+    },
+    {
+      "id": "mindray",
+      "name": "迈瑞医疗",
+      "seeds": ["https://www.mindray.com/cn", "https://www.mindray.com/cn/products/ultrasound"],
+      "allowed_domains": ["www.mindray.com", "mindray.com"]
+    },
+    {
+      "id": "united_imaging",
+      "name": "联影医疗",
+      "seeds": ["https://global.united-imaging.com/zh-cn/investor-relations/faq", "https://global.united-imaging.com/zh-cn/product-service/products/mi", "https://global.united-imaging.com/zh-cn/product-service/products/mr", "https://global.united-imaging.com/zh-cn/product-service/products/ct"],
+      "allowed_domains": ["global.united-imaging.com"]
+    },
+    {
+      "id": "medbot",
+      "name": "微创机器人",
+      "seeds": ["https://www.medbotsurgical.com/about", "https://www.medbotsurgical.com/"],
+      "allowed_domains": ["medbotsurgical.com"]
+    },
+    {
+      "id": "tinavi",
+      "name": "天智航",
+      "seeds": ["https://cn.tinavi.com/index.php?a=type&c=article&tid=1"],
+      "allowed_domains": ["cn.tinavi.com"]
+    },
+    {
+      "id": "edgemed",
+      "name": "精锋医疗",
+      "seeds": ["https://www.edgemed.cn/guanyuwomen/gongsikaikuang/", "https://www.edgemed.cn/chanpinfangan/chanpinjiqiren/"],
+      "allowed_domains": ["edgemed.cn"]
+    },
+    {
+      "id": "fourier",
+      "name": "傅利叶",
+      "seeds": ["https://www.fftai.com/en/", "https://www.fftai.com/", "https://fftai.com/uploads/upload/files/20240930/337b9b48d58a4f1a5ab114a212676ac1.pdf"],
+      "allowed_domains": ["fftai.com"]
+    },
+    {
+      "id": "ai_robotics",
+      "name": "大艾机器人",
+      "seeds": ["https://www.ai-robotics.cn/"],
+      "allowed_domains": ["ai-robotics.cn"]
+    },
+    {
+      "id": "iflytek_healthcare",
+      "name": "讯飞医疗",
+      "seeds": ["https://www.xunfeihealthcare.com/news/181/1088.html"],
+      "allowed_domains": ["xunfeihealthcare.com"]
+    },
+    {
+      "id": "yidu_tech",
+      "name": "医渡科技",
+      "seeds": ["https://www.yidutech.com/about.html", "https://www.yidutech.com/yidu-core.html", "https://www.yidutech.com/solution01.html"],
+      "allowed_domains": ["yidutech.com"]
+    }
+  ]
+}

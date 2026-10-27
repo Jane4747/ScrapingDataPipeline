@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "医疗健康部署与技术资料",
+  "query_topics": [
+    {"purpose": "部署与试点", "terms": "医疗 (部署 OR 试点 OR 上线)"},
+    {"purpose": "医院应用案例", "terms": "医院 (智能 OR 智慧) 案例"},
+    {"purpose": "智能装备", "terms": "(医疗装备 OR 医疗机器人) 应用"},
+    {"purpose": "健康与康养", "terms": "(智慧健康 OR 智慧康养) 项目"},
+    {"purpose": "合作与验收", "terms": "医疗 (合作 OR 中标 OR 验收)"},
+    {"purpose": "战略与年度披露", "terms": "医疗 (年报 OR 战略 OR 布局)"}
+  ]
+}

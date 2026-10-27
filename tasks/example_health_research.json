@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "health-research-demo-20261022",
+  "title": "21家企业医疗健康部署资料复核",
+  "question": "从已有企业公开资料中识别医疗装备、智慧医疗和康养部署线索，明确证据缺口，形成待核验资料包。",
+  "research_type": "health_deployment",
+  "region": "中国",
+  "scenarios": ["医院", "医疗健康服务", "康养机构"],
+  "source_config": "../configs/medical_equipment_sources.json",
+  "topic_profile": "../configs/topics/health_deployment.json",
+  "source_ids": [],
+  "allow_network": false,
+  "collection": {"mode": "existing", "input_dir": "../outputs/medical-equipment-20261022"},
+  "time_range": {"basis": "publication", "since": "2021-10-22", "until": "2026-10-22"},
+  "budget": {"max_per_page": 30, "proximity": 100},
+  "delivery": ["json", "markdown", "csv"]
+}

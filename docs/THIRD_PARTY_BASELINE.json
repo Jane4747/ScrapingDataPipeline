@@ -1,0 +1,40 @@
+{
+  "recorded_at": "2026-10-22",
+  "note": "Read-only baseline; third-party repositories and their local patches were not changed by this upgrade. Hashes identify local modifications but do not replace backup copies.",
+  "repositories": [
+    {
+      "name": "crawl4ai",
+      "head": "94b67888ca8b335ff2121423a50e06dd27661922",
+      "modified_tracked_files": []
+    },
+    {
+      "name": "feapder",
+      "head": "b5ed609d04350bd9089c161946069c6be75125fc",
+      "modified_tracked_files": []
+    },
+    {
+      "name": "goverment_spider",
+      "head": "de5b5edef7967c777216ca48f951911337cab3ed",
+      "modified_tracked_files": [
+        {
+          "path": "start_project.py",
+          "sha256": "c1dbf03b6f3dfb1cd1c17272dfd78ed22c4d6f7d8db4489852d4cdaca9f342d9"
+        },
+        {
+          "path": "utils.py",
+          "sha256": "34f4899dde98add3b9ec4e2f0998598bac82de899a9704937aba6275d6540eac"
+        }
+      ]
+    },
+    {
+      "name": "news-please",
+      "head": "f899850be2bb0059da101c13502ec88af057f974",
+      "modified_tracked_files": []
+    },
+    {
+      "name": "NewsCrawler",
+      "head": "25fb3b4a20186905f5ce38f7a7f854050d402253",
+      "modified_tracked_files": []
+    }
+  ]
+}

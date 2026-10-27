@@ -1,0 +1,80 @@
+{
+  "id": "20261015-deploy",
+  "created_at": "2026-10-15 17:52:00",
+  "updated_at": "2026-10-15 17:52:00",
+  "status": "completed",
+  "requirement": "把五个采集仓库和 BigData 环境部署到本地。Jane 提出内容需求后，先确认主题和交付格式，再调用对应代码。过程的想法树同步到 ScrapingDataPipeline。",
+  "theme": "本地采集流水线本身，还没有具体内容主题",
+  "delivery": "想法树用 json 和 markdown。以后每次采集的交付格式在运行前单独确认，只接受 json、excel、markdown。",
+  "tool": null,
+  "route": {
+    "tool": null,
+    "ambiguous": false,
+    "note": "这一轮是部署，不选择某一个采集器。"
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "requirement",
+      "at": "2026-10-15 16:56:00",
+      "text": "部署 E:\\CAICTBigData\\coding 的代码和 D:\\Anaconda3\\envs\\BigData，并在确认主题与交付格式后自动调用。想法树推到 Jane4747/ScrapingDataPipeline。"
+    },
+    {
+      "id": "found",
+      "parent": "need",
+      "kind": "observation",
+      "at": "2026-10-15 17:00:00",
+      "text": "coding 目录原先不存在。旁边有一个空的 codeing 目录。BigData 只是当天建的空文件夹，conda env list 里没有它。"
+    },
+    {
+      "id": "layout",
+      "parent": "found",
+      "kind": "decision",
+      "at": "2026-10-15 17:05:00",
+      "text": "仓库克隆到 repos/，调度写在 pipeline/。环境用 Python 3.11.17。五个上游仓库不推进公开仓库：NewsCrawler 是 GPL-3.0，goverment_spider 没有许可证。"
+    },
+    {
+      "id": "clone",
+      "parent": "layout",
+      "kind": "action",
+      "at": "2026-10-15 17:08:00",
+      "text": "浅克隆 goverment_spider、NewsCrawler、crawl4ai、feapder、news-please。本机访问 GitHub 时证书链里有自签名证书，只在这一次克隆命令上关闭校验，没有修改 git config。"
+    },
+    {
+      "id": "env",
+      "parent": "clone",
+      "kind": "observation",
+      "at": "2026-10-15 17:20:00",
+      "text": "conda 第一次解压不完整，缺少 _socket、OpenSSL、libffi、libexpat。强制重装后可以 import ssl、ctypes、pyexpat。调用 python.exe 时要把 Library\\bin 放进 PATH，否则 _ssl 加载失败。"
+    },
+    {
+      "id": "deps",
+      "parent": "env",
+      "kind": "decision",
+      "at": "2026-10-15 17:30:00",
+      "text": "不按互相冲突的版本号全装。政府爬虫原来的 pandas==1.4.4 换成当前 pandas。Playwright 跟随 crawl4ai 的 1.49 以上。requests 保持 2.32。微信解析需要的 demjson3 单独安装。feapder、news-please、crawl4ai 以可编辑方式装上本地克隆。"
+    },
+    {
+      "id": "windows",
+      "parent": "deps",
+      "kind": "decision",
+      "at": "2026-10-15 17:32:00",
+      "text": "政府爬虫在 Windows 上跳过 SIGALRM。start_project.py 改为调用当前解释器，不再写死 python3。这些改动只留在本地 repos/。"
+    },
+    {
+      "id": "gate",
+      "parent": "windows",
+      "kind": "decision",
+      "at": "2026-10-15 17:40:00",
+      "text": "pipeline plan 只记录需求和工具判断，不采集。pipeline run 必须带已确认的主题和交付格式。政府站点默认要 --site；文章和动态页要 --url；feapder 要 --spider。"
+    },
+    {
+      "id": "check",
+      "parent": "gate",
+      "kind": "result",
+      "at": "2026-10-15 17:52:00",
+      "text": "pandas、feapder、newsplease、crawl4ai 可以导入。NewsCrawler 通过仓库路径导入 news_extractor_core。Chromium 放在 .playwright-browsers。还没有开始具体内容采集。"
+    }
+  ]
+}

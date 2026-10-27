@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "health-live-example",
+  "title": "迈瑞与微创医疗装备部署资料",
+  "question": "寻找迈瑞与微创医疗机器人产品进入医院的公开部署证据，并区分产品发布、试点与常规使用。",
+  "research_type": "health_deployment",
+  "source_config": "../configs/medical_equipment_sources.json",
+  "topic_profile": "../configs/topics/health_deployment.json",
+  "source_ids": ["mindray", "medbot"],
+  "allow_network": true,
+  "collection": {"mode": "crawl"},
+  "discovery": {"provider": "plan", "max_queries": 6},
+  "budget": {"max_pages": 6, "max_depth": 1, "workers": 2, "delay": 1, "timeout": 25, "retries": 1, "browser": false},
+  "time_range": {"basis": "publication", "since": null, "until": null},
+  "delivery": ["json", "markdown", "csv"]
+}

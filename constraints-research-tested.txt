@@ -1,0 +1,12 @@
+# Observed in the validated local Python 3.11.17 environment on 2026-10-22.
+# Use with: python -m pip install -r requirements-research.txt -c constraints-research-tested.txt
+# These are tested versions, not a claim that they are the latest releases.
+requests==2.34.2
+beautifulsoup4==4.15.0
+pypdf==6.21.2
+certifi==2026.7.22
+charset-normalizer==3.5.2
+idna==3.20
+urllib3==2.8.0
+soupsieve==3.0.3
+typing_extensions==4.16.0

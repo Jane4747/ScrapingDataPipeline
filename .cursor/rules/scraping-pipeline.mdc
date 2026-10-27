@@ -1,0 +1,25 @@
+---
+description: Jane 提出采集需求时，先确认主题和交付格式，再调用本地代码，并把想法树推到 ScrapingDataPipeline
+alwaysApply: true
+---
+
+# 采集需求怎么做
+
+Jane 给出内容需求后，按这个顺序做，不要跳过确认直接采集。
+
+1. 用 BigData 解释器生成想法树，不运行采集：
+
+```powershell
+D:\Anaconda3\envs\BigData\python.exe -m pipeline plan --requirement "<Jane 的原话>"
+```
+
+2. 把推荐工具和原因告诉 Jane，并确认两件事：主题范围、交付格式（json、excel 或 markdown）。工具有歧义时先让 Jane 选定，不要猜测后开跑。
+3. Jane 确认后才运行：
+
+```powershell
+D:\Anaconda3\envs\BigData\python.exe -m pipeline run --tree-id <id> --theme "<主题>" --delivery json
+```
+
+政府站点必须带 `--site`，或在 Jane 明确要求全量时才加 `--all-sites`。文章、动态页和新闻提取要带 `--url`。feapder 要带已经写好的 `--spider`。
+4. 运行结束后，把 `idea-trees/<id>/` 提交并推送到 https://github.com/Jane4747/ScrapingDataPipeline 。不要提交 `repos/` 和 `outputs/`。
+5. 解释器固定为 `D:\Anaconda3\envs\BigData\python.exe`。五个仓库在 `repos/`。

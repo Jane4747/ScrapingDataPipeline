@@ -1,0 +1,14 @@
+repos/
+outputs/
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.xlsx
+*.log
+.idea/
+.vscode/
+.playwright-browsers/
+.runtime-deps/
+.runtime.json
+.deployment-wheels/
