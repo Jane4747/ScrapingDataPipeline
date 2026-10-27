@@ -83,7 +83,17 @@ def audit_bundle(folder,min_queries=6):
         evidence(row)
     for key,actual in [('searched_hospitals',len(set(log_ids))),('query_count',total),('records',len(records)),('candidates',len(candidates))]:
         if key in scope and scope[key]!=actual:issue('summary_mismatch',{'field':key,'reported':scope[key],'actual':actual})
-    retained={int(r['hospital_id']) for r in records+candidates}
+    retained=set()
+    for row in records+candidates:
+        try:
+            associated={int(value) for value in (row.get('hospital_ids') or [row['hospital_id']])}
+        except (TypeError,ValueError):
+            issue('invalid_hospital_ids','关联医院ID格式错误',row.get('hospital_id'));continue
+        if int(row['hospital_id']) not in associated:
+            issue('primary_hospital_not_associated','主医院不在关联医院清单',row['hospital_id'])
+        if not associated <= set(ids):
+            issue('unknown_associated_hospital',sorted(associated-set(ids)),row['hospital_id'])
+        retained.update(associated & set(ids))
     return {'status':'passed' if not errors else 'failed','hospital_count':len(ids),
             'searched_hospitals':len(set(log_ids)),'query_count':total,'queries_verified_in_evidence':verified,
             'accepted_records':len(records),'candidate_or_excluded':len(candidates),

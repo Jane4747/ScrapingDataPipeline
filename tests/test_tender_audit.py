@@ -42,5 +42,19 @@ class AuditTests(unittest.TestCase):
             self.make_bundle(root);(Path(root)/'evidence/query.json').unlink()
             self.assertIn('missing_evidence_file',[x['kind'] for x in audit_bundle(root,1)['errors']])
 
+    def test_shared_notice_counts_each_associated_hospital_once(self):
+        with tempfile.TemporaryDirectory() as root:
+            self.make_bundle(root)
+            self.save(root,'hospital_roster.json',[{'id':1,'name':'甲医院'},{'id':2,'name':'乙医院'}])
+            self.save(root,'hospital_search_log.json',[
+                {'hospital_id':i,'queries':['示例医院 HIS'],'evidence_files':['evidence/query.json']} for i in (1,2)])
+            self.save(root,'collection_scope.json',{'since':'2024-01-01','until':'2026-10-27','query_count':2})
+            self.save(root,'candidate_notices.json',[{'hospital_id':1,'hospital_ids':[1,2],'evidence_files':['evidence/query.json']}])
+            result=audit_bundle(root,1)
+            self.assertEqual(result['status'],'passed')
+            self.assertEqual(result['hospitals_with_retained_notices'],2)
+            self.assertEqual(result['hospitals_without_retained_notices'],0)
+            self.assertEqual(result['query_count'],2)
+
 
 if __name__=='__main__':unittest.main()

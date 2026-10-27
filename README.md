@@ -11,7 +11,10 @@
 - [数据字典](docs/DATA_DICTIONARY.md)：资料/证据/项目、日期与状态的区分。
 - [北京一级医院招采用法](docs/BEIJING_TIER1_TENDERS.md)：名单、词表、限定网址归档与七列导出。
 - [本轮代码总结](docs/BEIJING_TIER1_CODE_SUMMARY.md)：模块职责、实际执行范围、审计和已知限制。
-- [本轮想法树](idea-trees/beijing-tier1-tenders-20261027/tree.md)：检索、采集、核验、交付与缺口。
+- [渠道补查用法](docs/BEIJING_TIER1_CHANNELS.md)：参数化合并、历史日志和可选工作簿。
+- [逐站采集缺口](docs/BEIJING_TIER1_SITE_GAPS.md)：实际错误、字段缺口、证据和补齐方向。
+- [渠道补查想法树](idea-trees/beijing-tier1-channels-20261027/tree.md)：26家定向补查、149条查询和未解决问题。
+- [上轮全名单想法树](idea-trees/beijing-tier1-tenders-20261027/tree.md)：检索、采集、核验、交付与缺口。
 - [企业资料采集指南](COLLECTING_GUIDE.md)：分阶段搜索、采集和线索提取。
 - [AGENTS.md](AGENTS.md)：以后GPT在本库工作的约束和默认操作方式。
 
