@@ -3,6 +3,27 @@
   "purpose": "人工维护的渠道参考，不是已执行爬虫或完整站点适配器",
   "channels": [
     {
+      "name": "各医院本级官网采购信息（逐院必查）",
+      "url": null,
+      "channel_kind": "hospital_official_procurement",
+      "per_hospital_registry_required": true,
+      "observed_at": "2026-10-27",
+      "observed_status": "按原251家逐院建立核查项；已核验和待核验分开记录，不能用统一网址替代医院官网。",
+      "columns_to_check": [
+        "招标采购",
+        "采购公告",
+        "中标成交",
+        "采购意向",
+        "院内比选",
+        "询价议价",
+        "院务公开",
+        "通知公告",
+        "采购结果",
+        "更正终止"
+      ],
+      "note": "先核验官网主体，再查栏目及附件；无独立栏目时检查通知公告与院务公开；上级总院/学校/集团代发另列，不凭隶属关系确认项目使用医院。"
+    },
+    {
       "name": "中国政府采购网",
       "url": "https://www.ccgp.gov.cn/",
       "observed_at": "2026-10-27",
@@ -45,7 +66,7 @@
       "note": "powerbeijing.dnezb.com为第三方汇总页；转载公告须注明来源性质。拟定供应商不得填作已中标单位。"
     },
     {
-      "name": "高校、医院和上级单位官网",
+      "name": "上级学校采购部门官网（与医院本级官网分列）",
       "url": "https://gzc.bua.edu.cn/",
       "observed_at": "2026-10-27",
       "observed_status": "北京农学院采购管理官网已定位；其他已知采购人官网继续交叉查验",

@@ -14,7 +14,7 @@
 |---|---|---|
 | scripts/tender_tools.py | Excel名单导入、限定URL采集任务、七列CSV/JSON导出 | 名单读取依赖03-一级医院原列布局；不执行会话搜索 |
 | configs/beijing_tier1_keywords_v2.json | 11组277个去重主题词 | 组合检索，不是277词乘251家的穷举 |
-| configs/beijing_tender_channels.json | 12个入口的性质与本次观察 | 静态渠道参考，不是12个爬虫适配器；雄安入口仅备存 |
+| configs/beijing_tender_channels.json | 平台入口、逐院官网必查规则与观察 | 静态渠道参考，不是各站点的完整爬虫适配器；雄安入口仅备存 |
 | pipeline/research/ 与 task_runner.py | 已知URL采集、robots检查、限速、原文及检查点 | 受域名、页数、深度与正文提取能力限制 |
 | scripts/tender_channel_merge.py | 参数化离线合并本轮渠道补查 | 不联网，不会补齐缺失事实；保留原输入，要求新输出目录 |
 | scripts/tender_audit.py | 校验名单、真实查询留痕、日期、字段与证据 | 结构审计不证明公告真实性或全网完整；多院公告按全部hospital_ids计覆盖 |
@@ -38,3 +38,7 @@
 本轮历史脚本共9个，保留于outputs/beijing-hospital-channel-code-20261027/code，code_manifest.json记录SHA256。它们包含当时的目录、分组、个别记录和专用运行时假设，属于历史归档，不能当成通用爬虫。通用重放使用tender_channel_merge.py；它需要上一轮资料包及本轮补查输入，数据不随公开仓库分发。
 
 详细命令见[渠道补查用法](BEIJING_TIER1_CHANNELS.md)，逐网站原因见[网站采集缺口](BEIJING_TIER1_SITE_GAPS.md)，本次验证见[渠道补查验证](BEIJING_TIER1_CHANNEL_VALIDATION.md)。
+
+## 医院官网渠道补充
+
+新增 `scripts/hospital_official_channels.py`，为名单内每家医院建立本级官网和上级代发渠道核查项，保留普通通知栏目、采购栏目、证据与缺口，单独输出待执行查询计划。该脚本不联网、不改变16条正式招采结果。七项离线测试通过；真实251家台账与有限官网核验分开统计。用法和已定位入口见[医院官网采购渠道核查](HOSPITAL_OFFICIAL_CHANNELS.md)。

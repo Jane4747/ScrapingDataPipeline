@@ -18,6 +18,8 @@
 - [企业资料采集指南](COLLECTING_GUIDE.md)：分阶段搜索、采集和线索提取。
 - [AGENTS.md](AGENTS.md)：以后GPT在本库工作的约束和默认操作方式。
 
+- [医院官网采购渠道](docs/HOSPITAL_OFFICIAL_CHANNELS.md)：逐院官网、院务公开与采购栏目核查台账。
+
 ## 直接运行
 
 在本仓库目录打开PowerShell。启动器选择SCRAPING_PYTHON、.venv、.runtime.json、活动conda或系统Python；不会自动安装依赖。已有本机环境通过.runtime.json记录，避免代码写死盘符。
