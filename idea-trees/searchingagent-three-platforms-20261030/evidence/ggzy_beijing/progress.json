@@ -1,0 +1,28 @@
+{
+  "source": "ggzy_beijing",
+  "source_name": "北京公共资源交易平台",
+  "updated_at": "2026-10-29T10:46:21+00:00",
+  "status": "partial",
+  "start": "2024-01-01",
+  "end": "2026-10-29",
+  "records": 661,
+  "started_at": "2026-10-29T09:35:47+00:00",
+  "message": "开始执行；保留实际覆盖缺口",
+  "list_pages": 706,
+  "complete_windows": 168,
+  "pending_search_windows": 104,
+  "current_window": {
+    "start": "2025-10-01",
+    "end": "2025-10-31",
+    "word": "医院",
+    "page": 2
+  },
+  "failures": [
+    {
+      "url": "https://ggzyfw.beijing.gov.cn/jyxxzbjggg/20251027/5308870.html",
+      "status": "error",
+      "error": "Request failed: curl exit 28: curl: (28) Operation timed out after 40009 milliseconds with 0 bytes received"
+    }
+  ],
+  "stop_reason": "Request failed: curl exit 28: curl: (28) Operation timed out after 40009 milliseconds with 0 bytes received"
+}

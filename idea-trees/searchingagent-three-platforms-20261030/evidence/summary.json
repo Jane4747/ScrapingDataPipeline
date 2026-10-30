@@ -1,0 +1,89 @@
+{
+  "task_id": "medical-2024-20261029",
+  "status": "partial",
+  "generated_at": "2026-10-29T10:46:33+00:00",
+  "start": "2024-01-01",
+  "end": "2026-10-29",
+  "date_basis": "publication",
+  "records": 1082,
+  "sources": [
+    {
+      "source": "zycg",
+      "source_name": "央采",
+      "updated_at": "2026-10-29T09:43:18+00:00",
+      "status": "partial",
+      "start": "2024-01-01",
+      "end": "2026-10-29",
+      "records": 60,
+      "started_at": "2026-10-29T09:35:47+00:00",
+      "message": "窗口未完整完成；保留缓存，停止后续月份",
+      "current_window": [
+        "2024-07-01",
+        "2024-07-31"
+      ],
+      "completed_months": 6,
+      "total_months": 34,
+      "failures": [
+        {
+          "stage": "discovery",
+          "code": "blocked",
+          "url": "http://search.ccgp.gov.cn/bxsearch?searchtype=1&page_index=16&bidSort=0&buyerName=&projectId=&pinMu=0&bidType=0&dbselect=bidx&kw=&start_time=2024%3A07%3A01&end_time=2024%3A07%3A31&timeType=6&displayZone=&zoneId=&pppStatus=0&agentName=%E4%B8%AD%E5%A4%AE%E5%9B%BD%E5%AE%B6%E6%9C%BA%E5%85%B3%E6%94%BF%E5%BA%9C%E9%87%87%E8%B4%AD%E4%B8%AD%E5%BF%83",
+          "page": 16,
+          "reason": "Access challenge detected; no bypass attempted"
+        }
+      ]
+    },
+    {
+      "source": "ggzy_national",
+      "source_name": "全国公共资源交易平台",
+      "status": "partial",
+      "updated_at": "2026-10-29T18:36:36+08:00",
+      "api_calls_total": 510,
+      "detail_calls_total": 361,
+      "medical_digital_candidates": 397,
+      "records": 361,
+      "pending_search_windows": 810,
+      "complete_windows": 233,
+      "failures": 3,
+      "last_search": {
+        "start": "2025-10-29",
+        "end": "2025-10-29",
+        "word": "医",
+        "source": "3",
+        "stage": "0201",
+        "page": 1,
+        "endpoint": "current"
+      }
+    },
+    {
+      "source": "ggzy_beijing",
+      "source_name": "北京公共资源交易平台",
+      "updated_at": "2026-10-29T10:46:21+00:00",
+      "status": "partial",
+      "start": "2024-01-01",
+      "end": "2026-10-29",
+      "records": 661,
+      "started_at": "2026-10-29T09:35:47+00:00",
+      "message": "开始执行；保留实际覆盖缺口",
+      "list_pages": 706,
+      "complete_windows": 168,
+      "pending_search_windows": 104,
+      "current_window": {
+        "start": "2025-10-01",
+        "end": "2025-10-31",
+        "word": "医院",
+        "page": 2
+      },
+      "failures": [
+        {
+          "url": "https://ggzyfw.beijing.gov.cn/jyxxzbjggg/20251027/5308870.html",
+          "status": "error",
+          "error": "Request failed: curl exit 28: curl: (28) Operation timed out after 40009 milliseconds with 0 bytes received"
+        }
+      ],
+      "stop_reason": "Request failed: curl exit 28: curl: (28) Operation timed out after 40009 milliseconds with 0 bytes received"
+    }
+  ],
+  "facts_verified": false,
+  "note": "按来源保留公告；同名项目不自动归并。未知日期不计入本期，执行完成不等于全国无遗漏或事实已核验。"
+}

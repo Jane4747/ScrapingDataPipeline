@@ -1,0 +1,194 @@
+{
+  "archived_at": "2026-10-30T10:30:56+08:00",
+  "source_repository": "ScrapingDataPipeline local working tree",
+  "core_files": 10,
+  "support_files": 5,
+  "files": [
+    {
+      "source": "pipeline/research/beijing_ggzy.py",
+      "archive": "artifacts/code/pipeline/research/beijing_ggzy.py",
+      "role": "本轮新增或修改",
+      "bytes": 8613,
+      "sha256": "680675282d4a8a85f91cd355a9c7e714fdb54a71228faf12bdcdd0ecd4d7319a"
+    },
+    {
+      "source": "pipeline/research/tender_fields.py",
+      "archive": "artifacts/code/pipeline/research/tender_fields.py",
+      "role": "本轮新增或修改",
+      "bytes": 6727,
+      "sha256": "d8ab57b8c11b698d0c25d729f063a1d7b951ca8e29230a8b2d8f270acd59e519"
+    },
+    {
+      "source": "pipeline/research/tender_update.py",
+      "archive": "artifacts/code/pipeline/research/tender_update.py",
+      "role": "本轮新增或修改",
+      "bytes": 25252,
+      "sha256": "1fa726da80a95405091a68f6dc1c5cb476bb8d69d10ae8812ef471b46fcbf64d"
+    },
+    {
+      "source": "scripts/start-tender-update.ps1",
+      "archive": "artifacts/code/scripts/start-tender-update.ps1",
+      "role": "本轮新增或修改",
+      "bytes": 4938,
+      "sha256": "ba33b789937c694b6c9f26567256d4c85cc4343610339473bd90e445e0fcec54"
+    },
+    {
+      "source": "scripts/export_tender_workbook.mjs",
+      "archive": "artifacts/code/scripts/export_tender_workbook.mjs",
+      "role": "本轮新增或修改",
+      "bytes": 5823,
+      "sha256": "7cbdc22dcebed7c5fb84721826c22a291e205cddf1cef00527114fff2246a5b3"
+    },
+    {
+      "source": "tests/test_tender_update.py",
+      "archive": "artifacts/code/tests/test_tender_update.py",
+      "role": "本轮新增或修改",
+      "bytes": 7737,
+      "sha256": "b11d91e9685a41fdadbf2af4c97558968e406e4da14b199d3fedf24874334bd6"
+    },
+    {
+      "source": "docs/TENDER_UPDATE_DAGU.md",
+      "archive": "artifacts/code/docs/TENDER_UPDATE_DAGU.md",
+      "role": "本轮新增或修改",
+      "bytes": 5310,
+      "sha256": "12504c16d1a6a7715d3bda6966633c601cd72e9dd68a722706cb905b82b36ad2"
+    },
+    {
+      "source": "pipeline/research/fetch.py",
+      "archive": "artifacts/code/pipeline/research/fetch.py",
+      "role": "本轮新增或修改",
+      "bytes": 34077,
+      "sha256": "591e62fa0815668cbc087aafe13e6359a57c92374d0419a571326b51557bb45b"
+    },
+    {
+      "source": "pipeline/research/zycg.py",
+      "archive": "artifacts/code/pipeline/research/zycg.py",
+      "role": "本轮新增或修改",
+      "bytes": 22068,
+      "sha256": "75102895fc0a17b29d1bdaa9585ccbc018530e4db3bcc242225f5260502ecf90"
+    },
+    {
+      "source": "pipeline/research/national_ggzy.py",
+      "archive": "artifacts/code/pipeline/research/national_ggzy.py",
+      "role": "本轮新增或修改",
+      "bytes": 33936,
+      "sha256": "049668119dcc1f16005af0cd032429d46f33940bbb83213d9a95b95383f2f6e3"
+    },
+    {
+      "source": "pipeline/research/bid_common.py",
+      "archive": "artifacts/code/pipeline/research/bid_common.py",
+      "role": "复用支撑文件",
+      "bytes": 14335,
+      "sha256": "9230158913a73418fb13eb9de3f5e4a5bfa2f2631ebef67766912e466e15b0a4"
+    },
+    {
+      "source": "scripts/idea_tree_writer.py",
+      "archive": "artifacts/code/scripts/idea_tree_writer.py",
+      "role": "复用支撑文件",
+      "bytes": 3859,
+      "sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532"
+    },
+    {
+      "source": "tests/test_zycg_medical_bid.py",
+      "archive": "artifacts/code/tests/test_zycg_medical_bid.py",
+      "role": "复用支撑文件",
+      "bytes": 9996,
+      "sha256": "ccc18f93d0eaf37c5d17ea1cbbd5effbaa32d66ca64565e7a237ff1b4cd7c8a8"
+    },
+    {
+      "source": "tests/test_national_ggzy_collector.py",
+      "archive": "artifacts/code/tests/test_national_ggzy_collector.py",
+      "role": "复用支撑文件",
+      "bytes": 6214,
+      "sha256": "326f05f7a54a65ed7f8221f0d35aa9572dde9e389fb175936546c86c463f8e2c"
+    },
+    {
+      "source": "tests/test_system_tls_transport.py",
+      "archive": "artifacts/code/tests/test_system_tls_transport.py",
+      "role": "复用支撑文件",
+      "bytes": 2463,
+      "sha256": "2e68f6abaeb0b7c20ad833b4e97963486e41ebc0c7f5e51526d55e8022325c50"
+    },
+    {
+      "source": "outputs/tender-updates/medical-2024-20261029/summary.json",
+      "archive": "evidence/summary.json",
+      "role": "已保存运行快照",
+      "bytes": 3162,
+      "sha256": "21c56e89083ccb577decb9db76adc2d93db66b47ab8147da61f1c3a1fefcaa62"
+    },
+    {
+      "source": "outputs/tender-updates/medical-2024-20261029/code-revisions/current.json",
+      "archive": "evidence/code-revisions/current.json",
+      "role": "已保存运行快照",
+      "bytes": 1283,
+      "sha256": "ed7e0016affdd7cf857368c92a4d2a3ca8c5bfcf31b87b941403e6556881a79e"
+    },
+    {
+      "source": "outputs/tender-updates/medical-2024-20261029/zycg/progress.json",
+      "archive": "evidence/zycg/progress.json",
+      "role": "已保存运行快照",
+      "bytes": 965,
+      "sha256": "31e25eaf7abfa4fff2565b7a35b0d21a27677d992fd7bd9055ed8e78e9cc10e9"
+    },
+    {
+      "source": "outputs/tender-updates/medical-2024-20261029/ggzy_national/progress.json",
+      "archive": "evidence/ggzy_national/progress.json",
+      "role": "已保存运行快照",
+      "bytes": 452,
+      "sha256": "b3b28fc5910154c75041f01bde6fa6c8fe5c954e71d3ddb38ae61c7ec5c5728f"
+    },
+    {
+      "source": "outputs/tender-updates/medical-2024-20261029/ggzy_beijing/progress.json",
+      "archive": "evidence/ggzy_beijing/progress.json",
+      "role": "已保存运行快照",
+      "bytes": 931,
+      "sha256": "6d8f297a384edd1502e58c0c936858c88e37ea5f77e13ece0ed3c9f7c42ca81b"
+    },
+    {
+      "source": null,
+      "archive": "CODE_SUMMARY.md",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 9504,
+      "sha256": "a5441e021e8cc70c61e0e474ac14e98804e286b0ea3a9a9f00708ab96e159b8c",
+      "initial_archive_sha256": "bdea3ae74a39a832860b15f37ea25377af0efcb6a12e765620742098d7ead1f4"
+    },
+    {
+      "source": null,
+      "archive": "evidence/national-failures.json",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 1448,
+      "sha256": "f5c2f47251a85afe0eb92bc80ed71969f3d36deb00e0606f8f8a174585b0562b"
+    },
+    {
+      "source": null,
+      "archive": "evidence/scope.json",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 891,
+      "sha256": "6de369a7fe96ba4f9f4b1b331e27f1153adfcfd85fa3ec617ea1053372d753fb"
+    },
+    {
+      "source": null,
+      "archive": "tree.json",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 5954,
+      "sha256": "496d2aad675202fe7a1415af6e9855b02fc2fb4937f14984a7de33681d5cb53e",
+      "initial_archive_sha256": "56cb8a532fd32534a7236d8e9af0ea3428b5bb42ef0262dae512fb2224041a62"
+    },
+    {
+      "source": null,
+      "archive": "tree.md",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 2826,
+      "sha256": "cb06d435eefdaf5498178d93041f6ef7db329036c95fa9680aa9e236d7c742c3"
+    },
+    {
+      "source": null,
+      "archive": "validation.json",
+      "role": "本次生成的总结与结构记录",
+      "bytes": 763,
+      "sha256": "7adaf1ee732850f55d168e6692ffb2fbb0269af2106a86b19454326e2170efd2"
+    }
+  ],
+  "publication_prepared_at": "2026-10-30T10:35:07+08:00",
+  "publication_note": "源码与运行证据保持原始字节；CODE_SUMMARY.md和tree.json调整为GitHub可读的链接与发布说明，以下SHA256对应同步版。"
+}

@@ -1,0 +1,20 @@
+{
+  "status": "partial",
+  "updated_at": "2026-10-29T18:36:36+08:00",
+  "api_calls_total": 510,
+  "detail_calls_total": 361,
+  "medical_digital_candidates": 397,
+  "records": 361,
+  "pending_search_windows": 810,
+  "complete_windows": 233,
+  "failures": 3,
+  "last_search": {
+    "start": "2025-10-29",
+    "end": "2025-10-29",
+    "word": "医",
+    "source": "3",
+    "stage": "0201",
+    "page": 1,
+    "endpoint": "current"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "task_id": "medical-2024-20261029",
+  "start": "2024-01-01",
+  "end": "2026-10-29",
+  "date_basis": "publication",
+  "scope": "medical_digital_procurement",
+  "sources": [
+    "zycg",
+    "ggzy_national",
+    "ggzy_beijing"
+  ],
+  "fields": [
+    "时间",
+    "项目名称",
+    "产品",
+    "招标单位",
+    "客户标签",
+    "中标单位",
+    "运营商类型",
+    "中标金额（万元）",
+    "场景",
+    "评审专家",
+    "网址",
+    "公告类型",
+    "省份",
+    "项目编号",
+    "中标金额原文",
+    "信息缺口",
+    "标签依据",
+    "响应人资格要求（对供应商基本要求）",
+    "资格预审资质要求",
+    "来源平台",
+    "资格要求出处",
+    "原文文件"
+  ],
+  "allow_network": true,
+  "delay": 3.5,
+  "max_pages": 100,
+  "max_api_calls": 6000,
+  "max_details": 10000
+}

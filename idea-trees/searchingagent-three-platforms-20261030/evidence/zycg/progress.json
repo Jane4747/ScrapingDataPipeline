@@ -1,0 +1,26 @@
+{
+  "source": "zycg",
+  "source_name": "央采",
+  "updated_at": "2026-10-29T09:43:18+00:00",
+  "status": "partial",
+  "start": "2024-01-01",
+  "end": "2026-10-29",
+  "records": 60,
+  "started_at": "2026-10-29T09:35:47+00:00",
+  "message": "窗口未完整完成；保留缓存，停止后续月份",
+  "current_window": [
+    "2024-07-01",
+    "2024-07-31"
+  ],
+  "completed_months": 6,
+  "total_months": 34,
+  "failures": [
+    {
+      "stage": "discovery",
+      "code": "blocked",
+      "url": "http://search.ccgp.gov.cn/bxsearch?searchtype=1&page_index=16&bidSort=0&buyerName=&projectId=&pinMu=0&bidType=0&dbselect=bidx&kw=&start_time=2024%3A07%3A01&end_time=2024%3A07%3A31&timeType=6&displayZone=&zoneId=&pppStatus=0&agentName=%E4%B8%AD%E5%A4%AE%E5%9B%BD%E5%AE%B6%E6%9C%BA%E5%85%B3%E6%94%BF%E5%BA%9C%E9%87%87%E8%B4%AD%E4%B8%AD%E5%BF%83",
+      "page": 16,
+      "reason": "Access challenge detected; no bypass attempted"
+    }
+  ]
+}

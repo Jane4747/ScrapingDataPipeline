@@ -1,0 +1,146 @@
+{
+  "id": "searchingagent-three-platforms-20261030",
+  "created_at": "2026-10-30T10:30:56+08:00",
+  "updated_at": "2026-10-30T10:30:56+08:00",
+  "status": "partial",
+  "status_note": "代码总结与归档完成；数据历史覆盖仍为partial。",
+  "requirement": "总结本次三平台采集和Dagu新增代码，归档到本地想法树；采集范围为2024-01-01至2026-10-29医疗数字化采购。",
+  "theme": "SearchingAgent 三平台历史采集与Dagu代码总结",
+  "tool": "既有采集器＋Dagu＋Artifact Tool＋idea_tree_writer",
+  "delivery": "[代码总结](CODE_SUMMARY.md)、[快照清单](manifest.json)、[归档验证](validation.json)",
+  "result": {
+    "archive_status": "completed",
+    "coverage_status": "partial",
+    "records": 1082,
+    "source_counts": {
+      "央采": 60,
+      "全国公共资源交易平台": 361,
+      "北京公共资源交易平台": 661
+    },
+    "date_start": "2024-01-01",
+    "date_end": "2026-10-29",
+    "facts_verified": false,
+    "code_revision": 5,
+    "github_pushed_at_initial_archive": false
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "总结本次三平台采集和Dagu新增代码，归档到本地想法树；采集范围为2024-01-01至2026-10-29医疗数字化采购。"
+    },
+    {
+      "id": "implementation",
+      "parent": "need",
+      "kind": "代码实现",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "新增7个文件、修改3个模块，五层流程见[完整代码总结](CODE_SUMMARY.md)。"
+    },
+    {
+      "id": "source",
+      "parent": "implementation",
+      "kind": "数据源层",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "北京历史搜索已接通；全国历史/当前接口分流；央采读取官方末页。三源代码见[源码快照](artifacts/code/pipeline/research)。"
+    },
+    {
+      "id": "schedule",
+      "parent": "implementation",
+      "kind": "采集调度层",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "Dagu三个来源独立进程并行，配置同组队列、来源锁、显式DAGU_HOME；[本机进度界面](http://127.0.0.1:8098/)。"
+    },
+    {
+      "id": "extract",
+      "parent": "implementation",
+      "kind": "解析抽取层",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "统一22字段，新增评审专家、供应商资格和资格预审条款提取，证据保留网址、行号与文本哈希。"
+    },
+    {
+      "id": "govern",
+      "parent": "implementation",
+      "kind": "数据治理层",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "未知留空，非结果公告不冒充中标事实；资格补充要求项目编号与采购人同时一致并校验版本、日期；规则标签与事实区分。"
+    },
+    {
+      "id": "output",
+      "parent": "implementation",
+      "kind": "存储输出层",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "导出公告明细和采集范围两张工作表，以及JSON、CSV；同一快照行数与来源计数对齐。"
+    },
+    {
+      "id": "verify",
+      "parent": "need",
+      "kind": "验证",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "实施阶段64项相关离线检查及三源真实采集、表格验证已有记录；归档本次重新核对源码哈希、树结构及1082条汇总计数。"
+    },
+    {
+      "id": "archive",
+      "parent": "verify",
+      "kind": "版本归档",
+      "status": "completed",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "10个本轮文件和5个复用支撑文件保留逐文件SHA256；活动revision 5的8个代码哈希及原请求哈希一致。见[清单](manifest.json)与[归档验证](validation.json)。"
+    },
+    {
+      "id": "coverage",
+      "parent": "need",
+      "kind": "采集覆盖",
+      "status": "partial",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "最新保存1082条公告：央采60、全国361、北京661；三源均partial，公告数不等于项目数。见[汇总快照](evidence/summary.json)。"
+    },
+    {
+      "id": "gap-zycg",
+      "parent": "coverage",
+      "kind": "央采缺口",
+      "status": "partial",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "2024年7月检索第16页遇访问挑战，保留缓存和断点，后续月份待续；不得将挑战当作空结果。"
+    },
+    {
+      "id": "gap-national",
+      "parent": "coverage",
+      "kind": "全国缺口",
+      "status": "partial",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "单日查询触及1000条上限，需进一步按来源维度细分；810个搜索窗口待处理。"
+    },
+    {
+      "id": "gap-beijing",
+      "parent": "coverage",
+      "kind": "北京缺口",
+      "status": "partial",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "2025年10月详情页超时，保留104个待处理搜索窗口和原始失败原因。"
+    },
+    {
+      "id": "next",
+      "parent": "need",
+      "kind": "后续开发",
+      "status": "planned",
+      "at": "2026-10-30T10:30:56+08:00",
+      "text": "补齐有界恢复和单日上限细分，再扩展药械集采、厂商官网及各省医院入口；RSI自动评估与多模型自主协作仍待实现。"
+    }
+  ],
+  "publication": {
+    "prepared_at": "2026-10-30T10:35:07+08:00",
+    "repository": "Jane4747/ScrapingDataPipeline",
+    "branch": "main",
+    "note": "github_pushed_at_initial_archive表示首次本地归档时的状态；GitHub同步结果以仓库提交历史为准。"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "validated_at": "2026-10-30T10:30:56+08:00",
+  "status": "passed",
+  "checks": {
+    "core_file_count": 10,
+    "support_file_count": 5,
+    "archived_file_hashes_match": true,
+    "active_revision_hashes_match": true,
+    "original_request_hash_matches": true,
+    "unique_nodes": 14,
+    "tree_json_markdown_match": true,
+    "record_count": 1082,
+    "source_counts_reconcile": true,
+    "field_count": 22
+  },
+  "test_definitions_in_archived_files": {
+    "tests/test_tender_update.py": 18,
+    "tests/test_zycg_medical_bid.py": 19,
+    "tests/test_national_ggzy_collector.py": 22,
+    "tests/test_system_tls_transport.py": 5
+  },
+  "tests_rerun_during_archive": false,
+  "coverage_status": "partial",
+  "facts_verified": false
+}

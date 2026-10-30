@@ -98,3 +98,9 @@ $env:PATH = "$testPrefix\Library\bin;" + $env:PATH
 安装脚本相对当前仓库定位，不自动克隆、隐式下载浏览器或切换到其他项目。基础依赖实测版本见constraints-research-tested.txt；使用前先核对Python版本。
 
 测试使用模拟网络和临时文件，覆盖采集边界、恢复、导出、任务中断、核验及公式保护。离线通过不等于真实网站、浏览器或搜索API已验证。2026-10-22升级说明见 [CHANGELOG](CHANGELOG.md)。
+
+
+## 三平台历史采购采集与 Dagu 代码总结（2026-10-30）
+
+- [本次想法树](idea-trees/searchingagent-three-platforms-20261030/tree.md)：央采、全国公资和北京公资，7个新增文件、3个修改模块，含源码快照、哈希和验证记录。
+- [代码总结与待补事项](idea-trees/searchingagent-three-platforms-20261030/CODE_SUMMARY.md)：2024-01-01至2026-10-29范围；保存1082条公告的阶段性统计，三源均为partial，保留访问挑战、单日上限与详情超时缺口。

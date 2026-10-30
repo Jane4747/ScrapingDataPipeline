@@ -1,0 +1,16 @@
+{
+  "revision": 5,
+  "created_at": "2026-10-29T09:54:26.7184299Z",
+  "original_request_sha256": "bcdf150edb288f04560eda4c56ddd00375fcfee63b02c7eba642947581060caa",
+  "reason": "Live export reconciliation: source counts use the exact accepted snapshot rows, so concurrent progress updates cannot cause totals to differ. Collection scope and running workers unchanged.",
+  "code_sha256": {
+    "pipeline\\research\\tender_update.py": "1fa726da80a95405091a68f6dc1c5cb476bb8d69d10ae8812ef471b46fcbf64d",
+    "pipeline\\research\\zycg.py": "75102895fc0a17b29d1bdaa9585ccbc018530e4db3bcc242225f5260502ecf90",
+    "pipeline\\research\\national_ggzy.py": "049668119dcc1f16005af0cd032429d46f33940bbb83213d9a95b95383f2f6e3",
+    "pipeline\\research\\fetch.py": "591e62fa0815668cbc087aafe13e6359a57c92374d0419a571326b51557bb45b",
+    "pipeline\\research\\bid_common.py": "9230158913a73418fb13eb9de3f5e4a5bfa2f2631ebef67766912e466e15b0a4",
+    "pipeline\\research\\tender_fields.py": "d8ab57b8c11b698d0c25d729f063a1d7b951ca8e29230a8b2d8f270acd59e519",
+    "pipeline\\research\\beijing_ggzy.py": "680675282d4a8a85f91cd355a9c7e714fdb54a71228faf12bdcdd0ecd4d7319a",
+    "scripts\\export_tender_workbook.mjs": "7cbdc22dcebed7c5fb84721826c22a291e205cddf1cef00527114fff2246a5b3"
+  }
+}
