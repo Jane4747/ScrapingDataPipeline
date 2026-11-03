@@ -6,3 +6,5 @@ numpy>=1.24
 Pillow>=10
 truststore>=0.10
 pypdfium2>=4
+pandas>=2.2
+xlsxwriter>=3
