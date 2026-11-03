@@ -1,0 +1,85 @@
+{
+  "id": "institution-registry-digital-agedcare-20261102",
+  "created_at": "2026-11-02T00:08:59+08:00",
+  "updated_at": "2026-11-02T00:08:59+08:00",
+  "status": "partial",
+  "status_note": "已有文件归档完成；养老补查108/162家，54家待完成。",
+  "requirement": "盘点并归档机构台账、医卫数字化公众号报道分析、养老机构补查三条主线已有成果。",
+  "theme": "机构台账、医卫数字化报道与养老补查成果归档",
+  "tool": "既有工作簿和JSON复用；离线文件及计数核验",
+  "delivery": "[归档入口](tree.md)、[快照清单](manifest.json)、[核验](verification.json)",
+  "result": {
+    "archive_status": "completed",
+    "coverage_status": "partial",
+    "registry_records": 555,
+    "digital_reports": 667,
+    "digital_projects": 276,
+    "agedcare": {
+      "institutions": 108,
+      "target_institutions": 162,
+      "pending_institutions": 54,
+      "reports_raw": 277,
+      "projects_raw": 51
+    },
+    "facts_reverified": false,
+    "github_pushed": false
+  },
+  "nodes": [
+    {
+      "id": "scope",
+      "parent": null,
+      "kind": "需求",
+      "status": "completed",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "盘点并归档机构台账、医卫数字化公众号报道分析、养老机构补查三条主线已有成果。"
+    },
+    {
+      "id": "registry",
+      "parent": "scope",
+      "kind": "机构台账",
+      "status": "completed",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "[机构台账六表](artifacts/outputs/institution-registry-20261030/机构台账_六表_20261101.xlsx)：机构主表555条。保留六张来源表、证据台账、统计和历史版本。"
+    },
+    {
+      "id": "digital",
+      "parent": "scope",
+      "kind": "报道分析",
+      "status": "completed",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "[全量分析表](artifacts/outputs/institution-registry-20261030/医卫数字化公众号报道_分析表_全量_20261101.xlsx)：表A667条、表B276条。[试点版](artifacts/outputs/institution-registry-20261030/医卫数字化公众号报道_分析表.xlsx)：表A53条、表B7条。"
+    },
+    {
+      "id": "agedcare",
+      "parent": "scope",
+      "kind": "养老补查",
+      "status": "partial",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "p1–p6结果文件已保存，108/162家机构，277条报道和51条项目记录。详见[批次进度](agedcare-progress.json)。"
+    },
+    {
+      "id": "pending",
+      "parent": "agedcare",
+      "kind": "待办",
+      "status": "pending",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "p7/p8限流前未回报，p9未启动，共54家。保留p7–p9目标名单，不生成空结果冒充完成。"
+    },
+    {
+      "id": "verification",
+      "parent": "scope",
+      "kind": "验证",
+      "status": "completed",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "本次核对工作簿实际非空行、批次机构ID集合、162家目标分区及每个快照文件的SHA256。仅验证文件与计数，不重新核验网页事实。"
+    },
+    {
+      "id": "archive",
+      "parent": "verification",
+      "kind": "归档",
+      "status": "completed",
+      "at": "2026-11-02T00:08:59+08:00",
+      "text": "三条主线的工作簿、JSON、目标名单和相关脚本保留原目录结构，见[文件清单](manifest.json)。业务覆盖仍为partial。"
+    }
+  ]
+}

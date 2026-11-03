@@ -1,0 +1,20 @@
+{
+  "tree_id": "medical-digital-pr-wechat-mapping-20261102",
+  "verified_at": "2026-11-02T00:41:03+08:00",
+  "checks": {
+    "tree_valid": true,
+    "first_node_need": true,
+    "tree_md_matches_render": true,
+    "manifest_hashes_match": true,
+    "manifest_file_count": 6,
+    "internal_links_exist": true,
+    "missing_links": [],
+    "no_secret_patterns": true,
+    "secret_hits": [],
+    "node_count": 17,
+    "status": "completed"
+  },
+  "archive_status": "completed",
+  "coverage_status": "partial",
+  "note": "离线完整性校验，不重新联网采集；归档完整不等于事实已核验完。"
+}

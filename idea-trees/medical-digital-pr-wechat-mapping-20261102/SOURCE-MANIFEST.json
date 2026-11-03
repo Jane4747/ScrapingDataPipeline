@@ -1,0 +1,72 @@
+{
+  "tree_id": "medical-digital-pr-wechat-mapping-20261102",
+  "created_at": "2026-11-02T00:41:03+08:00",
+  "scope": "本任务链自编探针脚本、试跑证据、两份 HTML 交付物副本、仓库树渲染工具与归档脚本自身；不是完整运行环境或第三方库镜像。",
+  "excluded": [
+    "真实密钥/Cookie",
+    "运行环境与依赖库",
+    "未生成的 candidates.json（全量抓取已中止）"
+  ],
+  "files": [
+    {
+      "path": "artifacts/code/wxnum_probe.py",
+      "category": "probe_source",
+      "purpose": "按认证主体抓取省级运营商公众号的探针脚本（含卡片切块解析、限速与重试）",
+      "source_live": "E:\\CAICTBigData\\coding\\outputs\\pr-gzh-wxnum\\wxnum_probe.py",
+      "bytes": 4490,
+      "sha256": "f0cb7a36e37a0104eb0cf9f6b8aa459d80605db1019c7aae7aa076ad819f97db",
+      "source_sha256": "f0cb7a36e37a0104eb0cf9f6b8aa459d80605db1019c7aae7aa076ad819f97db",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/probe2.json",
+      "category": "verification_evidence",
+      "purpose": "广东、四川两省试跑的原始召回结果，用于判定收录源覆盖偏差",
+      "source_live": "E:\\CAICTBigData\\coding\\outputs\\pr-gzh-wxnum\\probe2.json",
+      "bytes": 2293,
+      "sha256": "11a381f16f3cfce51bd4de888dd0d0d331f17ea4ece1f045afb392702006bddb",
+      "source_sha256": "11a381f16f3cfce51bd4de888dd0d0d331f17ea4ece1f045afb392702006bddb",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/delivery/medical-digital-pr-url-map.html",
+      "category": "previous_delivery",
+      "purpose": "网址地图交付物副本（原件仍在 docs/）",
+      "source_live": "E:\\CAICTBigData\\coding\\docs\\medical-digital-pr-url-map.html",
+      "bytes": 34797,
+      "sha256": "124734f4c6ba08b7e1bd766021bea6f8b6c7a8ac314797b295fde4efc6fe6eb2",
+      "source_sha256": "124734f4c6ba08b7e1bd766021bea6f8b6c7a8ac314797b295fde4efc6fe6eb2",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/delivery/medical-digital-pr-wechat-matrix.html",
+      "category": "previous_delivery",
+      "purpose": "公众号矩阵交付物副本；原件已移至移交目录，此副本防止再次散落",
+      "source_live": "E:\\CAICTBigData\\移动项目沟通\\政采_公共资源网_全国与地方_1030\\medical-digital-pr-wechat-matrix.html",
+      "bytes": 45847,
+      "sha256": "7344dd55b252fa57977af2f172f6b184c9f16f2c10ccc1112c6fa3686092c8a0",
+      "source_sha256": "7344dd55b252fa57977af2f172f6b184c9f16f2c10ccc1112c6fa3686092c8a0",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/archive-tool/idea_tree_writer.py",
+      "category": "repository_tree_tool",
+      "purpose": "父仓库已有的树渲染/校验工具，保留以便重现渲染结果",
+      "source_live": "E:\\CAICTBigData\\coding\\scripts\\idea_tree_writer.py",
+      "bytes": 3859,
+      "sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532",
+      "source_sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/archive-tool/archive_medical_pr_mapping.py",
+      "category": "archive_tool",
+      "purpose": "本树的归档生成与离线校验脚本自身",
+      "source_live": "E:\\CAICTBigData\\coding\\scripts\\archive_medical_pr_mapping_20261102.py",
+      "bytes": 30178,
+      "sha256": "374d71d0c9ad640bf20a7b9a6a9f655a597b6224b750ddf31bc7e02e24e50ee6",
+      "source_sha256": "374d71d0c9ad640bf20a7b9a6a9f655a597b6224b750ddf31bc7e02e24e50ee6",
+      "transformation": null
+    }
+  ]
+}
