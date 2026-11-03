@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>省级公众号核对矩阵 — 医卫数字化传播 Mapping 附件</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#fff; --ink:#1c2430; --ink2:#4a5567; --ink3:#78849a;
+    --line:#e3e7ee; --accent:#1b4f8a; --ok:#2c6b3f; --okbg:#eaf3ec;
+    --warn:#8a5a1b; --warnbg:#fdf6ea; --mute:#f1f4f8;
+  }
+  *{box-sizing:border-box}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid #c9d8ea}
+  a:hover{border-bottom-color:var(--accent)}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    font-size:13.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:38px 26px 80px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:22px}
+  h1{font-size:24px;margin:0 0 8px}
+  .sub{color:var(--ink2);font-size:13px}
+  .meta{margin-top:10px;font-size:12.4px;color:var(--ink3)}
+  h2{font-size:16.5px;margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line);
+    display:flex;align-items:baseline;gap:9px}
+  h2 .idx{color:var(--accent);font-size:12.5px;font-weight:600;letter-spacing:1px}
+  .lead{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    padding:14px 18px;margin:18px 0 26px;font-size:13px;color:var(--ink2);border-radius:0 5px 5px 0}
+  .flag{background:var(--warnbg);border:1px solid #f0e2c6;border-radius:5px;padding:14px 18px;margin:16px 0}
+  .flag h4{margin:0 0 7px;font-size:13px;color:var(--warn)}
+  .flag p{margin:0 0 6px;font-size:12.8px;color:var(--ink2)}
+  .flag p:last-child{margin-bottom:0}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:5px;overflow:hidden}
+  th{background:#eef1f6;text-align:left;font-weight:600;color:var(--ink2);padding:8px 10px;
+    font-size:12.2px;letter-spacing:.3px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:12.7px}
+  tr:last-child td{border-bottom:none}
+  .prov{font-weight:600;white-space:nowrap;width:66px}
+  .acct{display:block;margin-bottom:3px}
+  .acct b{font-weight:600}
+  .id{font-family:Consolas,Menlo,monospace;font-size:11.6px;color:var(--accent);
+    background:#eef4fb;padding:0 4px;border-radius:2px;white-space:nowrap}
+  .kind{color:var(--ink3);font-size:11.4px}
+  .todo{color:var(--ink3)}
+  .todo .kw{color:#4a5567;background:var(--mute);padding:1px 5px;border-radius:2px;
+    font-size:11.8px;display:inline-block;margin:1px 3px 1px 0}
+  .lv{display:inline-block;font-size:10.6px;padding:0 4px;border-radius:2px;margin-left:4px;
+    vertical-align:1px}
+  .lv.s{background:var(--okbg);color:var(--ok)}
+  .lv.m{background:#fdf6ea;color:#8a5a1b}
+  .lv.w{background:#f4f4f4;color:#8a8a8a}
+  .cell-ok{background:#fbfdfb}
+  .cell-todo{background:#fcfcfd}
+  .notes{font-size:12.4px;color:var(--ink2)}
+  .notes li{margin-bottom:7px}
+  .notes b{color:var(--ink)}
+  footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--line);font-size:11.8px;color:var(--ink3)}
+  code{font-family:Consolas,Menlo,monospace;background:var(--mute);padding:1px 4px;border-radius:2px;font-size:12px}
+  @media (max-width:900px){
+    .wrap{padding:22px 12px 60px} table{font-size:12.2px} th,td{padding:7px}
+  }
+  @media print{ body{background:#fff} .wrap{max-width:none;padding:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>公众号入口核对矩阵（运营商 31 省 + 7 家厂商）</h1>
+  <div class="sub">医卫数字化传播 Mapping 附件 ｜ 支撑材料中“省分公众号/视频号是自有主阵地”这一判断的落地清单</div>
+  <div class="meta">核实日期 2026-10-30（第三轮补录厂商号）｜ 运营商省级已确认 <b>98</b> 个账号 / <b>29</b> 个省级行政区；厂商号 <b>24</b> 个 / 7 家机构 ｜ 未确认格给出检索词与应匹配认证主体，<b>不填推测值</b></div>
+</header>
+
+<div class="lead">
+这份表解决的是“材料里只说‘省分公众号’，但具体叫什么”的问题。先说清一个硬约束：
+<b>微信公众号名称不进搜索引擎索引，也没有任何官方开放接口可批量查询</b>，省级号的命名完全没有统一规则（同为移动，广东是“广东移动10086”、北京是“中国移动北京公司”、陕西是“陕西移动”、四川是“中国移动四川公司”）。
+因此本表只填<b>有官方页面或权威媒体可查证</b>的账号，其余留检索式，不做填充。
+</div>
+
+<h2><span class="idx">PART 01</span> 省级公众号的四层结构（这是可复用的规律）</h2>
+<table>
+<thead><tr><th style="width:17%">层</th><th style="width:30%">命名特征</th><th style="width:26%">典型样本</th><th>传播用途</th></tr></thead>
+<tbody>
+<tr><td><b>服务号／营业厅</b></td><td><code>省+移动10086</code>、<code>省+电信</code>、<code>省+联通10010</code></td>
+<td>广东移动10086 (CMCCGD)、广东电信 (gdkf10000)、江苏联通10010</td>
+<td>业务办理入口，粉丝量最大，但<b>不承载品牌叙事</b>，投放价值低</td></tr>
+<tr><td><b>官方资讯号／订阅号</b></td><td><code>中国移动+省+公司</code>、<code>省+移动</code>、<code>省+联通发布</code></td>
+<td>中国移动广东公司 (CMCC_GD_AND)、中国移动上海公司、广东联通发布 (WO--gd)、陕西移动 (sn_cmcc)</td>
+<td><b>这是传播投放的真正落点</b>——发产品、技术、样板点故事</td></tr>
+<tr><td><b>垂类号</b></td><td>宽带管家／人力资源／政企／共青团／法律服务</td>
+<td>山东移动宽带管家、山东移动人力资源、广东移动法律服务</td>
+<td>窄场景精准触达；政企号才是 To G/To 医院 的入口</td></tr>
+<tr><td><b>地市号</b></td><td>地市名+移动／联通／电信</td>
+<td>福州移动、苏州联通、贵港移动</td>
+<td>区域样板传播的落地层，数量最多、最不可枚举</td></tr>
+</tbody>
+</table>
+
+<div class="flag">
+<h4>两家运营商的省级命名规律（第二轮补录后新增）</h4>
+<p><b>中国电信</b>：一个省通常<b>两个号并行</b>——<code>省名+电信</code>（如“四川电信”“广西电信”“宁夏电信”，服务号，省公司官网 189.cn 子站会直接引用）与 <code>中国电信+省名+公司</code>／<code>省名+电信客服</code>（如“中国电信山东公司”“中国电信新疆公司”“中国电信北京客服” bjkf10000）。<b>前者偏业务，后者偏公司与新闻发布</b>，后者才是传播落点。</p>
+<p><b>中国联通</b>：<code>省名+联通</code>（如“广西联通” gxunicom10010、“云南联通”，<b>多数省的主流号</b>）与 <code>中国联通+省名+客服</code>（如“中国联通山东客服” sdltkf、“中国联通陕西客服” shaanxiltkf）。此外各省普遍存在<b>政企号</b>（“天津联通政企客户” tjltzqkh）和<b>品牌宣传号</b>（安徽“皖美联通”，简介即“传播联通声音，讲好联通故事”）——<b>这两类才是 To G/To 医院的投放入口</b>，服务号不是。</p>
+<p>另有<b>集团号兜底</b>：联通“中国联通”服务号 <code>ChinaUnicom800010010</code>，全国 31 省分公司均开通微信人工客服，绑定号码后按归属地分流。做全国性传播时可用它兜底，但触达的是已绑定用户，不等于省级覆盖。</p>
+</div>
+
+<div class="flag">
+<h4>为什么不能把 93 格填满——三条实测结论</h4>
+<p>① <b>第三方收录站覆盖不全且有噪声。</b>以“广东移动”检索某公众号收录站，返回 7 条，其中混入 OPPO 广东移动通信、第三方“移动花卡”代理号，且<b>没有返回真正的省级主号</b>；收录的多是“法律服务”“共青团”“一机游”这类边缘号。</p>
+<p>② <b>省公司官网直连被拦。</b>gd.10086.cn 返回 466、gd.189.cn 返回 412、多数省份 10010.com 直接连接失败，无法脚本化抓取“关注我们”栏。</p>
+<p>③ <b>唯一权威口径是微信端“搜一搜”看认证主体。</b>名称可重名，主体唯一。所以正确做法不是“查一份名单”，而是“按主体逐格核验”。</p>
+</div>
+
+<h2><span class="idx">PART 02</span> 核对矩阵</h2>
+<p class="notes" style="margin-top:-4px;margin-bottom:10px">
+图例：<span class="lv s">强</span> 运营商自有页面／政府网站／分公司公告可查证 ·
+<span class="lv m">中</span> 权威媒体报道或收录站主体可查证 · <span class="lv w">弱</span> 仅二手教程类来源，需复核。
+</p>
+
+<table>
+<thead><tr><th class="prov">省份</th><th style="width:31%">中国移动</th><th style="width:31%">中国电信</th><th style="width:31%">中国联通</th></tr></thead>
+<tbody>
+
+<tr><td class="prov">北京</td>
+<td class="cell-ok"><span class="acct"><b>中国移动北京公司</b><span class="lv m">中</span></span><span class="kind">资讯号 · 实名补登记官方通道</span></td>
+<td class="cell-ok"><span class="acct"><b>中国电信北京客服</b> <span class="id">bjkf10000</span><span class="lv s">强</span></span><span class="kind">客服服务号（“京妮儿”微客服）</span><span class="acct" style="margin-top:4px"><b>北京电信网上营业厅</b> <span class="id">bj189cn</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>北京电信订阅号</b> <span class="id">bjwx10000</span><span class="lv w">弱</span></span></td>
+<td class="cell-todo"><span class="kw">北京联通</span><span class="kw">北京联通10010</span><div class="kind">主体：中国联合网络通信有限公司北京市分公司｜暂未找到可查证证据，不填</div></td></tr>
+
+<tr><td class="prov">天津</td>
+<td class="cell-todo"><span class="kw">天津移动</span><span class="kw">天津移动10086</span><div class="kind">主体：中国移动通信集团天津有限公司</div></td>
+<td class="cell-todo"><span class="kw">天津电信</span><span class="kw">天翼天津</span><div class="kind">主体：中国电信股份有限公司天津分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>天津联通</b> <span class="id">Tianjin_Unicom</span><span class="lv s">强</span></span><span class="kind">官方微信 · 主体认证（省分公司名下共 4 个号）</span><span class="acct" style="margin-top:4px"><b>天津联通政企客户</b> <span class="id">tjltzqkh</span><span class="lv m">中</span></span><span class="kind"><b>To G 入口</b> · 政企客户事业部</span><span class="acct" style="margin-top:4px"><b>天津联通订阅号</b> <span class="id">wo_guanjia</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>中国联通天津客服</b> <span class="id">gh_2924107ee1ed</span><span class="lv m">中</span></span></td></tr>
+
+<tr><td class="prov">河北</td>
+<td class="cell-todo"><span class="kw">河北移动</span><span class="kw">河北移动10086</span><div class="kind">主体：中国移动通信集团河北有限公司</div></td>
+<td class="cell-ok"><span class="acct"><b>河北电信</b><span class="lv w">弱</span></span><span class="kind">亦称“中国电信河北客服”，仅二手来源，需复核</span></td>
+<td class="cell-ok"><span class="acct"><b>河北联通</b> <span class="id">heb10010</span><span class="lv m">中</span></span><span class="kind">服务号 · 个人中心/5G专区入口</span><span class="acct" style="margin-top:4px"><b>河北联通网上营业厅</b> <span class="id">hebei10010</span><span class="lv w">弱</span></span></td></tr>
+
+<tr><td class="prov">山西</td><td class="cell-todo"><span class="kw">山西移动</span><div class="kind">主体：中国移动通信集团山西有限公司</div></td>
+<td class="cell-todo"><span class="kw">山西电信</span><div class="kind">主体：中国电信股份有限公司山西分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>山西联通</b><span class="lv m">中</span></span><span class="kind">联通客服官方答复确认；2025 年度运营商领域有影响力新媒体账号</span></td></tr>
+
+<tr><td class="prov">内蒙古</td><td class="cell-todo"><span class="kw">内蒙古移动</span><div class="kind">主体：中国移动通信集团内蒙古有限公司</div></td>
+<td class="cell-todo"><span class="kw">内蒙古电信</span><div class="kind">主体：中国电信股份有限公司内蒙古分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>内蒙古联通</b><span class="lv w">弱</span></span><span class="kind">2013 年报道为微信客服服务号，时点较旧，需复核</span></td></tr>
+
+<tr><td class="prov">辽宁</td><td class="cell-todo"><span class="kw">辽宁移动</span><div class="kind">主体：中国移动通信集团辽宁有限公司</div></td>
+<td class="cell-todo"><span class="kw">辽宁电信</span><div class="kind">主体：中国电信股份有限公司辽宁分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>辽宁联通</b> <span class="id">lnltwx</span><span class="lv m">中</span></span><span class="kind">联通客服官方答复 + 辽宁省互联网协会通稿</span></td></tr>
+
+<tr><td class="prov">吉林</td><td class="cell-todo"><span class="kw">吉林移动</span><div class="kind">主体：中国移动通信集团吉林有限公司</div></td>
+<td class="cell-todo"><span class="kw">吉林电信</span><div class="kind">主体：中国电信股份有限公司吉林分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>吉林联通</b><span class="lv m">中</span></span><span class="kind">联通客服官方答复；菜单为沃服务/沃优惠/沃特权</span></td></tr>
+
+<tr><td class="prov">黑龙江</td><td class="cell-todo"><span class="kw">黑龙江移动</span><div class="kind">主体：中国移动通信集团黑龙江有限公司</div></td>
+<td class="cell-todo"><span class="kw">黑龙江电信</span><div class="kind">主体：中国电信股份有限公司黑龙江分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>黑龙江联通</b> <span class="id">hljlt-wx</span><span class="lv m">中</span></span><span class="kind">公众服务号 · 黑龙江日报整版报道</span><span class="acct" style="margin-top:4px"><b>黑龙江联通网上营业厅</b><span class="lv m">中</span></span></td></tr>
+
+<tr><td class="prov">上海</td>
+<td class="cell-ok"><span class="acct"><b>中国移动上海公司</b><span class="lv s">强</span></span><span class="kind">官方资讯号 · 提供公司信息/行业政策/重大活动</span><span class="acct" style="margin-top:4px"><b>上海移动</b><span class="lv w">弱</span></span></td>
+<td class="cell-todo"><span class="kw">上海电信</span><span class="kw">天翼上海</span><div class="kind">主体：中国电信股份有限公司上海分公司｜未找到可查证证据，不填</div></td>
+<td class="cell-ok"><span class="acct"><b>上海联通</b><span class="lv w">弱</span></span><span class="kind">仅教程类来源（实名认证/关注流程），需复核</span></td></tr>
+
+<tr><td class="prov">江苏</td>
+<td class="cell-ok"><span class="acct"><b>江苏移动</b> <span class="id">cmccjs10086</span><span class="lv s">强</span></span><span class="kind">服务号 · 活动规则页明示</span></td>
+<td class="cell-ok"><span class="acct"><b>江苏电信</b> <span class="id">jsdxwt</span><span class="lv m">中</span></span><span class="kind">自称“江苏公司唯一官方公众号”</span><span class="acct" style="margin-top:4px"><b>江苏电信星尊享</b> <span class="id">jsdxqxx</span><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>江苏联通10010</b><span class="lv m">中</span></span><span class="kind">话费/流量查询与业务办理</span></td></tr>
+
+<tr><td class="prov">浙江</td>
+<td class="cell-ok"><span class="acct"><b>浙江移动</b><span class="lv m">中</span></span><span class="kind">服务号 · 查询/办理/优惠三栏</span><span class="acct" style="margin-top:4px"><b>浙江移动10086</b><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>浙江电信</b><span class="lv m">中</span></span><span class="kind">全称“浙江电信官方微信”，2015 年披露粉丝 102 万</span></td>
+<td class="cell-ok"><span class="acct"><b>浙江联通</b><span class="lv m">中</span></span><span class="kind">查询-个人中心-服务专区</span></td></tr>
+
+<tr><td class="prov">安徽</td>
+<td class="cell-ok"><span class="acct"><b>安徽移动</b> <span class="id">anhuimobile</span><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>安徽电信</b><span class="lv m">中</span></span><span class="kind">话费/流量/宽带预约/充值</span></td>
+<td class="cell-ok"><span class="acct"><b>安徽联通官微</b> <span class="id">ahlt10010</span><span class="lv m">中</span></span><span class="kind">主体认证（省分公司名下共 6 个号）</span><span class="acct" style="margin-top:4px"><b>皖美联通</b> <span class="id">gh_01b05195a206</span><span class="lv m">中</span></span><span class="kind"><b>传播主号</b> · “传播联通声音，讲好联通故事”</span><span class="acct" style="margin-top:4px"><b>安徽联通微厅</b> <span class="id">gh_d34a958b815c</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>沃派安徽</b> <span class="id">wopaianhui</span><span class="lv m">中</span></span><span class="kind">校园垂类号</span></td></tr>
+
+<tr><td class="prov">福建</td>
+<td class="cell-ok"><span class="acct"><b>福建移动</b> <span class="id">cmcc_fj</span><span class="lv m">中</span></span><span class="kind">官方订阅号</span><span class="acct" style="margin-top:4px"><b>福建移动营业厅</b><span class="lv s">强</span></span><span class="kind">服务号 · 分公司公告明示</span></td>
+<td class="cell-ok"><span class="acct"><b>福建电信</b> <span class="id">fjdx189</span><span class="lv m">中</span></span><span class="kind">人民网福建频道 + 福州新闻网报道（远程柜台入口）</span></td>
+<td class="cell-ok"><span class="acct"><b>福建联通</b> <span class="id">fjunicom</span><span class="lv m">中</span></span><span class="kind">主体认证（省分公司名下 4 个号）；凤凰网报道</span><span class="acct" style="margin-top:4px"><b>中国联通福建客服</b> <span class="id">fjltwkf</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>福建联通沃易购</b> <span class="id">FJWOEGO</span><span class="lv m">中</span></span><span class="kind">B2B 终端交易垂类号</span></td></tr>
+
+<tr><td class="prov">江西</td>
+<td class="cell-ok"><span class="acct"><b>江西移动</b><span class="lv w">弱</span></span><span class="kind">仅内容站提及，需复核</span></td>
+<td class="cell-todo"><span class="kw">江西电信</span><div class="kind">主体：中国电信股份有限公司江西分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>江西联通</b><span class="lv s">强</span></span><span class="kind">赣州联通在政务平台官方答复：“搜索‘江西联通’即可”</span></td></tr>
+
+<tr><td class="prov">山东</td>
+<td class="cell-ok"><span class="acct"><b>山东移动10086</b><span class="lv m">中</span></span><span class="kind">服务号 · 实名补登记入口</span><span class="acct" style="margin-top:4px"><b>山东移动宽带管家</b><span class="lv s">强</span></span><span class="kind">垂类号 · 官网排障页明示</span><span class="acct" style="margin-top:4px"><b>山东移动人力资源</b><span class="lv s">强</span></span><span class="kind">招聘号 · 校招公告明示</span></td>
+<td class="cell-ok"><span class="acct"><b>中国电信山东公司</b><span class="lv s">强</span></span><span class="kind">通信世界网报道 · 5G 预约官方唯一指定公众号</span></td>
+<td class="cell-ok"><span class="acct"><b>中国联通山东客服</b> <span class="id">sdltkf</span><span class="lv m">中</span></span><span class="kind">主体认证（业务宣传、客户服务）</span><span class="acct" style="margin-top:4px"><b>山东联通10010</b> <span class="id">sdlt-10010</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>山东联通宽带专家</b> <span class="id">sd9600169</span><span class="lv m">中</span></span><span class="kind">宽带垂类号 · 报障/排障</span></td></tr>
+
+<tr><td class="prov">河南</td>
+<td class="cell-ok"><span class="acct"><b>河南移动10086</b><span class="lv m">中</span></span><span class="kind">微信营业厅 · 我的移动</span><span class="acct" style="margin-top:4px"><b>河南移动</b><span class="lv w">弱</span></span></td>
+<td class="cell-ok"><span class="acct"><b>河南电信</b><span class="lv m">中</span></span><span class="kind">郑州电信广播节目 + 河南电信官方号发文</span></td>
+<td class="cell-ok"><span class="acct"><b>河南联通</b> <span class="id">hnlt-10010</span><span class="lv m">中</span></span><span class="kind">主体认证 · 官方认证公众号</span><span class="acct" style="margin-top:4px"><b>中国联通河南客服</b><span class="lv m">中</span></span><span class="kind">联通客服官方答复</span></td></tr>
+
+<tr><td class="prov">湖北</td>
+<td class="cell-ok"><span class="acct"><b>中国移动湖北公司</b> <span class="id">hb_cmcc</span><span class="lv s">强</span></span><span class="kind">微信营业厅（与 10086 号并列）</span><span class="acct" style="margin-top:4px"><b>中国移动湖北10086</b><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>湖北电信</b><span class="lv w">弱</span></span><span class="kind">仅教程类来源；另有“中国电信湖北客服”（襄阳电信公告，中）</span></td>
+<td class="cell-ok"><span class="acct"><b>湖北联通</b><span class="lv m">中</span></span><span class="kind">荆楚网 + 中国工信新闻网报道；已上线 39 项服务</span><span class="acct" style="margin-top:4px"><b>湖北联通网上营业厅</b> <span class="id">unicom_hb</span><span class="lv w">弱</span></span></td></tr>
+
+<tr><td class="prov">湖南</td>
+<td class="cell-ok"><span class="acct"><b>湖南移动微厅</b><span class="lv s">强</span></span><span class="kind">实名核验官方指定通道</span><span class="acct" style="margin-top:4px"><b>湖南移动和你在一起</b> <span class="id">hunan12580</span><span class="lv m">中</span></span></td>
+<td class="cell-todo"><span class="kw">湖南电信</span><div class="kind">主体：中国电信股份有限公司湖南分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>湖南联通</b> <span class="id">hnliantong</span><span class="lv w">弱</span></span><span class="kind">主体：湖南省分公司（常德晚报通稿，需复核）</span><span class="acct" style="margin-top:4px"><b>湖南联通10010</b> <span class="id">hnltkf10010</span><span class="lv m">中</span></span><span class="kind">微信客服号 · 含“沃妹小湘”人工客服</span></td></tr>
+
+<tr><td class="prov">广东</td>
+<td class="cell-ok"><span class="acct"><b>广东移动10086</b> <span class="id">CMCCGD</span><span class="lv s">强</span></span><span class="kind">服务号 · 官网“服务渠道”明示</span><span class="acct" style="margin-top:4px"><b>中国移动广东公司</b> <span class="id">CMCC_GD_AND</span><span class="lv m">中</span></span><span class="kind"><b>传播主号</b> · 新产品/新技术/新服务资讯</span><span class="acct" style="margin-top:4px"><b>广东移动法律服务</b> <span class="id">gh_6dd1152bba21</span><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>广东电信</b> <span class="id">gdkf10000</span><span class="lv s">强</span></span><span class="kind">服务号 · 停复机/活动官方渠道</span><span class="acct" style="margin-top:4px"><b>天翼惠生活</b> <span class="id">gddxwt</span><span class="lv s">强</span></span><span class="kind">微信厅 · 流量账单套餐查询办理</span></td>
+<td class="cell-ok"><span class="acct"><b>广东联通发布</b> <span class="id">WO--gd</span><span class="lv m">中</span></span><span class="kind">官方发布号（主体：广东省分公司）</span><span class="acct" style="margin-top:4px"><b>沃在广东</b> <span class="id">gdunicom10010</span><span class="lv m">中</span></span><span class="kind">官方订阅号</span><span class="acct" style="margin-top:4px"><b>广东联通</b> <span class="id">WX4006010010</span><span class="lv w">弱</span></span><span class="kind">早期服务号，名称可能已变更</span></td></tr>
+
+<tr><td class="prov">广西</td>
+<td class="cell-ok"><span class="acct"><b>广西移动10086</b><span class="lv s">强</span></span><span class="kind">微信厅 · 官网活动页明示</span></td>
+<td class="cell-ok"><span class="acct"><b>广西电信</b><span class="lv s">强</span></span><span class="kind">gx.189.cn 官方公告：账单/发票查询跳转“广西电信”公众号</span></td>
+<td class="cell-ok"><span class="acct"><b>广西联通</b> <span class="id">gxunicom10010</span><span class="lv m">中</span></span><span class="kind">主体认证（省分公司名下 2 个号）</span><span class="acct" style="margin-top:4px"><b>广西流量达人</b> <span class="id">GXWOEGO</span><span class="lv w">弱</span></span></td></tr>
+
+<tr><td class="prov">海南</td><td class="cell-todo"><span class="kw">海南移动</span><div class="kind">主体：中国移动通信集团海南有限公司</div></td>
+<td class="cell-todo"><span class="kw">海南电信</span><div class="kind">主体：中国电信股份有限公司海南分公司｜未找到可查证证据，不填</div></td>
+<td class="cell-ok"><span class="acct"><b>海南联通</b><span class="lv s">强</span></span><span class="kind">新浪海南 + 海南日报 · FTTR 发布会官方预约入口</span><span class="acct" style="margin-top:4px"><b>海南联通VIP俱乐部</b><span class="lv m">中</span></span><span class="kind">VIP 垂类号 · 联通客服官方答复</span></td></tr>
+
+<tr><td class="prov">重庆</td>
+<td class="cell-ok"><span class="acct"><b>中国移动重庆10086</b> <span class="id">Chongqing_10086</span><span class="lv s">强</span></span><span class="kind">官方服务号 · 实名补登记通道</span><span class="acct" style="margin-top:4px"><b>重庆移动</b><span class="lv w">弱</span></span></td>
+<td class="cell-todo"><span class="kw">重庆电信</span><div class="kind">主体：中国电信股份有限公司重庆分公司</div></td>
+<td class="cell-todo"><span class="kw">重庆联通</span><div class="kind">主体：中国联合网络通信有限公司重庆市分公司</div></td></tr>
+
+<tr><td class="prov">四川</td>
+<td class="cell-ok"><span class="acct"><b>中国移动四川公司</b> <span class="id">cmcc_sc</span><span class="lv m">中</span></span><span class="kind">官方资讯号（“宣多多”）</span><span class="acct" style="margin-top:4px"><b>四川移动掌厅</b> <span class="id">SCYDZT</span><span class="lv m">中</span></span><span class="kind">服务号</span></td>
+<td class="cell-ok"><span class="acct"><b>四川电信</b><span class="lv s">强</span></span><span class="kind">m.sc.189.cn 官方套餐页：“关注四川电信公众号发‘激活’”</span></td>
+<td class="cell-ok"><span class="acct"><b>中国联通四川客服</b><span class="lv m">中</span></span><span class="kind">四川联通官方客服公众号（广元联通官微 2018 上线公告）</span></td></tr>
+
+<tr><td class="prov">贵州</td><td class="cell-todo"><span class="kw">贵州移动</span><div class="kind">主体：中国移动通信集团贵州有限公司</div></td>
+<td class="cell-todo"><span class="kw">贵州电信</span><div class="kind">主体：中国电信股份有限公司贵州分公司</div></td>
+<td class="cell-ok"><span class="acct"><b>贵州联通</b><span class="lv s">强</span></span><span class="kind">中国联通客服官方答复（实名/查询/报障入口）</span><span class="acct" style="margin-top:4px"><b>贵州联通网上营业厅</b> <span class="id">guizhou-10010</span><span class="lv w">弱</span></span></td></tr>
+
+<tr><td class="prov">云南</td><td class="cell-todo"><span class="kw">云南移动</span><div class="kind">主体：中国移动通信集团云南有限公司</div></td>
+<td class="cell-ok"><span class="acct"><b>云南电信</b><span class="lv m">中</span></span><span class="kind">云视新闻/腾讯新闻 · 中国电信云南公司服务渠道</span></td>
+<td class="cell-ok"><span class="acct"><b>云南联通</b><span class="lv s">强</span></span><span class="kind">微信服务市场主体页（fuwu.weixin.qq.com）：“云南联通微信矩阵平台，支持省市营业厅公众号接入”</span></td></tr>
+
+<tr><td class="prov">西藏</td><td class="cell-todo"><span class="kw">西藏移动</span><div class="kind">主体：中国移动通信集团西藏有限公司</div></td>
+<td class="cell-todo"><span class="kw">西藏电信</span><div class="kind">主体：中国电信股份有限公司西藏分公司</div></td>
+<td class="cell-todo"><span class="kw">西藏联通</span><div class="kind">主体：中国联合网络通信有限公司西藏自治区分公司</div></td></tr>
+
+<tr><td class="prov">陕西</td>
+<td class="cell-ok"><span class="acct"><b>陕西移动</b> <span class="id">sn_cmcc</span><span class="lv m">中</span></span><span class="kind">资讯号 · 微商城/5G资讯</span></td>
+<td class="cell-ok"><span class="acct"><b>陕西电信</b><span class="lv m">中</span></span><span class="kind">快捷办理/我的营业厅</span><span class="acct" style="margin-top:4px"><b>陕西电信官微</b> <span class="id">sn_189</span><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>陕西联通</b><span class="lv s">强</span></span><span class="kind">央广网 + 中国工信新闻网报道（查缴办、宽带排障）</span><span class="acct" style="margin-top:4px"><b>中国联通陕西客服</b> <span class="id">shaanxiltkf</span><span class="lv m">中</span></span></td></tr>
+
+<tr><td class="prov">甘肃</td><td class="cell-todo"><span class="kw">甘肃移动</span><div class="kind">主体：中国移动通信集团甘肃有限公司</div></td>
+<td class="cell-ok"><span class="acct"><b>甘肃电信</b><span class="lv m">中</span></span><span class="kind">嘉峪关市政府网 + 本地宝（高考查分入口）</span></td>
+<td class="cell-ok"><span class="acct"><b>甘肃联通</b><span class="lv m">中</span></span><span class="kind">5·17 国企开放日通稿（助老服务）</span></td></tr>
+
+<tr><td class="prov">青海</td><td class="cell-todo"><span class="kw">青海移动</span><div class="kind">主体：中国移动通信集团青海有限公司</div></td>
+<td class="cell-todo"><span class="kw">青海电信</span><div class="kind">主体：中国电信股份有限公司青海分公司</div></td>
+<td class="cell-todo"><span class="kw">青海联通</span><div class="kind">主体：中国联合网络通信有限公司青海省分公司</div></td></tr>
+
+<tr><td class="prov">宁夏</td><td class="cell-todo"><span class="kw">宁夏移动</span><div class="kind">主体：中国移动通信集团宁夏有限公司</div></td>
+<td class="cell-ok"><span class="acct"><b>宁夏电信</b><span class="lv s">强</span></span><span class="kind">nx.189.cn 官方隐私政策明示“宁夏电信”公众号</span></td>
+<td class="cell-todo"><span class="kw">宁夏联通</span><div class="kind">主体：中国联合网络通信有限公司宁夏回族自治区分公司｜未找到可查证证据，不填</div></td></tr>
+
+<tr><td class="prov">新疆</td><td class="cell-todo"><span class="kw">新疆移动</span><div class="kind">主体：中国移动通信集团新疆有限公司</div></td>
+<td class="cell-ok"><span class="acct"><b>中国电信新疆公司</b><span class="lv m">中</span></span><span class="kind">天山网 · 两个号并列</span><span class="acct" style="margin-top:4px"><b>中国电信新疆公司客服</b><span class="lv m">中</span></span></td>
+<td class="cell-ok"><span class="acct"><b>新疆联通</b><span class="lv m">中</span></span><span class="kind">天山网 · “我要办理—话费充值”入口</span></td></tr>
+
+</tbody>
+</table>
+
+<h2><span class="idx">PART 03</span> 剩下 2 省（西藏、青海）与个别空格怎么补齐：30 分钟自助核验法</h2>
+<div class="flag">
+<h4>逐格三步，每格约 30 秒</h4>
+<p><b>① 搜</b>：微信 → 发现 → 搜一搜 → 输入表中灰色检索词（如“天津移动”），切到“公众号”标签。</p>
+<p><b>② 验</b>：点开账号 → 右上角“…”→ 查看“帐号主体”，必须与表中所列认证主体全称一致。<b>名称可重名，主体不会错</b>。</p>
+<p><b>③ 判</b>：看账号简介与菜单。有“业务办理/充值”的是服务号，投放价值低；有“公司动态/新闻/案例”的是资讯号，<b>这才是发布落点</b>。</p>
+<p style="margin-top:8px;color:#8a5a1b"><b>红线</b>：主体显示为“XX科技有限公司”“XX通信专营店”的一律不用——那是代理商或第三方，投进去等于给渠道商导流。</p>
+</div>
+
+<h2><span class="idx">PART 04</span> 另外 7 家的公众号入口（集团号 + 业务线号，非省级）</h2>
+<p class="notes" style="margin-top:-4px;margin-bottom:10px">
+这 7 家<b>不按省设运营号</b>，因此不存在省级矩阵；它们的入口结构是<b>集团主号 → 业务线/产品号 → 招聘号</b>三层。
+公众号<b>没有稳定 URL</b>，唯一可靠入口是微信“搜一搜”输入下方名称或微信号；下表“官网入口”列给出的是可点击的核验落点（各公司官网/官微原文）。
+</p>
+
+<table>
+<thead><tr><th style="width:11%">机构</th><th style="width:38%">公众号入口（名称 · 微信号）</th><th style="width:31%">定位与投放用途</th><th>官网入口</th></tr></thead>
+<tbody>
+
+<tr><td class="prov" rowspan="2">华为</td>
+<td class="cell-ok"><span class="acct"><b>华为</b> <span class="id">huaweicorp</span><span class="lv s">强</span></span><span class="kind">集团官方号 · huawei.com 联系页明示</span></td>
+<td>集团级品牌与技术叙事，非医疗垂类</td>
+<td><a href="https://www.huawei.com/cn/contact-us" target="_blank" rel="noopener">huawei.com/cn/contact-us</a></td></tr>
+<tr>
+<td class="cell-ok"><span class="acct"><b>华为企业业务中国</b><span class="lv s">强</span></span><span class="kind">华为新闻稿统一落款话术</span><span class="acct" style="margin-top:4px"><b>华为中国</b><span class="lv m">中</span></span><span class="kind">中国区官方号</span><span class="acct" style="margin-top:4px"><b>华为企业业务</b><span class="lv m">中</span></span><span class="kind">早期稿用词，可能已并入前者</span></td>
+<td><b>行业传播真正落点</b>：样板点、联合方案、HAIP 发布</td>
+<td><a href="https://e.huawei.com/cn/industries/healthcare" target="_blank" rel="noopener">e.huawei.com 医疗健康</a></td></tr>
+
+<tr><td class="prov" rowspan="2">科大讯飞<br>讯飞医疗</td>
+<td class="cell-ok"><span class="acct"><b>科大讯飞</b><span class="lv s">强</span></span><span class="kind">深交所互动易官方答复：“官方微信公众号为‘科大讯飞’、‘科大讯飞集团’”</span><span class="acct" style="margin-top:4px"><b>科大讯飞集团</b><span class="lv s">强</span></span><span class="acct" style="margin-top:4px"><b>科大讯飞开放平台</b><span class="lv s">强</span></span><span class="kind">iflytek.com/about 页脚明示</span></td>
+<td>集团品牌与开发者生态；<b>不是医疗内容主通道</b></td>
+<td><a href="https://www.iflytek.com/about" target="_blank" rel="noopener">iflytek.com/about</a></td></tr>
+<tr>
+<td class="cell-ok"><span class="acct"><b>讯飞医疗</b><span class="lv s">强</span></span><span class="kind">讯飞医疗官网“联系我们”明示公众号+视频号</span><span class="acct" style="margin-top:4px"><b>讯飞晓医</b><span class="lv w">弱</span></span><span class="kind">C 端产品号，材料中提及，账号信息未核实到</span></td>
+<td><b>医疗垂直主号</b>：星火医疗大模型、智医助理、基层覆盖</td>
+<td><a href="https://www.xunfeihealthcare.com/contact/201.html" target="_blank" rel="noopener">讯飞医疗 联系我们</a></td></tr>
+
+<tr><td class="prov">卫宁健康</td>
+<td class="cell-ok"><span class="acct"><b>卫宁健康</b><span class="lv m">中</span></span><span class="kind">官网底部“微信公众号”入口 + 官微原文；微信号未公开</span><span class="acct" style="margin-top:4px"><b>卫宁招聘</b><span class="lv m">中</span></span><span class="kind">校招官方公众号</span></td>
+<td>对行业讲产品落地、对资本讲 AI 第二曲线；官网“赢在卫宁”为观点栏目（非独立号）</td>
+<td><a href="https://www.winning.com.cn" target="_blank" rel="noopener">winning.com.cn</a></td></tr>
+
+<tr><td class="prov">东软</td>
+<td class="cell-ok"><span class="acct"><b>东软集团</b><span class="lv m">中</span></span><span class="kind">人民财讯等引用“东软集团微信公众号”</span><span class="acct" style="margin-top:4px"><b>东软HIT解决方案</b> <span class="id">NeusoftHIT</span><span class="lv m">中</span></span><span class="kind"><b>医疗垂直号 · To 医院落点</b></span><span class="acct" style="margin-top:4px"><b>东软新媒体</b> <span class="id">Neu_Newsroom</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>东软ICT+</b> <span class="id">tongqi-neu</span><span class="lv m">中</span></span><span class="acct" style="margin-top:4px"><b>东软保盈</b> <span class="id">NeuRybal</span><span class="lv m">中</span></span><span class="kind">医保/保险线</span></td>
+<td><b>东软是 7 家里唯一有明确医疗垂类号的</b>；集团号偏稳健政企语境</td>
+<td><a href="https://www.neusoft.com/cn/topic/healthcare/" target="_blank" rel="noopener">neusoft.com 医疗健康</a></td></tr>
+
+<tr><td class="prov">创业慧康</td>
+<td class="cell-ok"><span class="acct"><b>创业慧康</b> <span class="id">B-soft</span><span class="lv s">强</span></span><span class="kind">官微文章页脚明示“微信号:B-soft”</span></td>
+<td>单号运作，聚焦县域医共体、云枢智能体、数据要素</td>
+<td><a href="https://www.bsoft.com.cn" target="_blank" rel="noopener">bsoft.com.cn</a></td></tr>
+
+<tr><td class="prov">东华软件<br>东华医为</td>
+<td class="cell-ok"><span class="acct"><b>东华软件</b> <span class="id">DHC_Software</span><span class="lv s">强</span></span><span class="kind">上市公司社会责任报告页脚“微信:DHC_Software”</span><span class="acct" style="margin-top:4px"><b>东华医为</b> <span class="id">donghuayiwei</span><span class="lv m">中</span></span><span class="kind">官微原文明示；2018 年出处，投放前复核</span></td>
+<td>集团号讲资本与生态；<b>东华医为号讲三甲标杆与 Copilot</b></td>
+<td><a href="https://www.dhcc.com.cn" target="_blank" rel="noopener">dhcc.com.cn</a> · <a href="https://www.imedway.com" target="_blank" rel="noopener">imedway.com</a></td></tr>
+
+<tr><td class="prov">阿里健康</td>
+<td class="cell-ok"><span class="acct"><b>阿里健康</b><span class="lv m">中</span></span><span class="kind">主号 · 官微原文引用</span><span class="acct" style="margin-top:4px"><b>阿里健康大药房</b><span class="lv m">中</span></span><span class="kind">C 端医药电商（云药房）</span><span class="acct" style="margin-top:4px"><b>阿里健康互联网医院</b><span class="lv m">中</span></span><span class="kind">云医院</span><span class="acct" style="margin-top:4px"><b>阿里健康招聘</b><span class="lv s">强</span></span><span class="kind">招聘官网明示</span><span class="acct" style="margin-top:4px"><b>小鹿中医</b><span class="lv m">中</span></span><span class="kind">子公司（中医互联网医院）</span></td>
+<td><b>7 家里号最多的一家</b>，按业务线拆分；区域触达仍主要走支付宝端内，不靠公众号做区域传播</td>
+<td><a href="http://www.alihealth.cn" target="_blank" rel="noopener">alihealth.cn</a> · <a href="https://careers.alihealth.cn/off-campus/home" target="_blank" rel="noopener">招聘页</a></td></tr>
+
+</tbody>
+</table>
+
+<div class="flag" style="margin-top:16px">
+<h4>这 7 家为什么没有“省级矩阵”——以及区域传播靠什么</h4>
+<p><b>① 不按省设号。</b>它们的区域传播靠三条替代路径：省办事处/分公司名义的招聘号与活动号（不固定）；与运营商省分<b>联合发布</b>的稿件（如“华为+XX移动”），最终落在运营商省分号上；华为全联接、数字中国峰会的省市分论坛。</p>
+<p><b>② 阿里健康是例外中的例外。</b>区域触达走支付宝端内城市服务与天猫健康，<b>不通过公众号做区域传播</b>，省级矩阵对其无意义。</p>
+<p><b>③ 结论不变</b>：10 家机构里只有<b>三家运营商</b>存在真正的“31 省 × 多号”矩阵。厂商要做区域传播，就得借运营商省分号——这正是材料里“运营商护城河是省分组织力”判断的实证，也意味着<b>联合发声是厂商绕不开的一条路</b>。</p>
+</div>
+
+<h2><span class="idx">PART 05</span> 取证留痕</h2>
+<ul class="notes">
+<li>抓取脚本：<code>outputs/pr-gzh-wxnum/wxnum_probe.py</code>（按认证主体过滤第三方收录站，命中项再取微信号）；试跑结果 <code>outputs/pr-gzh-wxnum/probe2.json</code>。全量扫描 31 省因“只出边缘号、主号缺失”主动中止，未消耗剩余请求。</li>
+<li><b>已废弃的路径</b>（避免重复投入）：省公司官网直连抓取（466/412/连接失败）；收录站全量扫描（只出边缘号，主号缺失）。</li>
+<li><b>已验证可用</b>的证据源：运营商自有活动规则页（如 <code>wx.gd.189.cn</code>、<code>wap.js.10086.cn</code>）、分公司官网公告（<code>10086.cn/aboutus/news/pannounce/</code>）、省市党媒报道、政府网站办事指南。</li>
+<li><b>第二轮新增的高价值证据源</b>（可继续批量补录）：① <b>省电信 189.cn 子站的公告与隐私政策页</b>——会以全称直接引用本省公众号名（广西 gx.189.cn、宁夏 yx.nx.189.cn、四川 m.sc.189.cn 均已命中）；② <b>企业信息平台的“微信公众号”维度</b>——按省分公司主体列出该主体名下<b>全部</b>公众号名称+微信号+简介（天津 4 个、安徽 6 个、福建 4 个、广西 2 个均由此取得），是唯一能一次拿全某省账号矩阵的路径；③ <b>微信服务市场主体页 fuwu.weixin.qq.com</b>（云南联通）；④ <b>中国联通客服在问答平台的官方答复</b>（山西、吉林、辽宁、贵州、江西均据此确认）；⑤ 省市党媒/通信行业媒体（天山网、荆楚网、央广网、海南日报、人民网地方频道）。</li>
+<li><b>仍未突破</b>：西藏、青海两省三家运营商均无公开可查证的省级公众号信息；重庆电信/联通、上海电信、宁夏联通、北京联通亦未取得可查证证据，留空而非填充。</li>
+<li><b>第三轮（厂商号）的证据源</b>：① 上市公司公告与定期报告页脚（东华软件“微信:DHC_Software”出自 2025 年度社会责任报告）；② 深交所互动易的官方答复（科大讯飞明示官方公众号为“科大讯飞”“科大讯飞集团”，是<b>唯一由公司自己声明官方号</b>的口径）；③ 企业官网“联系我们”页脚与二维码区（讯飞医疗、华为 huaweicorp）；④ 官微文章页脚（创业慧康“微信号:B-soft”）；⑤ 上市公司公众号清单类数据集（东软 4 个号的微信号与 fakeID）。</li>
+<li><b>厂商号的普遍缺口</b>：卫宁健康、阿里健康主号、华为企业业务中国均<b>未公开微信号</b>，只能按名称在微信端搜一搜核验主体，不能凭名称直接投放。</li>
+<li>标 <span class="lv w">弱</span> 的 6 条仅二手教程类来源支撑，正式投放前必须复核；标 <span class="lv m">中</span> 的多来自媒体或收录站主体说明，建议一并复核。</li>
+</ul>
+
+<footer>
+核实日期 2026-10-30（第三轮补录厂商号）｜ 矩阵覆盖内地 31 个省级行政区（不含港澳台）+ 7 家厂商机构<br>
+运营商省级：已确认 <b>98</b> 个账号、覆盖 <b>29</b> 个省级行政区（西藏、青海两省三家均无公开可查证证据）；第二轮新增 53 个（中国电信 17 个、中国联通 36 个）。<br>
+厂商号：已确认 <b>24</b> 个（华为 4、讯飞系 5、卫宁 2、东软 5、创业慧康 1、东华系 2、阿里健康 5），均非省级、按集团/业务线划分。<br>
+本表只收录可查证账号，未确认格留检索式而非推测名称——公众号名称重名率高且更名频繁，投放前请以微信端“帐号主体”为准。
+</footer>
+
+</div>
+</body>
+</html>

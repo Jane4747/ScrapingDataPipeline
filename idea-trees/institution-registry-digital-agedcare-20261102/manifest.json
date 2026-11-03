@@ -1,0 +1,651 @@
+{
+  "archive_id": "institution-registry-digital-agedcare-20261102",
+  "created_at": "2026-11-02T00:08:59+08:00",
+  "source_root": "E:\\CAICTBigData\\coding",
+  "files": [
+    {
+      "source": "configs/agedcare_all_targets_20261101.json",
+      "archive": "artifacts/configs/agedcare_all_targets_20261101.json",
+      "bytes": 45654,
+      "sha256": "9d3cd220ebd938b0465d0ed23081b6e1ab0aedaec9da4468cb5d722b45c7e123"
+    },
+    {
+      "source": "configs/agedcare_reports_p1.json",
+      "archive": "artifacts/configs/agedcare_reports_p1.json",
+      "bytes": 85618,
+      "sha256": "07f4db83ec53af6a1e9aeb23ea5c8c074df9dad6e9074e712fcd7fccc69d6b5d"
+    },
+    {
+      "source": "configs/agedcare_reports_p2.json",
+      "archive": "artifacts/configs/agedcare_reports_p2.json",
+      "bytes": 91239,
+      "sha256": "aba670fbf0b5d7108d3e3a5a2470af64d9971fcbd260c621b052cf22b49efe34"
+    },
+    {
+      "source": "configs/agedcare_reports_p3.json",
+      "archive": "artifacts/configs/agedcare_reports_p3.json",
+      "bytes": 118931,
+      "sha256": "4ce7cc6aaed088ed069e1d879cb7647fa041e5816d6fcb93e72810f330d9cd4e"
+    },
+    {
+      "source": "configs/agedcare_reports_p4.json",
+      "archive": "artifacts/configs/agedcare_reports_p4.json",
+      "bytes": 105926,
+      "sha256": "ae5d9d13f690cfe5bec61b82b67efc427c128168606eff0518049622ba74b086"
+    },
+    {
+      "source": "configs/agedcare_reports_p5.json",
+      "archive": "artifacts/configs/agedcare_reports_p5.json",
+      "bytes": 102356,
+      "sha256": "26d5a83c2104aa0e95a65bd85f2b70b8b462fdac09675f245fbdbb214a885225"
+    },
+    {
+      "source": "configs/agedcare_reports_p6.json",
+      "archive": "artifacts/configs/agedcare_reports_p6.json",
+      "bytes": 109819,
+      "sha256": "951889ac0070923453fb4f5c8eb085824a2fb21aea660880204399c1b67036ff"
+    },
+    {
+      "source": "configs/agedcare_targets_p1.json",
+      "archive": "artifacts/configs/agedcare_targets_p1.json",
+      "bytes": 5109,
+      "sha256": "2cd6f09a65177018222e172984a44b6d18b1616a2443676d804c189f78b9ac19"
+    },
+    {
+      "source": "configs/agedcare_targets_p2.json",
+      "archive": "artifacts/configs/agedcare_targets_p2.json",
+      "bytes": 5005,
+      "sha256": "1627f9b216e7269a5680af477b97222d100ba35b7489b450ed6d9568cd022e70"
+    },
+    {
+      "source": "configs/agedcare_targets_p3.json",
+      "archive": "artifacts/configs/agedcare_targets_p3.json",
+      "bytes": 5025,
+      "sha256": "3be0284c278eba35cfba23a49e0b063da0dfc58927404e6057539ba9e88e0cf8"
+    },
+    {
+      "source": "configs/agedcare_targets_p4.json",
+      "archive": "artifacts/configs/agedcare_targets_p4.json",
+      "bytes": 5080,
+      "sha256": "f13ad4f9ad273b4dd400b96f9f29c68d068d651f5540ba655328256b923d4f9d"
+    },
+    {
+      "source": "configs/agedcare_targets_p5.json",
+      "archive": "artifacts/configs/agedcare_targets_p5.json",
+      "bytes": 5344,
+      "sha256": "62bd81f4941ecc1f084b50a0f9121dea177c5c93ab1ea83255761ac2b48e5818"
+    },
+    {
+      "source": "configs/agedcare_targets_p6.json",
+      "archive": "artifacts/configs/agedcare_targets_p6.json",
+      "bytes": 5109,
+      "sha256": "ab1b46310a6fd992bd3806cddebb36e6eb9de119b9b86ab5032c3a4f97a61430"
+    },
+    {
+      "source": "configs/agedcare_targets_p7.json",
+      "archive": "artifacts/configs/agedcare_targets_p7.json",
+      "bytes": 5217,
+      "sha256": "a520a6c829926ff3618776d40506cd18259b194bfc28bc567d0129925c3c49bc"
+    },
+    {
+      "source": "configs/agedcare_targets_p8.json",
+      "archive": "artifacts/configs/agedcare_targets_p8.json",
+      "bytes": 5153,
+      "sha256": "1ebacd3d069741a1a77d6ccf0636b821b8ce9221fa4a97ad2ff0133a63946803"
+    },
+    {
+      "source": "configs/agedcare_targets_p9.json",
+      "archive": "artifacts/configs/agedcare_targets_p9.json",
+      "bytes": 5363,
+      "sha256": "3f3aab76facd6e3d7a1cd290d82850f3fe1c77670ee8c043405cd499bd58874a"
+    },
+    {
+      "source": "configs/digit_all_targets_20261101.json",
+      "archive": "artifacts/configs/digit_all_targets_20261101.json",
+      "bytes": 92546,
+      "sha256": "b55d23aee942692da3516b672daff715aa9a15760661c17438a098367c34482b"
+    },
+    {
+      "source": "configs/digit_reports_batch1.json",
+      "archive": "artifacts/configs/digit_reports_batch1.json",
+      "bytes": 12161,
+      "sha256": "7487f4e491930a17125c2ed7de4eb85fe8bd9b241ad351224d418f0170e20546"
+    },
+    {
+      "source": "configs/digit_reports_batch10.json",
+      "archive": "artifacts/configs/digit_reports_batch10.json",
+      "bytes": 75647,
+      "sha256": "c268f90c638badbba9f5c18861929b7bc3973b42b3ac564316a3fe1448f2cac6"
+    },
+    {
+      "source": "configs/digit_reports_batch10_retry.json",
+      "archive": "artifacts/configs/digit_reports_batch10_retry.json",
+      "bytes": 14288,
+      "sha256": "b792323efef1db4b6faad8e3b6aa8235b4a9e2b421aa48c4b0da5a1946753129"
+    },
+    {
+      "source": "configs/digit_reports_batch11.json",
+      "archive": "artifacts/configs/digit_reports_batch11.json",
+      "bytes": 177959,
+      "sha256": "fd5778b9703044aabac38df005ffe7b7acf101b7c4a4faa52e3aeb6db0044cb1"
+    },
+    {
+      "source": "configs/digit_reports_batch12.json",
+      "archive": "artifacts/configs/digit_reports_batch12.json",
+      "bytes": 93903,
+      "sha256": "f46d7ba2dd3f6d517508b7e2496f95e6a8b367fbe2e31d2678a536153f975128"
+    },
+    {
+      "source": "configs/digit_reports_batch13.json",
+      "archive": "artifacts/configs/digit_reports_batch13.json",
+      "bytes": 137625,
+      "sha256": "2a19f512cf353a4d3e10c40075d373da43665fd4b25b2048f57856db18a22060"
+    },
+    {
+      "source": "configs/digit_reports_batch14.json",
+      "archive": "artifacts/configs/digit_reports_batch14.json",
+      "bytes": 127098,
+      "sha256": "6a2d984f628f06b5f89f07920cb853f993914436903dd64a9584b63410653190"
+    },
+    {
+      "source": "configs/digit_reports_batch15.json",
+      "archive": "artifacts/configs/digit_reports_batch15.json",
+      "bytes": 116810,
+      "sha256": "f3af3f8b431930c882a43c8be2c29352dfe3d6453fb6412de85b2569e7687c60"
+    },
+    {
+      "source": "configs/digit_reports_batch2.json",
+      "archive": "artifacts/configs/digit_reports_batch2.json",
+      "bytes": 13964,
+      "sha256": "3521f9ee69debce5701c82e3a67f793c253899f5cc5d1c30ed58caf1b72321af"
+    },
+    {
+      "source": "configs/digit_reports_batch3.json",
+      "archive": "artifacts/configs/digit_reports_batch3.json",
+      "bytes": 14541,
+      "sha256": "0227da3e4988a36a608d8c73a2935cee89e176fedbacf84b05d4a558ce864f8d"
+    },
+    {
+      "source": "configs/digit_reports_batch4.json",
+      "archive": "artifacts/configs/digit_reports_batch4.json",
+      "bytes": 16215,
+      "sha256": "ef1f1fd476935198018a7a470088a6ee057be4b1c119f62b6cf06268938d15cd"
+    },
+    {
+      "source": "configs/digit_reports_batch5.json",
+      "archive": "artifacts/configs/digit_reports_batch5.json",
+      "bytes": 12741,
+      "sha256": "73c44113f42a5d65648153b8aedb1b5e05fb2afc848c0597cfe324916cade9a1"
+    },
+    {
+      "source": "configs/digit_reports_batch6.json",
+      "archive": "artifacts/configs/digit_reports_batch6.json",
+      "bytes": 73208,
+      "sha256": "d1876093125b7b32be7c627a214529f1120abca5f802046c27dadb00405b290d"
+    },
+    {
+      "source": "configs/digit_reports_batch7.json",
+      "archive": "artifacts/configs/digit_reports_batch7.json",
+      "bytes": 74570,
+      "sha256": "fb7871c887ae3e956c0951fad2bf1d874df6cfc372eecf664c4f03a5249a98c5"
+    },
+    {
+      "source": "configs/digit_reports_batch8.json",
+      "archive": "artifacts/configs/digit_reports_batch8.json",
+      "bytes": 158181,
+      "sha256": "aad232310e52721178c9d95d9eef1e1c2f66392900adc242a43818ffc1dbaff0"
+    },
+    {
+      "source": "configs/digit_reports_batch9.json",
+      "archive": "artifacts/configs/digit_reports_batch9.json",
+      "bytes": 137155,
+      "sha256": "5fb15ad2b5735c75cfbd8314c7223f9d7629b03a53e0b871830a1fc5217a23af"
+    },
+    {
+      "source": "configs/digit_targets_batch10.json",
+      "archive": "artifacts/configs/digit_targets_batch10.json",
+      "bytes": 4504,
+      "sha256": "1aadeb2f92b5278499113dddfa0f6d3d6dbe5f64e3121aafcef879fdfd29d37a"
+    },
+    {
+      "source": "configs/digit_targets_batch11.json",
+      "archive": "artifacts/configs/digit_targets_batch11.json",
+      "bytes": 4477,
+      "sha256": "dc0a8d6ef9e42ecef55663b2a44b92d49fc55f69fabe7d6635dea674bcb70f17"
+    },
+    {
+      "source": "configs/digit_targets_batch12.json",
+      "archive": "artifacts/configs/digit_targets_batch12.json",
+      "bytes": 4602,
+      "sha256": "eceea10936677d6aa1bdfbc0352fe833a0823d82efef794b104363980eac3f4c"
+    },
+    {
+      "source": "configs/digit_targets_batch13.json",
+      "archive": "artifacts/configs/digit_targets_batch13.json",
+      "bytes": 4371,
+      "sha256": "b24fc2d14ad75cf41182ec0288719ecf076b11d12bf4628593afccc41e7153d9"
+    },
+    {
+      "source": "configs/digit_targets_batch14.json",
+      "archive": "artifacts/configs/digit_targets_batch14.json",
+      "bytes": 4504,
+      "sha256": "8655c4f11018a4346ea77b92cac64dcf7fd67d2a9f4f35c62a1fe9f4aacd0cf8"
+    },
+    {
+      "source": "configs/digit_targets_batch15.json",
+      "archive": "artifacts/configs/digit_targets_batch15.json",
+      "bytes": 2846,
+      "sha256": "adc27f80c108792186f9f82f9b4d6e79e41889389019566ea37ab6a14b16c476"
+    },
+    {
+      "source": "configs/digit_targets_batch6.json",
+      "archive": "artifacts/configs/digit_targets_batch6.json",
+      "bytes": 4702,
+      "sha256": "4d7af115dde555f0db1d532ce608603c7980b9fe81bfaf556e996a09dd249aac"
+    },
+    {
+      "source": "configs/digit_targets_batch7.json",
+      "archive": "artifacts/configs/digit_targets_batch7.json",
+      "bytes": 4522,
+      "sha256": "bb315310914a70f6ec5c0c3429413e95681e547064ac2ab5fe79eac9907ba332"
+    },
+    {
+      "source": "configs/digit_targets_batch8.json",
+      "archive": "artifacts/configs/digit_targets_batch8.json",
+      "bytes": 4615,
+      "sha256": "e0697b09066b71b05997d70fc984096682bd49dfad21062584b9f4978e121cf9"
+    },
+    {
+      "source": "configs/digit_targets_batch9.json",
+      "archive": "artifacts/configs/digit_targets_batch9.json",
+      "bytes": 4450,
+      "sha256": "6ce6930d5ce084efe52b99fd51f6ebc681ac3dacc4ca0bda36b39f8ba3098fa4"
+    },
+    {
+      "source": "configs/institution_aliases_20261030.json",
+      "archive": "artifacts/configs/institution_aliases_20261030.json",
+      "bytes": 4784,
+      "sha256": "650d8ee6a48cb9a3aea7ca62bacffa085e0728c07450dcd8b65ea38c74e4ed8d"
+    },
+    {
+      "source": "configs/institution_contact_20261101.json",
+      "archive": "artifacts/configs/institution_contact_20261101.json",
+      "bytes": 178751,
+      "sha256": "b48da39bc8d9990cb5126ca1ac7d15096a837dbe054eaf8dbe79b47f449e2b6f"
+    },
+    {
+      "source": "configs/institution_hospital_domicile_20261030.json",
+      "archive": "artifacts/configs/institution_hospital_domicile_20261030.json",
+      "bytes": 5763,
+      "sha256": "b97dbc23df4e9b71d195734cd12cc6cc40fd7e249770b75f10981d9e8903a360"
+    },
+    {
+      "source": "configs/institution_patch_20261030.json",
+      "archive": "artifacts/configs/institution_patch_20261030.json",
+      "bytes": 294357,
+      "sha256": "adda405cc1d210ab2c91b116e254b69c43936a800253ae0d1f68fa007d8b3f10"
+    },
+    {
+      "source": "configs/institution_tables_seed_20261030.json",
+      "archive": "artifacts/configs/institution_tables_seed_20261030.json",
+      "bytes": 32249,
+      "sha256": "f6bf0879ed91794cd70cfc73df050f0ac1db77eeaf78f641dee900d1ae050b72"
+    },
+    {
+      "source": "configs/pilot_targets_20261101.json",
+      "archive": "artifacts/configs/pilot_targets_20261101.json",
+      "bytes": 6165,
+      "sha256": "32e1d6ba2f161b5cc3e90e03b782f5dfdeff97c9ff8a0ab53384086bec144c03"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part1.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part1.json",
+      "bytes": 20223,
+      "sha256": "6d505b44c00433d9511c0c08f746ded3262ad4f325a2d668b2f558b98787350a"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part2.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part2.json",
+      "bytes": 22875,
+      "sha256": "ed117e954c60896a658cb33f8588ab1a71a9523bf8922a31d047f2b487bb4e6c"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part3.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part3.json",
+      "bytes": 21241,
+      "sha256": "8f4a6618ecb0fb4542c201148c660da29e4876df5fa6ecb4faa9d37b17a2da14"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part4.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part4.json",
+      "bytes": 20823,
+      "sha256": "78bb2c10a1b78964c48f087e7c5fe73a9ec9b25846df6498882c266c64b15535"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part5.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part5.json",
+      "bytes": 16428,
+      "sha256": "e6522d343a6b703ee62a1cb2c951a17d97a99567bbf0cf291eebedea12ee1010"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part6.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part6.json",
+      "bytes": 26902,
+      "sha256": "3559285a5e35ca21bfc9ad79962e6dd2bc29a78d30c8672906ea34db7719f373"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part7.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part7.json",
+      "bytes": 16962,
+      "sha256": "0ab750c6e3fc973b0acdd4d4ca568715e7406fbb21a352ff263b125d4799978d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/result_part8.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/result_part8.json",
+      "bytes": 23300,
+      "sha256": "61a4b6f94f1022f44d037672b2fb064c2bb951432ed324e8902f70190b9d4052"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part1.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part1.json",
+      "bytes": 9231,
+      "sha256": "7673e11dde3b5e1b77b73238cc0aaed2824912ccceda3315102f5f2f17173723"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part2.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part2.json",
+      "bytes": 7571,
+      "sha256": "3a4dfae13e15f017a82bafffe9bbde8c6a15f19a18859345bbee49e280fb3e4e"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part3.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part3.json",
+      "bytes": 7263,
+      "sha256": "22949ab3ddc9f60379fbdcc81528e435d0681840abae472d6588df917cae9b26"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part4.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part4.json",
+      "bytes": 7458,
+      "sha256": "a30686bf6780945a4030edbe28f83263d60d75a0d483c0353966d0de79d2342b"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part5.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part5.json",
+      "bytes": 7263,
+      "sha256": "2d49d92f2f898ed80daa5f32d256a2e9264cff0639fbefef2e4786c7e5969b84"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part6.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part6.json",
+      "bytes": 7323,
+      "sha256": "9125e0eec5cf2f1f4c3872420513ae20049d2e0a85d64fdcc86cfb8dd2449cee"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part7.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part7.json",
+      "bytes": 7029,
+      "sha256": "ed9862ceaa9b15984cfda1757881e0b48fcd64fdd99c6341465191cfdbfa707e"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_contact/target_part8.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_contact/target_part8.json",
+      "bytes": 7458,
+      "sha256": "782c954e38cc36ef31e403649dda29bf52db531d4441c2a10078871ab61a6649"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_extract/crc_docs.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_extract/crc_docs.json",
+      "bytes": 4899,
+      "sha256": "0026713aa8911f86cad5fcda943634c89ba69d221bc0618b5355dc54d81dc199"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/_target_200.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/_target_200.json",
+      "bytes": 60575,
+      "sha256": "05cecd93a98dad8a96e06387db93772bef57832677f7b32e348071e06fdbb863"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/org_contact_probe.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/org_contact_probe.json",
+      "bytes": 9651,
+      "sha256": "24ef20b7537bfda6ad784081ef5edacdfef9eac14971ba032a566cd12bd003b4"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/t2_batch45.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/t2_batch45.json",
+      "bytes": 40201,
+      "sha256": "4d03a6127f3b2ae3e115779e9a6be4422af29049e55d95b7737342687fae4097"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/t3_yiyang_demo.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/t3_yiyang_demo.json",
+      "bytes": 30074,
+      "sha256": "40d1f5245552f52cbe8615d360f2570bd8b22ceba30141da1a9da2ec104d668d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/t4_hospice.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/t4_hospice.json",
+      "bytes": 40943,
+      "sha256": "80fd568d5bf66205e20788741a355f53a67724e91c7eb5fa730ff93fb175818d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/t5_clinical_research.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/t5_clinical_research.json",
+      "bytes": 18079,
+      "sha256": "1f16cc1a198d0fd8fbb9fc14138b0583f4ad195c1aa1755298ae759ec61cc6c1"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_research/t6_remote_pilot.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_research/t6_remote_pilot.json",
+      "bytes": 48325,
+      "sha256": "98ed2755e1487e39d2dbc0816ebebfbeffb12dd5d60ccb0bd01838c156387123"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/_rows.json",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/_rows.json",
+      "bytes": 64419,
+      "sha256": "450fbd1d09c80da97f33c64582b99b9d130c9d5a86634ecef7e11100880b5c17"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/A26_增设后国家儿童医学中心和国家儿童区域医疗中心名单.doc",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/A26_增设后国家儿童医学中心和国家儿童区域医疗中心名单.doc",
+      "bytes": 24064,
+      "sha256": "e1dec444e6ecded8743567ee7c76d4b1e21ad6f296af3f75940578b3162147a9"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/build_rows.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/build_rows.py",
+      "bytes": 1679,
+      "sha256": "9387b008d6275356035758551e93258cb042e9dd7c550d964f0aee185df6e145"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/build_rows_t3.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/build_rows_t3.py",
+      "bytes": 1656,
+      "sha256": "3957595cff664ee0eeae1b80c7811ac76e89072f77777acf5e157b3e1813b7c7"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/build_t4_t5.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/build_t4_t5.py",
+      "bytes": 20485,
+      "sha256": "be7ab9ea137b132ff0ca4610345abb336c3398b2e4a8d1d9b58091e5116c39ed"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/cj.txt",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/cj.txt",
+      "bytes": 288,
+      "sha256": "701e50022d629a06eb59f6c997c0f5a40052b5e10fb1acf539abf979e60207c9"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/gen_json.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/gen_json.py",
+      "bytes": 15119,
+      "sha256": "7581be6677468d20b9c895f0306d26c5f78cfc8dbe2afc39bcf169d46b33d0b6"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/nhc_anning_2nd.html",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/nhc_anning_2nd.html",
+      "bytes": 3855,
+      "sha256": "baf9e79f5cf46737742f6bcc005540514a78a5fe724025834f6ce8527fc0eb8e"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/nhc_anning_3rd.html",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/nhc_anning_3rd.html",
+      "bytes": 3910,
+      "sha256": "0298d0484dd28c01529ceb6ba9f5d6ede4e53ae3bc25e6db12450391ab0366a5"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/parse_t3.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/parse_t3.py",
+      "bytes": 672,
+      "sha256": "7cea862a55bc228ca470407af1a60cbfdf7e7480de2c4d18eeb375df956a4deb"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/parse_t3b.py",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/parse_t3b.py",
+      "bytes": 608,
+      "sha256": "80fcd0576c5cec05eebf7eb2ed7cf14201766fcb4f97e4734085208a8af98dcd"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t3_rows.txt",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t3_rows.txt",
+      "bytes": 4465,
+      "sha256": "e583b0126311598126109c2944dc231e2f037c63a853c98e1b999af34255f4b0"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t3_yiyang_99.doc",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t3_yiyang_99.doc",
+      "bytes": 31232,
+      "sha256": "b8f1fbbad403e3dec76159e1f032a8968b33c021e8ec194bf92432f29d998873"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t3_yiyang_99.txt",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t3_yiyang_99.txt",
+      "bytes": 3743,
+      "sha256": "62532b432cf3094da26a04fdf0b3b23e7c1e8fd8de5551cf2bb584166e1bb75d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t6_full.html",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t6_full.html",
+      "bytes": 3831,
+      "sha256": "e39b6c1d529b14ceb0261ba5cfd00e30b5b29753a8d7e18f14b38456bf7e4050"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t6_notice.html",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t6_notice.html",
+      "bytes": 3841,
+      "sha256": "2f41d5f3ae13d70cb55d5830883a746c339b944fc4c020d5b16f520cdf48daa2"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t6_notice2.html",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t6_notice2.html",
+      "bytes": 3849,
+      "sha256": "1c17847328735ab08c30fb8ffa5e03032c7f840083a560f6fa09faf553dc7536"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/t6_pilot_174.txt",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/t6_pilot_174.txt",
+      "bytes": 8240,
+      "sha256": "e80e6ae7a434dbe26b035d47bd26825fbdaf8e8c7971021bda673d594c5dda7d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/W020141030592960626156.doc",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/W020141030592960626156.doc",
+      "bytes": 32256,
+      "sha256": "9dfeaabe520ed5d9f3342c40555be473ea50e636cd66db2054e17a8748e86ac9"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/W020160801338653753517.doc",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/W020160801338653753517.doc",
+      "bytes": 17920,
+      "sha256": "d2f013ad5562dd2618ed15707d483ae606d53941fef52658fcb16bc01ba765b4"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/_sources/W020190530555596716661.doc",
+      "archive": "artifacts/outputs/institution-registry-20261030/_sources/W020190530555596716661.doc",
+      "bytes": 37376,
+      "sha256": "8c78fb50b9d5be3e38fd10d14e7e01806d35a66399c2279fa852c486509e24fb"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/医卫数字化公众号报道_分析表.xlsx",
+      "archive": "artifacts/outputs/institution-registry-20261030/医卫数字化公众号报道_分析表.xlsx",
+      "bytes": 33751,
+      "sha256": "5ef86330aece3d33127be33e637deb1645fa4e5736f5821be6c6da2c965dad28"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/医卫数字化公众号报道_分析表_全量_20261101.xlsx",
+      "archive": "artifacts/outputs/institution-registry-20261030/医卫数字化公众号报道_分析表_全量_20261101.xlsx",
+      "bytes": 333351,
+      "sha256": "ec84fb45b51939027539db732887ed642c4154dcfddeb82eed107765306b0afe"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/机构台账_六表_20261030.xlsx",
+      "archive": "artifacts/outputs/institution-registry-20261030/机构台账_六表_20261030.xlsx",
+      "bytes": 61164,
+      "sha256": "74bd72733661fb3d6d769d8fd6522b906af880e7ff11ecd2655ca5eb9a9d26dc"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/机构台账_六表_20261031.xlsx",
+      "archive": "artifacts/outputs/institution-registry-20261030/机构台账_六表_20261031.xlsx",
+      "bytes": 136223,
+      "sha256": "82480053aba51cd5a7eac942ab0cddd5d1822ce05b067c0758b449658165203d"
+    },
+    {
+      "source": "outputs/institution-registry-20261030/机构台账_六表_20261101.xlsx",
+      "archive": "artifacts/outputs/institution-registry-20261030/机构台账_六表_20261101.xlsx",
+      "bytes": 201156,
+      "sha256": "f34ba51652b27982c8648beba6cb10e1dbbe57d549cdf9d47204f380410cac56"
+    },
+    {
+      "source": "scripts/build_digitization_tables.py",
+      "archive": "artifacts/scripts/build_digitization_tables.py",
+      "bytes": 11012,
+      "sha256": "9f5ce3b77081a7aa774198ba5f8d834ace835c4bb04cc81d73d2a8e2ab412fbc"
+    },
+    {
+      "source": "scripts/build_institution_patch.py",
+      "archive": "artifacts/scripts/build_institution_patch.py",
+      "bytes": 18105,
+      "sha256": "986bede06634b8a0f012a00a9e65e80f552b81974404c22e6bcbfbb153263e03"
+    },
+    {
+      "source": "scripts/build_institution_registry.py",
+      "archive": "artifacts/scripts/build_institution_registry.py",
+      "bytes": 49750,
+      "sha256": "86af37f2563b25818ee7fdee41385c61346998bbdea4b15770602fe861992786"
+    },
+    {
+      "source": "scripts/fix_digit_reports.py",
+      "archive": "artifacts/scripts/fix_digit_reports.py",
+      "bytes": 6266,
+      "sha256": "5b891a0ddbf09870dfcbf56f83f413e340fd6f4ee57bf6dd1ce83ce5bbc0d8b9"
+    },
+    {
+      "source": "scripts/institution_contact_enrich.py",
+      "archive": "artifacts/scripts/institution_contact_enrich.py",
+      "bytes": 7755,
+      "sha256": "6b9ed127d429359ad1ff75a13a17fdae72b8da745ed283f972a3ab3b00a78343"
+    },
+    {
+      "source": "scripts/institution_doc_extract.py",
+      "archive": "artifacts/scripts/institution_doc_extract.py",
+      "bytes": 4946,
+      "sha256": "bad059c47d0f5e8efd598d4687964421d20b0aca66b4f1aee052f0b87751b5cd"
+    },
+    {
+      "source": "scripts/merge_institution_contact.py",
+      "archive": "artifacts/scripts/merge_institution_contact.py",
+      "bytes": 3923,
+      "sha256": "1c635124b600a29db5cdc761824f8fcf5c9f6a881164d864afb9a147fb870d18"
+    },
+    {
+      "source": "scripts/verify_institution_urls.py",
+      "archive": "artifacts/scripts/verify_institution_urls.py",
+      "bytes": 4378,
+      "sha256": "377e8c4c30ff2f8d885faf711e3bc669b62f9bc94e449aaed8b4389b0a83352c"
+    }
+  ],
+  "count": 107,
+  "bytes": 4257607
+}
