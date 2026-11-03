@@ -1,0 +1,3743 @@
+{
+  "schema_version": 1,
+  "rules_version": "2026-10-27.7",
+  "topic": "医疗数字化中标情报",
+  "scope": "A/B/C完整类别规则台账+31省及兵团双入口；有限验证，不宣称全量采集。",
+  "references": {
+    "ccgp_home": {
+      "kind": "official",
+      "url": "https://www.ccgp.gov.cn/",
+      "finding": "中央/地方公告、合同及31省分网导航；入口不等于覆盖完成。",
+      "observed_at": "2026-10-27"
+    },
+    "ccgp_2024": {
+      "kind": "official",
+      "url": "https://www.mof.gov.cn/gkml/caizhengwengao/wg2024/wg202403/202407/P020240710665612076807.pdf",
+      "finding": "财办库〔2024〕30号要求2024-04-01起推送本地区全部项目公告含500万元以下；制度要求不等于实测完整性。",
+      "observed_at": "2026-10-27"
+    },
+    "ccgp_interface": {
+      "kind": "official",
+      "url": "https://www.ccgp.gov.cn/zcfg/mof/202403/t20240306_21605100.htm",
+      "finding": "财信〔2024〕8号：地方分网以公函申请对接；调试账号邮件发放，不是免鉴权开放API。",
+      "observed_at": "2026-10-27"
+    },
+    "ccgp_github": {
+      "kind": "github",
+      "url": "https://raw.githubusercontent.com/ir-st/TenderCrawler/912f50d9905162eaa8b9f705e85bc72feef29b61/sites/ccgp_crawler.py",
+      "finding": "bxsearch列表选择器、冒号日期timeType=6；bidType中标8/成交9/磋商7；需实站核对。",
+      "observed_at": "2026-10-27",
+      "revision": "912f50d9905162eaa8b9f705e85bc72feef29b61"
+    },
+    "ccgp_legacy": {
+      "kind": "github",
+      "url": "https://raw.githubusercontent.com/eastseven/crawler-for-bidding/0dee4e31830973e697ce0ece42e171549a9fdb90/src/main/java/com/har/sjfxpt/crawler/ccgp/ZhengFuCaiGouPageProcessor.java",
+      "finding": "旧实现给出vF/vT正文及摘要表选择器。只参考定位方式，未复制源码。",
+      "observed_at": "2026-10-27",
+      "revision": "0dee4e31830973e697ce0ece42e171549a9fdb90"
+    },
+    "ggzy_home": {
+      "kind": "official",
+      "url": "https://www.ggzy.gov.cn/",
+      "finding": "全国交易查询含工程、政采结果与合同；官方导航31省+兵团。",
+      "observed_at": "2026-10-27"
+    },
+    "ggzy_legacy": {
+      "kind": "github",
+      "url": "https://raw.githubusercontent.com/eastseven/crawler-for-bidding/0dee4e31830973e697ce0ece42e171549a9fdb90/src/main/java/com/har/sjfxpt/crawler/core/processor/GongGongZiYuanPageProcessor.java",
+      "finding": "旧dealList.jsp POST使用DEAL_CLASSIFY、DEAL_STAGE、TIMEBEGIN/TIMEEND、PAGENUMBER；旧90天上限需复测。",
+      "observed_at": "2026-10-27",
+      "revision": "0dee4e31830973e697ce0ece42e171549a9fdb90"
+    },
+    "provincial_github": {
+      "kind": "github",
+      "url": "https://raw.githubusercontent.com/lby-1/crawler-service/a41437be8f479ff79bcb32096efc1289fcb6e1de/src/main/resources/application.yml",
+      "finding": "广东/广西/云南JSON线索及广州/海南栏目；原样例水利工程，不能继承行业筛选用于医疗。",
+      "observed_at": "2026-10-27",
+      "revision": "a41437be8f479ff79bcb32096efc1289fcb6e1de"
+    },
+    "ceb_github": {
+      "kind": "github",
+      "url": "https://raw.githubusercontent.com/ir-st/TenderCrawler/912f50d9905162eaa8b9f705e85bc72feef29b61/sites/registry.py",
+      "finding": "getSearch.do为表单；getStringMethod.do为列表线索，当前业务枚举/签名/响应需重验。",
+      "observed_at": "2026-10-27",
+      "revision": "912f50d9905162eaa8b9f705e85bc72feef29b61"
+    },
+    "blog_norah": {
+      "kind": "author_blog",
+      "url": "https://norah2.github.io/2019/05/18/china_gov/",
+      "finding": "2019作者案例解释bxsearch参数、页码从1起、自定义日期和列表选择器；年代早，仅作参考。",
+      "observed_at": "2026-10-27"
+    },
+    "blog_dashboard": {
+      "kind": "author_blog",
+      "url": "https://cloud.tencent.com/developer/article/2699820",
+      "finding": "2026-06-29作者介绍IT采购监测系统，仅参考组织思路，不继承成功率。",
+      "observed_at": "2026-10-27"
+    },
+    "qcc_api": {
+      "kind": "official",
+      "url": "https://openapi.qcc.com/dataApi/958",
+      "finding": "GetList官方描述最近2年、最多2000条；需要授权与配额。",
+      "observed_at": "2026-10-27"
+    },
+    "jianyu_api": {
+      "kind": "official",
+      "url": "https://www.jianyu360.cn/front/dataMarket/dataInterface",
+      "finding": "官方提供招投标API服务，历史深度/许可按合同。",
+      "observed_at": "2026-10-27"
+    },
+    "jianyu_sdk": {
+      "kind": "github_official_sdk",
+      "url": "https://github.com/jianyu360/openkeyapi-java/blob/3cd79a40e8a76cf7466ba8197294f2df2582212a/python-test/jyapi_test.py",
+      "finding": "openkey POST含action/appid/pagenum/timestamp/signature；示例可能过期，未调付费接口。",
+      "observed_at": "2026-10-27",
+      "revision": "3cd79a40e8a76cf7466ba8197294f2df2582212a"
+    },
+    "tyc_terms": {
+      "kind": "official",
+      "url": "https://static.tianyancha.com/webview/useragreement_v1.html",
+      "finding": "官方提供授权数据调用；网页会员不自动等于批量复制许可。",
+      "observed_at": "2026-10-27"
+    },
+    "ict_home": {
+      "kind": "official",
+      "url": "https://www.ulilink.com/",
+      "finding": "ICT标局官网newDetailsView?id；部分详情提示小程序查看。",
+      "observed_at": "2026-10-27"
+    },
+    "telecom_official": {
+      "kind": "official",
+      "url": "https://www.chinatelecom.com.cn/ct/xxgk/cggyl/gysmh/",
+      "finding": "集团公司列阳光采购网；旧trade登录入口提示改为caigou域ctsc-portal。",
+      "observed_at": "2026-10-27"
+    },
+    "unicom_official": {
+      "kind": "official",
+      "url": "https://www.cupb.cn/home",
+      "finding": "新采购与招标网页脚主体为中国联合网络通信集团有限公司；旧域保留历史线索。",
+      "observed_at": "2026-10-27"
+    },
+    "mobile_official": {
+      "kind": "official",
+      "url": "https://b2b.10086.cn/b2b/main/viewNoticeContent.html?noticeBean.id=905096",
+      "finding": "官方域列采购/候选人/结果；旧详情路径可能返回门户，需核对标题和公告ID。",
+      "observed_at": "2026-10-27"
+    },
+    "innomd": {
+      "kind": "publisher",
+      "url": "https://innomd.com/article/4e70527b8ca58fd46aae4bbd57091b60.html",
+      "finding": "介绍高端医械院院端招采数据服务；供数主体、数据包授权和原文链需核实。",
+      "observed_at": "2026-10-27"
+    },
+    "nhc_procurement": {
+      "kind": "official",
+      "url": "https://www.nhc.gov.cn/wjw/zfcg/list.shtml",
+      "observed_at": "2026-10-27",
+      "finding": "官方政府采购栏目；搜索可定位，web直开返回412，本机首轮首页也未取到有效正文。"
+    },
+    "ifly_site": {
+      "kind": "official",
+      "url": "https://www.xunfeihealthcare.com/",
+      "observed_at": "2026-10-27",
+      "finding": "现行讯飞医疗官网提供企业动态、关于我们、招股等；保留iflyhealth历史域，不把迁移报错抹掉。"
+    },
+    "cqcdc": {
+      "kind": "official",
+      "url": "https://www.cqcdc.org/index.php?a=shows&catid=2258&id=5878",
+      "observed_at": "2026-10-27",
+      "finding": "重庆疾控招标公示内2026-07-14信息化评估服务采购邀请函；为采购邀请，不能记成中标。"
+    }
+  },
+  "profiles": {
+    "ccgp": {
+      "list_selectors": [
+        ".vT-srch-result-list-bid li a",
+        ".c_list_bid li a",
+        "a[href*='/cggg/']"
+      ],
+      "body_selectors": [
+        ".vF_detail_content",
+        ".vT_detail_content",
+        ".vF_detail_content_container"
+      ],
+      "next_selectors": [
+        ".pager a",
+        "a[rel=next]",
+        "a[href*='index_']"
+      ],
+      "verification": "源码佐证，实站结果见outputs"
+    },
+    "government": {
+      "list_selectors": [
+        ".ewb-list-node a",
+        ".ewb-info-item a",
+        ".article-list a",
+        ".list a",
+        "li a",
+        "td a"
+      ],
+      "body_selectors": [
+        ".TRS_Editor",
+        ".ewb-article",
+        ".ewb-article-info",
+        "#zoom",
+        ".article-content",
+        ".detail-content",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        ".pages a",
+        "a[rel=next]"
+      ],
+      "verification": "通用候选，需逐站样本验收"
+    },
+    "ggzy": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "HTML公告规则；动态查询/API另列未验证hint"
+    },
+    "vendor": {
+      "list_selectors": [
+        "article a",
+        ".news-list a",
+        "li a",
+        "a[href*='news']"
+      ],
+      "body_selectors": [
+        "article",
+        ".article-content",
+        ".news-content",
+        ".content-detail",
+        ".TRS_Editor"
+      ],
+      "next_selectors": [
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "新闻只作来源陈述，采购事实需官方证据"
+    },
+    "commercial": {
+      "list_selectors": [],
+      "body_selectors": [],
+      "next_selectors": [],
+      "verification": "仅接受合法授权样本，默认不抓付费内容"
+    },
+    "tianjin": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".detail-body"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "2026-10-27真实公告HTML离线重放验证，原始失败保留",
+      "title_selectors": [
+        "h1.detail-title"
+      ],
+      "date_selectors": [
+        ".detail-header"
+      ]
+    },
+    "heilongjiang": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".ewb-art-bd"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "真实中标公示HTML；含预中标/公示条件须复核，不直接汇总为已生效中标",
+      "title_selectors": [
+        ".ewb-art-hd"
+      ],
+      "date_selectors": [
+        ".ewb-art-info",
+        ".ewb-art"
+      ]
+    },
+    "jiangxi": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".content > .text"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "真实公告静态text容器验证；隐藏/模板字段不等于完整结构化数据",
+      "date_selectors": [
+        ".content"
+      ]
+    },
+    "zhejiang": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".article-info .con"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "真实公告只含交换摘要和PDF附件，不代表已解析附件全文",
+      "date_selectors": [
+        ".info-sources-text"
+      ],
+      "content_scope": "summary_and_attachments"
+    },
+    "cqcdc": {
+      "list_selectors": [
+        ".ewb-list-node a",
+        ".ewb-info-item a",
+        ".article-list a",
+        ".list a",
+        "li a",
+        "td a"
+      ],
+      "body_selectors": [
+        ".box-r > .scroll"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        ".pages a",
+        "a[rel=next]"
+      ],
+      "verification": "真实采购邀请函静态正文验证",
+      "title_selectors": [
+        ".box-r > .title"
+      ]
+    },
+    "qinghai": {
+      "list_selectors": [
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "真实详情只有mytitle空节点和动态脚本；必须记dynamic_shell",
+      "dynamic_markers": [
+        "projectDetail.js"
+      ]
+    },
+    "shanxi_ggzy": {
+      "list_selectors": [
+        "div.cs_tab_box_cont a",
+        "div.sx_dynamic a",
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".cs_xq_content",
+        ".cs_twoC_box",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "2026-10-27.5：真实详情HTML离线推导（标题p.cs_title_P1、日期p.cs_title_P3、正文.cs_xq_content）",
+      "title_selectors": [
+        "p.cs_title_P1",
+        ".cs_xq_title"
+      ],
+      "date_selectors": [
+        "p.cs_title_P3"
+      ]
+    },
+    "hebei_ggzy": {
+      "list_selectors": [
+        "div.ewb-notice-block li.ewb-notice-item a",
+        "a[href*='/html/b/']",
+        "li a",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".ewb-copy",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        ".ewb-bulid h2",
+        "h2"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "jilin_ggzy": {
+      "list_selectors": [
+        "li.ewb-list-node a",
+        "a[href*='/html/b/']",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".ewb-article",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        "h3.ewb-article-tt"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "sichuan_ggzy": {
+      "list_selectors": [
+        "li.trade-item a",
+        "a[href*='/html/b/']",
+        "li a"
+      ],
+      "body_selectors": [
+        ".news-detailed",
+        ".container.news-detailed",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        "h2.detailed-title"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "guizhou_ggzy": {
+      "list_selectors": [
+        "ul.ulList li a",
+        "a[href*='/html/b/']",
+        "li a"
+      ],
+      "body_selectors": [
+        ".Article_Con",
+        ".trs_editor_view",
+        ".main.aBox",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "shaanxi_ggzy": {
+      "list_selectors": [
+        "li.ewb-news-item a",
+        "a[href*='/html/b/']",
+        ".ewb-list-node a"
+      ],
+      "body_selectors": [
+        ".epoint-article-content",
+        "#mainContent",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        "h3.article-title"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "xinjiang_ggzy": {
+      "list_selectors": [
+        "li.news-list-item a",
+        "div.trade-list li a",
+        "a[href*='/html/b/']",
+        "li a"
+      ],
+      "body_selectors": [
+        ".public-article-container",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        "h3.public-article-title"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本"
+    },
+    "neimenggu_ggzy": {
+      "list_selectors": [
+        "div.zyxx_list li a",
+        "a[href*='/html/b/']",
+        "li a"
+      ],
+      "body_selectors": [
+        ".body_zzms",
+        "#div_zw",
+        ".detail_content",
+        ".detail-content",
+        ".ewb-article",
+        ".TRS_Editor",
+        "article"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "verification": "2026-10-27.5：基于retest batch-listing真实详情HTML离线推导；列表→详情已打通，正文容器为真实样本；正文容器含导航与面包屑文本，已标content_scope待人工复核",
+      "content_scope": "article_text_with_chrome"
+    },
+    "ccgp_hubei": {
+      "list_selectors": [
+        "a[href*='/notice/']",
+        "a[href*='/news/']",
+        "li a"
+      ],
+      "body_selectors": [
+        "#main",
+        ".art_con"
+      ],
+      "next_selectors": [
+        ".pager a",
+        ".pagination a",
+        "a[rel=next]"
+      ],
+      "title_selectors": [
+        "#main h2",
+        "h2.title"
+      ],
+      "verification": "2026-10-27.5夜：/notice/公告详情真实样本，#main正文、#main h2标题；首页混入征订软文需过滤"
+    },
+    "zycg": {
+      "list_selectors": [
+        "ul.vT-srch-result-list-bid li a"
+      ],
+      "body_selectors": [
+        "div.vF_detail_content"
+      ],
+      "title_selectors": [
+        "div.vF_detail_content"
+      ],
+      "next_selectors": [
+        "a[href*='page_index']"
+      ],
+      "verification": "2026-10-27 实测：央采本站列表接口拒绝；改走 search.ccgp.gov.cn/bxsearch?agentName=中央国家机关政府采购中心，列表行含发布时间/采购人/代理机构/地区/公告类型；详情正文 div.vF_detail_content 含项目编号、预算、供应商、中标金额、主要标的表"
+    }
+  },
+  "keywords": {
+    "health": [
+      "医院",
+      "医疗",
+      "卫生",
+      "卫健",
+      "疾控",
+      "医保",
+      "医共体",
+      "医联体",
+      "公共卫生",
+      "临床",
+      "康复",
+      "保健",
+      "医用",
+      "影像诊断",
+      "疾病预防控制",
+      "卫生健康"
+    ],
+    "digital": [
+      "信息化",
+      "数字化",
+      "智慧医院",
+      "智慧医疗",
+      "电子病历",
+      "互联互通",
+      "数据平台",
+      "数据中心",
+      "区域平台",
+      "医保云",
+      "互联网医院",
+      "软件",
+      "系统集成",
+      "AI",
+      "HIS",
+      "EMR",
+      "PACS",
+      "LIS",
+      "CDSS",
+      "DRG",
+      "DIP",
+      "人工智能",
+      "辅助诊断",
+      "信息管理系统",
+      "信息系统",
+      "影像诊断",
+      "数据库",
+      "应用级灾备"
+    ]
+  },
+  "incremental": {
+    "publication_window_days": 7,
+    "overlap_days": 3,
+    "backfill": "按日/周窗×省×公告阶段分片；两页URL指纹重复需停并记pagination_stall。历史循环尚未实现。",
+    "dedup_key": [
+      "publisher_notice_id",
+      "normalized_url",
+      "raw_sha256"
+    ],
+    "project_merge": "项目编号+采购人+包号仅生成候选；候选/结果/合同/更正分别留存，转载不自动相加。"
+  },
+  "extraction_contract": {
+    "required_review": [
+      "project_id",
+      "purchaser_legal_name",
+      "supplier_legal_name",
+      "lot_id",
+      "award_amount",
+      "consortium_role",
+      "software_scope"
+    ],
+    "dates": [
+      "published_at",
+      "event_date",
+      "fetched_at"
+    ],
+    "amount_policy": "金额只保存上下文提及；预算、服务费和单价不填中标额。总额默认null，多包不自动合计。",
+    "attachments": "保留绝对URL；跨域白名单另核验；PDF/OCR、压缩包另处理。",
+    "commercial_import": "只读保留导出文件、sha256、供应商/授权范围/导出时间/原始字段；缺原文URL标证据不足。"
+  },
+  "failure_actions": {
+    "robots_denied": "停止；请求官方授权数据或人工检索。",
+    "robots_unavailable": "保留检查阶段和超时；新批次有限复测，不能断言永久不可用。",
+    "http_forbidden": "停止；核验官方入口和访问许可。",
+    "rate_limited": "停止；按官方限速/Retry-After降低频率后新批复测。",
+    "authentication_required": "取得正式授权或合法导出。",
+    "challenge": "停止；人工官方检索/授权接口。",
+    "login_required": "停止；使用授权导出，不保存账号Cookie。",
+    "dynamic_shell": "验证公开页面当前DOM/JSON契约；空壳200不算成功。",
+    "discovery_no_links": "查看已保存原文，补真实栏目/选择器，首页不计采集完成。",
+    "domain_scope_denied": "核验跳转域官方主体，显式加白名单后另批复测。",
+    "tls_error": "核验站点证书/本机证书链，不关闭TLS验证。",
+    "timeout": "保留阶段与超时预算，另批有限复测。",
+    "ocr_required": "保存PDF并OCR与页码核验后提取。"
+  },
+  "sources": [
+    {
+      "id": "ccgp",
+      "name": "中国政府采购网（中央+地方）",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp.gov.cn",
+        "search.ccgp.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp.gov.cn/cggg/zygg/zbgg/",
+        "https://www.ccgp.gov.cn/cggg/dfgg/zbgg/",
+        "https://www.ccgp.gov.cn/cggg/zygg/cjgg/",
+        "https://www.ccgp.gov.cn/cggg/dfgg/cjgg/"
+      ],
+      "profile": "ccgp",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "ccgp_home",
+        "ccgp_2024",
+        "ccgp_interface",
+        "ccgp_github",
+        "ccgp_legacy",
+        "blog_norah"
+      ],
+      "limitations": "2024-04-01全部公告推送是制度要求；实际漏推、历史和合同须地方抽样补查；交换接口需官方申请。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "search_hint": {
+        "url": "https://search.ccgp.gov.cn/bxsearch",
+        "params": {
+          "searchtype": "1",
+          "page_index": 1,
+          "bidType": "8",
+          "dbselect": "bidx",
+          "kw": "医疗 信息化",
+          "timeType": "6",
+          "start_time": "YYYY:MM:DD",
+          "end_time": "YYYY:MM:DD"
+        },
+        "bid_types": {
+          "中标": "8",
+          "成交": "9",
+          "更正": "6",
+          "竞争性磋商": "7"
+        },
+        "verification": "reference_only"
+      }
+    },
+    {
+      "id": "ggzy_national",
+      "name": "全国公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ggzy.gov.cn/",
+      "allowed_domains": [
+        "www.ggzy.gov.cn",
+        "deal.ggzy.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ggzy.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "ggzy_home",
+        "ggzy_legacy"
+      ],
+      "limitations": "入口已登记；未验证全历史/全部栏目覆盖。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "api_hints": [
+        {
+          "url": "http://deal.ggzy.gov.cn/ds/deal/dealList.jsp",
+          "method": "POST",
+          "fields": [
+            "DEAL_CLASSIFY",
+            "DEAL_STAGE",
+            "TIMEBEGIN",
+            "TIMEEND",
+            "PAGENUMBER",
+            "DEAL_PROVINCE"
+          ],
+          "verification": "historical_only"
+        }
+      ]
+    },
+    {
+      "id": "cebpub",
+      "name": "中国招标投标公共服务平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://www.cebpubservice.com/ctpsp_iiss/searchbusinesstypebeforedooraction/getSearch.do",
+      "allowed_domains": [
+        "www.cebpubservice.com",
+        "bulletin.cebpubservice.com"
+      ],
+      "seeds": [
+        "http://www.cebpubservice.com/ctpsp_iiss/searchbusinesstypebeforedooraction/getSearch.do"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "ggzy_home",
+        "ceb_github"
+      ],
+      "limitations": "表单200不能计为列表成功；当前签名/接口未复测，不伪造签名或绕过验证。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "api_hints": [
+        {
+          "url": "http://www.cebpubservice.com/ctpsp_iiss/searchbusinesstypebeforedooraction/getStringMethod.do",
+          "method": "POST",
+          "fields": [
+            "businessType",
+            "businessObjectName",
+            "searchTimeStart",
+            "searchTimeStop"
+          ],
+          "verification": "github_hint_only"
+        }
+      ]
+    },
+    {
+      "id": "nhc",
+      "name": "国家卫生健康委",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.nhc.gov.cn/",
+      "allowed_domains": [
+        "www.nhc.gov.cn"
+      ],
+      "seeds": [
+        "https://www.nhc.gov.cn/wjw/zfcg/list.shtml"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "nhc_procurement"
+      ],
+      "limitations": "国家入口；省市须逐机构核验栏目，政策/专项通知不等于中标。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "channel_keywords": [
+        "政府采购",
+        "招标采购",
+        "中标成交",
+        "信息公开",
+        "通知公告"
+      ]
+    },
+    {
+      "id": "nhsa",
+      "name": "国家医保局",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.nhsa.gov.cn/",
+      "allowed_domains": [
+        "www.nhsa.gov.cn"
+      ],
+      "seeds": [
+        "https://www.nhsa.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "国家入口；省市须逐机构核验栏目，政策/专项通知不等于中标。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "channel_keywords": [
+        "政府采购",
+        "招标采购",
+        "中标成交",
+        "信息公开",
+        "通知公告"
+      ]
+    },
+    {
+      "id": "ndcpa",
+      "name": "国家疾控局",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.ndcpa.gov.cn/",
+      "allowed_domains": [
+        "www.ndcpa.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ndcpa.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "国家入口；省市须逐机构核验栏目，政策/专项通知不等于中标。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "channel_keywords": [
+        "政府采购",
+        "招标采购",
+        "中标成交",
+        "信息公开",
+        "通知公告"
+      ]
+    },
+    {
+      "id": "china_cdc",
+      "name": "中国疾控中心",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.chinacdc.cn/",
+      "allowed_domains": [
+        "www.chinacdc.cn"
+      ],
+      "seeds": [
+        "https://www.chinacdc.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "国家入口；省市须逐机构核验栏目，政策/专项通知不等于中标。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "channel_keywords": [
+        "政府采购",
+        "招标采购",
+        "中标成交",
+        "信息公开",
+        "通知公告"
+      ]
+    },
+    {
+      "id": "provincial_ebid_directory",
+      "name": "省级电子招投标公共服务平台目录",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": null,
+      "allowed_domains": [],
+      "seeds": [],
+      "profile": "government",
+      "access_mode": "directory",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "与交易中心可能分站或同站；省级交换接口不等于公众开放接口。",
+      "next_action": "按31省从官方总枢纽核验主体和结果栏目，记录与交易中心重合关系",
+      "blocker_code": "directory_incomplete"
+    },
+    {
+      "id": "drug_procurement_directory",
+      "name": "各省药械采购中心目录",
+      "matrix_group": "A",
+      "priority": 3,
+      "source_kind": "official",
+      "homepage": null,
+      "allowed_domains": [],
+      "seeds": [],
+      "profile": "government",
+      "access_mode": "directory",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "药品/耗材挂网价不是软件中标；仅补设备+软件捆绑包。",
+      "next_action": "从各省医保局核验中心入口及含软件的包件清单",
+      "blocker_code": "directory_incomplete"
+    },
+    {
+      "id": "qcc",
+      "name": "企查查",
+      "matrix_group": "B",
+      "priority": 5,
+      "source_kind": "commercial",
+      "homepage": "https://openapi.qcc.com/dataApi/958",
+      "allowed_domains": [
+        "openapi.qcc.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "authorized_api",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "qcc_api"
+      ],
+      "limitations": "缺授权密钥/配额；官方最近2年最多2000条限制，不调用计费API。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "authorization_required"
+    },
+    {
+      "id": "tianyancha",
+      "name": "天眼查",
+      "matrix_group": "B",
+      "priority": 5,
+      "source_kind": "commercial",
+      "homepage": "https://open.tianyancha.com/",
+      "allowed_domains": [
+        "open.tianyancha.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "authorized_api",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "tyc_terms"
+      ],
+      "limitations": "缺正式招投标/工商接口权限与配额。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "authorization_required"
+    },
+    {
+      "id": "aiqicha",
+      "name": "爱企查",
+      "matrix_group": "B",
+      "priority": 5,
+      "source_kind": "commercial",
+      "homepage": "https://aiqicha.baidu.com/",
+      "allowed_domains": [
+        "aiqicha.baidu.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "未验证官方批量API契约，接收合法导出；不猜造接口。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "biaozhaozhao",
+      "name": "标找找",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.biaozhaozhao.com/",
+      "allowed_domains": [
+        "www.biaozhaozhao.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "API/会员导出的字段、历史范围和许可待官方契约及样本验证。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "ict_biaoju",
+      "name": "ICT标局",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.ulilink.com/",
+      "allowed_domains": [
+        "www.ulilink.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "ict_home"
+      ],
+      "limitations": "公开摘要可发现线索；完整正文/导出可能需会员或小程序，未提供授权样本。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "authorization_required"
+    },
+    {
+      "id": "jianyu",
+      "name": "剑鱼标讯",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.jianyu360.cn/front/dataMarket/dataInterface",
+      "allowed_domains": [
+        "www.jianyu360.cn"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "authorized_api",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "jianyu_api",
+        "jianyu_sdk"
+      ],
+      "limitations": "官方API及SDK已找到，缺本任务授权密钥和调用预算。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "authorization_required"
+    },
+    {
+      "id": "ttbiao",
+      "name": "天天标讯",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.ttbiao.com/",
+      "allowed_domains": [
+        "www.ttbiao.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "API/订阅导出的当前能力与历史范围未验证，待正式文档和样本。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "qianlima",
+      "name": "千里马",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.qianlima.com/",
+      "allowed_domains": [
+        "www.qianlima.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "缺付费导出授权与字段样本。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "yifangbao",
+      "name": "乙方宝",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "commercial",
+      "homepage": "https://www.yfbzb.com/",
+      "allowed_domains": [
+        "www.yfbzb.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "缺付费导出授权与字段样本。",
+      "next_action": "提供正式接口契约/合法导出；密钥只读环境变量，不写入文件",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "cmcc",
+      "name": "中国移动采购与招标网",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://b2b.10086.cn/",
+      "allowed_domains": [
+        "b2b.10086.cn"
+      ],
+      "seeds": [
+        "https://b2b.10086.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "mobile_official"
+      ],
+      "limitations": "只采公开公告/候选人/结果；上游医院标、运营商分包、联合体成员分别保留，集团名称不替代法律主体。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "telecom",
+      "name": "中国电信阳光采购网",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://caigou.chinatelecom.com.cn/ctsc-portal/ctscPortal",
+      "allowed_domains": [
+        "caigou.chinatelecom.com.cn"
+      ],
+      "seeds": [
+        "https://caigou.chinatelecom.com.cn/ctsc-portal/ctscPortal"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "telecom_official"
+      ],
+      "limitations": "只采公开公告/候选人/结果；上游医院标、运营商分包、联合体成员分别保留，集团名称不替代法律主体。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "unicom",
+      "name": "中国联通采购与招标网",
+      "matrix_group": "B",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.cupb.cn/home",
+      "allowed_domains": [
+        "www.cupb.cn"
+      ],
+      "seeds": [
+        "https://www.cupb.cn/home"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "unicom_official"
+      ],
+      "limitations": "只采公开公告/候选人/结果；上游医院标、运营商分包、联合体成员分别保留，集团名称不替代法律主体。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "iflyhealth",
+      "name": "讯飞医疗",
+      "matrix_group": "C",
+      "priority": 4,
+      "source_kind": "vendor",
+      "homepage": "https://www.xunfeihealthcare.com/",
+      "allowed_domains": [
+        "www.iflyhealth.com",
+        "www.xunfeihealthcare.com"
+      ],
+      "seeds": [
+        "https://www.xunfeihealthcare.com/news.html"
+      ],
+      "profile": "vendor",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "ifly_site"
+      ],
+      "limitations": "新闻/案例只能算厂商陈述，须追溯采购人公告；主体及新闻栏目待核验。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "tencent_cloud",
+      "name": "腾讯云医疗健康",
+      "matrix_group": "C",
+      "priority": 4,
+      "source_kind": "vendor",
+      "homepage": "https://cloud.tencent.com/solution/medical",
+      "allowed_domains": [
+        "cloud.tencent.com"
+      ],
+      "seeds": [
+        "https://cloud.tencent.com/solution/medical"
+      ],
+      "profile": "vendor",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "新闻/案例只能算厂商陈述，须追溯采购人公告；主体及新闻栏目待核验。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "alipay",
+      "name": "支付宝开放平台",
+      "matrix_group": "C",
+      "priority": 4,
+      "source_kind": "vendor",
+      "homepage": "https://open.alipay.com/",
+      "allowed_domains": [
+        "open.alipay.com"
+      ],
+      "seeds": [
+        "https://open.alipay.com/"
+      ],
+      "profile": "vendor",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "新闻/案例只能算厂商陈述，须追溯采购人公告；主体及新闻栏目待核验。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "wechat_channels",
+      "name": "厂商公众号/视频号",
+      "matrix_group": "C",
+      "priority": 4,
+      "source_kind": "vendor",
+      "homepage": null,
+      "allowed_domains": [],
+      "seeds": [],
+      "profile": "vendor",
+      "access_mode": "manual",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [],
+      "limitations": "无已验证通用官方RSS；搜狗仅发现，历史/视频正文完整性不保证。",
+      "next_action": "核验账号认证主体、永久原文URL及授权导出；视频转写另审",
+      "blocker_code": "official_feed_unavailable"
+    },
+    {
+      "id": "tyc_news",
+      "name": "天眼查新闻舆情",
+      "matrix_group": "C",
+      "priority": 3,
+      "source_kind": "commercial",
+      "homepage": "https://open.tianyancha.com/",
+      "allowed_domains": [
+        "open.tianyancha.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "authorized_api",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "tyc_terms"
+      ],
+      "limitations": "缺舆情字段接口契约与权限；同稿转载不计独立证据。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "blocker_code": "authorization_required"
+    },
+    {
+      "id": "device_data_center",
+      "name": "高端医械院等院端招采数据中心",
+      "matrix_group": "C",
+      "priority": 3,
+      "source_kind": "commercial",
+      "homepage": "https://innomd.com/article/4e70527b8ca58fd46aae4bbd57091b60.html",
+      "allowed_domains": [
+        "innomd.com"
+      ],
+      "seeds": [],
+      "profile": "commercial",
+      "access_mode": "licensed_export",
+      "rule_status": "not_executed",
+      "geographic_scope": "全国",
+      "reference_ids": [
+        "innomd"
+      ],
+      "limitations": "仅找到服务介绍；供数主体、数据包授权和原文链接样本未取得。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "blocker_code": "contract_unverified"
+    },
+    {
+      "id": "ggzy_beijing",
+      "name": "北京公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyfw.beijing.gov.cn/",
+      "allowed_domains": [
+        "ggzyfw.beijing.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyfw.beijing.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "third_party_script_verified",
+      "geographic_scope": "北京",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "2026-10-27晚逐UA对照修订：站点为国密SM2 TLS，Python OpenSSL握手报SSL: BAD_ECPOINT，取页走系统TLS栈且仍校验证书。此前\"WAF按UA拦截爬虫\"的判断不成立——被拦的只是UA含python-requests的请求；自报UA CAICTMedicalResearchBot、curl默认UA、无UA均返回200，robots.txt为404（无规则）。本轮未使用浏览器UA。",
+      "next_action": "扩到中标候选人公示/合同公示栏目；按日期窗回溯；与政采网同项目做交叉去重",
+      "province_code": "11",
+      "entry_verification": "national_official_navigation",
+      "transport": "system_tls",
+      "third_party": {
+        "library": "goverment_spider",
+        "script": "repos/goverment_spider/codes/1600005.北京公共资源交易平台-医疗中标.py",
+        "run": "python -m pipeline run --site 北京公共资源交易平台 --start-date <YYYY-MM-DD>",
+        "channels": [
+          "采购公告 jyxxcggg",
+          "中标成交公告 jyxxzbjggg"
+        ],
+        "output": "files/<年月>/<日期>/市级/北京市公共资源交易平台-医疗公告.txt|.json"
+      }
+    },
+    {
+      "id": "ccgp_beijing",
+      "name": "北京政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-beijing.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-beijing.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-beijing.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "third_party_script_verified",
+      "geographic_scope": "北京",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "2026-10-27晚实测修订：此前只测443端口（两轮网络均TCP不通）。本轮补测80端口——TCP可连、http:// 首页200（约90KB）且不跳转https、robots.txt为404。属仅HTTP入口可用，非不可采。",
+      "next_action": "按日期窗扩大页数；补区级招标/合同公告栏目；与中央网北京属地数据交叉核对完整性",
+      "province_code": "11",
+      "entry_verification": "central_official_navigation",
+      "transport": "http_only",
+      "third_party": {
+        "library": "goverment_spider",
+        "script": "repos/goverment_spider/codes/1600004.北京市政府采购网-医疗中标.py",
+        "run": "python -m pipeline run --site 北京市政府采购网 --start-date <YYYY-MM-DD>",
+        "channels": [
+          "市级中标公告 A002004001002",
+          "区级中标公告 A002004002002",
+          "市级招标公告 A002004001001"
+        ],
+        "output": "files/<年月>/<日期>/市级/北京市政府采购网-医疗公告.txt|.json"
+      }
+    },
+    {
+      "id": "ggzy_tianjin",
+      "name": "天津公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.zwfwb.tj.gov.cn/",
+      "allowed_domains": [
+        "ggzy.zwfwb.tj.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.zwfwb.tj.gov.cn/"
+      ],
+      "profile": "tianjin",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "天津",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "12",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_tianjin",
+      "name": "天津政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-tianjin.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-tianjin.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-tianjin.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "天津",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "12",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_hebei",
+      "name": "河北公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://szj.hebei.gov.cn/hbggfwpt/",
+      "allowed_domains": [
+        "szj.hebei.gov.cn"
+      ],
+      "seeds": [
+        "https://szj.hebei.gov.cn/hbggfwpt/"
+      ],
+      "profile": "hebei_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "河北",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "13",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_hebei",
+      "name": "河北政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-hebei.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-hebei.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-hebei.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "河北",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "13",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_shanxi",
+      "name": "山西公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://prec.sxzwfw.gov.cn/",
+      "allowed_domains": [
+        "prec.sxzwfw.gov.cn"
+      ],
+      "seeds": [
+        "https://prec.sxzwfw.gov.cn/"
+      ],
+      "profile": "shanxi_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "selector_replayed_offline_requires_live_detail",
+      "geographic_scope": "山西",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量联网验证列表→详情，再核市县子站",
+      "province_code": "14",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_shanxi",
+      "name": "山西政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-shanxi.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-shanxi.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-shanxi.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "山西",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "14",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_neimenggu",
+      "name": "内蒙古公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjy.nmg.gov.cn/",
+      "allowed_domains": [
+        "ggzyjy.nmg.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjy.nmg.gov.cn/"
+      ],
+      "profile": "neimenggu_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "内蒙古",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "15",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_neimenggu",
+      "name": "内蒙古政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-neimenggu.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-neimenggu.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-neimenggu.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "内蒙古",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "15",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_liaoning",
+      "name": "辽宁公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.lnggzy.gov.cn/",
+      "allowed_domains": [
+        "www.lnggzy.gov.cn"
+      ],
+      "seeds": [
+        "https://www.lnggzy.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "辽宁",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "21",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_liaoning",
+      "name": "辽宁政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-liaoning.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-liaoning.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-liaoning.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "辽宁",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "21",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_jilin",
+      "name": "吉林公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.jl.gov.cn/ggzy/",
+      "allowed_domains": [
+        "www.jl.gov.cn"
+      ],
+      "seeds": [
+        "https://www.jl.gov.cn/ggzy/"
+      ],
+      "profile": "jilin_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "吉林",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "22",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_jilin",
+      "name": "吉林政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-jilin.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-jilin.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-jilin.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "吉林",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "22",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_heilongjiang",
+      "name": "黑龙江公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjyw.hlj.gov.cn/",
+      "allowed_domains": [
+        "ggzyjyw.hlj.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjyw.hlj.gov.cn/"
+      ],
+      "profile": "heilongjiang",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "黑龙江",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "23",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_heilongjiang",
+      "name": "黑龙江政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-heilongj.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-heilongj.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-heilongj.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "黑龙江",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "23",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_shanghai",
+      "name": "上海公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.shggzy.com/",
+      "allowed_domains": [
+        "www.shggzy.com"
+      ],
+      "seeds": [
+        "https://www.shggzy.com/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "上海",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "31",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_shanghai",
+      "name": "上海政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-shanghai.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-shanghai.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-shanghai.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "上海",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "31",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_jiangsu",
+      "name": "江苏公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://jsggzy.jszwfw.gov.cn/",
+      "allowed_domains": [
+        "jsggzy.jszwfw.gov.cn"
+      ],
+      "seeds": [
+        "http://jsggzy.jszwfw.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "江苏",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "32",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_jiangsu",
+      "name": "江苏政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-jiangsu.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-jiangsu.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-jiangsu.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "江苏",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "32",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_zhejiang",
+      "name": "浙江公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.zj.gov.cn/",
+      "allowed_domains": [
+        "ggzy.zj.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.zj.gov.cn/"
+      ],
+      "profile": "zhejiang",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "浙江",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "33",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_zhejiang",
+      "name": "浙江政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-zhejiang.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-zhejiang.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-zhejiang.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "blocked_by_untrusted_root_certificate",
+      "geographic_scope": "浙江",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "Python OpenSSL报CERTIFICATE_VERIFY_FAILED(unable to get local issuer certificate)；改用系统TLS后schannel报SEC_E_UNTRUSTED_ROOT——证书链根不受操作系统信任。属站点证书问题，未关闭验证也未加例外。",
+      "next_action": "请站点修复证书链，或经授权使用官方接口",
+      "province_code": "33",
+      "entry_verification": "central_official_navigation",
+      "transport": "system_tls"
+    },
+    {
+      "id": "ggzy_anhui",
+      "name": "安徽公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://ggzy.ah.gov.cn/",
+      "allowed_domains": [
+        "ggzy.ah.gov.cn"
+      ],
+      "seeds": [
+        "http://ggzy.ah.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "安徽",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "34",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_anhui",
+      "name": "安徽政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-anhui.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-anhui.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-anhui.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "安徽",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "34",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_fujian",
+      "name": "福建公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyfw.fujian.gov.cn/",
+      "allowed_domains": [
+        "ggzyfw.fujian.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyfw.fujian.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "福建",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "35",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_fujian",
+      "name": "福建政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-fujian.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-fujian.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-fujian.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "福建",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "35",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_jiangxi",
+      "name": "江西公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.jxsggzy.cn/",
+      "allowed_domains": [
+        "www.jxsggzy.cn"
+      ],
+      "seeds": [
+        "https://www.jxsggzy.cn/"
+      ],
+      "profile": "jiangxi",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "江西",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "36",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_jiangxi",
+      "name": "江西政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://ccgp-jiangxi.gov.cn/",
+      "allowed_domains": [
+        "ccgp-jiangxi.gov.cn"
+      ],
+      "seeds": [
+        "http://ccgp-jiangxi.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "江西",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "36",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_shandong",
+      "name": "山东公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjy.shandong.gov.cn/",
+      "allowed_domains": [
+        "ggzyjy.shandong.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjy.shandong.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "山东",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "37",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_shandong",
+      "name": "山东政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-shandong.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-shandong.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-shandong.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "山东",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "37",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_henan",
+      "name": "河南公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.fgw.henan.gov.cn/",
+      "allowed_domains": [
+        "ggzy.fgw.henan.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.fgw.henan.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "河南",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "41",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_henan",
+      "name": "河南政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-henan.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-henan.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-henan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "blocked_by_certificate_hostname_mismatch",
+      "geographic_scope": "河南",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "证书主机名不匹配（certificate is not valid for www.ccgp-henan.gov.cn），属真实证书错误，不绕过。",
+      "next_action": "待站点修复证书或经授权使用官方接口",
+      "province_code": "41",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_hubei",
+      "name": "湖北公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.hbggzyfwpt.cn/",
+      "allowed_domains": [
+        "www.hbggzyfwpt.cn"
+      ],
+      "seeds": [
+        "https://www.hbggzyfwpt.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "湖北",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "42",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_hubei",
+      "name": "湖北政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-hubei.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-hubei.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-hubei.gov.cn/"
+      ],
+      "profile": "ccgp_hubei",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "湖北",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "首页新闻栏目混入征订软文（已见1条），需以/notice/公告入口为主种子；省市县三级栏目需分列",
+      "next_action": "复测/notice/公告详情并推导标题正文，再分省本级与市县栏目",
+      "province_code": "42",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_hunan",
+      "name": "湖南公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.hnsggzy.com/",
+      "allowed_domains": [
+        "www.hnsggzy.com"
+      ],
+      "seeds": [
+        "https://www.hnsggzy.com/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "湖南",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "43",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_hunan",
+      "name": "湖南政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-hunan.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-hunan.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-hunan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "湖南",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "43",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_guangdong",
+      "name": "广东公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ygp.gdzwfw.gov.cn/",
+      "allowed_domains": [
+        "ygp.gdzwfw.gov.cn"
+      ],
+      "seeds": [
+        "https://ygp.gdzwfw.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "广东",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "44",
+      "entry_verification": "national_official_navigation",
+      "api_hints": [
+        {
+          "url": "https://ygp.gdzwfw.gov.cn/ggzy-portal/search/v2/items",
+          "method": "POST",
+          "verification": "github_hint_only",
+          "reference_id": "provincial_github",
+          "notes": "上游A07水利分类不能直接替代医疗；请求体/响应/分页需实站重验。"
+        }
+      ]
+    },
+    {
+      "id": "ccgp_guangdong",
+      "name": "广东政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-guangdong.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-guangdong.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-guangdong.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "广东",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "44",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_guangxi",
+      "name": "广西公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.jgswj.gxzf.gov.cn/",
+      "allowed_domains": [
+        "ggzy.jgswj.gxzf.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.jgswj.gxzf.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "广西",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "45",
+      "entry_verification": "national_official_navigation",
+      "api_hints": [
+        {
+          "url": "http://gxggzy.gxzf.gov.cn/irs/front/list",
+          "method": "POST",
+          "verification": "github_hint_only",
+          "reference_id": "provincial_github",
+          "notes": "旧域与国家导航新域不同；code/tableName/分类字段需从当前官方页面核验。"
+        }
+      ]
+    },
+    {
+      "id": "ccgp_guangxi",
+      "name": "广西政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-guangxi.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-guangxi.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-guangxi.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "广西",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "45",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_hainan",
+      "name": "海南公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://zw.hainan.gov.cn/ggzy/",
+      "allowed_domains": [
+        "zw.hainan.gov.cn"
+      ],
+      "seeds": [
+        "https://zw.hainan.gov.cn/ggzy/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "海南",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "46",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_hainan",
+      "name": "海南政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://ccgp-hainan.gov.cn/",
+      "allowed_domains": [
+        "ccgp-hainan.gov.cn"
+      ],
+      "seeds": [
+        "http://ccgp-hainan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "海南",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "46",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_chongqing",
+      "name": "重庆公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.cqggzy.com/",
+      "allowed_domains": [
+        "www.cqggzy.com"
+      ],
+      "seeds": [
+        "https://www.cqggzy.com/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "重庆",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "50",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_chongqing",
+      "name": "重庆政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-chongqing.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-chongqing.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-chongqing.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "重庆",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "50",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_sichuan",
+      "name": "四川公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjy.sc.gov.cn/",
+      "allowed_domains": [
+        "ggzyjy.sc.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjy.sc.gov.cn/"
+      ],
+      "profile": "sichuan_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "四川",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "51",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_sichuan",
+      "name": "四川政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-sichuan.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-sichuan.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-sichuan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "四川",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "51",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_guizhou",
+      "name": "贵州公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.guizhou.gov.cn/",
+      "allowed_domains": [
+        "ggzy.guizhou.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.guizhou.gov.cn/"
+      ],
+      "profile": "guizhou_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "贵州",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "52",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_guizhou",
+      "name": "贵州政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-guizhou.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-guizhou.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-guizhou.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "贵州",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "52",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_yunnan",
+      "name": "云南公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.yn.gov.cn/",
+      "allowed_domains": [
+        "ggzy.yn.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.yn.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "云南",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "53",
+      "entry_verification": "national_official_navigation",
+      "api_hints": [
+        {
+          "url": "https://ggzy.yn.gov.cn/ynggfwpt-home-api/jyzyCenter/jyInfo/gcjs/{categoryCode}",
+          "method": "POST",
+          "verification": "github_hint_only",
+          "reference_id": "provincial_github",
+          "notes": "gcjs为工程，软件政采不能只查工程分类。"
+        }
+      ]
+    },
+    {
+      "id": "ccgp_yunnan",
+      "name": "云南政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-yunnan.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-yunnan.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-yunnan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "云南",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "53",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_xizang",
+      "name": "西藏公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.xizang.gov.cn/",
+      "allowed_domains": [
+        "ggzy.xizang.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.xizang.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "西藏",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "54",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_xizang",
+      "name": "西藏政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-xizang.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-xizang.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-xizang.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "西藏",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "54",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_shaanxi",
+      "name": "陕西公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.sxggzyjy.cn/",
+      "allowed_domains": [
+        "www.sxggzyjy.cn"
+      ],
+      "seeds": [
+        "https://www.sxggzyjy.cn/"
+      ],
+      "profile": "shaanxi_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "陕西",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "61",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_shaanxi",
+      "name": "陕西政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-shaanxi.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-shaanxi.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-shaanxi.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "陕西",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "61",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_gansu",
+      "name": "甘肃公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjy.gansu.gov.cn/",
+      "allowed_domains": [
+        "ggzyjy.gansu.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjy.gansu.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "甘肃",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "62",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_gansu",
+      "name": "甘肃政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-gansu.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-gansu.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-gansu.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "甘肃",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "62",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_qinghai",
+      "name": "青海公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.qhggzyjy.gov.cn/",
+      "allowed_domains": [
+        "www.qhggzyjy.gov.cn"
+      ],
+      "seeds": [
+        "https://www.qhggzyjy.gov.cn/"
+      ],
+      "profile": "qinghai",
+      "access_mode": "public_html",
+      "rule_status": "listing_replayed_offline_requires_live_detail",
+      "geographic_scope": "青海",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "本轮retest抓到的2条详情整页仅146/265字符，正文JS加载，仍记dynamic_shell",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "63",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_qinghai",
+      "name": "青海政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-qinghai.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-qinghai.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-qinghai.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "青海",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "63",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_ningxia",
+      "name": "宁夏公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzyjy.fzggw.nx.gov.cn/",
+      "allowed_domains": [
+        "ggzyjy.fzggw.nx.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzyjy.fzggw.nx.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "宁夏",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "64",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_ningxia",
+      "name": "宁夏政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-ningxia.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-ningxia.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-ningxia.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "宁夏",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "64",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_xinjiang",
+      "name": "新疆公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.xinjiang.gov.cn/",
+      "allowed_domains": [
+        "ggzy.xinjiang.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.xinjiang.gov.cn/"
+      ],
+      "profile": "xinjiang_ggzy",
+      "access_mode": "public_html",
+      "rule_status": "detail_selectors_from_live_sample_requires_replay",
+      "geographic_scope": "新疆",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "国家导航入口可能迁移；列表/详情/API/市县分页均待逐站验收。",
+      "next_action": "离线重放真实详情→小批量复核→再扩展日期窗口与市县子站",
+      "province_code": "65",
+      "entry_verification": "national_official_navigation"
+    },
+    {
+      "id": "ccgp_xinjiang",
+      "name": "新疆政府采购网分网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.ccgp-xinjiang.gov.cn/",
+      "allowed_domains": [
+        "www.ccgp-xinjiang.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp-xinjiang.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "新疆",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "中央导航域名可能迁移；未白名单的重定向先记录，核验后再显式补域。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口",
+      "province_code": "65",
+      "entry_verification": "central_official_navigation"
+    },
+    {
+      "id": "ggzy_bingtuan",
+      "name": "新疆兵团公共资源交易平台",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://ggzy.xjbt.gov.cn/",
+      "allowed_domains": [
+        "ggzy.xjbt.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.xjbt.gov.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "listing_replayed_offline_requires_live_detail",
+      "geographic_scope": "兵团",
+      "reference_ids": [
+        "ggzy_home"
+      ],
+      "limitations": "本轮retest抓到的详情整页仅125字符，em-tab动态容器，需浏览器渲染或官方接口",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "ccgp_bingtuan",
+      "name": "新疆兵团政府采购网",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "http://ccgp-bingtuan.gov.cn/",
+      "allowed_domains": [
+        "ccgp-bingtuan.gov.cn"
+      ],
+      "seeds": [
+        "http://ccgp-bingtuan.gov.cn/"
+      ],
+      "profile": "government",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "兵团",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "limitations": "入口已登记；未验证全历史/全部栏目覆盖。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "ggzy_guangzhou",
+      "name": "广州公共资源交易中心",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.gzggzy.cn/",
+      "allowed_domains": [
+        "www.gzggzy.cn"
+      ],
+      "seeds": [
+        "https://www.gzggzy.cn/"
+      ],
+      "profile": "ggzy",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "geographic_scope": "广东/广州",
+      "reference_ids": [
+        "provincial_github"
+      ],
+      "limitations": "上游只验证水利栏目；本轮需独立核验医疗/软件相关业务分类。",
+      "next_action": "小批量验证列表→详情→附件，再增日期窗口"
+    },
+    {
+      "id": "cq_cdc",
+      "name": "重庆市疾病预防控制中心招标公示",
+      "matrix_group": "A",
+      "priority": 4,
+      "source_kind": "official",
+      "homepage": "https://www.cqcdc.org/",
+      "seeds": [
+        "https://www.cqcdc.org/index.php?a=shows&catid=2258&id=5878"
+      ],
+      "allowed_domains": [
+        "www.cqcdc.org"
+      ],
+      "profile": "cqcdc",
+      "access_mode": "public_html",
+      "rule_status": "candidate_requires_live_validation",
+      "reference_ids": [
+        "cqcdc"
+      ],
+      "geographic_scope": "重庆",
+      "limitations": "只验证一条采购邀请样本；完整栏目/分页尚未验收。",
+      "next_action": "验证正文DOM，区分采购邀请与结果公告"
+    },
+    {
+      "id": "zycg",
+      "name": "中央国家机关政府采购中心（央采）",
+      "matrix_group": "A",
+      "priority": 5,
+      "source_kind": "official",
+      "homepage": "https://www.zycg.gov.cn/",
+      "allowed_domains": [
+        "www.zycg.gov.cn",
+        "search.ccgp.gov.cn",
+        "www.ccgp.gov.cn"
+      ],
+      "seeds": [
+        "https://www.zycg.gov.cn/freecms/site/zygjjgzfcgzx/cggg/index.html"
+      ],
+      "profile": "zycg",
+      "access_mode": "public_html",
+      "rule_status": "list_api_blocked_used_ccgp_search",
+      "geographic_scope": "全国（中央本级）",
+      "collector": "pipeline/research/zycg.py",
+      "reference_ids": [
+        "ccgp_home"
+      ],
+      "entry": {
+        "listing_api_blocked": {
+          "url": "https://www.zycg.gov.cn/freecms/rest/v1/notice/selectInfoMore.do",
+          "result": "任何参数组合返回 {\"code\":\"-1\",\"msg\":\"公告列表查询失败\"}；POST 405"
+        },
+        "working_path": {
+          "url": "http://search.ccgp.gov.cn/bxsearch",
+          "params": {
+            "agentName": "中央国家机关政府采购中心",
+            "timeType": 6,
+            "start_time": "YYYY:MM:DD",
+            "end_time": "YYYY:MM:DD",
+            "page_index": "N"
+          },
+          "note": "按代理机构锁定央采；每页20条；2026-01-01~2026-10-27 共4524条；列表行含发布时间/采购人/代理机构/地区/公告类型"
+        },
+        "detail_pattern": "http://www.ccgp.gov.cn/cggg/zygg/{zbgg|cjgg}/YYYYMM/tYYYYMMDD_id.htm"
+      },
+      "limitations": "央采本站列表接口服务端拒绝，改走中国政府采购网检索接口（同源，正文末尾署名为中央国家机关政府采购中心）；检索站在高频请求下返回访问挑战页，按不绕过原则停止并以分页缓存续采；电子卖场/批量集采/电子询价及委托社会代理机构的项目不在本链路",
+      "next_action": "冷却后续采至2026-01-01；更正公告导致的金额变更需二次核对；与北京两站按项目编号去重"
+    }
+  ],
+  "province_directories": [
+    {
+      "province_code": "11",
+      "province": "北京",
+      "ggzy_source_id": "ggzy_beijing",
+      "ccgp_source_id": "ccgp_beijing",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "北京 公共资源交易中心 医疗 信息化 中标",
+        "北京 电子招标投标公共服务平台",
+        "北京 卫生健康委员会 招标采购",
+        "北京 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "12",
+      "province": "天津",
+      "ggzy_source_id": "ggzy_tianjin",
+      "ccgp_source_id": "ccgp_tianjin",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "天津 公共资源交易中心 医疗 信息化 中标",
+        "天津 电子招标投标公共服务平台",
+        "天津 卫生健康委员会 招标采购",
+        "天津 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "13",
+      "province": "河北",
+      "ggzy_source_id": "ggzy_hebei",
+      "ccgp_source_id": "ccgp_hebei",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "河北 公共资源交易中心 医疗 信息化 中标",
+        "河北 电子招标投标公共服务平台",
+        "河北 卫生健康委员会 招标采购",
+        "河北 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "14",
+      "province": "山西",
+      "ggzy_source_id": "ggzy_shanxi",
+      "ccgp_source_id": "ccgp_shanxi",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "山西 公共资源交易中心 医疗 信息化 中标",
+        "山西 电子招标投标公共服务平台",
+        "山西 卫生健康委员会 招标采购",
+        "山西 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "15",
+      "province": "内蒙古",
+      "ggzy_source_id": "ggzy_neimenggu",
+      "ccgp_source_id": "ccgp_neimenggu",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "内蒙古 公共资源交易中心 医疗 信息化 中标",
+        "内蒙古 电子招标投标公共服务平台",
+        "内蒙古 卫生健康委员会 招标采购",
+        "内蒙古 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "21",
+      "province": "辽宁",
+      "ggzy_source_id": "ggzy_liaoning",
+      "ccgp_source_id": "ccgp_liaoning",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "辽宁 公共资源交易中心 医疗 信息化 中标",
+        "辽宁 电子招标投标公共服务平台",
+        "辽宁 卫生健康委员会 招标采购",
+        "辽宁 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "22",
+      "province": "吉林",
+      "ggzy_source_id": "ggzy_jilin",
+      "ccgp_source_id": "ccgp_jilin",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "吉林 公共资源交易中心 医疗 信息化 中标",
+        "吉林 电子招标投标公共服务平台",
+        "吉林 卫生健康委员会 招标采购",
+        "吉林 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "23",
+      "province": "黑龙江",
+      "ggzy_source_id": "ggzy_heilongjiang",
+      "ccgp_source_id": "ccgp_heilongjiang",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "黑龙江 公共资源交易中心 医疗 信息化 中标",
+        "黑龙江 电子招标投标公共服务平台",
+        "黑龙江 卫生健康委员会 招标采购",
+        "黑龙江 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "31",
+      "province": "上海",
+      "ggzy_source_id": "ggzy_shanghai",
+      "ccgp_source_id": "ccgp_shanghai",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "上海 公共资源交易中心 医疗 信息化 中标",
+        "上海 电子招标投标公共服务平台",
+        "上海 卫生健康委员会 招标采购",
+        "上海 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "32",
+      "province": "江苏",
+      "ggzy_source_id": "ggzy_jiangsu",
+      "ccgp_source_id": "ccgp_jiangsu",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "江苏 公共资源交易中心 医疗 信息化 中标",
+        "江苏 电子招标投标公共服务平台",
+        "江苏 卫生健康委员会 招标采购",
+        "江苏 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "33",
+      "province": "浙江",
+      "ggzy_source_id": "ggzy_zhejiang",
+      "ccgp_source_id": "ccgp_zhejiang",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "浙江 公共资源交易中心 医疗 信息化 中标",
+        "浙江 电子招标投标公共服务平台",
+        "浙江 卫生健康委员会 招标采购",
+        "浙江 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "34",
+      "province": "安徽",
+      "ggzy_source_id": "ggzy_anhui",
+      "ccgp_source_id": "ccgp_anhui",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "安徽 公共资源交易中心 医疗 信息化 中标",
+        "安徽 电子招标投标公共服务平台",
+        "安徽 卫生健康委员会 招标采购",
+        "安徽 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "35",
+      "province": "福建",
+      "ggzy_source_id": "ggzy_fujian",
+      "ccgp_source_id": "ccgp_fujian",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "福建 公共资源交易中心 医疗 信息化 中标",
+        "福建 电子招标投标公共服务平台",
+        "福建 卫生健康委员会 招标采购",
+        "福建 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "36",
+      "province": "江西",
+      "ggzy_source_id": "ggzy_jiangxi",
+      "ccgp_source_id": "ccgp_jiangxi",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "江西 公共资源交易中心 医疗 信息化 中标",
+        "江西 电子招标投标公共服务平台",
+        "江西 卫生健康委员会 招标采购",
+        "江西 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "37",
+      "province": "山东",
+      "ggzy_source_id": "ggzy_shandong",
+      "ccgp_source_id": "ccgp_shandong",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "山东 公共资源交易中心 医疗 信息化 中标",
+        "山东 电子招标投标公共服务平台",
+        "山东 卫生健康委员会 招标采购",
+        "山东 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "41",
+      "province": "河南",
+      "ggzy_source_id": "ggzy_henan",
+      "ccgp_source_id": "ccgp_henan",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "河南 公共资源交易中心 医疗 信息化 中标",
+        "河南 电子招标投标公共服务平台",
+        "河南 卫生健康委员会 招标采购",
+        "河南 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "42",
+      "province": "湖北",
+      "ggzy_source_id": "ggzy_hubei",
+      "ccgp_source_id": "ccgp_hubei",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "湖北 公共资源交易中心 医疗 信息化 中标",
+        "湖北 电子招标投标公共服务平台",
+        "湖北 卫生健康委员会 招标采购",
+        "湖北 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "43",
+      "province": "湖南",
+      "ggzy_source_id": "ggzy_hunan",
+      "ccgp_source_id": "ccgp_hunan",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "湖南 公共资源交易中心 医疗 信息化 中标",
+        "湖南 电子招标投标公共服务平台",
+        "湖南 卫生健康委员会 招标采购",
+        "湖南 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "44",
+      "province": "广东",
+      "ggzy_source_id": "ggzy_guangdong",
+      "ccgp_source_id": "ccgp_guangdong",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "广东 公共资源交易中心 医疗 信息化 中标",
+        "广东 电子招标投标公共服务平台",
+        "广东 卫生健康委员会 招标采购",
+        "广东 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "45",
+      "province": "广西",
+      "ggzy_source_id": "ggzy_guangxi",
+      "ccgp_source_id": "ccgp_guangxi",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "广西 公共资源交易中心 医疗 信息化 中标",
+        "广西 电子招标投标公共服务平台",
+        "广西 卫生健康委员会 招标采购",
+        "广西 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "46",
+      "province": "海南",
+      "ggzy_source_id": "ggzy_hainan",
+      "ccgp_source_id": "ccgp_hainan",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "海南 公共资源交易中心 医疗 信息化 中标",
+        "海南 电子招标投标公共服务平台",
+        "海南 卫生健康委员会 招标采购",
+        "海南 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "50",
+      "province": "重庆",
+      "ggzy_source_id": "ggzy_chongqing",
+      "ccgp_source_id": "ccgp_chongqing",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "重庆 公共资源交易中心 医疗 信息化 中标",
+        "重庆 电子招标投标公共服务平台",
+        "重庆 卫生健康委员会 招标采购",
+        "重庆 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "51",
+      "province": "四川",
+      "ggzy_source_id": "ggzy_sichuan",
+      "ccgp_source_id": "ccgp_sichuan",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "四川 公共资源交易中心 医疗 信息化 中标",
+        "四川 电子招标投标公共服务平台",
+        "四川 卫生健康委员会 招标采购",
+        "四川 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "52",
+      "province": "贵州",
+      "ggzy_source_id": "ggzy_guizhou",
+      "ccgp_source_id": "ccgp_guizhou",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "贵州 公共资源交易中心 医疗 信息化 中标",
+        "贵州 电子招标投标公共服务平台",
+        "贵州 卫生健康委员会 招标采购",
+        "贵州 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "53",
+      "province": "云南",
+      "ggzy_source_id": "ggzy_yunnan",
+      "ccgp_source_id": "ccgp_yunnan",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "云南 公共资源交易中心 医疗 信息化 中标",
+        "云南 电子招标投标公共服务平台",
+        "云南 卫生健康委员会 招标采购",
+        "云南 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "54",
+      "province": "西藏",
+      "ggzy_source_id": "ggzy_xizang",
+      "ccgp_source_id": "ccgp_xizang",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "西藏 公共资源交易中心 医疗 信息化 中标",
+        "西藏 电子招标投标公共服务平台",
+        "西藏 卫生健康委员会 招标采购",
+        "西藏 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "61",
+      "province": "陕西",
+      "ggzy_source_id": "ggzy_shaanxi",
+      "ccgp_source_id": "ccgp_shaanxi",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "陕西 公共资源交易中心 医疗 信息化 中标",
+        "陕西 电子招标投标公共服务平台",
+        "陕西 卫生健康委员会 招标采购",
+        "陕西 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "62",
+      "province": "甘肃",
+      "ggzy_source_id": "ggzy_gansu",
+      "ccgp_source_id": "ccgp_gansu",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "甘肃 公共资源交易中心 医疗 信息化 中标",
+        "甘肃 电子招标投标公共服务平台",
+        "甘肃 卫生健康委员会 招标采购",
+        "甘肃 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "63",
+      "province": "青海",
+      "ggzy_source_id": "ggzy_qinghai",
+      "ccgp_source_id": "ccgp_qinghai",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "青海 公共资源交易中心 医疗 信息化 中标",
+        "青海 电子招标投标公共服务平台",
+        "青海 卫生健康委员会 招标采购",
+        "青海 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "64",
+      "province": "宁夏",
+      "ggzy_source_id": "ggzy_ningxia",
+      "ccgp_source_id": "ccgp_ningxia",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "宁夏 公共资源交易中心 医疗 信息化 中标",
+        "宁夏 电子招标投标公共服务平台",
+        "宁夏 卫生健康委员会 招标采购",
+        "宁夏 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    },
+    {
+      "province_code": "65",
+      "province": "新疆",
+      "ggzy_source_id": "ggzy_xinjiang",
+      "ccgp_source_id": "ccgp_xinjiang",
+      "city_registry_status": "not_complete",
+      "cities": [],
+      "ebid_url": null,
+      "health_commission_url": null,
+      "insurance_bureau_url": null,
+      "cdc_url": null,
+      "drug_center_url": null,
+      "query_templates": [
+        "新疆 公共资源交易中心 医疗 信息化 中标",
+        "新疆 电子招标投标公共服务平台",
+        "新疆 卫生健康委员会 招标采购",
+        "新疆 医疗保障局 药械采购中心"
+      ],
+      "gap_reason": "未穷尽地市/垂直部门，不把省入口等同于全地市覆盖"
+    }
+  ]
+}

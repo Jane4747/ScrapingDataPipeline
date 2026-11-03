@@ -1,0 +1,324 @@
+{
+  "id": "puh3-digital-procurement-20261027",
+  "created_at": "2026-10-27",
+  "updated_at": "2026-10-27",
+  "status": "partial",
+  "status_note": "案例与成果归档完成；官方检索、合同及部分渠道历史覆盖仍有缺口。",
+  "requirement": "把本次北医三院医卫数字化采购采集案例上传到现有想法树。",
+  "theme": "北医三院医卫数字化采购历史采集案例",
+  "delivery": "[案例说明](CASE.md)、[成果与执行记录](../../outputs/puh3-digital-procurement-20261027/README.md)、[归档核验](ARCHIVE-VERIFICATION.json)",
+  "tool": "现有采集pipeline＋公开检索与定向提取＋证据归并＋artifact-tool工作簿＋idea_tree_writer",
+  "tags": [
+    "北医三院",
+    "北京大学第三医院",
+    "医卫数字化",
+    "政府采购",
+    "单院深采",
+    "案例",
+    "partial"
+  ],
+  "result": {
+    "since": "2024-01-01",
+    "until": "2026-10-27",
+    "status": "partial",
+    "ledger_rows": 60,
+    "source_notice_rows": 67,
+    "unique_source_urls": 66,
+    "dedup_notice_count": 65,
+    "award_ledger_rows": 9,
+    "priced_award_rows": 5,
+    "held_rows": 19,
+    "category_counts": {
+      "IT基础设施与运维": 17,
+      "临床数据与知识服务": 13,
+      "智慧后勤与安防": 5,
+      "临床与运营信息系统": 21,
+      "网络与数据安全": 4
+    },
+    "scheduled": false,
+    "archive_status": "completed",
+    "native_hyperlinks": 215
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "案例",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "北医三院医卫数字化采购历史采集。形成可追溯采购台账，保存执行方法、渠道覆盖、结果和待补齐部分。"
+    },
+    {
+      "id": "scope",
+      "parent": "need",
+      "kind": "范围",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "公告期2024年1月1日至2026年10月27日；采购人按北京大学第三医院本级核对。同名合作医院、雄安宣武和北大人民医院不直接归并。"
+    },
+    {
+      "id": "schedule",
+      "parent": "scope",
+      "kind": "用户决定",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "先完成本轮采集，暂不设置定时；本次归档未创建自动补采任务。"
+    },
+    {
+      "id": "counting",
+      "parent": "scope",
+      "kind": "统计口径",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "60条归并采购条目包含明确采购包及设备采购批次，不等同于60个已证实互相独立的项目。65份公告按标题与发布日期去重，对应66个官方网址；证据表因分包列示共67行。"
+    },
+    {
+      "id": "method",
+      "parent": "need",
+      "kind": "执行流程",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "官方总库优先，医院官网补充；目录发现 → 候选详情采集 → 正文与表格提取 → 数字化及采购人筛选 → 证据关联与归并 → 工作簿与原文证据包。详见[案例说明](CASE.md)。"
+    },
+    {
+      "id": "pipeline",
+      "parent": "method",
+      "kind": "复用工具",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "复用现有pipeline的版本1任务、来源白名单、dry-run及采集记录；定向补充公开列表和检索页面，没有另造全网采集引擎。任务与代码快照见[归档说明](../../outputs/puh3-digital-procurement-20261027/README.md)。"
+    },
+    {
+      "id": "channel-1",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[中央政府采购网](https://www.zycg.gov.cn/)：全站标题搜索API 5页50条；单独委托栏目1页11条；8条数字化详情尝试；取得5条详情正文，3条返回滑块验证。缺口：当前索引结果存在历史覆盖缺口，不能代替2024—2025年完整历史库。"
+    },
+    {
+      "id": "channel-2",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[中国政府采购网](https://www.ccgp.gov.cn/)：2024年标题检索30次，去重397条；2025、2026年各尝试1次；定向补采公告正文；已核读中央公告正文及明确供应商/金额。缺口：2024年最后一页重复返回已去重；2025、2026年搜索遇验证，未完成年度分页；附属合作医院单独排除。"
+    },
+    {
+      "id": "channel-3",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[政府采购合同公告系统](https://www.ccgp.gov.cn/htgg/)：读取合同公告入口及其公开检索页面；检索表单要求验证码，本轮未提交本院合同检索。缺口：尚未取得可关联的合同公告或合同金额。"
+    },
+    {
+      "id": "channel-4",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[北京市政府采购网](https://www.ccgp-beijing.gov.cn/)：首页采集尝试及站点限定检索；robots请求连接超时。缺口：未完成站内分页；不把北部医疗中心等其他采购人的项目直接计入北医三院。"
+    },
+    {
+      "id": "channel-5",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[中国河北政府采购网](https://www.ccgp-hebei.gov.cn/)：首页采集尝试及站点限定检索；robots返回403，停止该来源自动采集。缺口：未取得北医三院本级在雄安的数字化采购归属证据。"
+    },
+    {
+      "id": "channel-6",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "雄安新区政采云：查阅雄安交易平台及站点限定检索；尚未核实独立政采云公开查询入口。缺口：未执行该平台站内检索；雄安宣武及北大人民医院不并入北医三院。"
+    },
+    {
+      "id": "channel-7",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[北京市公共资源交易服务平台](https://ggzyfw.beijing.gov.cn/)：首页采集尝试及站点限定工程公告检索；采集器robots连接出现TLS错误；搜索取得部分工程线索。缺口：未取得可确认数字化标段的本院工程正文；其他项目业绩引用不计入。"
+    },
+    {
+      "id": "channel-8",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[雄安新区公共资源交易服务平台](https://www.xaprtc.com/)：读取首页及站点限定检索；首页可读；未取得可归属北医三院本级的数字化项目。缺口：没有完成全部历史公告遍历。"
+    },
+    {
+      "id": "channel-9",
+      "parent": "method",
+      "kind": "渠道",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "[北医三院官网补充源](https://www.puh3.net.cn/xwzx/rdgg1/zbcg.htm)：52页栏目目录；624条去重目录项，其中517条日期在2024年以来；读取265条候选详情；取得265条候选正文，筛选软件、数据、网络和机房等采购。缺口：仅完成本轮已发现目录及候选正文；未逐项下载需求附件，不代表所有采购均已公开。"
+    },
+    {
+      "id": "review",
+      "parent": "need",
+      "kind": "筛选与归并",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "正文和采购明细表逐项提取后由GPT辅助核读，保留来源网址、项目编号、分包及公告关系；同名无编号且轮次不明的条目保留待核。"
+    },
+    {
+      "id": "table-fix",
+      "parent": "review",
+      "kind": "提取经验",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "医院部分HTML标题标签未闭合，改用页面title规范化；表格仅提取内层数据行，避免外层整页表格及通用售后软件要求造成误收。"
+    },
+    {
+      "id": "buyer-fix",
+      "parent": "review",
+      "kind": "主体经验",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "中国政府采购网采购人精确筛选可能漏掉带法人后缀的名称；先用医院名发现公告，再按正文采购单位确认归属。"
+    },
+    {
+      "id": "exclusion",
+      "parent": "review",
+      "kind": "排除口径",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "普通医疗设备自带固件不自动归为医院数字化采购；实物病案箱及病理蜡块柜的外存储不归为IT存储；其他采购人公告中的医院业绩引用不计入。待核与排除表保留19条。"
+    },
+    {
+      "id": "amount",
+      "parent": "review",
+      "kind": "金额口径",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "预算、年度服务费、单价和成交总额分开。病案数字化仅披露扫描及录入单价时，成交总额留空；不将年度预算相加为总合同额。"
+    },
+    {
+      "id": "result",
+      "parent": "need",
+      "kind": "成果",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "60条归并采购条目；65份去重公告；9条取得成交供应商，5条披露明确成交总额。成果归档完成，历史及渠道覆盖仍为partial。"
+    },
+    {
+      "id": "category-1",
+      "parent": "result",
+      "kind": "条目分类",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "IT基础设施与运维：17条。"
+    },
+    {
+      "id": "category-2",
+      "parent": "result",
+      "kind": "条目分类",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "临床数据与知识服务：13条。"
+    },
+    {
+      "id": "category-3",
+      "parent": "result",
+      "kind": "条目分类",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "智慧后勤与安防：5条。"
+    },
+    {
+      "id": "category-4",
+      "parent": "result",
+      "kind": "条目分类",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "临床与运营信息系统：21条。"
+    },
+    {
+      "id": "category-5",
+      "parent": "result",
+      "kind": "条目分类",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "网络与数据安全：4条。"
+    },
+    {
+      "id": "example",
+      "parent": "result",
+      "kind": "核读示例",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "[医疗信息交换基础保障平台采购公告](https://www.zycg.gov.cn/freecms/site/zygjjgzfcgzx/ggxx/info/2026/37033226-886a-4d9d-9b71-c918d2ba06a0.html)：2026年10月27日，GC-HGX261229，预算234.1万元；预算不代表成交金额，本轮未取得对应成交结果。"
+    },
+    {
+      "id": "delivery",
+      "parent": "result",
+      "kind": "交付入口",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "[四张表工作簿](../../outputs/puh3-digital-procurement-20261027/delivery/北医三院医卫数字化采购清单_2024至20261027.xlsx)、[原文与检索记录包](../../outputs/puh3-digital-procurement-20261027/delivery/北医三院采集原文与检索记录_20261027.zip)、[结构化数据](../../outputs/puh3-digital-procurement-20261027/delivery/北医三院数字化采购数据.json)。"
+    },
+    {
+      "id": "qa",
+      "parent": "delivery",
+      "kind": "既有成果核验",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "工作簿汇总60／9／5与JSON逐项一致；成交总额逐行核对；215条原生超链接；Excel错误单元格0；全部引用原文存在。原有[核验记录](../../outputs/puh3-digital-procurement-20261027/delivery/核验记录.json)随成果原样保存。"
+    },
+    {
+      "id": "archive",
+      "parent": "delivery",
+      "kind": "本次归档核验",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "交付文件逐字节复制；原文ZIP的1130条文件清单全部通过大小与SHA256核验；新增树校验父子节点与唯一ID，并由既有idea_tree_writer渲染。见[文件清单](../../outputs/puh3-digital-procurement-20261027/manifest.json)和[归档核验](ARCHIVE-VERIFICATION.json)。"
+    },
+    {
+      "id": "gaps",
+      "parent": "need",
+      "kind": "待补齐",
+      "at": "2026-10-27",
+      "status": "partial",
+      "text": "中国政府采购网2025和2026年度搜索遇访问验证；中央采购网3条详情返回滑块验证；合同检索需验证码，未提交本院合同查询；北京与河北部分渠道失败；雄安独立政采云公开入口未核实。"
+    },
+    {
+      "id": "next-search",
+      "parent": "gaps",
+      "kind": "后续采集",
+      "at": "2026-10-27",
+      "status": "open",
+      "text": "通过平台正常访问流程核验受阻检索与详情后，继续年度分页；已保存的成功原文复用。新增证据进入新任务或新attempt，保持旧证据不变。"
+    },
+    {
+      "id": "next-contract",
+      "parent": "gaps",
+      "kind": "后续合同",
+      "at": "2026-10-27",
+      "status": "open",
+      "text": "通过正常人工验证码流程检索合同，再按项目编号、采购人和分包关联；合同金额与预算及成交公告金额分别保留。"
+    },
+    {
+      "id": "next-channels",
+      "parent": "gaps",
+      "kind": "后续渠道",
+      "at": "2026-10-27",
+      "status": "open",
+      "text": "复核北京和河北平台连接与robots情况，定位雄安公开入口；需求附件、补充公告和同名轮次继续核对。本轮没有执行这些后续事项。"
+    },
+    {
+      "id": "history",
+      "parent": "need",
+      "kind": "相关想法树",
+      "at": "2026-10-27",
+      "status": "completed",
+      "text": "[医院采购入口目录](../hospital-procurement-urls-20261027/tree.md)、[北京一级医院渠道补查](../beijing-tier1-channels-20261027/tree.md)、[中央采购规则](../20261027-230958/tree.md)。本案例为单院深采，不替换历史各轮数量。"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-28T14:42:31+08:00",
+  "status": "passed",
+  "network_used": false,
+  "checks": [
+    {
+      "name": "offline_tests",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "----------------------------------------------------------------------\nRan 22 tests in 0.053s\n\nOK"
+    },
+    {
+      "name": "dry_run",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"valid\", \"start\": \"2026-10-21\", \"end\": \"2026-10-28\", \"source_types\": \"1\", \"notice_types\": \"0202\", \"initial_search_windows\": 1, \"allow_network_when_executed\": true, \"max_api_calls\": 5, \"max_details\": 10, \"output\": \"E:\\\\CAICTBigData\\\\coding\\\\outputs\\\\ggzy-reuse-example-validation\"}",
+      "stderr": ""
+    },
+    {
+      "name": "module_path",
+      "exit_code": 0,
+      "stdout": "E:\\CAICTBigData\\coding\\idea-trees\\national-ggzy-medical-digital-2026-20261028\\artifacts\\code\\pipeline\\research\\national_ggzy.py",
+      "stderr": ""
+    }
+  ],
+  "scope": "全国平台CLI及22项核心回归，不代表所附其他模块自身CLI、任意网站或异机环境均已验证。"
+}

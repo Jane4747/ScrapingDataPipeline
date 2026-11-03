@@ -1,0 +1,20 @@
+{
+ "validated_at": "2026-10-30T13:23:32+08:00",
+ "status": "passed",
+ "checks": {
+  "archived_file_hashes_match": true,
+  "archived_file_count": 7,
+  "region_count": 9,
+  "records": 446,
+  "pending_search_windows": 3256,
+  "field_count": 22,
+  "max_active_steps": 3,
+  "tests_passed": 31,
+  "tree_json_markdown_match": true,
+  "api_calls_total": 790,
+  "regions_with_records": 9
+ },
+ "coverage_status": "partial",
+ "facts_verified": false,
+ "note": "数字为归档时刻的实时快照；采集仍在运行，缺口随后续运行下降。"
+}

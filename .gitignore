@@ -12,3 +12,22 @@ __pycache__/
 .runtime-deps/
 .runtime.json
 .deployment-wheels/
+# local-only working data, not part of the published repo
+.workbuddy/
+tmp_dig/
+analytics/
+rest_hospitals/
+
+# Credentials, caches and machine-specific runtime state
+.env.*
+!.env.example
+*.pem
+*.key
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+local-crawlers/envs/
+local-crawlers/runs/
+local-crawlers/*.json
+literature/figure-runtime.json

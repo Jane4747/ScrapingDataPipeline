@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-10-28T14:42:31+08:00",
+  "python": "3.11.17 | packaged by Anaconda, Inc. | (main, Oct  1 2026, 20:16:54) [MSC v.1942 64 bit (AMD64)]",
+  "python_executable": "D:\\Anaconda3\\envs\\BigData\\python.exe",
+  "collector_required_packages": {
+    "playwright": "1.64.0",
+    "beautifulsoup4": "4.15.0",
+    "requests": "2.34.2",
+    "truststore": "0.10.5"
+  },
+  "installed_but_not_required_by_collector_core": {
+    "httpx": "0.28.1",
+    "lxml": "6.1.3"
+  },
+  "node_version": "v24.22.1",
+  "artifact_tool_version": "2.8.106",
+  "chrome_executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "chrome_observed_version": "149.0.7827.197",
+  "windows_curl_observed_version": "8.13.0, Schannel",
+  "dependencies_bundled": false,
+  "notes": [
+    "版本是本机验证快照，不是最新版推荐。",
+    "只归档自己编写/仓库共享代码，不打包解释器、node_modules、浏览器、虚拟环境、真实环境配置、密钥、Cookie或用户浏览器档案。"
+  ]
+}

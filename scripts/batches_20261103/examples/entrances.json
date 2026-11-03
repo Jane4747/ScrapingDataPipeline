@@ -1,0 +1,22 @@
+{
+  "entrances": [
+    {
+      "task_id": "S00001",
+      "hospital": "示例医院",
+      "hospital_ids": "demo-001",
+      "hospital_entities": [
+        {
+          "id": "demo-001",
+          "name": "示例医院",
+          "province": "示例省",
+          "city": "示例市",
+          "aliases": []
+        }
+      ],
+      "province": "示例省",
+      "url": "https://hospital.example.org/procurement/",
+      "entry_kind": "procurement_column",
+      "entrance_verified": false
+    }
+  ]
+}

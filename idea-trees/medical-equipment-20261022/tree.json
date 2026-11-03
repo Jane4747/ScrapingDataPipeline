@@ -1,0 +1,56 @@
+{
+  "id": "medical-equipment-20261022",
+  "kind": "research",
+  "status": "partial",
+  "started_at": "2026-10-22T03:27:27+00:00",
+  "theme": "智能医疗装备技术研究",
+  "delivery": [
+    "json",
+    "markdown"
+  ],
+  "sources": [
+    "genertec_health",
+    "cr_healthcare",
+    "sinopharm_healthcare",
+    "cecloud",
+    "shecc",
+    "china_mobile",
+    "china_telecom",
+    "china_unicom",
+    "shandong_healthcare",
+    "beijing_elderly_care",
+    "inspur_health",
+    "yunnan_investment_health",
+    "mindray",
+    "united_imaging",
+    "medbot",
+    "tinavi",
+    "edgemed",
+    "fourier",
+    "ai_robotics",
+    "iflytek_healthcare",
+    "yidu_tech"
+  ],
+  "output_dir": "E:\\CAICTBigData\\coding\\outputs\\medical-equipment-20261022",
+  "limits": {
+    "max_pages_per_source": 12,
+    "max_depth": 2
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "requirement",
+      "at": "2026-10-22T03:27:27+00:00",
+      "text": "按用户提供的平台采集智能医疗装备技术资料；不使用研究角色或主要价值描述。"
+    }
+  ],
+  "finished_at": "2026-10-22T03:28:30+00:00",
+  "result": {
+    "source_count": 21,
+    "attempted_pages": 161,
+    "successful_pages": 126,
+    "failed_pages": 35,
+    "record_count": 50
+  }
+}

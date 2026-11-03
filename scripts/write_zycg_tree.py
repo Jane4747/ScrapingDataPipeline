@@ -1,0 +1,179 @@
+"""把央采（中央国家机关政府采购中心）医卫数字化中标的采集方法与进度写入想法树。
+
+只记录本轮真实发生过的事：入口勘察结论、采集链路、限流分窗、八列口径、
+三次分批取页与离线合并的结果、验证与测试、遗留缺口。
+不虚构未发生的执行，也不写无法复核的数字。
+"""
+import sys
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from pipeline.idea_tree import add_node, create_tree, load_tree, save_tree  # noqa: E402
+
+REQUIREMENT = (
+    "用爬虫取央采（中央国家机关政府采购中心）2026 年以来医卫数字化的中标信息，"
+    "并落成八列表：项目名称、产品、招标单位、客户标签、中标单位、运营商类型、"
+    "中标金额（万元）、场景。"
+)
+
+ROUTE = {
+    "ambiguous": False,
+    "tool": "中国政府采购网检索接口 + 本机 pipeline.research.zycg 采集器",
+    "hits": {
+        "中国政府采购网检索接口 + 本机 pipeline.research.zycg 采集器": [
+            "央采本站在售/公告 JSON 服务端拒绝（code:-1）",
+            "search.ccgp.gov.cn/bxsearch 支持 agentName 精确过滤代理机构",
+            "既有 Fetcher（robots/节流/受限不绕过）可复用",
+            "已有 tender 解析与出表流水线，新增采集器并入 pipeline/research/",
+        ]
+    },
+}
+
+
+def build() -> dict:
+    tree = create_tree(REQUIREMENT, ROUTE)
+    tree["status"] = "completed"
+    tree["theme"] = "央采医卫数字化中标：入口勘察、检索链路与八列表落库"
+    tree["delivery"] = "excel（xlsx 八列表 + 同源 csv + 明细 json）"
+
+    # 一、为什么不用央采本站
+    add_node(
+        tree, "probe", "route", "analysis",
+        "入口勘察：央采本站 www.zycg.gov.cn 首页 200（约173KB 静态页），但公告列表不在静态 HTML 里；"
+        "列表 JSON 接口 /freecms/rest/v1/notice/selectInfoMore.do 在任何参数组合下都回 "
+        "{code:-1,msg:公告列表查询失败}，POST 回 405——参数取自页面内联脚本（siteId、channel、noticeType=2），不是拼错；"
+        "robots.txt 为 404。ggzy.zycg.gov.cn 是国资处置 SPA 壳，oldpt 自跳自身。结论：本站不可用，需换入口。",
+    )
+    add_node(
+        tree, "entry", "probe", "decision",
+        "改用 search.ccgp.gov.cn/bxsearch，参数 agentName=中央国家机关政府采购中心 精确过滤代理机构，"
+        "timeType=6 + start_time/end_time 控时间窗，page_index 翻页，每页 20 条。"
+        "同源依据：详情正文末尾署名就是中央国家机关政府采购中心。"
+        "另一条 www.ccgp.gov.cn/cggg/zygg/zbgg/ 只保留最近 5 天（25 页）滚动窗口，不能回溯全年，只做近端校验。",
+    )
+    add_node(
+        tree, "no-guess", "entry", "decision",
+        "央采判定不靠猜：检索参数即代理机构字段，命中即央采中心组织；详情页再用“采购执行机构信息”二次确认。"
+        "只取结果公告（/zbgg/ 中标、/cjgg/ 成交），招标/更正/终止公告不进表。",
+    )
+
+    # 二、方法链路
+    add_node(
+        tree, "pipeline", "route", "method",
+        "采集链路：bxsearch 列表（标题/发布时间/采购人/代理机构/公告类型/地域）"
+        "→ 只留 /zbgg/ 与 /cjgg/ → 标题级过滤（医卫主体 ∩ 数字化标的，剔后勤/纯设备/工程）"
+        "→ 逐条取详情 www.ccgp.gov.cn/cggg/zygg/{zbgg|cjgg}/YYYYMM/tYYYYMMDD_xxxx.htm"
+        "→ 正文抽项目编号/项目名称/采购方式/预算/供应商/中标金额/主要标的/采购人/执行机构"
+        "→ 打标（客户标签、运营商类型、场景）→ 八列表 + 明细页。代码 pipeline/research/zycg.py。",
+    )
+    add_node(
+        tree, "throttle", "pipeline", "method",
+        "节流与合规：复用 pipeline/research/fetch.py 的 Fetcher——robots 检查、单站点最小间隔、"
+        "401/403/429 直接判 blocked 不重试不绕过、UA 自报 CAICTMedicalResearchBot/1.0 (public-source research)，"
+        "不伪装浏览器、不加代理、不关证书校验。",
+    )
+    add_node(
+        tree, "window", "pipeline", "method",
+        "限流实测与分窗：单窗口全量 delay 1.1s 在第 31 页被访问挑战打断；delay 3.0s 跑到第 100 页（覆盖到 8-13）；"
+        "冷却 7 分钟后请求第 100/101/150 页仍是挑战页，而同时间窄日期窗第 1 页正常。"
+        "结论：检索站按请求总量限流，且对同一查询深页（page_index≥100）直接返回挑战页。"
+        "对策：按月切窗（每窗 20-25 页），并把已取页落盘 cache/page-NNNN.html，重跑命中缓存、"
+        "--from-cache 可离线合并，blocked_at_page 写入结果 JSON 以便判断是否全量。",
+    )
+    add_node(
+        tree, "fields", "pipeline", "method",
+        "八列口径：项目名称取正文（去掉尾部“中标/成交公告”，不用列表标题）；产品取主要标的表“主要投标标的名称”去重前 4 项，"
+        "取不到时退化为场景词、不臆造品牌型号；招标单位取“采购人信息—名称”，缺失回落列表行采购人；"
+        "客户标签按采购人名称分层（专科优先于综合）；中标单位取“供应商名称”，多包用“；”连接；"
+        "运营商类型看中标单位工商名称含 中国移动/中移、中国电信、中国联通、中国广电，不做股权穿透；"
+        "金额统一折万元（亿元×10000、元÷10000）并保留原文列复核；场景按标题+标的首个命中类别，不做多标签打分。",
+    )
+
+    # 三、执行与结果
+    add_node(tree, "run-1", "route", "action",
+             "第 1 批取页：单窗口 2026-01-01~2026-10-27、delay 2.5s，从最新页往回翻，跑到第 100 页遇挑战停止，"
+             "落盘列表页 99 个到 outputs/zycg-2026-medical/run-20261027（覆盖到 8 月中）。")
+    add_node(tree, "run-2", "route", "action",
+             "第 2 批重跑：同窗口、delay 3.0s，前 99 页全部命中 cache/page-NNNN.html 直接复用、不发请求，"
+             "从第 100 页往后继续，新增列表页 72 个到 run-20261027-v2（覆盖 8 月中到 2 月初）。")
+    add_node(tree, "run-3", "route", "action",
+             "第 3 批补窗：改按月切两窗（2026-07-01~07-31、2026-08-01~08-12）、delay 5s，新增列表页 49 个到 fill-jul-aug，全程无挑战。")
+    add_node(tree, "run-4", "route", "action",
+             "离线合并：三批缓存（99+72+49=220 个列表页）--from-cache 合并出 final，不再请求检索站；"
+             "共 4193 条公告 → 结果类 1636 条 → 医卫数字化 109 条。")
+
+    add_node(
+        tree, "result", "route", "结果",
+        "2026-01-01~2026-10-27：抓取公告 4193 条 → 结果类 1636 条 → 医卫数字化 109 条，"
+        "合计中标金额 37,630.55 万元；金额缺失 0、中标单位缺失 0、详情失败 0；排除 1527 条（非医卫主体或医卫但非数字化）。"
+        "月度 1月14/2月6/3月5/4月5/5月4/6月5/7月17/8月14/9月18/10月21，1-10 月全覆盖。",
+    )
+    add_node(
+        tree, "result-structure", "result", "结果",
+        "场景：云与算力 38、网络与链路 23、应用系统与平台 20、信息安全 10、终端与办公设备 9、人工智能 3、"
+        "电子病历与HIS 2、数据中心与机房 2、影像与检验 1、存储与备份 1。"
+        "客户：高校附属医院 46、国家级医学科研/医疗机构 31、疾控 13、综合医院 7、医学教育/科研 5、卫生行政 4、医保 2、卫生支撑 1。"
+        "运营商直投仅 8 条（联通 4、电信 2、移动 2），其余 101 条是厂商/集成商。",
+    )
+    add_node(
+        tree, "result-samples", "result", "实例",
+        "Top 额：山东大学齐鲁医院 AI 智算平台 2,999.77 万（华鲁数智）；东直门医院中医药循证研究基地数智设备 1,960.85 万（北京伟业泽城）；"
+        "协和医院智算算力一体化平台 1,569.70 万（上海华讯）；中国 CDC 无线接入网络 1,358.00 万（北京移动系统集成）；"
+        "阜外医院云平台扩容 1,139.60 万（北京航天星桥）。",
+    )
+
+    # 四、修复记录
+    add_node(
+        tree, "fixes", "route", "fix",
+        "本轮修的问题：① 取回文本是纯文本致解析失败 → 改用 page_html(result) 解析原始 HTML；"
+        "② 金额写成“人民币\\n697000.00元”被换行截断 → 新增 amount_field() 跨行取到单位为止；"
+        "③ STAGE_WORDS 判定顺序错（“网络安全”落到网络类）→ 信息安全前置，客户标签补卫生支撑机构、医学教育/科研；"
+        "④ page_index≥100 一律挑战页、冷却无效 → 按月切窗 + 页缓存 + 离线合并；⑤ 详情阶段一度 82 条不全 → 补 7 月与 8 月上半月两窗后补齐 109 条。",
+    )
+
+    # 五、证据与验证
+    add_node(
+        tree, "code", "route", "代码沉淀",
+        "pipeline/research/zycg.py（search_url/parse_search_page/parse_detail/build_row/amount_wan/amount_field/"
+        "month_windows/discover/collect/load_from_cache 与 customer_tag/carrier_type/scene_of 打标）；"
+        "复用 pipeline/research/fetch.py 的 Fetcher；文档 docs/ZYCG_MEDICAL_BID_RULES.md。",
+    )
+    add_node(
+        tree, "verify", "route", "验证",
+        "tests/test_zycg_medical_bid.py 19 项离线回归（列表解析、详情字段、金额折算、跨行金额、场景判定、运营商判定、"
+        "分窗边界、缓存合并）；全库 295 项测试 294 通过，唯一失败 "
+        "test_full_install_fails_preflight_before_installing_missing_repositories 经 stash 复测确认为与本轮无关的既有问题。",
+    )
+    add_node(
+        tree, "evidence", "route", "证据位置",
+        "产物 outputs/zycg-2026-medical/final/（央采医卫数字化中标_2026.xlsx 两张表 + 同名 csv + zycg_medical_bid.json 逐条/排除项/失败台账/运行日志）；"
+        "台账 docs/medical-digital-tender-validation-20261027/zycg-2026/report.md；设计与口径 docs/ZYCG_MEDICAL_BID_RULES.md；页缓存 final/cache/。",
+    )
+
+    # 六、缺口
+    add_node(tree, "gaps", "route", "缺口",
+             "① 央采电子卖场/批量集采/电子询价的成交走另一套系统，代理机构字段不指向央采中心，本链路抓不到；"
+             "② 中央单位委托社会代理机构（中招国际、国信招标等）的项目不属“央采”口径，未纳入；"
+             "③ 更正公告可能改金额，本轮只取结果公告，金额以公告原文为准，合同变更/追加/结算未纳入；"
+             "④ 项目是否落地/验收不做推断，公告只证明中标事实。")
+    add_node(tree, "next", "route", "后续方向",
+             "① 把八列表并进统一的中标情报表，按项目编号跨源去重（央采 / 北京 / 地方政采）；"
+             "② 补采电子卖场与批量集采入口，需先勘察其代理机构字段口径；"
+             "③ 增加按季度的增量跑批与金额异动同比；④ 用 ccgp 中央公告近 5 天窗口对最新月份做交叉校验。")
+
+    save_tree(tree)
+    return tree
+
+
+def main() -> None:
+    tree = build()
+    print(f"tree_id={tree['id']} nodes={len(tree['nodes'])} status={tree['status']}")
+    print(Path("idea-trees") / tree["id"] / "tree.md")
+
+
+if __name__ == "__main__":
+    main()

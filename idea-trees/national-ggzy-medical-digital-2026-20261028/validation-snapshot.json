@@ -1,0 +1,29 @@
+{
+  "snapshot_at": "2026-10-28T14:08:04+08:00",
+  "data_updated_at": "2026-10-28T14:05:39+08:00",
+  "workbook_counts": {
+    "source_record_count": 313,
+    "deduplicated_notice_count": 298,
+    "award_records": 215,
+    "tender_records": 83,
+    "award_lot_rows": 70
+  },
+  "collector_counts": {
+    "api_calls_total": 385,
+    "detail_calls_total": 338,
+    "pending_details": 0
+  },
+  "pending_windows": 238,
+  "completed_windows": 67,
+  "historical_failures": 29,
+  "unresolved_failures": 0,
+  "job_status": "running",
+  "tests": "33 relevant offline tests passed; test_national_ggzy*.py",
+  "workbook_validation": "Required headers, native URLs, numeric amount cells, date scope, non-award blank winner/amount, and ZIP integrity passed. Rendered all four tabs.",
+  "source_hashes": {
+    "pipeline\\research\\national_ggzy.py": "bd7ab0198e80e11e0c9c5a37284c9219442f6ac509574bfdc39fa5d8c33e9fae",
+    "tests\\test_national_ggzy_collector.py": "326f05f7a54a65ed7f8221f0d35aa9572dde9e389fb175936546c86c463f8e2c",
+    "outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\build.mjs": "e3fc4152328668326444215f88e53940c93745aecf7006fe202fc82292bd635d",
+    "outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\run_collection.mjs": "7954e17bca6159f4d2e37aae6c2693f568daafc72795a1cd01f09b08beabaaa0"
+  }
+}

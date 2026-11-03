@@ -1,0 +1,655 @@
+{
+  "id": "medical-digital-tender-rules-20261027",
+  "created_at": "2026-10-27T17:40:52+08:00",
+  "updated_at": "2026-10-27T17:40:52+08:00",
+  "status": "partial",
+  "status_note": "本轮规则与失败台账已沉淀，但全量采集、商业接入及D层工商/项目/合同治理仍未完成。",
+  "requirement": "完善医疗数字化中标情报A/B/C数据源规则，保存成功与失败；详细说明已测、未测及D治理层实际完成度，并提交想法树。",
+  "theme": "医疗数字化中标情报来源规则、有限验证、失败台账与完整化治理",
+  "delivery": "tree.json及由既有idea_tree_writer.py生成的tree.md；引用已保存的规则、逐站状态和失败证据。",
+  "tool": "既有采集流水线+公开HTML限量采集+保存原文离线重放+既有想法树渲染器",
+  "rules_version": "2026-10-27.4",
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "text": "从官方页面、GitHub和作者博客完善医疗数字化中标情报采集规则，沉淀到本地代码库；失败也保留原因；按A/B/C来源与D治理层提交进展树。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "scope",
+      "parent": "need",
+      "kind": "范围与口径",
+      "text": "93项是来源及目录项；79项是有限访问尝试，包含robots检查阶段即停止；89是页次，不是底层HTTP请求总数。不是全国全量采集或79个采集器全部打通。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "research",
+      "parent": "need",
+      "kind": "参考调查",
+      "text": "保留23条官方、固定版本GitHub和作者博客出处；调查结果、历史接口线索与本机实测分别记录。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "configs/medical_digital_tender_rules.json"
+      ]
+    },
+    {
+      "id": "research_api",
+      "parent": "research",
+      "kind": "接口边界",
+      "text": "bxsearch、全国旧dealList.jsp、中国招标投标平台及广东/广西/云南JSON线索有出处；仅保存hint，尚未完成当前JSON契约与业务请求验收。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a",
+      "parent": "need",
+      "kind": "A 官方权威源",
+      "text": "登记75项，73项尝试访问、81页次；6个来源解析出7条详情或摘要；另9个省级平台只发现列表/候选链接。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_ccgp",
+      "parent": "a",
+      "kind": "中央政采",
+      "text": "中国政府采购网实际仅测中央中标列表1页及中央中标详情2页，正文均解析；地方主网、成交、合同栏目只配置入口，未逐项实测。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "configs/medical_digital_tender_smoke_sources.json",
+        "tasks/medical_digital_tender_smoke_20261027.json"
+      ]
+    },
+    {
+      "id": "a_ccgp_samples",
+      "parent": "a_ccgp",
+      "kind": "真实样本",
+      "text": "样本为临床研究与临床试验一体化信息管理系统、保健中心数字化医用X射线摄影系统中标公告；设备包是否包含可单列软件需核验。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_ggzy_national",
+      "parent": "a",
+      "kind": "全国公资",
+      "text": "全国公共资源交易平台在robots读取阶段超时；未完成全国业务列表、详情、分页和接口采集。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_ceb",
+      "parent": "a",
+      "kind": "招投标总枢纽",
+      "text": "中国招标投标公共服务平台受robots规则禁止；未取得可解析公告或验收接口。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_regions",
+      "parent": "a",
+      "kind": "省级双入口",
+      "text": "31省及兵团的公资、政采共64个入口均做有限试连；省政采分网未有公告详情解析成功，不能把入口登记写作全省采集通过。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_regions_details",
+      "parent": "a_regions",
+      "kind": "已重放解析",
+      "text": "天津：医院改造成交正文；黑龙江：医院耗材公示正文；江西：医院电梯结果正文；浙江：医院暖通工程交换摘要和附件入口。前三项正文解析，浙江仅摘要；均不是已确认的纯软件中标项目。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_regions_listing",
+      "parent": "a_regions",
+      "kind": "只到链接发现",
+      "text": "河北、内蒙古、吉林、四川、贵州、陕西、青海、新疆、兵团；未完成详情验证。青海实际取过详情，确认为动态空壳。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_regions_failed",
+      "parent": "a_regions",
+      "kind": "仍有缺口",
+      "text": "北京、山西、辽宁、上海、江苏、安徽、福建、山东、河南、湖北、湖南、广东、广西、海南、重庆、云南、西藏、甘肃、宁夏公资入口未到列表/详情有效解析；具体TLS、超时、规则拒绝、HTTP错误和未命中原因逐站保存。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_cities",
+      "parent": "a",
+      "kind": "地市目录",
+      "text": "广州入口跳转超出白名单而停止；从16个省级页面提取233条城市/平台导航候选，未逐条访问、未完成全国地市目录或采集验收。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "configs/medical_digital_tender_city_candidates.json"
+      ]
+    },
+    {
+      "id": "a_departments",
+      "parent": "a",
+      "kind": "卫健医保疾控",
+      "text": "国家卫健委两次HTTP 412；国家医保局、国家疾控局首页可读但未命中公告；中国疾控中心robots返回445。省市部门尚未穷尽。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_cqcdc",
+      "parent": "a_departments",
+      "kind": "重庆疾控样本",
+      "text": "一条信息化系统年度评估服务采购邀请函正文解析成功，保留tender阶段；没有把正文出现的中标措辞升级为中标结果。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "a_other_directories",
+      "parent": "a",
+      "kind": "未执行目录项",
+      "text": "省级电子招投标公共服务平台、各省药械采购中心仍是待完善目录项；没有逐站业务测试。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "b",
+      "parent": "need",
+      "kind": "B 企业行业与运营商",
+      "text": "登记12项；只有移动、电信、联通3项做本机访问尝试，3页次且均未进入业务公告；其余9项未调用业务接口或导入商业数据。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "b_operators",
+      "parent": "b",
+      "kind": "运营商失败",
+      "text": "移动在robots检查时TLS兼容错误；电信在robots检查时连接超时；联通在robots检查时证书域名不匹配。均未验证候选人、结果或分包线索。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "b_official_api",
+      "parent": "b",
+      "kind": "已调查未调用",
+      "text": "企查查、天眼查、剑鱼已调查官方服务/文档；没有本轮已确认的接口授权、样本与预算，未发计费请求、未验证真实业务返回。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "b_exports",
+      "parent": "b",
+      "kind": "待契约与样本",
+      "text": "爱企查、标找找、ICT标局、天天标讯、千里马、乙方宝均未完成业务采集测试；公开摘要查阅不等于正文/会员导出/API已打通。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "b_network",
+      "parent": "b",
+      "kind": "尚未形成",
+      "text": "竞品中标台账、企业工商关联、联合体成员、报价策略和运营商分包网络，均未以本轮真实业务数据构建或验证。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "c",
+      "parent": "need",
+      "kind": "C 厂商侧与舆情",
+      "text": "登记6项，3个来源5页次访问尝试；无新闻详情或授权数据包解析成功。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "c_ifly",
+      "parent": "c",
+      "kind": "讯飞医疗",
+      "text": "3次尝试：历史域失败；当前官网首页可读并发现新闻候选；新闻栏目在robots阶段超时。汇总中的listing_discovered是新闻链接发现，不能写作公告列表验收。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "c_other_web",
+      "parent": "c",
+      "kind": "腾讯云与支付宝",
+      "text": "腾讯云医疗入口未取得可用正文；支付宝入口robots返回HTML后停止；未验证医疗项目新闻、签约和中标栏目。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "c_unattempted",
+      "parent": "c",
+      "kind": "未做业务采集",
+      "text": "公众号/视频号未取得可用接口、订阅源或授权导出；天眼查舆情未调用；院端招采数据中心只查服务介绍，未取得数据包。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "c_evidence",
+      "parent": "c",
+      "kind": "证据边界",
+      "text": "厂商新闻只算source_claim；未找到官方公告不能推断官方未公示，同稿转载不计多条独立证据。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d",
+      "parent": "need",
+      "kind": "D 数据完整化治理",
+      "text": "本轮只完成基础存证、URL级重复控制、日期/公告阶段/金额角色规则，未完成工商归一、跨站项目唯一键或合同核验链。",
+      "status": "partial",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_done",
+      "parent": "d",
+      "kind": "已有能力",
+      "text": "成功原文归档、SHA-256、抓取时间与发布日期分开、同来源链接去重、按来源ID+规范化URL形成记录ID；真实样本及相关离线回归已验证。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_amounts",
+      "parent": "d",
+      "kind": "已有金额护栏",
+      "text": "保留预算/中标/代理费/单价及上下文；真实样本89万元总额与1.335万元代理费分开。最终总额默认空，多包多供应商不自动求和。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_uscc",
+      "parent": "d",
+      "kind": "未接入工商库",
+      "text": "统一社会信用代码库、企业曾用名/简称/子公司别名归一均未接入或完成真实数据测试。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_project_key",
+      "parent": "d",
+      "kind": "未完成项目级去重",
+      "text": "项目编号+标段编号+公告URL规则尚未完整落地；现有来源ID+URL记录键不能代替跨站项目去重，配置中的目标键不等于已实现功能。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_contract",
+      "parent": "d",
+      "kind": "未接入合同链",
+      "text": "本轮没有合同公示采集样本；未验证中标额与合同额、暂列金、变更金额的勾稽校验。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "d_relations",
+      "parent": "d",
+      "kind": "未建立关系图谱",
+      "text": "联合体/总包/分包角色尚未结构化关联；当前supplier、lot等缺失字段留空待核验。",
+      "status": "open",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "engineering",
+      "parent": "need",
+      "kind": "代码与交付",
+      "text": "新增tenders.py、tender_audit.py、来源规则/城市候选/兼容配置/样本任务/回归文件与说明文档，已保存指定代码库。 [规则与用法](E:/CAICTBigData/coding/docs/MEDICAL_DIGITAL_TENDER_RULES.md)。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "pipeline/research/tenders.py",
+        "pipeline/research/tender_audit.py",
+        "configs/medical_digital_tender_rules.json",
+        "tests/test_medical_tender_rules.py",
+        "docs/MEDICAL_DIGITAL_TENDER_RULES.md"
+      ]
+    },
+    {
+      "id": "tests",
+      "parent": "engineering",
+      "kind": "验证",
+      "text": "既有版本1任务先dry-run通过再采集，两条详情成功保存；19项新增规则回归、全库252项测试通过。代码测试通过不等于真实平台全量采集验收。 [测试记录](E:/CAICTBigData/coding/docs/medical-digital-tender-validation-20261027/final_checks.json)。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "docs/medical-digital-tender-validation-20261027/final_checks.json"
+      ]
+    },
+    {
+      "id": "failures",
+      "parent": "need",
+      "kind": "失败留存",
+      "text": "保留87条历史失败/未执行记录，包含修复前未命中和14项未执行；不把87当作当前失败站点数，不覆盖旧失败来制造成功。 [完整失败台账](E:/CAICTBigData/coding/docs/medical-digital-tender-validation-20261027/historical_failures.json)。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00",
+      "evidence": [
+        "docs/medical-digital-tender-validation-20261027/historical_failures.json"
+      ]
+    },
+    {
+      "id": "observability",
+      "parent": "failures",
+      "kind": "可追溯字段",
+      "text": "按来源、网址、阶段、HTTP状态、原始错误、下一步、时间和已有原文路径记录；成功、列表候选、访问失败、未测试分别计数。 [93项逐站状态](E:/CAICTBigData/coding/docs/medical-digital-tender-validation-20261027/report.md)。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "metrics_correction",
+      "parent": "failures",
+      "kind": "口径更正",
+      "text": "79项包含规则检查失败；6项解析包含浙江摘要；10项链接发现由9个省级平台和讯飞新闻候选组成；中央政采只实测中央中标栏目。",
+      "status": "completed",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "next",
+      "parent": "need",
+      "kind": "后续执行顺序",
+      "text": "后续工作尚未执行；本树提交只整理既有事实，不新增采集，不自动调用付费接口。",
+      "status": "planned",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "next_a",
+      "parent": "next",
+      "kind": "优先1 官方详情与分页",
+      "text": "复测已修正文容器的省站；补中央地方、成交、合同栏目；核对旧域/迁移/证书问题；每站按列表→详情→附件→日期窗验收。",
+      "status": "planned",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "next_directories",
+      "parent": "next",
+      "kind": "优先2 城市和垂直目录",
+      "text": "核验233条候选的机构主体与采购栏目，逐省补地市、电子招投标公服、卫健医保疾控及药械中心，不能只数入口。",
+      "status": "planned",
+      "at": "2026-10-27T17:40:52+08:00"
+    },
+    {
+      "id": "next_bd",
+      "parent": "next",
+      "kind": "优先3 授权接入和项目治理",
+      "text": "取得商业接口契约/合法样本后验证字段；接入信用代码归一，明确项目/包件键，再补合同与暂列金校验及主体关系。",
+      "status": "planned",
+      "at": "2026-10-27T17:40:52+08:00"
+    }
+  ],
+  "result": {
+    "schema_version": 1,
+    "status": "partial",
+    "generated_at": "2026-10-27T17:08:31+08:00",
+    "rules_version": "2026-10-27.4",
+    "registered_sources": 93,
+    "sources_with_attempts": 79,
+    "page_attempts": 89,
+    "unique_detail_records": 7,
+    "sources_with_details": 6,
+    "medical_digital_candidates": 3,
+    "historical_failure_rows": 87,
+    "historical_failure_codes": {
+      "robots_unavailable": 44,
+      "robots_denied": 5,
+      "error": 3,
+      "discovery_no_links": 16,
+      "directory_incomplete": 2,
+      "authorization_required": 5,
+      "contract_unverified": 6,
+      "official_feed_unavailable": 1,
+      "dynamic_shell": 2,
+      "http_not_found": 2,
+      "domain_scope_denied": 1
+    },
+    "source_states": {
+      "detail_parsed": 6,
+      "attempted_unresolved": 63,
+      "not_attempted": 14,
+      "listing_discovered": 10
+    },
+    "note": "离线解析改进不代表重新联网成功；保留原始失败。记录/候选均不等于已核验中标项目。"
+  },
+  "group_summary": {
+    "A": {
+      "registered_items": 75,
+      "sources_with_attempts": 73,
+      "page_attempts": 81,
+      "sources_with_details": 6,
+      "states": {
+        "detail_parsed": 6,
+        "attempted_unresolved": 58,
+        "not_attempted": 2,
+        "listing_discovered": 9
+      }
+    },
+    "B": {
+      "registered_items": 12,
+      "sources_with_attempts": 3,
+      "page_attempts": 3,
+      "sources_with_details": 0,
+      "states": {
+        "not_attempted": 9,
+        "attempted_unresolved": 3
+      }
+    },
+    "C": {
+      "registered_items": 6,
+      "sources_with_attempts": 3,
+      "page_attempts": 5,
+      "sources_with_details": 0,
+      "states": {
+        "listing_discovered": 1,
+        "attempted_unresolved": 2,
+        "not_attempted": 3
+      }
+    }
+  },
+  "reference_count": 23,
+  "city_candidate_count": 233,
+  "new_regression_tests": 19,
+  "full_regression": {
+    "tests": 252,
+    "failures": 0,
+    "result": "OK",
+    "log": "outputs/medical-digital-rules-20261027/full-regression.log",
+    "sha256": "a459b6205173df06f7e3d14c0f1e54f4edeb207d53b59fa8cf53f04fca66681b"
+  },
+  "not_attempted_sources": [
+    {
+      "source_id": "provincial_ebid_directory",
+      "name": "省级电子招投标公共服务平台目录",
+      "matrix_group": "A",
+      "latest_failure_reason": "与交易中心可能分站或同站；省级交换接口不等于公众开放接口。"
+    },
+    {
+      "source_id": "drug_procurement_directory",
+      "name": "各省药械采购中心目录",
+      "matrix_group": "A",
+      "latest_failure_reason": "药品/耗材挂网价不是软件中标；仅补设备+软件捆绑包。"
+    },
+    {
+      "source_id": "qcc",
+      "name": "企查查",
+      "matrix_group": "B",
+      "latest_failure_reason": "缺授权密钥/配额；官方最近2年最多2000条限制，不调用计费API。"
+    },
+    {
+      "source_id": "tianyancha",
+      "name": "天眼查",
+      "matrix_group": "B",
+      "latest_failure_reason": "缺正式招投标/工商接口权限与配额。"
+    },
+    {
+      "source_id": "aiqicha",
+      "name": "爱企查",
+      "matrix_group": "B",
+      "latest_failure_reason": "未验证官方批量API契约，接收合法导出；不猜造接口。"
+    },
+    {
+      "source_id": "biaozhaozhao",
+      "name": "标找找",
+      "matrix_group": "B",
+      "latest_failure_reason": "API/会员导出的字段、历史范围和许可待官方契约及样本验证。"
+    },
+    {
+      "source_id": "ict_biaoju",
+      "name": "ICT标局",
+      "matrix_group": "B",
+      "latest_failure_reason": "公开摘要可发现线索；完整正文/导出可能需会员或小程序，未提供授权样本。"
+    },
+    {
+      "source_id": "jianyu",
+      "name": "剑鱼标讯",
+      "matrix_group": "B",
+      "latest_failure_reason": "官方API及SDK已找到，缺本任务授权密钥和调用预算。"
+    },
+    {
+      "source_id": "ttbiao",
+      "name": "天天标讯",
+      "matrix_group": "B",
+      "latest_failure_reason": "API/订阅导出的当前能力与历史范围未验证，待正式文档和样本。"
+    },
+    {
+      "source_id": "qianlima",
+      "name": "千里马",
+      "matrix_group": "B",
+      "latest_failure_reason": "缺付费导出授权与字段样本。"
+    },
+    {
+      "source_id": "yifangbao",
+      "name": "乙方宝",
+      "matrix_group": "B",
+      "latest_failure_reason": "缺付费导出授权与字段样本。"
+    },
+    {
+      "source_id": "wechat_channels",
+      "name": "厂商公众号/视频号",
+      "matrix_group": "C",
+      "latest_failure_reason": "无已验证通用官方RSS；搜狗仅发现，历史/视频正文完整性不保证。"
+    },
+    {
+      "source_id": "tyc_news",
+      "name": "天眼查新闻舆情",
+      "matrix_group": "C",
+      "latest_failure_reason": "缺舆情字段接口契约与权限；同稿转载不计独立证据。"
+    },
+    {
+      "source_id": "device_data_center",
+      "name": "高端医械院等院端招采数据中心",
+      "matrix_group": "C",
+      "latest_failure_reason": "仅找到服务介绍；供数主体、数据包授权和原文链接样本未取得。"
+    }
+  ],
+  "detail_sources": [
+    {
+      "source_id": "ccgp",
+      "name": "中国政府采购网（中央+地方）",
+      "detail_records": 2
+    },
+    {
+      "source_id": "ggzy_tianjin",
+      "name": "天津公共资源交易平台",
+      "detail_records": 1
+    },
+    {
+      "source_id": "ggzy_heilongjiang",
+      "name": "黑龙江公共资源交易平台",
+      "detail_records": 1
+    },
+    {
+      "source_id": "ggzy_zhejiang",
+      "name": "浙江公共资源交易平台",
+      "detail_records": 1
+    },
+    {
+      "source_id": "ggzy_jiangxi",
+      "name": "江西公共资源交易平台",
+      "detail_records": 1
+    },
+    {
+      "source_id": "cq_cdc",
+      "name": "重庆市疾病预防控制中心招标公示",
+      "detail_records": 1
+    }
+  ],
+  "discovery_only_sources": [
+    {
+      "source_id": "iflyhealth",
+      "name": "讯飞医疗",
+      "latest_replay_status": "not_available"
+    },
+    {
+      "source_id": "ggzy_hebei",
+      "name": "河北公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_neimenggu",
+      "name": "内蒙古公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_jilin",
+      "name": "吉林公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_sichuan",
+      "name": "四川公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_guizhou",
+      "name": "贵州公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_shaanxi",
+      "name": "陕西公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_qinghai",
+      "name": "青海公共资源交易平台",
+      "latest_replay_status": "dynamic_shell"
+    },
+    {
+      "source_id": "ggzy_xinjiang",
+      "name": "新疆公共资源交易平台",
+      "latest_replay_status": "listing"
+    },
+    {
+      "source_id": "ggzy_bingtuan",
+      "name": "新疆兵团公共资源交易平台",
+      "latest_replay_status": "listing"
+    }
+  ],
+  "provenance": [
+    {
+      "path": "configs/medical_digital_tender_rules.json",
+      "sha256": "bcc9231a9c6dd98b77302e73443eb8f00891dad265c54dc00862025c514afe7e"
+    },
+    {
+      "path": "configs/medical_digital_tender_city_candidates.json",
+      "sha256": "d14dc4824040d10b56c572ae0d1788ad03ca031ccd8f7dcc2fd4abf386e5ffda"
+    },
+    {
+      "path": "docs/medical-digital-tender-validation-20261027/summary.json",
+      "sha256": "58478e2e32c19966636612c8c131b09d5b7f51b1af38020c1906ebab393c0d9a"
+    },
+    {
+      "path": "docs/medical-digital-tender-validation-20261027/sources.json",
+      "sha256": "d1b3eda77b0adc3f1a57f3852b788f82b09754a531bde9dd58289f5a41a6c247"
+    },
+    {
+      "path": "docs/medical-digital-tender-validation-20261027/historical_failures.json",
+      "sha256": "253b28938d62410e4d547dd603f54c7e50871524ab011fc6d4f4129ed35167c3"
+    },
+    {
+      "path": "docs/medical-digital-tender-validation-20261027/final_checks.json",
+      "sha256": "75f3d17b491f7db9026060307a25c3e27939a171abb8b436da7d3327bc0ba934"
+    }
+  ]
+}

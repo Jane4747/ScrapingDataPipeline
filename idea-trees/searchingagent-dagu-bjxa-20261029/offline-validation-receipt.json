@@ -1,0 +1,39 @@
+{
+  "captured_at": "2026-10-29T16:56:14+08:00",
+  "source": "C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\searchingagent-dagu-20261029\\runs\\validation-20261029-163017-1694f0\\summary.json",
+  "source_sha256": "ea8226713a03cc625b9f7fe009137071e21cbab4a3762bfb40888c2c1d7ad9df",
+  "summary": {
+    "status": "completed",
+    "verification": "bounded offline integration only",
+    "group_id": "validation-20261029-163017-1694f0",
+    "parallel_processes": 3,
+    "three_way_overlap_seconds": 2.564,
+    "live_crawl_executed": false,
+    "facts_verified": false,
+    "archive_sample_pages": 1,
+    "tasks": [
+      {
+        "task_id": "public-plan",
+        "status": "completed",
+        "status_file": "\\\\?\\C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\searchingagent-dagu-20261029\\runs\\validation-20261029-163017-1694f0\\pipeline-tasks\\public-plan\\status.json"
+      },
+      {
+        "task_id": "manufacturer-plan",
+        "status": "completed",
+        "status_file": "\\\\?\\C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\searchingagent-dagu-20261029\\runs\\validation-20261029-163017-1694f0\\pipeline-tasks\\manufacturer-plan\\status.json"
+      },
+      {
+        "task_id": "archive-replay",
+        "status": "completed",
+        "status_file": "\\\\?\\C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\searchingagent-dagu-20261029\\runs\\validation-20261029-163017-1694f0\\pipeline-tasks\\archive-replay\\status.json"
+      }
+    ],
+    "delivery": [
+      {
+        "path": "C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\searchingagent-dagu-20261029\\runs\\validation-20261029-163017-1694f0\\pipeline-tasks\\archive-replay\\delivery\\attempt-001\\report.json",
+        "sha256": "f8dc486443d37e90b8be3831380e1ed7d3fe34c372d2726cec376edc27f9d7ef"
+      }
+    ]
+  },
+  "dashboard_run_url": "http://127.0.0.1:8097/dag-runs/searchingagent-integration/validation-20261029-163017-1694f0"
+}

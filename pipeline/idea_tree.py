@@ -64,10 +64,37 @@ def save_tree(tree: dict) -> Path:
     return folder
 
 
+def _unique_id(node_id: str, tree: dict) -> str:
+    """节点 id 在树内必须唯一，否则 tree.md 会把同 id 的子树重复渲染。"""
+    taken = {node["id"] for node in tree["nodes"]}
+    if node_id not in taken:
+        return node_id
+    index = 2
+    while f"{node_id}-{index}" in taken:
+        index += 1
+    return f"{node_id}-{index}"
+
+
+def find_node(tree: dict, node_id: str) -> dict | None:
+    return next((node for node in tree["nodes"] if node["id"] == node_id), None)
+
+
+def upsert_node(tree: dict, node_id: str, parent: str, kind: str, text: str, **extra) -> dict:
+    """同一个决策点在一个树里只保留一个节点：已有就改写，没有才追加。"""
+    node = find_node(tree, node_id)
+    if node is None:
+        add_node(tree, node_id, parent, kind, text, **extra)
+        return find_node(tree, node_id)
+    node["text"] = text
+    node["at"] = _now()
+    node.update(extra)
+    return node
+
+
 def add_node(tree: dict, node_id: str, parent: str, kind: str, text: str, **extra) -> None:
     tree["nodes"].append(
         {
-            "id": node_id,
+            "id": _unique_id(node_id, tree),
             "parent": parent,
             "kind": kind,
             "at": _now(),

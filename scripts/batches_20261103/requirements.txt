@@ -1,0 +1,4 @@
+-r ../../requirements-research.txt
+truststore
+# Only the public_resources browser collector requires Playwright.
+playwright>=1.49

@@ -1,0 +1,264 @@
+{
+  "tree_id": "national-ggzy-medical-digital-2026-20261028",
+  "captured_at": "2026-10-28T14:42:31+08:00",
+  "branch": "feat/national-ggzy-medical-digital",
+  "files": [
+    {
+      "path": "artifacts/code/pipeline/__init__.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\__init__.py",
+      "sha256": "a9761698478abe3d346db102e60b560b40de228144d53bcfaf06c1a2ac13d3e2",
+      "bytes": 89,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/__init__.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\__init__.py",
+      "sha256": "c77dd7a1780d6471d9f35b859e2f7ce5c759ff13780b93a435dfbf7dd0911114",
+      "bytes": 77,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/national_ggzy.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\national_ggzy.py",
+      "sha256": "bd7ab0198e80e11e0c9c5a37284c9219442f6ac509574bfdc39fa5d8c33e9fae",
+      "bytes": 30522,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/zycg.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\zycg.py",
+      "sha256": "c302e334948d123fd70208bdf34e826ad6b0636419b28a7199e3ef2648fb236f",
+      "bytes": 18861,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/bid_common.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\bid_common.py",
+      "sha256": "9230158913a73418fb13eb9de3f5e4a5bfa2f2631ebef67766912e466e15b0a4",
+      "bytes": 14335,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/fetch.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\fetch.py",
+      "sha256": "5ff33276b5041eedbe6af0e4024272c40fcf6f7218f4bb0fdc2ff4ae14271a9b",
+      "bytes": 31929,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/tenders.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\tenders.py",
+      "sha256": "718b532904db40952f5a06d2dc266c7b16816316350b8d8f9c649be34cc7fca9",
+      "bytes": 25735,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/pipeline/research/config.py",
+      "source": "E:\\CAICTBigData\\coding\\pipeline\\research\\config.py",
+      "sha256": "ca85d25aa21cc1164954d4c63bc36f8b0e3dc0402eeac5ca8463f88806b198c2",
+      "bytes": 4780,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/scripts/thirdparty_goverment_spider/site_fetch.py",
+      "source": "E:\\CAICTBigData\\coding\\scripts\\thirdparty_goverment_spider\\site_fetch.py",
+      "sha256": "5a5ae2749ee5062155827276b2ad39fd5681ea9d6bf6a9f6de85e1dffe0b84ac",
+      "bytes": 4163,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/tests/test_national_ggzy_collector.py",
+      "source": "E:\\CAICTBigData\\coding\\tests\\test_national_ggzy_collector.py",
+      "sha256": "326f05f7a54a65ed7f8221f0d35aa9572dde9e389fb175936546c86c463f8e2c",
+      "bytes": 6214,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/tools/idea_tree_writer.py",
+      "source": "E:\\CAICTBigData\\coding\\scripts\\idea_tree_writer.py",
+      "sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532",
+      "bytes": 3859,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/support/build.mjs",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\build.mjs",
+      "sha256": "e3fc4152328668326444215f88e53940c93745aecf7006fe202fc82292bd635d",
+      "bytes": 13216,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/support/native_links.py",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\native_links.py",
+      "sha256": "8079d6c452e40686854295ae459d9e3348465fd9de0b1ad4f1ff43d1fdd7df48",
+      "bytes": 3513,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/code/support/run_collection.mjs",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\run_collection.mjs",
+      "sha256": "7954e17bca6159f4d2e37aae6c2693f568daafc72795a1cd01f09b08beabaaa0",
+      "bytes": 5129,
+      "kind": "code"
+    },
+    {
+      "path": "artifacts/evidence/083346c3e2283f46fe2e/body.html",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\articles\\083346c3e2283f46fe2e-body.html",
+      "sha256": "f973f16bfbfa2f88c93467775c81285550bca98f24a8336488194020e5b4c8c9",
+      "bytes": 110921,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/083346c3e2283f46fe2e/text.txt",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\texts\\083346c3e2283f46fe2e.txt",
+      "sha256": "066fdd9b0a47d524661dc25b7a635c4dec6cf701f91e64cffd06767eb38b7ef4",
+      "bytes": 3577,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/fac53022c57cfe4fe9ab/body.html",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\articles\\fac53022c57cfe4fe9ab-body.html",
+      "sha256": "8145982c04b59a5193ba20d9f245cab177baa8c3cef299cdd53b24c621eb90e2",
+      "bytes": 7925,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/fac53022c57cfe4fe9ab/text.txt",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\texts\\fac53022c57cfe4fe9ab.txt",
+      "sha256": "7674fa13bbb01a16aee6515237636f5a9b97846e5b37ecf8fec988fb06688f7e",
+      "bytes": 2039,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/a68989b7d97464dad653/body.html",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\articles\\a68989b7d97464dad653-body.html",
+      "sha256": "88058fc53e8f533bbf782902c8ee533d2eea57fc22cf0a4878cd00561e48be57",
+      "bytes": 105970,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/a68989b7d97464dad653/text.txt",
+      "source": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2\\texts\\a68989b7d97464dad653.txt",
+      "sha256": "690dd55fa12e26fa1a3910e04d54e5b5aadb45b0febd8b2d7a2aa4d306e497c0",
+      "bytes": 6303,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "README.md",
+      "source": "generated or prior validation snapshot",
+      "sha256": "ede09f6af0d244ff52da8e92484155f77a631435f319f7d56fc47037dcb241f0",
+      "bytes": 1652,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "TECHNICAL-REUSE.md",
+      "source": "generated or prior validation snapshot",
+      "sha256": "07f8e2c8743369c944f8354ebd697e113e1119fdddb3b7c2a5fbb1459be9c963",
+      "bytes": 12243,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "CODE-INDEX.md",
+      "source": "generated or prior validation snapshot",
+      "sha256": "6979e77277953233a2ec0cc7c55f3752b05f3274357c288d1b9da27d20dd56c7",
+      "bytes": 3281,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "tree.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "bf935d2d275d5a211f09559aed2eccf6ba15f66d5bd7ac70ed07eaf8f36498ea",
+      "bytes": 8988,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "tree.md",
+      "source": "generated or prior validation snapshot",
+      "sha256": "fed07577085fe3528ae69a87b44410938fafef67aa687f0316641ac7ce2902a5",
+      "bytes": 6395,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "ec02a644a031f71c367b9bad0899966dbc487e9bb052679688bb317804bf5668",
+      "bytes": 1048,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "PROGRESS-SNAPSHOT.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "977604bf0a98115e4925cad59dc92a1fd05e355b197e54ffdcbfa382fa2f3c7c",
+      "bytes": 3003,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "validation-snapshot.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "2f7c033763b590331b07cea66d8b9917ced268af5bec2533e6450a8ad4992c10",
+      "bytes": 1338,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "REUSE-VERIFICATION.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "1a12454fcf0b140e30d38d44d568611e3b088fc7d945f7fc1921ea974eae56c7",
+      "bytes": 1137,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "artifacts/tools/archive_ggzy_reuse.py",
+      "source": "generated or prior validation snapshot",
+      "sha256": "1e25583d43f18a6290c9f5ff404cec2134ac1cf2c68ec9a77f98039068784869",
+      "bytes": 30679,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "artifacts/code/requirements-collector.txt",
+      "source": "generated or prior validation snapshot",
+      "sha256": "ccfb5dd8f4aeb3f23c678de0f1b42322de3c1b0b26a2cb856f5ccf714a9ee635",
+      "bytes": 82,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "artifacts/evidence/samples.json",
+      "source": "generated or prior validation snapshot",
+      "sha256": "c9902c92817e60f3509f4825abf2a60adb046e139b163467cc659096153cb4f5",
+      "bytes": 943,
+      "kind": "documentation_or_metadata"
+    },
+    {
+      "path": "artifacts/evidence/083346c3e2283f46fe2e/record.json",
+      "source": "selected public fields from state.json",
+      "sha256": "6946febed0bef69baa48ae570984243160b96339c0a1cc2702bd6323632392ba",
+      "bytes": 945,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/a68989b7d97464dad653/record.json",
+      "source": "selected public fields from state.json",
+      "sha256": "98894268d1f7132f8d04325adea450d6e61ca0dde4686bc93cd10a9418bd789f",
+      "bytes": 1641,
+      "kind": "public_evidence"
+    },
+    {
+      "path": "artifacts/evidence/fac53022c57cfe4fe9ab/record.json",
+      "source": "selected public fields from state.json",
+      "sha256": "8a9885dd7d85328a57c638a7627d67b408708bcd5412e7abded9c43e70acb3d7",
+      "bytes": 1073,
+      "kind": "public_evidence"
+    }
+  ],
+  "not_bundled": [
+    "runtime executables",
+    "node_modules",
+    "Conda/virtualenv",
+    "Chrome browser/profile",
+    "secrets/env/cookies",
+    "all collected pages"
+  ],
+  "notes": [
+    "只读复制生产源码和公开样本，未修改运行中的采集器、原文或任务配置。",
+    "未进行Git暂存、提交或推送。"
+  ]
+}
