@@ -9,6 +9,7 @@
 | 文档 | 内容 |
 | --- | --- |
 | [架构与模块](#架构与模块) | 多 Agent 分工、Dagu 任务可视化、本地爬虫 Harness 与 RSIHub 自进化路线 |
+| [采集器](#采集器) | 工具选择、异常处理、动态渲染、登录信息与会话处理 |
 | [调研调用指南](docs/GPT_RESEARCH_GUIDE.md) / [AGENTS.md](AGENTS.md) | 任务范围、证据纪律、恢复与协作约定 |
 | [命令与任务协议](docs/COMMANDS.md) | JSON 任务、参数、退出码与目录约定 |
 | [数据字典](docs/DATA_DICTIONARY.md) | 资料、证据、项目、日期及状态口径 |
@@ -106,7 +107,7 @@ outputs/<task_id>/                     # 本机产物，默认不提交
 repos/                                # 外部采集器检出，默认不提交
 run-local.ps1                         # 运行时选择与 UTF-8 启动入口
 requirements-research.txt              # 通用采集最小依赖
-requirements-pipeline.txt              # Excel、浏览器及旧适配器扩展依赖
+requirements-pipeline.txt              # Excel、浏览器及采集器适配扩展依赖
 requirements-test.txt                  # 离线测试依赖，含图片与系统 TLS 测试
 environment.yml                       # Python 3.11 的 Conda 环境声明
 ```
@@ -154,7 +155,7 @@ $env:SCRAPING_PYTHON = 'C:\path\to\python.exe'
 | --- | --- |
 | `SCRAPING_PYTHON` / `.runtime.json` 的 `python` | Python 绝对路径，本机配置不提交 |
 | `SCRAPING_REPOS` | 外部采集器根目录，默认 `repos/` |
-| `SCRAPING_PROCESS_TIMEOUT` | 旧采集器子进程超时秒数，默认 600 |
+| `SCRAPING_PROCESS_TIMEOUT` | 采集器子进程超时秒数，默认 600 |
 | `BRAVE_SEARCH_API_KEY` | 仅显式选择 Brave 时读取，通过环境注入，不写任务或日志 |
 | `PLAYWRIGHT_BROWSERS_PATH` | 浏览器安装位置；安装器默认 `.playwright-browsers/` |
 | `DAGU_HOME` | Dagu 状态目录；启动器设为仓库 `outputs/dagu-runtime/` |
@@ -195,7 +196,7 @@ $env:SCRAPING_PYTHON = 'C:\path\to\python.exe'
 | `evidence` | 原文片段、网址、行号/PDF 页码、日期缺口 |
 | `review` | 项目台账、核验队列和模板；不自动证明来源独立性 |
 | `task/status/resume` | 全流程定义、状态与恢复 |
-| `plan/run` | 五种旧适配器；先 `check --profile full --json`，再看 `--help` |
+| `plan/run` | 五种采集器适配器；先 `check --profile full --json`，再看 `--help` |
 
 ```text
 outputs/<task_id>/
@@ -213,7 +214,67 @@ outputs/<task_id>/
 
 `published_at` 是发布日期，`event_date` 是核验后的事件日期，`collected_at/fetched_at` 是采集时间。未知留空，不用 URL 年份或抓取日期填补。中标金额保留数值单位和原文；预算、合同与最终中标不互换。公告数不是独立项目数。
 
-统一任务通常以 0/2/3/4 表示成功、失败、部分完成、需要输入。`status` 读取成功返回 0，不代表被查询任务成功；旧独立采集器退出语义不同，须同时读 JSON 状态与缺口，见[命令协议](docs/COMMANDS.md)。`completed` 只说明阶段完成，`partial` 必须带缺口交付。
+统一任务通常以 0/2/3/4 表示成功、失败、部分完成、需要输入。`status` 读取成功返回 0，不代表被查询任务成功；独立采集器退出语义不同，须同时读 JSON 状态与缺口，见[命令协议](docs/COMMANDS.md)。`completed` 只说明阶段完成，`partial` 必须带缺口交付。
+
+## 采集器
+
+按页面类型和交付目标选择入口；先用少量页面确认正文、日期和附件，再扩大范围。采集器的输出可交给 [Agent 分工流程](#多-agent-协作与执行)核验，专用批次通过 [Dagu 查看任务](#任务可视化与状态追踪)；失败样本也可用于[自进化模块规划](#自进化模块rsihub-规划与现有基础)中的候选评测。三个模块的实现状态见前面的架构表。
+
+### 入口与工具选择
+
+| 场景 | 采集器与用法边界 |
+| --- | --- |
+| 多来源公开网页、PDF 与可恢复研究 | `research` 或统一 `task`；通用 Fetcher 控制来源域名、公开地址、robots、跳转和响应大小，采集调度控制页面预算 |
+| 政策站点 | `plan/run` → `goverment_spider`，按 `--site` 选择站点；主题参数不会自动重写第三方库的检索逻辑 |
+| 已知新闻/公众号文章 URL | `plan/run` → `NewsCrawler`；负责文章采集，不自动发现全部账号或历史链接 |
+| 浏览器渲染与结构化字段 | `plan/run` → `crawl4ai`；可传 `--url` 和 CSS 抽取 `--schema`，当前包装使用 `JsonCssExtractionStrategy` |
+| 自定义站点爬虫 | `plan/run` → `feapder`，需提供自己的 `--spider`；框架安装完成不代表已有业务站点规则 |
+| 新闻正文与元数据 | `plan/run` → `news-please`；传入文章 URL，核对标题、正文、作者及日期 |
+| 医院采购、央采、公资与分省任务 | 使用下文批次手册中的专用入口；分页、限速、恢复和字段口径按各适配器说明执行 |
+| 可选本地浏览器/模型后端 | MCP `fetch_page` / `render_page` / `start_crawl`；先 `crawler_status`，再按任务选择 browser-use、Skyvern、ScrapeGraphAI 或 Firecrawl |
+
+`plan/run` 的五个适配器依赖外部仓库及相应环境，先执行 `check --profile full --json`，用 `plan --requirement ...` 取得 `tree_id`，再运行 `run --tree-id ... --theme ... --delivery ...`。按适配器补充 `--url`（可重复）、`--site`、`--spider` 或 `--schema`；`--process-timeout` 控制子进程超时，默认 600 秒。完整示例见[批次手册](docs/USAGE_BATCHES.md)。不同入口的访问与恢复措施并不相同，通用 Fetcher 的约束不能自动推及所有第三方采集器。
+
+通用研究可先检查一个小预算计划，确认配置后去掉 `--dry-run` 才实际联网：
+
+```powershell
+.\run-local.ps1 research --config configs\medical_equipment_sources.json --source genertec_health --run-id collector-demo --max-pages 3 --workers 1 --timeout 25 --delay 2 --retries 1 --browser --dry-run
+```
+
+`--max-pages` 是每个来源累计不同页面 URL 的上限，包含失败页面；重试、robots、跳转及渲染资源请求不按此计数，因此它不是 HTTP 请求总量上限。`--workers` 是同时处理的来源数，单来源仍串行。复用已有运行要指定原 `--run-id` 或 `--output-dir`，加 `--resume`；只有明确需要重新请求失败页时加 `--retry-failed`。`--resume --reprocess` 仅重解析本地原文，不联网，不能与 `--retry-failed` 合用。
+
+### 异常处理与排查
+
+先查看页面状态、最终 URL、原始响应及错误记录，再判断失败发生在访问、渲染还是解析阶段。HTTP 200、进程退出或生成了文件都不等于取得有效正文；抽查标题、正文片段、发布日期及附件，并排除登录页、空模板和访问挑战页。
+
+| 现象 | 当前行为与处理技巧 |
+| --- | --- |
+| 超时、连接失败、HTTP 408/500/502/503/504 | 通用 Fetcher 按 `--retries` 做有限重试，退避最多 8 秒；按实际情况调整 `--timeout`、`--delay` 和页数预算，保留最终错误。每个主机还遵守 robots 的 Crawl-delay |
+| HTTP 401/403/429、robots 禁止或访问挑战 | 通用 Fetcher 不自动重试这些状态；记录权限、限流或访问缺口。429 可结合站点要求/`Retry-After` 安排后续恢复，但当前通用入口没有自动执行该响应头的逻辑；不要连续重试访问拒绝 |
+| TLS/证书错误 | 核对系统时间、证书链和运行环境；特定适配器可用 `system_tls`，或用 `auto` 对已识别的 OpenSSL 兼容错误尝试系统 curl，仍校验证书。通用 `research` 没有 `--transport` 参数，不用关闭证书校验解决问题 |
+| HTTP 200 但正文空、字段缺失 | 比较原始 HTML、渲染结果和选择器，检查是否进入登录页、分页遗漏或附件才含正文；无法确认时保留缺项，不把空结果写成“无相关公告” |
+| 中断、部分失败或预算耗尽 | 读取检查点、失败记录和 `partial` 缺口，按对应入口恢复；不删除运行中的锁，不用新结果覆盖旧证据。Dagu 步骤结束也不能替代业务验收 |
+
+上述通用重试规则见 [fetch.py](pipeline/research/fetch.py)；共享节流、冷却和来源锁属于部分专用批次的额外实现。解析规则修改后，先离线重解析已有样本，再决定是否重新访问网站。
+
+### 动态渲染
+
+原始 HTML 已含正文时，优先修正解析规则；只有 JavaScript 执行后才出现正文时，再启用浏览器。通用研究使用 `research --browser`，统一任务使用 `budget.browser=true`，联网任务还需 `collection.mode=crawl` 和 `allow_network=true`。当前回退只在识别到允许访问的 JavaScript 空壳页面时触发，不会把所有访问失败都改用浏览器重试。需在实际运行解释器中准备 Crawl4AI、Playwright 和 Chromium。
+
+通用浏览器回退仍检查域名、robots、跳转和响应大小，只允许 GET，并阻止 WebSocket；依赖表单 POST、登录交互或 WebSocket 的站点需要专用适配器。必要资源位于其他域名时，先核实来源与授权范围，再明确配置允许域名，不能把渲染失败简单当作解析失败。
+
+专用适配器的调试技巧包括：等待正文选择器出现、核对页面最终地址、对分页或滚动设置明确上限，并保存渲染 HTML/截图辅助定位。等待正文元素通常比盲目增加固定等待更可靠，但当前通用 CLI 没有自定义等待选择器、点击或下载事件参数。MCP `render_page` 使用新浏览器，等待 DOMContentLoaded 后固定等待 1.5 秒，慢速页面可能仍未完成；更复杂交互可评估 browser-use/Skyvern，仍需配置模型、预算与结果核验。
+
+### 登录信息与会话处理
+
+需要登录时先判断是否有公开原公告或公开附件；确需访问授权账号内容时，用专用适配器处理正常登录、会话有效性和权限判断。当前 `research`、`plan/run` 及本地爬虫 MCP 参数未开放 Cookie、`storage_state` 或个人 profile 导入；`render_page` 不继承用户浏览器登录态，browser-use/Skyvern 使用每个 job 独立的 profile，不自动跨任务共享登录。
+
+开发专用适配器时可采用以下方式；这些是扩展技巧，不是现有 CLI 参数：
+
+1. 为目标站点建立独立浏览器上下文，由用户完成正常登录和必要的多因素验证。确认最终页面、账号权限和正文元素后再提取，不把登录页或“无权限”页当成成功。
+2. Playwright 可用 `context.storage_state(path=...)` 保存授权会话，并在 `browser.new_context(storage_state=...)` 中复用；`sessionStorage` 不会由该接口自动持久化，站点若依赖它需另外设计和验证。方法与限制见 [Playwright 身份认证文档](https://playwright.dev/python/docs/auth)。会话文件可用于冒用登录身份，应按凭据保护。
+3. 会话文件放在仓库外或已忽略的 `outputs/private-auth/`，密码、令牌通过本机环境或凭据管理器提供，不写进 URL、命令参数、任务 JSON 或 Agent 任务描述。本地网关会保存任务输入，浏览器截图、历史和日志也可能含私密内容；共享前应检查并脱敏。
+4. 分别识别未登录、会话过期和账号无权限。过期后停止并重新登录，确认正文有效再续采；不用无限重试代替认证，不复用个人主浏览器的整个 profile。HTTP 采集器与浏览器之间的 Cookie/CSRF 状态传递也需显式实现，不能假定自动同步。
 
 ## 各批次入口与历史归档
 
@@ -277,7 +338,7 @@ $env:PYTHONIOENCODING = 'utf-8'
 - **机构版本分开。** 327 行 → 190 家唯一机构、22 组跨表重复是 2026-10-30 种子版；补正版机构主表为 555 行。孤行、推断、证据等级及缺项见补正说明。10 Sheet 不表示床位、入住率、资金来源等字段已经齐全。
 - **批次范围分开。** 三平台、分省、医院入口和旧央采八字段/新 22 字段表分别解释；广东与深圳/广州有重叠。未检索窗口、访问挑战、详情失败及 partial 随数据保留。公告、标包、项目不能混算。
 - **规则与名单需复核。** 登记入口、首页可达、找到栏目、解析成功、事实核验是不同阶段。关键词可能误收设备/工程；规则标签不能证明金额都属于软件。医疗品牌无独立官网时不虚构域名；CHINC 旧名、赛迪媒体/研究、东软集团/东软医疗、中国软件网/协会等易混项保留提示。
-- **工具边界。** 扫描 PDF 不自动 OCR；论文全文缺失、身份匹配、图注和裁剪各有待核项。403/429、访问挑战、证书错误和配额限制不改写为已覆盖。旧适配器和专题脚本的保护措施不同，不能把通用 Fetcher 的所有约束推及全库。
+- **工具边界。** 扫描 PDF 不自动 OCR；论文全文缺失、身份匹配、图注和裁剪各有待核项。403/429、访问挑战、证书错误和配额限制不改写为已覆盖。不同适配器和专题脚本的保护措施不同，不能把通用 Fetcher 的所有约束推及全库。
 
 ## 版本控制边界
 
