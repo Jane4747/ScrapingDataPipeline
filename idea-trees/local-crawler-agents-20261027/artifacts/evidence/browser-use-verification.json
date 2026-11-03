@@ -1,0 +1,8 @@
+{
+  "engine": "browser-use",
+  "core_imports": "passed",
+  "local_browser_launch": "passed",
+  "navigation_and_dom_reading": "passed",
+  "model_called": false,
+  "verified_at": "2026-10-27T15:08:34.029385+00:00"
+}

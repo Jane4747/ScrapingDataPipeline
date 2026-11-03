@@ -1,0 +1,52 @@
+{
+  "verified_at": "2026-10-27T15:12:14.776696+00:00",
+  "mcp_handshake": "passed",
+  "tool_discovery": [
+    "crawler_status",
+    "fetch_page",
+    "firecrawl_map",
+    "job_status",
+    "render_page",
+    "start_crawl"
+  ],
+  "html_extraction": "passed",
+  "status": {
+    "engines": {
+      "browser-use": {
+        "installed": true,
+        "version": "0.13.14",
+        "python": "E:\\CAICTBigData\\coding\\local-crawlers\\envs\\browser-use\\Scripts\\python.exe",
+        "model_configured": false
+      },
+      "skyvern": {
+        "installed": true,
+        "version": "1.0.56",
+        "python": "E:\\CAICTBigData\\coding\\local-crawlers\\envs\\skyvern\\Scripts\\python.exe",
+        "model_configured": false
+      },
+      "scrapegraphai": {
+        "installed": true,
+        "version": "2.3.1",
+        "python": "E:\\CAICTBigData\\coding\\local-crawlers\\envs\\scrapegraphai\\Scripts\\python.exe",
+        "model_configured": false
+      },
+      "firecrawl": {
+        "reachable": false,
+        "reason": "ConnectError",
+        "endpoint": "http://127.0.0.1:3002",
+        "docker_found": false,
+        "compose": "E:\\CAICTBigData\\coding\\local-crawlers\\firecrawl\\compose.yaml",
+        "wsl_host_status": "waiting_for_manual_restart",
+        "manual_restart_required": true
+      }
+    },
+    "requested_model": "DeepSeek V4.1 Flash",
+    "model_id": "",
+    "model_credentials_configured": false,
+    "runs_directory": "E:\\CAICTBigData\\coding\\local-crawlers\\runs",
+    "max_active_jobs": 1
+  },
+  "unconfigured_model_reported": "passed",
+  "javascript_rendering": "passed",
+  "render_job_id": "ebeb5141b3a64a24"
+}

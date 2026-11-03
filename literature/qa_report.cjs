@@ -1,0 +1,33 @@
+const {chromium}=require('playwright');
+const {pathToFileURL}=require('url');
+const fs=require('fs');
+const path=require('path');
+(async()=>{
+ const root=path.resolve(process.argv[2]),out=path.resolve(process.argv[3]);
+ const browser=await chromium.launch({executablePath:'E:/CAICTBigData/coding/.playwright-browsers/chromium_headless_shell-1248/chrome-headless-shell-win64/chrome-headless-shell.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1280,height:1000},deviceScaleFactor:1});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(pathToFileURL(path.join(root,'architecture_report.html')).href);
+ const total=await page.locator('.paper').count();
+ if(total!==22)throw new Error('Expected 22 cards: '+total);
+ if(!(await page.locator('#count').innerText()).includes('22 / 22'))throw new Error('Initial filter count');
+ await page.screenshot({path:path.join(out,'report-desktop.png')});
+ await page.getByRole('button',{name:'世界模型 2',exact:true}).click();
+ if(await page.locator('.paper:visible').count()!==2)throw new Error('Category filter');
+ await page.getByRole('button',{name:'全部 22',exact:true}).click();
+ await page.locator('#q').fill('AdaRSI');
+ if(await page.locator('tbody tr:visible').count()!==1)throw new Error('Search filter');
+ await page.locator('#q').fill('');
+ await page.locator('#loops').screenshot({path:path.join(out,'architecture-loops.png')});
+ await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:path.join(out,'report-mobile.png')});
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+ if(overflow)throw new Error('Mobile document overflow');
+ const links=await page.locator('a[href]').evaluateAll(as=>as.map(a=>a.getAttribute('href')).filter(h=>h&&!h.startsWith('http')&&!h.startsWith('#')));
+ const missing=[...new Set(links)].filter(h=>!fs.existsSync(path.resolve(root,h)));
+ if(missing.length)throw new Error('Missing local links: '+missing.join(', '));
+ if(errors.length)throw new Error(errors.join('\n'));
+ fs.writeFileSync(path.join(out,'report-qa.json'),JSON.stringify({status:'passed',cards:total,category_filter:true,search_filter:true,mobile_overflow:false,local_links:true,browser_errors:errors},null,2));
+ await browser.close();console.log('Report QA passed');
+})().catch(e=>{console.error(e);process.exit(1)});
+

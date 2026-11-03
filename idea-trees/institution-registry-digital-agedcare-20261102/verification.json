@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-11-02T00:08:59+08:00",
+  "archive_status": "completed",
+  "coverage_status": "partial",
+  "registry_master_rows": 555,
+  "full_workbook": {
+    "reports": 667,
+    "projects": 276
+  },
+  "pilot_workbook": {
+    "reports": 53,
+    "projects": 7
+  },
+  "agedcare": {
+    "institutions": 108,
+    "target_institutions": 162,
+    "pending_institutions": 54,
+    "reports_raw": 277,
+    "projects_raw": 51
+  },
+  "target_ids_unique": true,
+  "result_ids_match_each_target_batch": true,
+  "done_pending_disjoint": true,
+  "p7_p8_p9_result_files_absent": true,
+  "source_file_count": 107,
+  "source_and_snapshot_hashes_match": true,
+  "source_files_unchanged": true,
+  "workbook_bytes_unchanged": true,
+  "web_facts_reverified": false
+}

@@ -1,0 +1,6 @@
+# 本组件配置示例；不含密钥，不覆盖其他MCP项目。
+[mcp_servers.local_crawlers]
+command = 'E:\CAICTBigData\coding\local-crawlers\envs\gateway\Scripts\python.exe'
+args = ['E:\CAICTBigData\coding\local-crawlers\gateway.py']
+enabled = true
+# 之后配置模型时，另行设置安全的环境变量透传并重新加载。

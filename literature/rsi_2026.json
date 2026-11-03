@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": "physical-embodied-rsi-20261025",
+  "title": "2026 Physical / Embodied Recursive Self-Improvement",
+  "question": "2026年物理/具身递归自我改进系统如何组织执行、经验、失败诊断、更新与验证？",
+  "year": 2026,
+  "cutoff": "2026-10-25",
+  "allow_network": true,
+  "output_dir": "../outputs/physical-embodied-rsi-20261025",
+  "delay": 15,
+  "max_bytes": 134217728,
+  "queries": [
+    "2026 embodied recursive self improvement physical intelligence RSI robotics paper",
+    "site:arxiv.org \"2026\" \"Physical\" \"RSI\"",
+    "site:arxiv.org \"2026\" \"embodied\" \"self-improvement\"",
+    "site:arxiv.org \"robot\" \"recursive self-improvement\" \"2026\" January February March April May"
+  ],
+  "candidates": [
+    {
+      "arxiv_id": "2610.29677",
+      "category": "survey",
+      "reason": "综述与递归证据边界",
+      "discovery_url": "https://arxiv.org/abs/2610.29677"
+    },
+    {
+      "arxiv_id": "2610.18842",
+      "category": "survey",
+      "reason": "Physical RSI 定义、L0-L5 与三层闭环",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.08995",
+      "category": "harness",
+      "reason": "执行技能与诊断工具共同改进",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.12369",
+      "category": "code",
+      "reason": "有状态可执行代码与共享控制库",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.18792",
+      "category": "benchmark",
+      "reason": "三种自演化模式与预算评测",
+      "discovery_url": "https://arxiv.org/abs/2610.18792"
+    },
+    {
+      "arxiv_id": "2610.20474",
+      "category": "hybrid",
+      "reason": "按失败归因决定是否微调",
+      "discovery_url": "https://arxiv.org/abs/2610.20474"
+    },
+    {
+      "arxiv_id": "2609.38905",
+      "category": "policy",
+      "reason": "real-to-sim-to-real 自适应采数",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.07969",
+      "category": "simulation",
+      "reason": "资产、场景和任务联合改进",
+      "discovery_url": "https://arxiv.org/abs/2610.07969"
+    },
+    {
+      "arxiv_id": "2609.27612",
+      "category": "verification",
+      "reason": "证据提交门与版本发布",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.13376",
+      "category": "physical",
+      "reason": "真实物理证据驱动策略修订",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2609.31760",
+      "category": "negative",
+      "reason": "123轮未累积成功的失败分析",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.10498",
+      "category": "harness",
+      "reason": "假设图、信息价值与代码技能共同演化",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.18867",
+      "category": "code",
+      "reason": "跨场景复用Skills与Lessons",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2609.37583",
+      "category": "memory",
+      "reason": "分层物理知识和历史纠错",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.02204",
+      "category": "simulation",
+      "reason": "重建部署环境并练习迁移",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "category": "simulation",
+      "reason": "进化代码代理生成仿真环境",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2606.19980",
+      "category": "policy",
+      "reason": "真实机器人研究代理自改进",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2606.08610",
+      "category": "training",
+      "reason": "代理式机器人强化学习框架",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2609.32069",
+      "category": "policy",
+      "reason": "能力边界发现与真实RL",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2602.12063",
+      "category": "world_model",
+      "reason": "VLA与世界模型共同改进",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    },
+    {
+      "arxiv_id": "2610.24464",
+      "category": "code",
+      "reason": "共享可执行栈与长任务组合",
+      "discovery_url": "https://arxiv.org/abs/2610.24464"
+    },
+    {
+      "arxiv_id": "2609.39685",
+      "category": "world_model",
+      "reason": "世界模型主动教练与技能组合",
+      "discovery_url": "https://github.com/SAIL-Research-Lab/Physical-RSI"
+    }
+  ]
+}

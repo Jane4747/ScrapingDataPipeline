@@ -1,0 +1,18 @@
+{
+  "status": "archived_local",
+  "checked_at": "2026-11-02T00:09:35+08:00",
+  "target": "E:\\CAICTBigData\\coding\\idea-trees\\institution-registry-digital-agedcare-20261102",
+  "tree": "E:\\CAICTBigData\\coding\\idea-trees\\institution-registry-digital-agedcare-20261102\\tree.md",
+  "copied_files": 113,
+  "source_files": 107,
+  "source_and_destination_hashes_verified": true,
+  "source_files_unchanged": true,
+  "index_appended": true,
+  "readme_original_preserved": true,
+  "readme_sha256_after": "99d5073844ef7237e791c523b8f6c94db49be67834ca6bcfa8acd562ac63339e",
+  "coverage_status": "partial",
+  "agedcare_saved_institutions": 108,
+  "agedcare_pending_institutions": 54,
+  "git_commit_created": false,
+  "github_pushed": false
+}

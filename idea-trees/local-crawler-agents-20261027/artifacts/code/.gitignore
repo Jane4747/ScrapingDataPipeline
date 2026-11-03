@@ -1,0 +1,12 @@
+envs/
+tools/
+cache/
+runs/
+profiles/
+logs/
+installers/
+migration-history/
+*.log
+.env
+*.lock.txt
+__pycache__/

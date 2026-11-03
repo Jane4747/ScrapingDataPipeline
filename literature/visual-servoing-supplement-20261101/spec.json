@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "task_id": "visual-servoing-supplement-20261101",
+  "allow_network": true,
+  "output_dir": "../../outputs/visual-servoing-supplement-20261101",
+  "catalog": "catalog.json",
+  "records": "records.json",
+  "supplemental": "supplemental.json",
+  "delay": 15,
+  "workers": 3,
+  "max_bytes": 67108864,
+  "max_requests_per_paper": 3,
+  "allowed_domains": [
+    "arxiv.org",
+    "mdpi-res.com",
+    "pure.tue.nl",
+    "research.tue.nl",
+    "hal.science",
+    "doi.org",
+    "ieeexplore.ieee.org",
+    "usrfiles.com"
+  ]
+}

@@ -1,0 +1,28 @@
+# 想法树 medical-digital-pr-wechat-mapping-20261102
+
+- 状态：partial
+- 创建：2026-11-02T00:41:03+08:00
+- 更新：2026-11-02T00:41:03+08:00
+- 工具：公开检索核实 + wxnum.cn 探针脚本 + 企业信息平台主体维度 + 仓库 idea_tree_writer 渲染
+- 主题：医卫数字化传播 mapping：网址清单 + 省级公众号矩阵 + 厂商入口
+- 交付：[工作思路](DETAILS.md)、[代码学习总结](CODE_SUMMARY.md)、[代码索引](CODE-INDEX.md)、[SHA256清单](SOURCE-MANIFEST.json)、[归档校验](ARCHIVE-VERIFICATION.json)
+
+## 节点
+
+- **需求** `need`：对「医卫数字化棋盘」材料做可核实的传播 mapping：逐条标注涉及网址，补齐三家运营商内地各省公众号，并纳入华为、讯飞医疗、卫宁、东软、创业慧康、东华医为、阿里健康的公众号入口。
+  - **证据纪律** `discipline`：不推测、不编造：查不到只写检索词与应匹配认证主体；证据分强/中/弱；投放前帐号主体必须与省分公司全称完全一致，代理商主体一律不用。详见[工作思路](DETAILS.md)。
+  - **网址清单** `url-map`：[medical-digital-pr-url-map.html](artifacts/delivery/medical-digital-pr-url-map.html)：60+ 可点击入口，按官网/政企/IR/媒体/会议分色；补入 A股 IR 三件套、港股披露易、搜狗微信、会议当年报名页等隐性路口。
+    - **核实结论** `url-findings`：CHINC 已更名（2026 称数字医学大会，7/3-5 长沙，按旧名检索会漏）；三家运营商医疗品牌（翼康/智慧医疗军团/OneHealth）均无独立官网；赛迪网≠赛迪顾问、东软集团≠东软医疗、中国软件网≠中国软件行业协会。
+  - **省级公众号矩阵** `matrix`：[medical-digital-pr-wechat-matrix.html](artifacts/delivery/medical-digital-pr-wechat-matrix.html)：31 省 x 移动/电信/联通，已确认 98 个账号、覆盖 29 个省级行政区；未确认格留检索词。
+    - **四层结构** `matrix-layers`：服务号（粉丝多但不承载叙事）→ 官方资讯号（真正投放落点）→ 垂类号（宽带管家/人力资源/政企/共青团）→ 地市号（不可枚举）；命名无统一规则。
+    - **取证突破** `matrix-breakthrough`：第二轮改用企业信息平台「微信公众号」维度，按省分公司主体一次列全账号，账号数 42→98；省电信 189.cn 子站公告/隐私政策页可直接命中本省公众号全称。
+  - **7家厂商入口** `vendors`：华为/讯飞医疗/卫宁/东软/创业慧康/东华医为/阿里健康共 24 个账号，按集团主号→业务线号→招聘号三层；均不按省设号，区域传播须借运营商省分号。东软 NeusoftHIT 是唯一明确医疗垂类号；阿里健康区域触达走支付宝端内。
+  - **代码归档** `code`：[代码学习总结](CODE_SUMMARY.md) · [代码索引](CODE-INDEX.md) · [SHA256清单](SOURCE-MANIFEST.json)。唯一自编脚本为 wxnum_probe.py，全量抓取已主动中止，未产出 candidates.json。
+    - **探针脚本** `code-probe`：[wxnum_probe.py](artifacts/code/wxnum_probe.py)：检索词模板 → 按卡片切块解析 → 认证主体白名单过滤 → 详情页取微信号；1.2s/1.0s 限速、超时 20s、重试 2 次。
+      - **已修复缺陷** `code-bug`：初版用跨卡片贪婪正则，把 OPPO 广东移动通信误判进广东移动名下；改为按卡片起始标签 re.split 切块、块内分别匹配，物理隔离卡片边界。微信号正则放宽为允许中间夹 HTML 标签。
+    - **中止原因** `code-abandon`：[probe2.json](artifacts/evidence/probe2.json) 显示广东只召回一机游/法律服务/共青团等边缘号，主号缺失，四川电信与联通 0 命中——是收录源结构性偏差而非解析故障，继续跑只产噪声，故停止全量模式。
+    - **仓库规范学习** `code-repo-tool`：tree.json 为权威源、tree.md 由 scripts/idea_tree_writer.py 渲染（首节点必须为 need、状态枚举固定）；完整归档含源码副本、SHA256 清单、脱敏扫描与离线校验；归档状态与事实覆盖状态分开记录。
+  - **交付物位置** `delivery`：网址地图原件在 docs/；矩阵页原件已移至 E:/CAICTBigData/移动项目沟通/政采_公共资源网_全国与地方_1030/，本树 artifacts/delivery/ 保存两份独立副本防止散落。
+  - **仍待核** `gaps`：西藏、青海两省三家运营商无公开证据；重庆电信/联通、上海电信、宁夏联通、北京联通共 6 格留空，保留检索词与应匹配主体，未填推测值。
+    - **下一步** `next`：① 换运营商年报/招标公示联系方式口径再攻剩余 8 格；② 按 To G / To 医院 / To 医生 / To 资本 抽投放清单；③ 微信搜一搜核验主体需人工配合（搜索结果页对自动化不友好）。
+  - **归档验收** `archive-check`：[归档校验](ARCHIVE-VERIFICATION.json)：树 JSON/Markdown 一致、父子节点有效、源码哈希比对、内部链接存在、无敏感模式；上一轮手写稿另存 artifacts/docs/ 未覆盖。归档交付 completed，事实覆盖 partial。

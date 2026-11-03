@@ -1,3 +1,118 @@
+# 2026-11-03 发布整理与离线可复现性
+
+- 将尚未发布的采集、机构/传播、文献和本地爬虫工具分组纳入 PR，保留远程已有内容。
+- 补齐 README、批次用法、测试依赖与排除规则；修复归档校验失败仍返回成功的退出码。
+- 保存归档原始字节，按既有 SHA256/源码 ZIP 恢复换行差异，不改历史事实或清单。
+- 最终 pytest：430 + 79 项通过，7 项依赖本机历史原文而跳过。
+- 以下是历史运行记录；历史“8 格待核”与公众号矩阵待核标记不一致，须按 README 对账。全量 candidates.json 未生成，不能据此计算公众号覆盖率。
+
+# 2026-11-02 机构台账六表、传播 mapping 与想法树归档规范化
+
+- 机构台账：`configs/institution_tables_seed_20261030.json` + `scripts/build_institution_registry.py`
+  把六张现成表（327 行）合并为 190 家唯一机构、22 组跨表重复，输出 10 个 sheet 的工作簿；
+  表 1 的 37 行里 7 行实为国家临床医学研究中心依托单位，国家老年医学中心仅北京医院。
+- 传播 mapping：`docs/medical-digital-pr-url-map.html` 标注 60+ 网页入口，并记录 CHINC 更名、
+  三家运营商医疗品牌均无独立官网、赛迪网/赛迪顾问与东软集团/东软医疗等易混主体；
+  公众号矩阵确认运营商 98 个账号覆盖 29 省、7 家厂商 24 个账号，未核实格只给检索词与应匹配认证主体。
+- 想法树归档规范化：新增 `scripts/archive_medical_pr_mapping_20261102.py`，按 `tree.json` 为权威源、
+  `idea_tree_writer` 渲染 `tree.md`、源码副本配 SHA256 清单并做离线校验；归档状态与事实覆盖状态分开记录。
+- `.gitignore` 增加 `.workbuddy/`、`tmp_dig/`、`analytics/`、`rest_hospitals/`：本机工作数据与采集中间产物不进公开仓库。
+
+# 2026-10-30 分省医疗数字化采购采集（第一批已启动、第二批待跑）
+
+- 交付落地（revision 4）：`export` 成功后自动调用 `publish`，把成品投放到
+  `E:\CAICTBigData\移动项目沟通\政采_公共资源网_全国与地方_1030`（`01_地方_分省第1批`、
+  `02_地方_分省第2批`、`00_全国层_央采与全国平台`），每批附自动生成的交付说明。投放幂等，
+  目标文件被占用时落带时间戳的邻居文件，投放失败不判采集失败。
+- 新增 `scripts/supervise_province_batches.py`：第一批 Dagu 运行结束后自动入队第二批，两批都结束后
+  统一投放；状态写在 `outputs/province-updates/_supervisor.json`，重复运行无副作用。
+- 新增 `publish` 子命令与 1 项离线测试（共 32 项通过），两批 `verify` 在 revision 4 下均通过。
+
+- 第二轮（run `...-1a65f7`）判 failed：13:58 三个在跑区域同时 `Failed to fetch`，另六个启动即
+  `ERR_CERT_AUTHORITY_INVALID`，而入口页与检索调用都没有重试；随后 `export` 重命名覆盖交付表时因该表
+  正被编辑器打开而失败，整批失败。范围、日期、预算均未变，属基础设施故障。
+- 代码修订 revision 3：入口页与检索请求增加有界传输重试（`--net-retries 2`、`--net-backoff 60`，
+  仅对 `Failed to fetch`/`net::ERR_*`/超时重试，证书校验保持开启）；`export_province_workbook.mjs`
+  重命名遇到占用时回退为带时间戳文件名并打印 `target_locked`，不再让整批失败。
+- 新增 `scripts/live_province_snapshot.py`：采集未收尾时按正式口径（`公告日期`→`时间`、按网址去重、
+  资格关联）生成独立的"进行中快照"工作簿，供中途核对，不触碰正式交付文件。
+- 第三轮（run `...-f6f3e6`）已入队：实测聚合速率 0.28 请求/秒，三区域并行，未再出现限流或证书中断。
+  当前 615 条记录（2024 年 72、2025 年 220、2026 年 323），待检索窗口约 2.95k，整体仍 partial。
+- 2024 数据晚到是设计使然：窗口按最新月份优先，首跑在 2025-07 处被限流中断，2024 排在队列最后。
+
+# 2026-10-30 分省医疗数字化采购采集（首轮）
+
+- 新增 `pipeline/research/province_update.py`：批次成员写死（第一批 9 个区域、第二批 24 个区域）、
+  不可变请求契约、逐区域独立进程/目录/预算/锁、DAG 生成、汇总与工作簿导出。入口为全国公共资源
+  交易平台省级/市级检索（`SOURCE_TYPE=1` + `DEAL_PROVINCE`/`DEAL_CITY`），日期口径为公告发布日
+  2024-01-01 至 2026-10-29，关键词六词、结果+招标两类公告，输出 22 列与原三平台版本一致。
+- `pipeline/research/national_ggzy.py` 增加省/市维度表单参数、省份文本校验、`city_unconfirmed`
+  计数、最新月份优先窗口顺序；未改变既有无维度任务的 config，旧任务可继续续跑。
+- 第一批首次运行（run `...-ba21b4`）在 9 并发下被平台 `code 800` 限流，每区域约 79–101 次请求即停，
+  落 446 条记录、整体 partial；预算 1600/区域远未用尽，属速率问题而非预算问题。
+- 代码修订 revision 2（`outputs/province-updates/province-b1-2024-20261029/code-revisions/`）：
+  跨进程共享节流文件让所有区域合计每 3.5 秒一次请求、被拦后 900 秒冷却重试一次、并发降到 3；
+  搜索范围、日期、预算、字段均未变，pending 窗口原样续跑。实测聚合速率 0.30 请求/秒，未再触发限流。
+- 结果仍为 partial：第一批待检索窗口约 3.2k，非"跑完"。公告数不等于项目数，省级聚合入口收录
+  不等于各省门户全量，深圳/广州市级口径与第二批广东省口径重叠部分按网址去重。
+- 新增 `docs/PROVINCE_TENDER_UPDATE.md`、`scripts/export_province_workbook.mjs`、
+  `scripts/start-province-update.ps1`、`tests/test_province_update.py`（含共享节流与 DAG 并发断言），
+  与既有回归合计 31 项通过。
+
+# 2026-10-28 全国平台浏览器链路补采与九字段工作簿（进行中）
+
+- 新增pipeline/research/national_ggzy.py：普通Chrome会话已取得code 200，复用site_fetch、zycg和bid_common；详情按真实iframe指向/html/b/抓取，保留系统证书校验。
+- 2026年政府采购与工程建设分批采集，按月/分窗/关键词保存原始响应、正文、失败、导入哈希和检查点；财政部SOURCE_TYPE=3，原source4错误范围与原0命中证据原样保留。
+- 输出九个所需字段及金额原文、发布日期、信息缺口；结果、分项、采购线索和覆盖分表。修复嵌套布局表串列及产品带入联系方式；多标包金额不冒充总额。
+- 22项新采集器回归与11项旧脚本回归，共33项通过；工作簿用artifact-tool生成并核查原生链接、数值金额、日期和四页预览。结果为partial，未声称全国全量。
+- 新想法树idea-trees/national-ggzy-medical-digital-2026-20261028/；实时运行状态和有限批次预算见outputs/national-ggzy-medical-digital-2026-20261028/job.json。用户既有改动保留，未提交。
+
+# 2026-10-28 全国公共资源交易平台医卫数字化采集（分支 feat/national-ggzy-medical-digital）
+
+- 新增 `scripts/thirdparty_goverment_spider/1600006.全国公共资源交易平台-医卫数智.py`（正本，部署到
+  `repos/goverment_spider/codes/`）：对接 www.ggzy.gov.cn 交易公开检索接口
+  （`/information/...`（近一年）与 `/his/information/...`（历史）双 POST 接口，契约取自前端 JS），
+  参数 DEAL_CLASSIFY(02政采/23药品)+TIMEBEGIN/TIMEEND+FINDTXT+PAGENUMBER，逐词检索后按
+  1600005 同口径分类（医卫数智/设备/其他），输出 5列TSV + 旁证JSON（含每页接口证据）。
+- 接口实测（如实留账，本轮 0 命中）：近一年接口本机网络稳定 404（同 context 验证码接口正常，
+  判定路径级 WAF 拦截）；历史接口可达但全部时间窗返回 code 400「结束时间错误」，更早窗口被
+  WAF 以 404 静态页拦截；WAF 行为与 UA 无关、过密更频、冷却 30–90s 恢复、同参数可复现。
+- 新增 `tests/test_national_ggzy_script.py` 11 项离线回归；与北京两脚本合计 22 项通过。
+  已知口径备注：共享 NEGATIVE 词表含「档案」，「健康档案」类标题被排除（与 1600005 一致）。
+- 证据：`docs/medical-digital-tender-validation-20261028/national-ggzy-20261028/report.md` +
+  旁证 JSON；`outputs/national-ggzy-20261028/`（WAF 404 页、code 400 响应、前端 JS 快照、运行日志）。
+- 想法树 `idea-trees/national-ggzy-medical-digital-20261028/`（状态 partial）；后续方向见树内 next 节点
+  （浏览器实检、history 接口校验规则定位、换出口复测）。
+
+# 2026-10-27 北京、雄安医卫数字化中标采集
+
+- 新增 `pipeline/research/bjxa.py`：北京走 ccgp-beijing 市级/区级「中标公告」静态列表（143 页/频道），
+  雄安走 xaprtc channelId=273 列表（50 页到底）；落成与央采同一张八列表 + 明细页。
+- 入口勘察留证：ggzyfw.beijing.gov.cn 首页与 robots 均 403、河北政采目录与 robots 均 403，按 fail-closed 不绕过；
+  雄安详情页是壳，正文改走中国政府采购网地方公告（`/cggg/dfgg/`）镜像。
+- 补窗与地域校验：平台列表回溯不到的月份用检索站按月切窗补；检索是全文命中，`雄县`会命中云南**镇**雄县、
+  `安新`会命中浙江**磐**安新城区，加三道地域校验（平台域名 → 结果行地域标签 → 标题带行政后缀的地名），
+  并处理检索高亮把“安新县”拆成“安新 县”的问题。
+- 修复 `--from-cache` 未真离线：offline 标志只传了列表页，详情、标题反查与补窗仍会发请求，现全部透传。
+- 结果：2026-01-01~2026-10-27 北京 139 条 / 66,910.31 万元（缺金额 3、缺中标单位 0），
+  雄安 8 条 / 9,020.06 万元（零缺失）；北京 4–7 月补窗被检索站限流，`supplement.stopped` 如实留账。
+- 口径边界量化：北京 139 条里 42 条（34,015.50 万元，占 50.8%）、雄安 8 条里 3 条（1,774.13 万元）
+  属设备维保／医用设备购置／后勤设施／检验委外／医疗设备包，各单列 `口径边界复核.csv`，剔除后北京 97 条／
+  32,894.81 万元、雄安 5 条／7,245.92 万元；未擅自改 `bid_common` 共享口径（一改央采那张表也会变），等确认影响面后再统一收紧。
+- 抽出 `pipeline/research/bid_common.py` 承载八列口径，`zycg.py` 改为复用（611 → 约 400 行，19 项回归无损）。
+- 新增 `tests/test_bjxa_medical_bid.py` 30 项离线回归；与 `test_zycg_medical_bid`、`test_idea_tree_ids` 合计 54 项通过。
+- 新增想法树 `idea-trees/20261027-bjxa-medical/` 与生成脚本 `scripts/write_bjxa_tree.py`（重复执行覆盖同一棵树）；
+  文档 `docs/BJXA_MEDICAL_BID_RULES.md`。
+
+# 2026-10-27 央采医卫数字化中标采集
+
+- 新增 `pipeline/research/zycg.py`：走 search.ccgp.gov.cn/bxsearch 的 agentName 过滤拿央采结果公告，分窗发现、页缓存、离线合并。
+- 入口勘察留证：央采本站列表 JSON 接口恒返回 code:-1（POST 405），本体不可用；改用检索站并在详情页二次确认执行机构。
+- 限流实测：深页 page_index≥100 一律挑战页，改为按月切窗 + cache/page-*.html + `--from-cache` 合并；被挑战不绕过不换 UA。
+- 结果：2026-01-01~2026-10-27 共 4193 条公告 → 结果类 1636 → 医卫数字化 109 条、37,630.55 万元，金额与中标单位零缺失。
+- 新增 `tests/test_zycg_medical_bid.py` 19 项离线回归；全库 295 项 294 通过（唯一失败为既有 install 预检问题）。
+- 新增想法树 `idea-trees/20261027-230958/` 与生成脚本 `scripts/write_zycg_tree.py`，把入口、链路、口径、执行与缺口记录在案。
+
 # 2026-10-27 渠道补查代码整理
 
 - 将本轮合并流程改为显式输入输出目录，保留历史日志、证据及多医院公告。

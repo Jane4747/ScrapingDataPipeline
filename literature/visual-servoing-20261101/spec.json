@@ -1,0 +1,29 @@
+{
+  "delay": 15,
+  "max_bytes": 67108864,
+  "allowed_domains": [
+    "doi.org",
+    "arxiv.org",
+    "mdpi-res.com",
+    "mdpi.com",
+    "ieeexplore.ieee.org",
+    "sciencedirect.com",
+    "link.springer.com",
+    "frontiersin.org",
+    "public-pages-files-2025.frontiersin.org",
+    "pure.tue.nl",
+    "research.tue.nl",
+    "hdl.handle.net",
+    "orbilu.uni.lu",
+    "ieee-jas.net",
+    "aimspress.com"
+  ],
+  "task_id": "visual-servoing-fulltext-20261101",
+  "records": "records.json",
+  "workers": 4,
+  "output_dir": "../../outputs/visual-servoing-20261101",
+  "max_requests_per_paper": 8,
+  "schema_version": 2,
+  "allow_network": true,
+  "catalog": "catalog.json"
+}
