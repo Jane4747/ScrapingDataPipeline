@@ -8,6 +8,7 @@
 
 | 文档 | 内容 |
 | --- | --- |
+| [架构与模块](#架构与模块) | 多 Agent 分工、Dagu 任务可视化、本地爬虫 Harness 与 RSIHub 自进化路线 |
 | [调研调用指南](docs/GPT_RESEARCH_GUIDE.md) / [AGENTS.md](AGENTS.md) | 任务范围、证据纪律、恢复与协作约定 |
 | [命令与任务协议](docs/COMMANDS.md) | JSON 任务、参数、退出码与目录约定 |
 | [数据字典](docs/DATA_DICTIONARY.md) | 资料、证据、项目、日期及状态口径 |
@@ -17,6 +18,73 @@
 | [历史验证](docs/VALIDATION.md) / [变更记录](CHANGELOG.md) | 指定版本的验证记录，不是当前网站可用性承诺 |
 
 本文命令默认在仓库根目录的 PowerShell 中执行。`<...>` 必须替换为实际路径或业务输入；历史截止日不自动代表今天。不同示例属于不同研究范围，不应一次执行全部示例。
+
+## 架构与模块
+
+SearchingAgent 是本项目的任务编排与调研工作流方向：上层研究人员/GPT 确定问题和范围，任务协议保存执行合同，采集器处理具体来源，核验与交付层保留证据。当前能力与代码位置如下；“已实现”指仓库有对应实现，不表示每个外部服务已经在当前机器配置或验收。
+
+| 模块 | 职责与入口 | 当前状态 |
+| --- | --- | --- |
+| 多 Agent 协作 | 上层按来源、区域或采集/提取/核验角色分工，通过任务 JSON、原文、证据 ID 和收据交接；[任务协议](docs/COMMANDS.md)、[协作约定](AGENTS.md) | 可供外部多 Agent 宿主调用；本库未实现自主 Agent 团队调度、多模型协商或共享长期记忆 |
+| 工作流编排与任务可视化 | Dagu 执行依赖图、队列及来源/区域并行步骤；[三平台编排](pipeline/research/tender_update.py)、[分省编排](pipeline/research/province_update.py) | 已实现 DAG 生成、启动、入队、状态与日志入口；需要本机 Dagu 等运行环境 |
+| 本地爬虫 Harness（统一执行外壳） | [gateway.py](local-crawlers/gateway.py) → [job_runner.py](local-crawlers/job_runner.py) → [worker.py](local-crawlers/worker.py)，接入 browser-use、Skyvern、ScrapeGraphAI、Firecrawl | 已实现后端选择、参数与预算检查、独立进程、超时清理及结果查询；模型和后端需分别配置、验证 |
+| 证据治理与可追溯交付 | [核验](pipeline/review.py)、[交付](pipeline/delivery.py)、[树渲染](scripts/idea_tree_writer.py)及 SHA256 归档 | 已实现来源与日期分离、显式项目归并、版本快照、失败留痕和离线校验 |
+| 自进化模块 RSIHub | 失败证据 → 候选改进 → 固定样本评测 → 小范围验证 → 版本发布；[架构记录](idea-trees/searchingagent-dagu-bjxa-20261029/tree.json)、[实现边界](idea-trees/searchingagent-three-platforms-20261030/CODE_SUMMARY.md) | 属于规划中的独立实验/评测发布层；自动候选生成、自动改码、评测晋级与自动发布闭环尚未实现 |
+
+### 多 Agent 协作与执行
+
+可由支持多 Agent 的外部宿主组织“主控规划 → 分源采集 → 证据提取 → 独立核验 → 汇总交付”。这是建议的分工方式：主控固定研究范围、日期和任务 ID，各执行者返回原文位置、状态与缺口，核验者再显式关联 `evidence_ids`。不同研究范围使用独立任务目录，避免多个执行者同时改写同一任务或把候选、证据、项目重复计数。
+
+仓库内实际并行执行的是受控采集步骤。三平台工作流在校验后启动三个来源步骤；分省工作流按区域隔离进程、目录、预算和锁，当前最多同时运行三个区域，并通过共享节流限制总请求速率。启动器初建的 `medical-tender-updates` 队列默认同时执行一个工作流，工作流内部再并行多个步骤；这与网关的任务并发设置是不同层级。[批次监督器](scripts/supervise_province_batches.py)可按前一批运行终态排队下一批，但步骤结束、请求重试和进程并发均不代表自主推理或多模型协商。
+
+本地爬虫 Harness 提供另一组可选工具：简单 HTML 用 `fetch_page`，动态页面用 `render_page`，交互任务选择 browser-use/Skyvern，字段提取选择 ScrapeGraphAI，整站入口发现/采集选择 Firecrawl。先用 `crawler_status` 检查准备状态，再提交 `start_crawl` 并用 `job_status` 查询。每次选择一个后端，默认 `MAX_ACTIVE_JOBS=1`；四种后端不是同时协商的四个 Agent。这个网关尚未自动接入统一 `task/status/resume` 协议，结果进入研究证据流程仍需显式适配或导入。安装与能力边界见[本地爬虫说明](local-crawlers/README.txt)和[完整归档](idea-trees/local-crawler-agents-20261027/DETAILS.md)。
+
+### 任务可视化与状态追踪
+
+Dagu 提供任务网页。本库负责生成流程和业务收据，页面用于查看步骤依赖、运行记录、日志与队列。三平台的实际依赖关系如下；分省任务把三个来源节点替换为各区域节点。
+
+```mermaid
+flowchart LR
+    V[verify 范围与代码校验] --> A[央采采集]
+    V --> B[全国公资采集]
+    V --> C[北京公资采集]
+    A --> S[summary 汇总与缺口]
+    B --> S
+    C --> S
+    S --> E[export 导出]
+```
+
+用 [start-tender-update.ps1](scripts/start-tender-update.ps1) 或 [start-province-update.ps1](scripts/start-province-update.ps1) 提供 Python、Dagu、Node 和 Artifact 模块路径后启动；完整命令见[批次手册](docs/USAGE_BATCHES.md)。启动器会生成并校验 DAG、启动/复用服务并入队实际任务，默认端口 `8098`，`-Port` 可修改。`-NoBrowser` 仅不自动打开页面，不会把任务改成离线运行。历史医院案例中的 `8097` 是另一套运行实例。
+
+不要拼接或假定运行编号，读取启动器写出的实际地址：
+
+```powershell
+# 将 <task_id> 替换为已经启动的三平台任务 ID；本命令只读取记录。
+$launch = Get-Content 'outputs/tender-updates/<task_id>/launch.json' -Raw | ConvertFrom-Json
+$launch.dashboard_url
+```
+
+| 查看对象 | 记录位置与解释 |
+| --- | --- |
+| Dagu 服务与任务网页 | `outputs/dagu-runtime/` 保存本机 DAG、运行状态和服务日志；启动器的 `launch.json` 保存实际任务页面地址 |
+| 三平台/分省业务进度 | 任务目录中的 `request.json`、各来源或区域的 `progress.json`、分省 `region-progress.json`、汇总 `summary.json`；以本次返回路径为准 |
+| 通用研究流水线 | `status --task-id ... --json` 与 `outputs/<task_id>/status.json`，含当前阶段、待处理阶段、锁和缺口 |
+| 本地爬虫任务 | `job_status(job_id)` 与 `local-crawlers/runs/<job_id>/` 中的 `input.json`、`state.json`、`result.json`、`worker.log`；有些失败不会产出结果文件 |
+
+页面上的运行状态与业务覆盖状态分别判断：部分来源失败时流程可以保留汇总和已有产物，Dagu 仍可显示失败；步骤成功也不能证明全历史覆盖。先核对 `partial`、未检索窗口、原文缺失和字段待核，再使用交付。分省的[实时快照工具](scripts/live_province_snapshot.py)读取进行中检查点，仅作观察，不能替代正式导出和验收；这些本机页面与状态文件不随 GitHub 克隆自动出现。
+
+### 自进化模块：RSIHub 规划与现有基础
+
+RSI 在这里指 Recursive Self-Improvement（递归自我改进）。项目计划把 RSIHub 作为独立的候选实验、评测与版本发布层，而不是让采集任务直接改写自身代码。当前仓库已具备可供这一层复用的基础：失败与缺口记录、原文及输入快照、离线回归用例、`code-revisions/` 代码哈希审计、不可变历史归档，以及修订后新建任务或按规则恢复的机制。已有自动重试、冷却和断点续采属于预设规则下的恢复能力。
+
+规划中的改进流程为：
+
+1. 从失败原文、解析错误或人工核验差异中形成可复现问题，保留原样本与原版本。
+2. 在独立分支提出规则、解析器或采集策略候选，记录变更原因与预期影响。
+3. 用与候选开发分开的固定样本和回归用例比较字段准确性、误收漏收、证据可追溯性与资源成本，避免只针对失败样本修补。
+4. 在明确授权的范围内做小规模联网验证，确认访问约束、失败处理及旧功能没有退化，再经过审阅发布；不合格候选保留实验记录，不替换生产版本。
+
+上述流程是路线图，当前没有可运行的 `RSIHub` 命令、自动评分晋级器或无人值守改码发布服务。维护者与 GPT 仍负责问题分析、实现、审阅和发布判断。[RSI 文献采集](literature/README.txt)用于研究相关方法与证据，不是本系统已具备自进化能力的证明。历史规划和未完成项见[SearchingAgent 进展](idea-trees/searchingagent-dagu-bjxa-20261029/PROGRESS.md)及[分省想法树](idea-trees/province-medical-digital-batches-20261030/tree.md)。
 
 ## 目录结构
 
