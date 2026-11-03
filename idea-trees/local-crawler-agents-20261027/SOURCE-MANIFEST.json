@@ -1,0 +1,462 @@
+{
+  "tree_id": "local-crawler-agents-20261027",
+  "created_at": "2026-10-27T23:45:30+08:00",
+  "live_directory": "E:\\CAICTBigData\\coding\\local-crawlers",
+  "scope": "本轮自编集成源码、部署验证脚本、文档、依赖快照及验收JSON；不是完整上游代码/运行环境镜像。",
+  "excluded": [
+    "真实.env及秘密值",
+    "全局Codex完整配置",
+    "envs/",
+    "cache/",
+    "profiles/",
+    "runs/",
+    "logs/",
+    "installers/",
+    "migration-history/",
+    "tools/",
+    "*.pyc"
+  ],
+  "generated_config_example": "artifacts/config/codex-mcp.example.toml",
+  "files": [
+    {
+      "path": "artifacts/code/gateway.py",
+      "category": "integration_source",
+      "purpose": "六个 MCP 工具、输入检查、并发入口和后台任务提交",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\gateway.py",
+      "bytes": 10817,
+      "sha256": "3f19acaf9ae8aaafacc85c0b7ad0e211d3ffba17a091444d640ae5d52b1f7466",
+      "source_sha256": "3f19acaf9ae8aaafacc85c0b7ad0e211d3ffba17a091444d640ae5d52b1f7466",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/common.py",
+      "category": "integration_source",
+      "purpose": "相对目录定位、环境变量、模型配置检查、TLS、URL校验与原子写入",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\common.py",
+      "bytes": 3647,
+      "sha256": "f7f94e38c2a15fa8906a71d9b024666361e6d038fcb891039488d196502b66bf",
+      "source_sha256": "f7f94e38c2a15fa8906a71d9b024666361e6d038fcb891039488d196502b66bf",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/worker.py",
+      "category": "integration_source",
+      "purpose": "browser-use / Skyvern / ScrapeGraphAI / Firecrawl 及渲染适配器",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\worker.py",
+      "bytes": 8859,
+      "sha256": "4dc5b61613a858fc7707dd0ecb17c8efe5f89696a8a47245d79e75ad651b09c0",
+      "source_sha256": "4dc5b61613a858fc7707dd0ecb17c8efe5f89696a8a47245d79e75ad651b09c0",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/job_runner.py",
+      "category": "integration_source",
+      "purpose": "后台监督、任务时限、日志和超时进程树清理",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\job_runner.py",
+      "bytes": 2058,
+      "sha256": "e0b30c33f626ddd6677329abe0d8800d4e405969ec72d5f208d7edfd74883966",
+      "source_sha256": "e0b30c33f626ddd6677329abe0d8800d4e405969ec72d5f208d7edfd74883966",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/Install.ps1",
+      "category": "integration_source",
+      "purpose": "创建四个独立 Python 环境并安装固定顶层版本",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\Install.ps1",
+      "bytes": 2705,
+      "sha256": "bd13e7944d8af6ce63fe73fab85c8069c4650c175be3da67c80577a1bf9b7174",
+      "source_sha256": "bd13e7944d8af6ce63fe73fab85c8069c4650c175be3da67c80577a1bf9b7174",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/Register-Codex.ps1",
+      "category": "integration_source",
+      "purpose": "注册 local_crawlers MCP，不包含全局配置或密钥",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\Register-Codex.ps1",
+      "bytes": 536,
+      "sha256": "fe57af190bf3293781c36c706ec81d9a95966c14c82f85994f9f6eb97077b669",
+      "source_sha256": "fe57af190bf3293781c36c706ec81d9a95966c14c82f85994f9f6eb97077b669",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/Start-Firecrawl.ps1",
+      "category": "integration_source",
+      "purpose": "Docker 或专用 WSL 环境中的服务启动/停止",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\Start-Firecrawl.ps1",
+      "bytes": 2312,
+      "sha256": "3ae29033c91f1a1820e57e25e6895e95401a0a58c4a3c3f8b9aff36939eaffae",
+      "source_sha256": "3ae29033c91f1a1820e57e25e6895e95401a0a58c4a3c3f8b9aff36939eaffae",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/Complete-FirecrawlWSL.ps1",
+      "category": "integration_source",
+      "purpose": "手动重启后的专用 Ubuntu 导入、Docker 安装与容器启动",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\Complete-FirecrawlWSL.ps1",
+      "bytes": 2476,
+      "sha256": "ff1058064722899e80add139a612d22bd626171fe53b840b3e8edf959365e110",
+      "source_sha256": "ff1058064722899e80add139a612d22bd626171fe53b840b3e8edf959365e110",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/Configure-WSLHost.ps1",
+      "category": "integration_source",
+      "purpose": "管理员系统准备，启用功能且不自动重启",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\Configure-WSLHost.ps1",
+      "bytes": 3077,
+      "sha256": "ebfaac97bc026fc0b8059f84162247812d18f8ef1e21d511dbe1b8ad2fbbadb3",
+      "source_sha256": "ebfaac97bc026fc0b8059f84162247812d18f8ef1e21d511dbe1b8ad2fbbadb3",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/download_wsl.py",
+      "category": "integration_source",
+      "purpose": "WSL 安装包下载与摘要校验辅助",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\download_wsl.py",
+      "bytes": 1280,
+      "sha256": "b059101ed547c71d01a088e98c56f19066f29fa00db945ff26583a0ce4dc36ee",
+      "source_sha256": "b059101ed547c71d01a088e98c56f19066f29fa00db945ff26583a0ce4dc36ee",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/download_ubuntu.py",
+      "category": "integration_source",
+      "purpose": "Ubuntu WSL 镜像下载与摘要校验辅助",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\download_ubuntu.py",
+      "bytes": 1417,
+      "sha256": "5f3a5d40ba4068b4f26e84107c18239470be6e94d61cfff22b10343d26087010",
+      "source_sha256": "5f3a5d40ba4068b4f26e84107c18239470be6e94d61cfff22b10343d26087010",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/migrate_runtime.py",
+      "category": "integration_source",
+      "purpose": "E盘迁移后重新生成虚拟环境命令入口",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migrate_runtime.py",
+      "bytes": 1349,
+      "sha256": "0ae0a79a31f1ef5de71b61f7c84aa62bd5a06f9e53489f803aba0cc9af53e8f6",
+      "source_sha256": "0ae0a79a31f1ef5de71b61f7c84aa62bd5a06f9e53489f803aba0cc9af53e8f6",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/migration_validation.py",
+      "category": "integration_source",
+      "purpose": "迁移后依赖和功能验证辅助",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migration_validation.py",
+      "bytes": 4036,
+      "sha256": "afa23b8699f8d05bc34abf51fd7489d4b44da48caec6105620aabc5118c8d82c",
+      "source_sha256": "afa23b8699f8d05bc34abf51fd7489d4b44da48caec6105620aabc5118c8d82c",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/report_status.py",
+      "category": "integration_source",
+      "purpose": "生成部署状态报告，不返回密钥值",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\report_status.py",
+      "bytes": 1670,
+      "sha256": "26a84e896575907ea43d00c3725e528d00d149b97f0e0f6ea40564222a75fd91",
+      "source_sha256": "26a84e896575907ea43d00c3725e528d00d149b97f0e0f6ea40564222a75fd91",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/verify_stack.py",
+      "category": "integration_source",
+      "purpose": "MCP握手、工具发现、HTML/JS渲染和缺失模型验证",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\verify_stack.py",
+      "bytes": 4540,
+      "sha256": "eb19e97c9180d66368027e7ac9d4df099c5dc5edd0dc1b6a632ba4159e34d59d",
+      "source_sha256": "eb19e97c9180d66368027e7ac9d4df099c5dc5edd0dc1b6a632ba4159e34d59d",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/verify_browser_use.py",
+      "category": "integration_source",
+      "purpose": "browser-use 导入、本地浏览器启动和DOM读取验证",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\verify_browser_use.py",
+      "bytes": 2314,
+      "sha256": "d54ccf6741fb142803a0af378cea1164baf2e9915eadf3282c32c6bc25064579",
+      "source_sha256": "d54ccf6741fb142803a0af378cea1164baf2e9915eadf3282c32c6bc25064579",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/verify_skyvern.py",
+      "category": "integration_source",
+      "purpose": "Skyvern嵌入式运行库、本地Chrome/CDP与页面读取验证",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\verify_skyvern.py",
+      "bytes": 1824,
+      "sha256": "53ae1de59a0d38bd3b3ffd86fc8d869e7cc3c874f81d90827d0f7e2c67597163",
+      "source_sha256": "53ae1de59a0d38bd3b3ffd86fc8d869e7cc3c874f81d90827d0f7e2c67597163",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/verify_scrapegraph.py",
+      "category": "integration_source",
+      "purpose": "ScrapeGraphAI导入与上游ChromiumLoader验证",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\verify_scrapegraph.py",
+      "bytes": 872,
+      "sha256": "79db3eeeee67c6a2478c8d33765454338666de4b26bf57027e8472e02c143578",
+      "source_sha256": "79db3eeeee67c6a2478c8d33765454338666de4b26bf57027e8472e02c143578",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/.env.example",
+      "category": "integration_source",
+      "purpose": "空配置模板；真实 .env 明确不归档",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\.env.example",
+      "bytes": 449,
+      "sha256": "113ded4823ba131817fbd974b90c6177cf4557bf34de67fb14ffee487a5115a3",
+      "source_sha256": "113ded4823ba131817fbd974b90c6177cf4557bf34de67fb14ffee487a5115a3",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/.gitignore",
+      "category": "integration_source",
+      "purpose": "部署目录运行数据、环境、缓存和密钥文件忽略规则",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\.gitignore",
+      "bytes": 108,
+      "sha256": "1d7de2f0612cd0ec42594ddb045f9d00054d649c34d9c6491becced1e01c79f9",
+      "source_sha256": "1d7de2f0612cd0ec42594ddb045f9d00054d649c34d9c6491becced1e01c79f9",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/requirements-gateway.txt",
+      "category": "integration_source",
+      "purpose": "MCP网关固定顶层依赖",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\requirements-gateway.txt",
+      "bytes": 81,
+      "sha256": "4619b36a3093adb5279c648114a47f9cb0e57779681b31f4da41d2f53aa5e85e",
+      "source_sha256": "4619b36a3093adb5279c648114a47f9cb0e57779681b31f4da41d2f53aa5e85e",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/firecrawl/compose.yaml",
+      "category": "integration_source",
+      "purpose": "五服务自托管容器配置，API仅绑定回环地址",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\firecrawl\\compose.yaml",
+      "bytes": 2842,
+      "sha256": "c34586ee0651a98e4286db47162384863922049a9ce553c730da35a54fd59458",
+      "source_sha256": "c34586ee0651a98e4286db47162384863922049a9ce553c730da35a54fd59458",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/code/firecrawl/install-docker-wsl.sh",
+      "category": "integration_source",
+      "purpose": "在专用Ubuntu内安装并启动Docker与Compose",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\firecrawl\\install-docker-wsl.sh",
+      "bytes": 370,
+      "sha256": "82805cd24e372f6057d0fbb7af788223aa5dd3227e0850ef99d6294ab5065378",
+      "source_sha256": "82805cd24e372f6057d0fbb7af788223aa5dd3227e0850ef99d6294ab5065378",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/docs/README.txt",
+      "category": "previous_delivery",
+      "purpose": "本轮已交付文档的完整副本",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\README.txt",
+      "bytes": 4656,
+      "sha256": "8af241b8c90e779e2ee838a7cad76c4b1fd0c773c39db269e7fbe2946e141fb2",
+      "source_sha256": "8af241b8c90e779e2ee838a7cad76c4b1fd0c773c39db269e7fbe2946e141fb2",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/docs/WORK-SUMMARY-20261027.txt",
+      "category": "previous_delivery",
+      "purpose": "本轮已交付文档的完整副本",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\WORK-SUMMARY-20261027.txt",
+      "bytes": 2710,
+      "sha256": "e8025e1f4a73aae6661a946ee5571b77c16c2c0d98c9d99b16afce008960e77f",
+      "source_sha256": "e8025e1f4a73aae6661a946ee5571b77c16c2c0d98c9d99b16afce008960e77f",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/docs/TASK-CAPABILITIES-20261027.txt",
+      "category": "previous_delivery",
+      "purpose": "本轮已交付文档的完整副本",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\TASK-CAPABILITIES-20261027.txt",
+      "bytes": 6158,
+      "sha256": "783a5fad6a194c6c5bb944027913ec5fcc1765880acb24e34858606b355447a0",
+      "source_sha256": "783a5fad6a194c6c5bb944027913ec5fcc1765880acb24e34858606b355447a0",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/deployment-status.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\deployment-status.json",
+      "bytes": 2889,
+      "sha256": "f69b2fc5edb6fe9f1a37878f1352038a935769ecc23bf17a10865fdde053de2d",
+      "source_sha256": "f69b2fc5edb6fe9f1a37878f1352038a935769ecc23bf17a10865fdde053de2d",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/host-setup-status.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\host-setup-status.json",
+      "bytes": 827,
+      "sha256": "44c0c41cefeb873ae0f30aaca21af42302200db58cd4ee354bd7f15f18e56c69",
+      "source_sha256": "44c0c41cefeb873ae0f30aaca21af42302200db58cd4ee354bd7f15f18e56c69",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/verification.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\verification.json",
+      "bytes": 1696,
+      "sha256": "0303ef9039eaa1d0f311ab4f8cafbefa0ec9dc4499b2fc017d522707512ea6f4",
+      "source_sha256": "0303ef9039eaa1d0f311ab4f8cafbefa0ec9dc4499b2fc017d522707512ea6f4",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/browser-use-verification.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\browser-use-verification.json",
+      "bytes": 220,
+      "sha256": "c61de987a7de17a4db636bcf1892a6a83792f826684bd47b8bc7f4a71874e3ef",
+      "source_sha256": "c61de987a7de17a4db636bcf1892a6a83792f826684bd47b8bc7f4a71874e3ef",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/skyvern-verification.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\skyvern-verification.json",
+      "bytes": 275,
+      "sha256": "5741ae43b338728b9161c262cc197ac604fad0ce3610e7294399902f5d17860e",
+      "source_sha256": "5741ae43b338728b9161c262cc197ac604fad0ce3610e7294399902f5d17860e",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/scrapegraphai-verification.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\scrapegraphai-verification.json",
+      "bytes": 223,
+      "sha256": "9cf738ff8bfe26ac533ec17e5f66b935120f4f1974608a7068eae3b7a8bdfe1c",
+      "source_sha256": "9cf738ff8bfe26ac533ec17e5f66b935120f4f1974608a7068eae3b7a8bdfe1c",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/dependency-checks.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\dependency-checks.json",
+      "bytes": 527,
+      "sha256": "ad5711418af60eaeccbf347766b8d349b7f09227bce1ee35ff562d3e787dbbcd",
+      "source_sha256": "ad5711418af60eaeccbf347766b8d349b7f09227bce1ee35ff562d3e787dbbcd",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/migration-dependency-checks.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migration-dependency-checks.json",
+      "bytes": 478,
+      "sha256": "a27007988d9d62cb39f5fd98f41261c3c5bef1878bfcbfc9c26a00037a2f11c0",
+      "source_sha256": "a27007988d9d62cb39f5fd98f41261c3c5bef1878bfcbfc9c26a00037a2f11c0",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/migration-verification.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migration-verification.json",
+      "bytes": 688,
+      "sha256": "17a41afe0aafdaa0171193e240fdf05d3496c86671c067d1125d3721f5eada5f",
+      "source_sha256": "17a41afe0aafdaa0171193e240fdf05d3496c86671c067d1125d3721f5eada5f",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/migration-runtime.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migration-runtime.json",
+      "bytes": 618,
+      "sha256": "a56cf69b6fa2fbbea5cd531b3b8867f39038f17dd08f560c185a5f1a4e1ac869",
+      "source_sha256": "a56cf69b6fa2fbbea5cd531b3b8867f39038f17dd08f560c185a5f1a4e1ac869",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/evidence/migration-report.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\migration-report.json",
+      "bytes": 4189,
+      "sha256": "0cb787b6ec298ccc8cf99c7860172ce866bf10b790d0f0bd68ea0db7d37d9bc9",
+      "source_sha256": "091de5e8ea0a81d2f428cbcf46032f53b7e945278d07033abc889e6b4c3ffd86",
+      "transformation": "removed_real_env_hash"
+    },
+    {
+      "path": "artifacts/evidence/ubuntu-image.json",
+      "category": "verification_evidence",
+      "purpose": "本轮状态/验收/迁移的历史记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\ubuntu-image.json",
+      "bytes": 299,
+      "sha256": "8cf3682a2f7bcb6eb6f507bdbf2ccb37fd244881d8ae9f70100bc17ece5d7b70",
+      "source_sha256": "8cf3682a2f7bcb6eb6f507bdbf2ccb37fd244881d8ae9f70100bc17ece5d7b70",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/dependencies/gateway.lock.txt",
+      "category": "dependency_snapshot",
+      "purpose": "对应独立环境的pip freeze版本记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\gateway.lock.txt",
+      "bytes": 671,
+      "sha256": "e6c1734d002595b4aec99c84cc53a5c1e45a2acc8da3de6d035f8ba66ea099e4",
+      "source_sha256": "e6c1734d002595b4aec99c84cc53a5c1e45a2acc8da3de6d035f8ba66ea099e4",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/dependencies/browser-use.lock.txt",
+      "category": "dependency_snapshot",
+      "purpose": "对应独立环境的pip freeze版本记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\browser-use.lock.txt",
+      "bytes": 2034,
+      "sha256": "755e2a2fb83b50f9f4e0bae940fac7d4ff8b1b93e58555b3274258fe511007a8",
+      "source_sha256": "755e2a2fb83b50f9f4e0bae940fac7d4ff8b1b93e58555b3274258fe511007a8",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/dependencies/skyvern.lock.txt",
+      "category": "dependency_snapshot",
+      "purpose": "对应独立环境的pip freeze版本记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\skyvern.lock.txt",
+      "bytes": 3250,
+      "sha256": "363bc8fdcc0f782c37eb7e99fc066c93ce7b1bce9a530460d3d0988c9f550614",
+      "source_sha256": "363bc8fdcc0f782c37eb7e99fc066c93ce7b1bce9a530460d3d0988c9f550614",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/dependencies/scrapegraphai.lock.txt",
+      "category": "dependency_snapshot",
+      "purpose": "对应独立环境的pip freeze版本记录",
+      "source_live": "E:\\CAICTBigData\\coding\\local-crawlers\\scrapegraphai.lock.txt",
+      "bytes": 1970,
+      "sha256": "057d2a7e3c09cc1560a146fb5c63e409a951d779ed9cf495f5014d7780d59add",
+      "source_sha256": "057d2a7e3c09cc1560a146fb5c63e409a951d779ed9cf495f5014d7780d59add",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/archive-tool/archive_local_crawler_stack.py",
+      "category": "archive_tool",
+      "purpose": "本树的归档生成和离线校验脚本",
+      "source_live": "E:\\CAICTBigData\\coding\\scripts\\archive_local_crawler_stack_20261027.py",
+      "bytes": 54960,
+      "sha256": "e6fef4d9be962905ddc396ab4915e291896dc99ef13624cd8c2267dc433d639e",
+      "source_sha256": "e6fef4d9be962905ddc396ab4915e291896dc99ef13624cd8c2267dc433d639e",
+      "transformation": null
+    },
+    {
+      "path": "artifacts/archive-tool/idea_tree_writer.py",
+      "category": "repository_tree_tool",
+      "purpose": "父仓库已有树渲染/校验工具，保留用于重现",
+      "source_live": "E:\\CAICTBigData\\coding\\scripts\\idea_tree_writer.py",
+      "bytes": 3859,
+      "sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532",
+      "source_sha256": "4c1a96f587e81bf7332b2220dd227def595d5b0484b10bd012dfda67425dd532",
+      "transformation": null
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+2026物理与具身RSI论文图像提取
+=============================
+
+直接打开输出目录中的index.html可按论文、图号和图注浏览。
+完整Figure：figures/<arXiv ID>/<完整论文名称>__<图号>__<图注简称>.png
+内嵌素材：embedded_images/<arXiv ID>/<完整论文名称>__Page_页码_Image_序号.png
+
+完整论文名称只替换Windows不允许的字符，不截断。
+图注简称取自原文图注首句/首行，过长时缩短；完整原图注和标题在manifest中保存。
+Supplementary Figure和附录字母图号均单独保留。
+多面板图作为一个完整Figure保存，不把其中照片碎片当成完整Figure。
+
+完整Figure从本地固定版本PDF按240dpi渲染裁剪，可保留矢量图的线条、文字及多面板布局。
+内嵌图片以PDFium解码并应用透明遮罩/变换，以PNG保存，不缩小原始像素。
+PNG可能与原始JPEG编码不同；原始PDF保持不变。
+相同论文中像素完全相同的素材只保存一次；每次出现仍在image_occurrences.json保留页码/索引。
+
+代码与复用
+----------
+extract_figures.py          离线扫描、图注识别、整图裁剪、原始素材提取、去重、校验与图像库
+figures_2026.json           本次离线任务定义
+figure_overrides.json       人工核对的裁剪边界及逐篇编号图覆盖清单
+test_extract_figures.py     离线回归测试
+run-figures.ps1             Windows入口
+figure-runtime.json        此机器已有PDF处理Python的位置；不改全库运行环境
+
+在E:\CAICTBigData\coding目录运行：
+.\literature\run-figures.ps1 -Spec literature\figures_2026.json -DryRun
+.\literature\run-figures.ps1 -Spec literature\figures_2026.json -Resume
+
+新任务首次执行去掉Resume，使用新的task_id和独立output_dir。
+--stage scan只扫描；all导出整图和内嵌素材，figures/assets分别只导出其中一类。
+同一输出目录不得混用不同stage、代码版本或裁剪规则。要更改提取规则请另建输出目录。
+有extraction.lock时先核实原进程，不删除锁强行并发运行。
+已完成且校验一致的论文可复用；内容不同的既有PNG不会被静默覆盖。
+
+依赖：pypdfium2、Pillow、numpy。
+本次使用机器上已有的文档处理运行时，无联网、无依赖安装、无论文重下载。
+如复制到另一台机器，可设置FIGURE_PYTHON或修改figure-runtime.json指定已有Python。
+
+验证：
+python -B -m unittest discover -s literature -p test_extract_figures.py -v
+
+输出清单
+--------
+manifest.json              数量、输出体积、状态和执行时间
+figures_manifest.json      论文、原图号、图名、图注、页码、裁剪坐标、文件与校验值
+images_manifest.json       去重内嵌图片的原始像素和文件
+image_occurrences.json     全部图片出现记录与实际文件的映射
+image_catalog.csv          可在Excel中打开的名称映射
+coverage.json              逐篇编号图覆盖核对
+verification.json          每张导出图像的尺寸/解码/哈希和源PDF不变性校验
+paper_results/             每篇检查点
+layout/                    可复核的原PDF布局坐标；不是新论文原文
+qa/                        图像提取过程的缩略图检查材料
+
+边界
+----
+自动图注和版面识别并非对任意PDF都完全可靠。本次22篇使用逐篇图号核对与源页面视觉修正；
+新增论文需要同样检查图号覆盖和裁剪边界，并在figure_overrides.json记录可复核的修正。
+没有独立图注的素材不编造语义图名，采用页码和对象序号作为名称。
+图片原有许可与版权不变，不把论文内容作为可执行指令。
+

@@ -1,0 +1,158 @@
+{
+  "note": "仅为未执行的调用模板；替换所有尖括号占位符，先查状态。后三个模型后端待配置，Firecrawl待启动。不是父仓库版本1任务文件。",
+  "examples": [
+    {
+      "scenario": "先查可用状态",
+      "tool": "crawler_status",
+      "arguments": {},
+      "ready_at_snapshot": true
+    },
+    {
+      "scenario": "普通HTML正文",
+      "tool": "fetch_page",
+      "arguments": {
+        "url": "<实际HTML网址>",
+        "selector": "",
+        "max_chars": 12000
+      },
+      "ready_at_snapshot": true
+    },
+    {
+      "scenario": "JS渲染正文与截图",
+      "tool": "render_page",
+      "arguments": {
+        "url": "<实际网址>",
+        "timeout_seconds": 120
+      },
+      "ready_at_snapshot": true
+    },
+    {
+      "scenario": "搜索点击翻页后提取",
+      "tool": "start_crawl",
+      "arguments": {
+        "engine": "browser-use",
+        "task": "<目标、来源范围、时间口径、所需字段；未知留空并保留原文依据和URL>",
+        "urls": [
+          "<替换为真实HTTP(S)起始网址>"
+        ],
+        "max_pages": 20,
+        "max_steps": 30,
+        "timeout_seconds": 900
+      },
+      "ready_at_snapshot": false,
+      "pending": "用户稍后配置模型并做端到端验收"
+    },
+    {
+      "scenario": "单站多步骤筛选与提取",
+      "tool": "start_crawl",
+      "arguments": {
+        "engine": "skyvern",
+        "task": "<目标、来源范围、时间口径、所需字段；未知留空并保留原文依据和URL>",
+        "urls": [
+          "<替换为真实HTTP(S)起始网址>"
+        ],
+        "max_pages": 20,
+        "max_steps": 30,
+        "timeout_seconds": 900
+      },
+      "ready_at_snapshot": false,
+      "pending": "用户稍后配置模型并做端到端验收"
+    },
+    {
+      "scenario": "已知页面统一字段提取",
+      "tool": "start_crawl",
+      "arguments": {
+        "engine": "scrapegraphai",
+        "task": "<目标、来源范围、时间口径、所需字段；未知留空并保留原文依据和URL>",
+        "urls": [
+          "<替换为真实HTTP(S)起始网址>"
+        ],
+        "max_pages": 20,
+        "max_steps": 30,
+        "timeout_seconds": 900
+      },
+      "ready_at_snapshot": false,
+      "pending": "用户稍后配置模型并做端到端验收"
+    },
+    {
+      "scenario": "批量站点Markdown原文",
+      "tool": "start_crawl",
+      "arguments": {
+        "engine": "firecrawl",
+        "task": "",
+        "urls": [
+          "<替换为真实HTTP(S)起始网址>"
+        ],
+        "max_pages": 100,
+        "max_steps": 30,
+        "timeout_seconds": 900
+      },
+      "ready_at_snapshot": false,
+      "pending": "手动重启后完成容器安装和map/crawl验收；task不产生过滤规则"
+    },
+    {
+      "scenario": "站点URL发现",
+      "tool": "firecrawl_map",
+      "arguments": {
+        "url": "<实际入口网址>",
+        "limit": 100
+      },
+      "ready_at_snapshot": false,
+      "pending": "Firecrawl启动与验收"
+    },
+    {
+      "scenario": "轮询后台任务",
+      "tool": "job_status",
+      "arguments": {
+        "job_id": "<上一步返回的16位后台ID>",
+        "include_result": true,
+        "max_chars": 12000
+      },
+      "ready_at_snapshot": true
+    }
+  ],
+  "optional_schema_example": {
+    "type": "object",
+    "properties": {
+      "records": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "publication_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_url": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "title",
+            "publication_date",
+            "source_url",
+            "evidence"
+          ]
+        }
+      }
+    },
+    "required": [
+      "records"
+    ]
+  },
+  "schema_note": "仅对三个模型后端使用output_schema；schema是结构校验，不验证事实、链接真实性或覆盖完整度。"
+}
