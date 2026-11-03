@@ -1,0 +1,60 @@
+{
+  "id": "20261015-200338",
+  "created_at": "2026-10-15 20:03:38",
+  "updated_at": "2026-10-16 00:21:00",
+  "status": "partial",
+  "requirement": "从大众点评获取北京海淀学院路地区奶茶店的地址和电话",
+  "theme": "北京海淀学院路奶茶店",
+  "delivery": "excel",
+  "tool": "crawl4ai",
+  "route": {
+    "tool": "crawl4ai",
+    "ambiguous": false,
+    "note": "动态站点页面，用浏览器渲染查看公开列表。五个仓库的关键词都对不上大众点评。"
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "requirement",
+      "at": "2026-10-15 20:03:38",
+      "text": "从大众点评获取北京海淀学院路地区奶茶店的地址和电话"
+    },
+    {
+      "id": "theme",
+      "parent": "need",
+      "kind": "decision",
+      "at": "2026-10-15 20:04:00",
+      "text": "主题定为北京海淀学院路奶茶店，字段为店名、地址、电话，交付 Excel。"
+    },
+    {
+      "id": "tool",
+      "parent": "theme",
+      "kind": "choice",
+      "at": "2026-10-15 20:04:30",
+      "text": "选用 crawl4ai 打开搜索页。政府爬虫、新闻提取和 feapder 都没有大众点评的站点规则。",
+      "tool": "crawl4ai"
+    },
+    {
+      "id": "run",
+      "parent": "tool",
+      "kind": "result",
+      "at": "2026-10-15 20:06:00",
+      "text": "搜索页返回 302，浏览器进入美团验证中心，参数 action=spiderindefence。没有拿到店铺列表，也没有绕过验证。"
+    },
+    {
+      "id": "fallback",
+      "parent": "run",
+      "kind": "decision",
+      "at": "2026-10-15 20:12:00",
+      "text": "不处理验证中心。改查品牌官网和公开目录，只收录页面上同时写明地址和电话的店，导出 outputs/20261015-200338/学院路奶茶店.xlsx。这不是大众点评全量列表。"
+    },
+    {
+      "id": "login",
+      "parent": "run",
+      "kind": "result",
+      "at": "2026-10-16 00:21:00",
+      "text": "Jane 在弹出的窗口里完成登录。搜索页显示共 81 家，第一页 15 家有店名、评价数、人均和商圈，没有地址和电话。导出 outputs/20261015-200338/大众点评学院路奶茶.xlsx。"
+    }
+  ]
+}

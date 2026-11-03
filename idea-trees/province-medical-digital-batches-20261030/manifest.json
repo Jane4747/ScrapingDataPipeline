@@ -1,0 +1,57 @@
+{
+ "archived_at": "2026-10-30T13:23:23+08:00",
+ "source_repository": "E:\\CAICTBigData\\coding",
+ "core_files": 7,
+ "support_files": 0,
+ "files": [
+  {
+   "source": "pipeline/research/province_update.py",
+   "archive": "artifacts/code/pipeline/research/province_update.py",
+   "role": "本轮新增：批次定义、契约、DAG、调度、汇总、导出",
+   "bytes": 25340,
+   "sha256": "cf98bcac2c0e3a7de7faa6368b89bbe91389e2dfe21eaa43cefdb51fe272ec4f"
+  },
+  {
+   "source": "pipeline/research/national_ggzy.py",
+   "archive": "artifacts/code/pipeline/research/national_ggzy.py",
+   "role": "本轮修改：省/市维度、共享节流、冷却重试",
+   "bytes": 41631,
+   "sha256": "5e2a61c6f772964c7242c300ac485d485ed1481348bce972dfc47831bffa445b"
+  },
+  {
+   "source": "pipeline/research/tender_fields.py",
+   "archive": "artifacts/code/pipeline/research/tender_fields.py",
+   "role": "复用：22 字段契约",
+   "bytes": 6727,
+   "sha256": "d8ab57b8c11b698d0c25d729f063a1d7b951ca8e29230a8b2d8f270acd59e519"
+  },
+  {
+   "source": "scripts/export_province_workbook.mjs",
+   "archive": "artifacts/code/scripts/export_province_workbook.mjs",
+   "role": "本轮新增：分省工作簿导出",
+   "bytes": 6933,
+   "sha256": "642669c8b4de5a7799c0ed0a8e41cc41429a0e22c16ad7b2c696d1c29a723f3e"
+  },
+  {
+   "source": "scripts/start-province-update.ps1",
+   "archive": "artifacts/code/scripts/start-province-update.ps1",
+   "role": "本轮新增：校验、起 Dagu、入队",
+   "bytes": 4479,
+   "sha256": "b054bfaff70a0cf433f3e0e47b41a7a25bce8bfb9cf4f76893b573b05ad62c6c"
+  },
+  {
+   "source": "tests/test_province_update.py",
+   "archive": "artifacts/code/tests/test_province_update.py",
+   "role": "本轮新增：批次、表单、省市校验、去重、预算、锁、节流、DAG",
+   "bytes": 10025,
+   "sha256": "2bd88ab35c36ffe54fd18f8686e4f4a84933df4fa85b6a75c3201147189a3605"
+  },
+  {
+   "source": "docs/PROVINCE_TENDER_UPDATE.md",
+   "archive": "artifacts/code/docs/PROVINCE_TENDER_UPDATE.md",
+   "role": "本轮新增：口径、风控处理与缺口说明",
+   "bytes": 7055,
+   "sha256": "16026f1231373a448abb3e3f73cbd1b80348d56637e7f9f1b84b6d832bc265d4"
+  }
+ ]
+}

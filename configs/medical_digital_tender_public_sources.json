@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "topic": "医疗数字化中标情报：有限公开网页采集",
+  "sources": [
+    {
+      "id": "ccgp",
+      "name": "中国政府采购网（中央+地方）",
+      "allowed_domains": [
+        "www.ccgp.gov.cn",
+        "search.ccgp.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp.gov.cn/cggg/zygg/zbgg/",
+        "https://www.ccgp.gov.cn/cggg/dfgg/zbgg/",
+        "https://www.ccgp.gov.cn/cggg/zygg/cjgg/",
+        "https://www.ccgp.gov.cn/cggg/dfgg/cjgg/"
+      ]
+    },
+    {
+      "id": "ggzy_national",
+      "name": "全国公共资源交易平台",
+      "allowed_domains": [
+        "www.ggzy.gov.cn",
+        "deal.ggzy.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ggzy.gov.cn/"
+      ]
+    },
+    {
+      "id": "cebpub",
+      "name": "中国招标投标公共服务平台",
+      "allowed_domains": [
+        "www.cebpubservice.com",
+        "bulletin.cebpubservice.com"
+      ],
+      "seeds": [
+        "http://www.cebpubservice.com/ctpsp_iiss/searchbusinesstypebeforedooraction/getSearch.do"
+      ]
+    },
+    {
+      "id": "ggzy_guangdong",
+      "name": "广东公共资源交易平台",
+      "allowed_domains": [
+        "ygp.gdzwfw.gov.cn"
+      ],
+      "seeds": [
+        "https://ygp.gdzwfw.gov.cn/"
+      ]
+    },
+    {
+      "id": "ggzy_yunnan",
+      "name": "云南公共资源交易平台",
+      "allowed_domains": [
+        "ggzy.yn.gov.cn"
+      ],
+      "seeds": [
+        "https://ggzy.yn.gov.cn/"
+      ]
+    }
+  ]
+}

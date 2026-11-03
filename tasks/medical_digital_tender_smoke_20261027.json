@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "medical-digital-tender-smoke-20261027",
+  "title": "医疗数字化中标采集规则有限实测",
+  "question": "验证两个公开详情样本的可达性、原文保存和字段缺口；不做全量项目统计。",
+  "research_type": "health_deployment",
+  "source_config": "../configs/medical_digital_tender_smoke_sources.json",
+  "source_ids": [
+    "ccgp"
+  ],
+  "region": "全国",
+  "scenarios": [
+    "医疗数字化中标情报"
+  ],
+  "allow_network": true,
+  "stages": [
+    "collection"
+  ],
+  "collection": {
+    "mode": "crawl"
+  },
+  "budget": {
+    "max_pages": 2,
+    "max_depth": 0,
+    "workers": 1,
+    "timeout": 15,
+    "delay": 2,
+    "retries": 0,
+    "browser": false
+  },
+  "delivery": [
+    "json",
+    "markdown"
+  ]
+}

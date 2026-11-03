@@ -11,8 +11,12 @@ import asyncio
 from datetime import datetime
 from io import BytesIO
 import ipaddress
+import os
 import re
+import shutil
 import socket
+import subprocess
+import tempfile
 import time
 from urllib.parse import unquote_plus, urljoin, urlsplit, urlunsplit
 from urllib.robotparser import RobotFileParser
@@ -20,11 +24,15 @@ from urllib.robotparser import RobotFileParser
 import requests
 from bs4 import BeautifulSoup
 
-USER_AGENT = "CAICTMedicalResearchBot/1.0 (public-source research; Python requests)"
+USER_AGENT = "CAICTMedicalResearchBot/1.0 (public-source research)"
 ROBOT_AGENT = "CAICTMedicalResearchBot"
 _TRACKERS = {"fbclid", "gclid", "dclid", "msclkid", "mc_cid", "mc_eid", "_ga", "spm"}
 _REDIRECTS = {301, 302, 303, 307, 308}
 _TRANSIENT = {408, 500, 502, 503, 504}
+# OpenSSL cannot complete a handshake with SM2/国密 certificates (SSL: BAD_ECPOINT).
+# Such hosts may still be reachable through the OS TLS stack, which keeps full
+# certificate validation; only the transport changes, verification is never disabled.
+OPENSSL_INCOMPATIBLE = re.compile(r"BAD_ECPOINT|bad ecpoint|SSLV3_ALERT_HANDSHAKE_FAILURE|no protocols available", re.I)
 
 
 def normalize_url(url: str) -> str:
@@ -99,13 +107,41 @@ def _result(requested_url, url=None, **updates):
     return result
 
 
+class _SystemTLSResponse:
+    """Minimal requests-like response backed by curl's OS TLS stack.
+
+    Used only when OpenSSL cannot handshake (国密/SM2 sites).  Certificate
+    validation stays enabled: curl validates against the OS trust store and a
+    verification failure aborts the request instead of returning content.
+    """
+
+    def __init__(self, status, headers, body):
+        self.status_code = status
+        self.headers = headers
+        self._body = body
+
+    def iter_content(self, chunk_size=64 * 1024):
+        for start in range(0, len(self._body), chunk_size):
+            yield self._body[start:start + chunk_size]
+
+    def close(self):
+        self._body = b""
+
+
+def _curl_binary():
+    return shutil.which("curl")
+
+
 class Fetcher:
     def __init__(self, timeout=25, retries=1, delay=1.0, browser=False,
-                 max_bytes=12 * 1024 * 1024):
+                 max_bytes=12 * 1024 * 1024, transport="requests"):
         if timeout <= 0 or retries < 0 or delay < 0 or max_bytes <= 0:
             raise ValueError("timeout/max_bytes must be positive; retries/delay cannot be negative")
+        if transport not in {"requests", "system_tls", "auto"}:
+            raise ValueError("transport must be requests, system_tls or auto")
         self.timeout, self.retries, self.delay = timeout, int(retries), delay
         self.browser, self.max_bytes = browser, int(max_bytes)
+        self.transport = transport
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT,
                                      "Accept": "text/html,application/pdf,text/plain;q=0.8,*/*;q=0.2"})
@@ -140,10 +176,14 @@ class Fetcher:
     def _request(self, url):
         for attempt in range(self.retries + 1):
             self._throttle(url)
+            if self.transport == "system_tls":
+                return self._request_system_tls(url)
             try:
                 response = self.session.get(url, timeout=self.timeout, stream=True,
                                             allow_redirects=False, verify=True)
             except requests.exceptions.SSLError as exc:
+                if self.transport == "auto" and OPENSSL_INCOMPATIBLE.search(str(exc)):
+                    return self._request_system_tls(url)
                 raise _FetchFailure("error", f"TLS verification failed: {exc}", url=url) from exc
             except (requests.Timeout, requests.ConnectionError) as exc:
                 if attempt < self.retries:
@@ -158,6 +198,60 @@ class Fetcher:
                 continue
             return response
         raise AssertionError("retry loop did not return")
+
+    def _request_system_tls(self, url, form=None):
+        """Fetch through curl using the OS TLS stack (certificate validation on)."""
+        curl = _curl_binary()
+        if not curl:
+            raise _FetchFailure("error", "system_tls transport requires curl in PATH", url=url)
+        limit = min(self.max_bytes, 512 * 1024) if url.rstrip("/").endswith("robots.txt") else self.max_bytes
+        with tempfile.TemporaryDirectory() as folder:
+            header_path = os.path.join(folder, "headers.txt")
+            body_path = os.path.join(folder, "body.bin")
+            command = [curl, "--silent", "--show-error", "--max-redirs", "0",
+                       "--max-time", str(int(self.timeout) + 5),
+                       "--max-filesize", str(limit),
+                       "--user-agent", USER_AGENT,
+                       "--header", "Accept: text/html,application/pdf,text/plain;q=0.8,*/*;q=0.2",
+                       "--dump-header", header_path, "--output", body_path, url]
+            if form is not None:
+                command += ["--request", "POST", "--header", "Content-Type: application/x-www-form-urlencoded"]
+                for key, value in form.items():
+                    command += ["--data-urlencode", f"{key}={value}"]
+            try:
+                completed = subprocess.run(command, capture_output=True, timeout=self.timeout + 15)
+            except subprocess.TimeoutExpired as exc:
+                raise _FetchFailure("error", "Request failed: system_tls timeout", url=url) from exc
+            if completed.returncode != 0:
+                stderr = completed.stderr.decode("utf-8", "replace").strip()[:300]
+                label = {60: "TLS verification failed in system store",
+                         63: f"Response exceeds {limit} byte limit",
+                         6: "DNS resolution failed",
+                         7: "connect failed"}.get(completed.returncode,
+                                                  f"curl exit {completed.returncode}")
+                raise _FetchFailure("error", f"Request failed: {label}: {stderr}", url=url)
+            try:
+                with open(header_path, "rb") as handle:
+                    raw_headers = handle.read().decode("iso-8859-1", "replace")
+                with open(body_path, "rb") as handle:
+                    body = handle.read(limit + 1)
+            except OSError as exc:
+                raise _FetchFailure("error", f"Request failed: {exc}", url=url) from exc
+        if len(body) > limit:
+            raise _FetchFailure("error", f"Response exceeds {limit} byte limit", url=url)
+        blocks = [b for b in re.split(r"\r?\n\r?\n", raw_headers) if b.strip()]
+        status_line = blocks[-1].splitlines()[0] if blocks else ""
+        match = re.match(r"HTTP/\d(?:\.\d)?\s+(\d{3})", status_line)
+        if not match:
+            raise _FetchFailure("error", "Request failed: unparsable system_tls status", url=url)
+        headers = requests.structures.CaseInsensitiveDict()
+        for line in blocks[-1].splitlines()[1:]:
+            if ":" in line:
+                name, _, value = line.partition(":")
+                if name.strip().lower() in {"content-length", "content-type", "location",
+                                            "last-modified", "etag", "date", "content-encoding"}:
+                    headers[name.strip()] = value.strip()
+        return _SystemTLSResponse(int(match.group(1)), headers, body if 200 <= int(match.group(1)) < 300 else b"")
 
     def _read_body(self, response, limit):
         length = response.headers.get("Content-Length", "")
@@ -237,6 +331,38 @@ class Fetcher:
             raise _FetchFailure(status, error, url=url)
         if parser is not None and not parser.can_fetch(ROBOT_AGENT, url):
             raise _FetchFailure("robots_denied", "Disallowed by robots.txt", url=url)
+
+    def post_json(self, url, form, allowed_domains):
+        """Post a documented public search form, preserving robots/TLS/denial rules."""
+        normalized = normalize_url(url)
+        response = None
+        try:
+            self._validate_url(normalized, allowed_domains)
+            self._check_robots(normalized, allowed_domains)
+            self._throttle(normalized)
+            if self.transport == "system_tls":
+                response = self._request_system_tls(normalized, form)
+            else:
+                response = self.session.post(normalized, data=form, timeout=self.timeout,
+                                             allow_redirects=False, verify=True)
+            if response.status_code in {401, 403, 429}:
+                return dict(_result(url, normalized, http_status=response.status_code), status="blocked", error="Access denied; not retried")
+            if response.status_code != 200:
+                return dict(_result(url, normalized, http_status=response.status_code), status="error", error=f"HTTP {response.status_code}")
+            body = self._read_body(response, self.max_bytes)
+            import json
+            try:
+                payload = json.loads(body.decode("utf-8-sig"))
+            except (ValueError, UnicodeError):
+                return dict(_result(url, normalized, http_status=200), status="error", error="Expected JSON, received a non-JSON response", raw=body)
+            return dict(_result(url, normalized, http_status=200), status="ok", raw=body, data=payload)
+        except _FetchFailure as exc:
+            return _result(url, normalized, status=exc.status, error=str(exc), http_status=exc.http_status)
+        except requests.RequestException as exc:
+            return _result(url, normalized, status="error", error=str(exc))
+        finally:
+            if response is not None:
+                response.close()
 
     def fetch(self, url, allowed_domains):
         requested_url = str(url)

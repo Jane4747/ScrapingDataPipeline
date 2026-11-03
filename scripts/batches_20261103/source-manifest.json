@@ -1,0 +1,181 @@
+{
+  "note": "source_sha256 identifies the original task script before portability edits; published_sha256 identifies the current published copy. No run data is included.",
+  "files": [
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/collector.py",
+      "target": "scripts/batches_20261103/hospitals/collector.py",
+      "source_sha256": "b0702010b7a73dae8656646d2eff559706614016f8b9a9b57954e283a648855e",
+      "published_sha256": "14cbe326e67a5ffcbd47865022a9a8ec326fa60498601d2498e810fc313daa00"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/extractor.py",
+      "target": "scripts/batches_20261103/hospitals/extractor.py",
+      "source_sha256": "a854a4d47bedf3d8fd37c14de1e32e7d4b6d20e1348f69f86786161bc262c985",
+      "published_sha256": "a854a4d47bedf3d8fd37c14de1e32e7d4b6d20e1348f69f86786161bc262c985"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/cached_extractor.py",
+      "target": "scripts/batches_20261103/hospitals/cached_extractor.py",
+      "source_sha256": "7039e06566b5a1fa3612b5b8eb14b671d61ba22eefe5f72a3a464e6e38f74eba",
+      "published_sha256": "7039e06566b5a1fa3612b5b8eb14b671d61ba22eefe5f72a3a464e6e38f74eba"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/apply_verified_reviews.py",
+      "target": "scripts/batches_20261103/hospitals/apply_verified_reviews.py",
+      "source_sha256": "ce20155d5dfaa3a0b83bc66fe13a2e458a79124c2988ff379ef24bfa6a121a17",
+      "published_sha256": "ce20155d5dfaa3a0b83bc66fe13a2e458a79124c2988ff379ef24bfa6a121a17"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/run_batch.py",
+      "target": "scripts/batches_20261103/hospitals/run_batch.py",
+      "source_sha256": "dbd33045559136781a1a4df7d4b89b3641b9fcf9bedb6324a0c60cb5115dfdae",
+      "published_sha256": "f5ae057452aca0b208e4095e55d9d0b759e40a38686500c3fe4d2f2ee0c844d5"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/select_resume.py",
+      "target": "scripts/batches_20261103/hospitals/select_resume.py",
+      "source_sha256": "ccc016e520d6f457f1244b76af8849f37c78016ae052cf59a60056adffd22ba6",
+      "published_sha256": "894dfac770cd037f6cf4874714cca2897ab6544be6770d926d57bb129cd1b34c"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/consolidate.py",
+      "target": "scripts/batches_20261103/hospitals/consolidate.py",
+      "source_sha256": "7ad53a281aadfb8a0eff053678e6b9cbf22fd12eede3a326e54a2c450c3de79d",
+      "published_sha256": "a7484f069db74e13bf45e81e6d1f7fa21a5f03257e32491cd909ece11482ee6a"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/test_collector.py",
+      "target": "scripts/batches_20261103/hospitals/test_collector.py",
+      "source_sha256": "c55a98eaf615b0a820339c0825a035a2bbe648b7f452e59a1db293a25b216bc0",
+      "published_sha256": "c55a98eaf615b0a820339c0825a035a2bbe648b7f452e59a1db293a25b216bc0"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/test_extractor.py",
+      "target": "scripts/batches_20261103/hospitals/test_extractor.py",
+      "source_sha256": "dadac4d54cdc65b4bb27b1d9c6da2ba65d79bfa191a10521a084f79e40d07e55",
+      "published_sha256": "dadac4d54cdc65b4bb27b1d9c6da2ba65d79bfa191a10521a084f79e40d07e55"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/test_cached_extractor.py",
+      "target": "scripts/batches_20261103/hospitals/test_cached_extractor.py",
+      "source_sha256": "1d0eaa57f41287a6395b331bdd236a56c5b1b26cd6f168ccda6b7460b91ad357",
+      "published_sha256": "1d0eaa57f41287a6395b331bdd236a56c5b1b26cd6f168ccda6b7460b91ad357"
+    },
+    {
+      "source": "work/nationwide-hospital-tenders-20261103/test_apply_verified_reviews.py",
+      "target": "scripts/batches_20261103/hospitals/test_apply_verified_reviews.py",
+      "source_sha256": "1a9b00e9adb0b759bc72b7e9c558d49b11cc3ee566184c79b8c554a5f425d02c",
+      "published_sha256": "1a9b00e9adb0b759bc72b7e9c558d49b11cc3ee566184c79b8c554a5f425d02c"
+    },
+    {
+      "source": "work/public-resource-refresh-20261103/guarded_run.py",
+      "target": "scripts/batches_20261103/public_resources/guarded_run.py",
+      "source_sha256": "dfd0826f3863249360cb4356c781787a324b1db40db8107c215b0f10b2e9edf2",
+      "published_sha256": "848328b4b9e75231ce3b531448a589afc339b5096d9fb3248da1c15f0fcfdcac"
+    },
+    {
+      "source": "work/public-resource-refresh-20261103/national_ggzy_task_snapshot.py",
+      "target": "scripts/batches_20261103/public_resources/national_ggzy_task_snapshot.py",
+      "source_sha256": "a1751f9e64559a9fd25b282c7695ba736d70bbc964b3c57492a0928678e575e3",
+      "published_sha256": "d09ad309c2981e23c791e6ab09c6fb394f42de1bf12221110caa05b6fc39888a"
+    },
+    {
+      "source": "work/zycg-2024-20261103/continue_zycg.py",
+      "target": "scripts/batches_20261103/zycg/continue_zycg.py",
+      "source_sha256": "b76bd9fdceaaa6346c848e9e64b66faff1e32d3689c0271eb2d4453a34056121",
+      "published_sha256": "b28ad0dd4649a6a35b81c53011805b4b695aa99601530ccc6cc1a1f03eb0b05b"
+    },
+    {
+      "source": "work/zycg-2024-20261103/test_continuation.py",
+      "target": "scripts/batches_20261103/zycg/test_continuation.py",
+      "source_sha256": "4b0b3959f94d02a89cd1f8c3e9257f64eb5d5c23e5e571e01b00dc8e1ee4698d",
+      "published_sha256": "554fc3cf57a178d357a590db45fbca2aa3085a1a25d10936d9fdf05419f89a71"
+    }
+  ],
+  "published_files": [
+    {
+      "path": "scripts/batches_20261103/examples/contract.json",
+      "sha256": "f6347a472735c5983a4cb36daf3a9319ca1d955629370ccf235d0997ac6fffcd"
+    },
+    {
+      "path": "scripts/batches_20261103/examples/empty-reviews.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "scripts/batches_20261103/examples/entrances.json",
+      "sha256": "4ab1adb4be8f8aeb5d7c06d98ae4147bda9bc36fc87fbc6cb3a505b368e220f0"
+    },
+    {
+      "path": "scripts/batches_20261103/examples/roster.json",
+      "sha256": "ec47dd62131efe7ac01aadb19d23d9b0356e7e50bf3c43809e46901c2de73e53"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/apply_verified_reviews.py",
+      "sha256": "ce20155d5dfaa3a0b83bc66fe13a2e458a79124c2988ff379ef24bfa6a121a17"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/cached_extractor.py",
+      "sha256": "7039e06566b5a1fa3612b5b8eb14b671d61ba22eefe5f72a3a464e6e38f74eba"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/collector.py",
+      "sha256": "14cbe326e67a5ffcbd47865022a9a8ec326fa60498601d2498e810fc313daa00"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/consolidate.py",
+      "sha256": "a7484f069db74e13bf45e81e6d1f7fa21a5f03257e32491cd909ece11482ee6a"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/extractor.py",
+      "sha256": "a854a4d47bedf3d8fd37c14de1e32e7d4b6d20e1348f69f86786161bc262c985"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/run_batch.py",
+      "sha256": "f5ae057452aca0b208e4095e55d9d0b759e40a38686500c3fe4d2f2ee0c844d5"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/select_resume.py",
+      "sha256": "894dfac770cd037f6cf4874714cca2897ab6544be6770d926d57bb129cd1b34c"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/test_apply_verified_reviews.py",
+      "sha256": "1a9b00e9adb0b759bc72b7e9c558d49b11cc3ee566184c79b8c554a5f425d02c"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/test_cached_extractor.py",
+      "sha256": "1d0eaa57f41287a6395b331bdd236a56c5b1b26cd6f168ccda6b7460b91ad357"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/test_collector.py",
+      "sha256": "c55a98eaf615b0a820339c0825a035a2bbe648b7f452e59a1db293a25b216bc0"
+    },
+    {
+      "path": "scripts/batches_20261103/hospitals/test_extractor.py",
+      "sha256": "dadac4d54cdc65b4bb27b1d9c6da2ba65d79bfa191a10521a084f79e40d07e55"
+    },
+    {
+      "path": "scripts/batches_20261103/public_resources/guarded_run.py",
+      "sha256": "848328b4b9e75231ce3b531448a589afc339b5096d9fb3248da1c15f0fcfdcac"
+    },
+    {
+      "path": "scripts/batches_20261103/public_resources/national_ggzy_task_snapshot.py",
+      "sha256": "d09ad309c2981e23c791e6ab09c6fb394f42de1bf12221110caa05b6fc39888a"
+    },
+    {
+      "path": "scripts/batches_20261103/public_resources/test_guarded_run.py",
+      "sha256": "c07a4df790e0f0ad01b32641c47d4b49cc93ad39dc29486d0e823ce9d6d712ca"
+    },
+    {
+      "path": "scripts/batches_20261103/requirements.txt",
+      "sha256": "7a691fc027ccdca81c73f129692abac5874cf56becbf7662ad434ea8fd383b7b"
+    },
+    {
+      "path": "scripts/batches_20261103/zycg/continue_zycg.py",
+      "sha256": "b28ad0dd4649a6a35b81c53011805b4b695aa99601530ccc6cc1a1f03eb0b05b"
+    },
+    {
+      "path": "scripts/batches_20261103/zycg/test_continuation.py",
+      "sha256": "554fc3cf57a178d357a590db45fbca2aa3085a1a25d10936d9fdf05419f89a71"
+    }
+  ]
+}

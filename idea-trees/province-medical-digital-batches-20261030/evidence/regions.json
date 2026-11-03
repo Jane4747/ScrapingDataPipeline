@@ -1,0 +1,92 @@
+[
+ {
+  "id": "310000",
+  "name": "上海",
+  "scope": "province",
+  "live_status": "running",
+  "records": 42,
+  "api_calls": 106,
+  "pending": 347,
+  "last_stop_reason": null
+ },
+ {
+  "id": "110000",
+  "name": "北京",
+  "scope": "province",
+  "live_status": "running",
+  "records": 51,
+  "api_calls": 94,
+  "pending": 352,
+  "last_stop_reason": null
+ },
+ {
+  "id": "440300",
+  "name": "深圳",
+  "scope": "city",
+  "live_status": "running",
+  "records": 59,
+  "api_calls": 94,
+  "pending": 343,
+  "last_stop_reason": null
+ },
+ {
+  "id": "440100",
+  "name": "广州",
+  "scope": "city",
+  "live_status": "partial",
+  "records": 28,
+  "api_calls": 101,
+  "pending": 338,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ },
+ {
+  "id": "320000",
+  "name": "江苏",
+  "scope": "province",
+  "live_status": "partial",
+  "records": 56,
+  "api_calls": 79,
+  "pending": 372,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ },
+ {
+  "id": "330000",
+  "name": "浙江",
+  "scope": "province",
+  "live_status": "partial",
+  "records": 51,
+  "api_calls": 79,
+  "pending": 380,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ },
+ {
+  "id": "420000",
+  "name": "湖北",
+  "scope": "province",
+  "live_status": "partial",
+  "records": 35,
+  "api_calls": 79,
+  "pending": 368,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ },
+ {
+  "id": "510000",
+  "name": "四川",
+  "scope": "province",
+  "live_status": "partial",
+  "records": 68,
+  "api_calls": 79,
+  "pending": 383,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ },
+ {
+  "id": "370000",
+  "name": "山东",
+  "scope": "province",
+  "live_status": "partial",
+  "records": 56,
+  "api_calls": 79,
+  "pending": 373,
+  "last_stop_reason": "Challenge/rate limit: HTTP 200, code 800; no bypass/retry"
+ }
+]

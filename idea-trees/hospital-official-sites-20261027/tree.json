@@ -1,0 +1,161 @@
+{
+  "id": "hospital-official-sites-20261027",
+  "created_at": "2026-10-27T13:46:21+08:00",
+  "updated_at": "2026-10-27T18:02:08+08:00",
+  "status": "partial",
+  "status_note": "批量实地核查已完成并用代码固化，但 SMTP 逐院闭合仍有 40 家未定位；未命中不等于没有采购",
+  "requirement": "在北京581家医院清单内，逐院找出招标采购网头，做成一列；后续继续核实医院本级官网，并把检索方法沉淀成代码与新想法树",
+  "theme": "北京医院招标采购网址逐院查找与本级官网核查",
+  "delivery": "清单工作簿 S/T/U 三列、06-未找到待核查清单、可复用探针代码与用法文档、想法树",
+  "tool": "分轮联网检索 + 权威名录对照 + 工作簿实时回写 + 离线探针代码与回写代码",
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "at": "2026-10-27T13:46:21+08:00",
+      "text": "581家医院全量明细，按招标采购网头建一列；示例为北医三院 https://www.puh3.net.cn/xwzx/rdgg1/zbcg.htm。",
+      "status": "completed"
+    },
+    {
+      "id": "scope",
+      "parent": "need",
+      "kind": "范围",
+      "at": "2026-10-27T13:48:18+08:00",
+      "text": "固定原名单，不扩院；举办主体为规则推断，只作线索；本院栏目优先于平台入口；未验证的地址不写入。",
+      "status": "completed"
+    },
+    {
+      "id": "rounds",
+      "parent": "need",
+      "kind": "分轮方法",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "第一轮按等级分层：142家三级逐院实搜、其余按举办主体给平台入口；第二轮补439家待核实，二级公办逐院、一级未定级按机构类型抽样后统一标注；第三轮核实本级官网，新增T/U两列。",
+      "status": "completed"
+    },
+    {
+      "id": "rounds_priority",
+      "parent": "rounds",
+      "kind": "优先级",
+      "at": "2026-10-27T14:19:22+08:00",
+      "text": "三级优先、二级公办次之、民营二级再次、一级与未定级不逐院；每批搜索→验证→写入→保存，避免中断丢失进度。",
+      "status": "completed"
+    },
+    {
+      "id": "sources",
+      "parent": "need",
+      "kind": "来源",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "北京市卫健委《可提供儿科门诊医疗机构名单》149家官网域名对照表作批量来源；其余逐院搜索；政府平台、军队采购网、集团电子采购平台分别作为兜底渠道。",
+      "status": "completed"
+    },
+    {
+      "id": "probe",
+      "parent": "need",
+      "kind": "代码沉淀",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "scripts/hospital_site_probe.py 提供离线计划与授权后的限速探测：域名本月级判定、平台与集团域名排除、robots、超时、大小与页数边界、栏目候选打分。",
+      "status": "completed"
+    },
+    {
+      "id": "writeback",
+      "parent": "probe",
+      "kind": "回写",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "scripts/hospital_workbook_writer.py 默认干跑，--apply 才写入，先备份再改；只写命中行，未命中的行保留人工结论；可重建06清单。",
+      "status": "completed"
+    },
+    {
+      "id": "tree_sync",
+      "parent": "probe",
+      "kind": "树同步",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "scripts/idea_tree_writer.py 由 tree.json 渲染 tree.md，校验 id、父节点与状态取值，避免节点事实与大纲不一致。",
+      "status": "completed"
+    },
+    {
+      "id": "mistake",
+      "parent": "writeback",
+      "kind": "已修正错误",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "正则回填把 ggzyfw.beijing.gov.cn 等平台域名截成 beijing.gov.cn，误写8行；现已改为配置化平台域名排除名单，配置见 configs/hospital_site_probe.json。",
+      "status": "completed"
+    },
+    {
+      "id": "editor_risk",
+      "parent": "writeback",
+      "kind": "编辑器风险",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "长时间实时编辑会出现会话失效与旧快照实例；写入前用 get_pool_status 核对 file_id 与时间戳，旧快照实例不得保存或写入。",
+      "status": "partial"
+    },
+    {
+      "id": "gaps",
+      "parent": "need",
+      "kind": "缺口",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "T列仍有29家经检索未发现本级官网、70家确认无独立官网；U列未见本级采购栏目475家；未命中不等于没有采购，公告可能只在公众号或平台发布。",
+      "status": "open"
+    },
+    {
+      "id": "gaps_types",
+      "parent": "gaps",
+      "kind": "缺口分类",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "官网未定位、栏目未定位、访问失败、仅微信公众号发布、隶属上级或区政府统一发布、民营无公开渠道六类分别记录，不合并统计。",
+      "status": "open"
+    },
+    {
+      "id": "evidence",
+      "parent": "need",
+      "kind": "证据口径",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "栏目页存在不等于发布过招标公告；上级或集团代发不等于该院使用；平台入口不是本院栏目，不回填S列。",
+      "status": "completed"
+    },
+    {
+      "id": "code",
+      "parent": "need",
+      "kind": "代码清单",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "hospital_site_probe.py、hospital_workbook_writer.py、idea_tree_writer.py、configs/hospital_site_probe.json、docs/HOSPITAL_SITE_PROBE.md 与两个离线测试文件。",
+      "status": "completed"
+    },
+    {
+      "id": "next",
+      "parent": "need",
+      "kind": "后续方向",
+      "at": "2026-10-27T15:51:20+08:00",
+      "text": "先用离线计划模式对剩余40家产出检索式，再批量探测；顺着已定位栏目抓取历史分页并核对发布日期；不用二次全量关键词替代事实核验。",
+      "status": "planned"
+    },
+    {
+      "id": "delivery_593_followup",
+      "parent": "need",
+      "kind": "后续成果（最新口径）",
+      "at": "2026-10-27T18:02:08+08:00",
+      "text": "[北京＋雄安593家采购网址想法树](../hospital-procurement-urls-20261027/tree.md)：98个本院/项目入口（含1个外链目标待核）、55个上级共用入口、440家未定位。代码、完成版清单和验收已归档。以上S/T/U列统计均为早期阶段记录，不是最终593家统计。",
+      "status": "partial"
+    }
+  ],
+  "result": {
+    "workbook_rows": 581,
+    "s_column_with_channel": 119,
+    "s_column_reason_only": 414,
+    "s_column_pending_zero": true,
+    "t_column_homepage_located": 213,
+    "t_column_confirmed_none": 70,
+    "t_column_not_found": 29,
+    "t_column_uniform_label": 269,
+    "u_column_has_column": 106,
+    "u_column_without_column": 475,
+    "list_sheet_rows": 475,
+    "new_files": 5,
+    "new_tests_passed": 11
+  },
+  "latest_followup": {
+    "tree_id": "hospital-procurement-urls-20261027",
+    "path": "../hospital-procurement-urls-20261027/tree.md",
+    "at": "2026-10-27T18:02:08+08:00"
+  }
+}

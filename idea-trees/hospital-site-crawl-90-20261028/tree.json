@@ -1,0 +1,271 @@
+{
+  "id": "hospital-site-crawl-90-20261028",
+  "created_at": "2026-10-28",
+  "updated_at": "2026-10-29T19:03:25+08:00",
+  "status": "open",
+  "status_note": "分支已建立；90入口核验完成；P0北医三院试采+77个可读站点批量采集完成（4017条、951候选、921详情）。剩余4站需JS渲染、12站需重新定位入口/渲染。",
+  "requirement": "在想法树上新建分支：按爬虫任务表已定位的90个医院官网入口，采集医疗数字化招采数据并回填任务表。",
+  "theme": "第一批90个医院官网入口的医疗数字化招采采集",
+  "delivery": "[90入口清单](entrances.csv)、[结构化入口清单](entrances.json)、[入口核验结果](probe/entry_probe.csv)、[P0试采汇总](../../outputs/hospital-site-crawl-90-20261028/pilot-puh3-v4/pilot_summary.json)、[任务表](../../../移动项目沟通/北京雄安医院网站爬虫/第一批_97家医院_北京雄安医院官网数字化招采_爬虫智能体任务表_20261028.xlsx)",
+  "tool": "爬虫任务表v1口径＋北医三院案例方法＋本地HTTP采集与原文留证＋工作表回填",
+  "tags": [
+    "医院官网",
+    "医疗数字化",
+    "第一批",
+    "90入口",
+    "open"
+  ],
+  "result": {
+    "entrances": 90,
+    "unique_domains": 89,
+    "institution_records": 104,
+    "batch_counts": {
+      "P0": 1,
+      "P1": 62,
+      "P2": 26,
+      "P3": 1
+    },
+    "column_type_counts": {
+      "采购专栏": 63,
+      "公开混合栏目": 26,
+      "采购平台": 1
+    },
+    "since": "2024-01-01",
+    "until": "2026-10-28",
+    "excluded_discovery_rows": 428,
+    "status": "batch_crawl_done",
+    "collected_notices": 0,
+    "entrance_check": {
+      "readable": 78,
+      "needs_rendering": 7,
+      "broken_404": 3,
+      "unreachable": 2
+    },
+    "pilot": {
+      "site": "北京大学第三医院",
+      "list_pages": 44,
+      "items_total": 528,
+      "items_since_start": 518,
+      "year_counts": {
+        "2024": 90,
+        "2025": 128,
+        "2026": 300
+      },
+      "keyword_candidates": 72,
+      "device_false_positives": 9,
+      "details_saved": 72,
+      "detail_failures": 0
+    },
+    "batch_crawl": {
+      "sites_attempted": 77,
+      "list_pages": 324,
+      "items_total": 4017,
+      "items_since_2024": 2854,
+      "keyword_candidates": 951,
+      "details_saved": 921,
+      "detail_fail": 7,
+      "js_rendering_needed": [
+        "C0003 解放军总医院采购平台",
+        "C0067 门头沟区医院",
+        "C0077 北大国际医院",
+        "C0082 广安门南区"
+      ],
+      "undated_in_list": 13,
+      "note": "13个54doctor CMS站列表页无日期，日期需从详情正文提取后归位"
+    }
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "at": "2026-10-28",
+      "status": "open",
+      "text": "按爬虫任务表已定位的90个官网入口，采集2024年1月1日至2026年10月28日医院官网发布的医疗数字化招标采购信息，回填任务表并保留原文证据。"
+    },
+    {
+      "id": "scope",
+      "parent": "need",
+      "kind": "范围",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "仅采医院官网来源：90条栏目采集任务（89个本院/院区官网＋1个中国人民解放军总医院总院采购平台），关联104条机构记录；批次P0 1条、P1 62条、P2 26条、P3 1条。官网栏目发现（P4）428家待定位机构不纳入本轮。"
+    },
+    {
+      "id": "excluded",
+      "parent": "scope",
+      "kind": "边界",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "不采政府采购平台（中央、中国政府采购网、北京市、河北、雄安）作为本轮成果；平台公告只作官网缺失时的线索，不并入官网采集数。合作医院、院区、总院共用入口按任务表关联医院ID核验归属，不按名称自动归并。"
+    },
+    {
+      "id": "entrances",
+      "parent": "need",
+      "kind": "入口清单",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "已从任务表导出90条入口：[entrances.csv](entrances.csv)与[entrances.json](entrances.json)，含任务ID、批次、医院、关联医院ID、栏目类型、栏目路径、入口网址、日期范围与执行状态；89个唯一域名，5条任务一网多机构（301总院覆盖11家）。"
+    },
+    {
+      "id": "method",
+      "parent": "need",
+      "kind": "方法",
+      "at": "2026-10-28",
+      "status": "open",
+      "text": "沿用北医三院案例：入口核验 → 栏目列表及分页 → 详情正文 → 内层采购明细 → 附件 → D1-D5数字化判定 → 采购人与院区核验 → 公告与项目关联 → 回填任务表并保存原文。"
+    },
+    {
+      "id": "phase0",
+      "parent": "method",
+      "kind": "阶段0入口核验",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "已对90个入口做一次只读核验（单次GET＋每域名一次robots）：78个可读、7个需JS渲染或站点维护、3个入口404（丰台中西医结合、世纪坛OA、大兴中西医结合）、2个不可达（北京按摩医院、望京医院，代理502且直连超时）。结果见[entry_probe.csv](probe/entry_probe.csv)。"
+    },
+    {
+      "id": "phase1",
+      "parent": "method",
+      "kind": "阶段1P0试采",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "北医三院（C0057）试采已完成：翻页44页、列表528条、2024年以来518条（2024年90条、2025年128条、2026年300条），关键词候选72条并保存72份详情正文，失败0。"
+    },
+    {
+      "id": "phase2",
+      "parent": "method",
+      "kind": "阶段2P1批量",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "77个可读站点批量采集完成（C0057已单独试采）：324个列表页、4017条公告条目、2024年以来2854条、标题关键词候选951条、保存候选详情921份、失败7份。脚本 scripts/hospital_batch_crawl.py，每站单线程1请求/秒、6站并行。"
+    },
+    {
+      "id": "phase3",
+      "parent": "method",
+      "kind": "阶段3P2P3补采",
+      "at": "2026-10-28",
+      "status": "planned",
+      "text": "P2 26条公开混合栏目需在通知公告中筛采购类条目；P3 1条301总院采购平台按11家医疗区机构核对采购人与项目地点。"
+    },
+    {
+      "id": "phase4",
+      "parent": "method",
+      "kind": "阶段4回填归档",
+      "at": "2026-10-28",
+      "status": "planned",
+      "text": "按任务ID回填执行状态、最近采集时间、发现公告数、详情成功数、数字化纳入数、已覆盖日期范围、失败原因与回填结果位置；另出汇总台账、按院证据包与核验记录。"
+    },
+    {
+      "id": "rules",
+      "parent": "need",
+      "kind": "采集规则",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "数字化按D1基础设施、D2临床数据、D3智慧后勤、D4临床运营系统、D5网络安全五类判定；普通设备固件、实物柜外存储不纳入；预算、成交、合同、单价、年费分列不互加；验证码与robots限制记录为缺口，不绕过。"
+    },
+    {
+      "id": "rules-dedup",
+      "parent": "rules",
+      "kind": "关联口径",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "公告按规范网址与正文标识去重，一个公告在多栏目出现时保留全部来源；采购、变更、结果分列不同公告；项目按采购人、项目编号、分包关联，同名年度项目不直接合并。"
+    },
+    {
+      "id": "outputs",
+      "parent": "need",
+      "kind": "交付",
+      "at": "2026-10-28",
+      "status": "planned",
+      "text": "①回填后的任务表副本（新增attempt不改原表）；②按院原文与元数据包；③数字化采购汇总台账（含证据链接）；④入口核验与失败记录；⑤本树节点与统计更新。"
+    },
+    {
+      "id": "gaps",
+      "parent": "need",
+      "kind": "已知缺口",
+      "at": "2026-10-28",
+      "status": "open",
+      "text": "89条任务标注待入口核验，入口可能已迁移或栏目改版；医院站点常见JS渲染、附件权限、验证码与超时；一网多机构需按采购人区分，不能把总院项目计入院区。"
+    },
+    {
+      "id": "risks",
+      "parent": "need",
+      "kind": "风险控制",
+      "at": "2026-10-28",
+      "status": "planned",
+      "text": "单站限速并识别robots；单站失败不影响批次其它站；原始页面与解析结果分开保存；回填前先备份任务表；解析不确定的条目进待核表，不硬判纳入或排除。"
+    },
+    {
+      "id": "related",
+      "parent": "need",
+      "kind": "相关想法树",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "[北医三院案例](../puh3-digital-procurement-20261027/tree.md)提供方法与样例；[593家采购网址清单](../hospital-procurement-urls-20261027/tree.md)是本轮入口来源；[官网初轮核查](../hospital-official-sites-20261027/tree.md)保留早期口径。本分支为单轮官网采集，不改历史统计。"
+    },
+    {
+      "id": "phase0_result",
+      "parent": "phase0",
+      "kind": "核验结果",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "可读78条可直接进入采集；7条需适配（上地医院、延庆区医院维护中、石景山医院#路由、顺义中医院disclosure、通用航天/purchase、安定医院招采平台登录页、潞河医院）；3条404需重新定位入口；2条不可达标记待补。三类失败分别记录，未合并为'无采购'。"
+    },
+    {
+      "id": "phase1_result",
+      "parent": "phase1",
+      "kind": "试采结果",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "518条日期内条目、72条关键词候选（D4系统类53、D1基础设施15、D5安全9、D2数据7、D3后勤1，可多计）；其中9条为'耗材试用信息'等信息类误收，另有锅炉阀门、电梯报警等边界条目，均需正文复核后定性；机房空调维保2条按设备维保另议。复跑修正了两处分页/URL拼接错误：真实分页为zbcg/90至40共52页、详情须urljoin。"
+    },
+    {
+      "id": "next_phase2",
+      "parent": "phase2",
+      "kind": "执行计划",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "已执行：2026-10-28批采，结果见 [batch_summary.csv](../../outputs/hospital-site-crawl-90-20261028/batch-20261028/batch_summary.csv)。"
+    },
+    {
+      "id": "phase2_result",
+      "parent": "phase2",
+      "kind": "批采结果",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "全批次：4017条/2854条2024以来/951候选/921详情。候选最多：北大第六49、肛肠44、整形外科43、天坛42、朝阳40。4站需JS渲染（301总院平台、门头沟、北大国际、广安门南区）；13站列表页无日期（54doctor CMS），日期在详情正文，待下一阶段补齐归位；7份详情失败已在站点summary记录原因。"
+    },
+    {
+      "id": "next_phase3",
+      "parent": "phase3",
+      "kind": "执行计划",
+      "at": "2026-10-28",
+      "status": "planned",
+      "text": "下一阶段：①正文级数字化判定（读取921+72份候选详情，按采购标的定案，剔除耗材误收）；②13个无日期站从详情正文提取发布日期归位；③4个JS渲染站用浏览器通道补采；④12个404/不可达入口重新定位；⑤按任务表回填发现公告数/详情成功数/数字化纳入数。"
+    },
+    {
+      "id": "phase3_extract",
+      "parent": "next_phase3",
+      "kind": "模板化整理",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "按用户模板（项目名称/产品/招标单位/客户标签/中标单位/运营商类型/中标金额万元/场景/时间）从1096条候选详情抽取：保留775条数字化项目（2024以来738条+37条无日期），排除249条非数字化（工程改造125/医用设备86/无信号38）。抽得中标单位81、明确金额50条；中标1家运营商（中国电信翼康，北大第一医院AI预测模型）。脚本 scripts/hospital_projects_extract.py；交付 outputs/.../projects_table/ 与 沟通目录xlsx/csv。"
+    },
+    {
+      "id": "extract_rules",
+      "parent": "phase3_extract",
+      "kind": "抽取口径",
+      "at": "2026-10-28",
+      "status": "completed",
+      "text": "口径：①金额只取成交/中标金额，预算/限价/控制价黑名单剔除，元自动折万元；②中标单位需显式中标/成交短语或结果公示上下文中紧跟的名称，医院/大学/代理机构/采购人排除，废标作废终止清空；③场景沿用五分类（IT基础设施/临床运营系统/临床数据/智慧后勤/网络安全）；④客户标签=区域·等级（来自593机构表）；⑤运营商=名称以移动/电信/联通/铁塔/广电开头或含中移/翼康/天翼；⑥37条日期缺失（54doctor站列表无日期且正文无发布时间），保留并备注。"
+    },
+    {
+      "id": "dagu-update-20261029",
+      "parent": "need",
+      "kind": "后续分支",
+      "status": "partial",
+      "at": "2026-10-29T19:03:25+08:00",
+      "text": "2026-10-29后续轮已完成19字段资料整理与正式交付：主表617条，覆盖partial；仅医疗数字化、信息化、通信网络及相关设备服务。历史统计保留原口径，最新计数、资格要求与缺口见[新分支](../searchingagent-dagu-bjxa-20261029/tree.md)和[Dagu运行](http://127.0.0.1:8097/dag-runs/hospital-tenders-20261029/bjxa-20261029-170035)。"
+    }
+  ]
+}

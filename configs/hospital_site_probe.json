@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "description": "Per-hospital official website probe settings. Platform hosts are never accepted as hospital-level homepages.",
+  "request": {
+    "timeout_seconds": 10,
+    "max_bytes": 800000,
+    "max_links_per_page": 400,
+    "user_agent": "ScrapingDataPipeline/1.0 (+research probe; contact: local user)",
+    "follow_top_candidates": 0,
+    "respect_robots": true
+  },
+  "search_queries": [
+    "\"{name}\" 官网",
+    "\"{name}\" (招标 OR 采购 OR 中标 OR 成交)",
+    "\"{name}\" (院务公开 OR 通知公告 OR 招标采购)"
+  ],
+  "column_keywords": {
+    "strong": ["招标", "采购", "中标", "成交", "比选", "遴选", "询价", "竞价"],
+    "medium": ["院务公开", "信息公开", "通知公告", "公示", "公告"],
+    "exclude": ["招聘", "人才", "挂号", "就诊须知", "停车", "招聘信息"]
+  },
+  "column_path_hints": ["zb", "cg", "zbcg", "caigou", "zhaobiao", "bid", "tender", "notice", "xxgk", "ywgk"],
+  "platform_domains": [
+    "ccgp.gov.cn",
+    "ccgp-beijing.gov.cn",
+    "ggzyfw.beijing.gov.cn",
+    "ggzyjy.beijing.gov.cn",
+    "sjsggzy.bjsjs.gov.cn",
+    "zycg.gov.cn",
+    "plap.mil.cn",
+    "weain.mil.cn",
+    "szecp.com.cn",
+    "cnncecp.com",
+    "cg.gt.cn",
+    "gxzbcg.net",
+    "baoming.cn",
+    "chinasrm.cn",
+    "gov.cn",
+    "mil.cn"
+  ],
+  "group_domains": [
+    "simeid.com",
+    "301hospital.com.cn"
+  ],
+  "status_labels": {
+    "found": "有本级采购栏目",
+    "not_found": "无本级采购栏目",
+    "unknown": "未核实"
+  },
+  "limitation": "A located column proves the page exists, not that the hospital publishes tenders there; upstream placement does not prove hospital use."
+}

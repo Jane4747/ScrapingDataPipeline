@@ -1,0 +1,12 @@
+[
+  {
+    "entity": {
+      "id": "demo-001",
+      "name": "示例医院",
+      "province": "示例省",
+      "city": "示例市",
+      "aliases": []
+    },
+    "task_id": "S00001"
+  }
+]

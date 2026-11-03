@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "task_id": "province-b1-2024-20261029",
+  "batch": 1,
+  "start": "2024-01-01",
+  "end": "2026-10-29",
+  "date_basis": "publication",
+  "scope": "province_medical_digital_procurement",
+  "entry": "全国公共资源交易平台省级/市级检索（SOURCE_TYPE=1 + DEAL_PROVINCE/DEAL_CITY）",
+  "keywords": [
+    "医",
+    "卫生",
+    "疾控",
+    "妇幼",
+    "血站",
+    "急救"
+  ],
+  "notice_types": [
+    "0202",
+    "0201"
+  ],
+  "sources": [
+    "1"
+  ],
+  "fields": [
+    "时间",
+    "项目名称",
+    "产品",
+    "招标单位",
+    "客户标签",
+    "中标单位",
+    "运营商类型",
+    "中标金额（万元）",
+    "场景",
+    "评审专家",
+    "网址",
+    "公告类型",
+    "省份",
+    "项目编号",
+    "中标金额原文",
+    "信息缺口",
+    "标签依据",
+    "响应人资格要求（对供应商基本要求）",
+    "资格预审资质要求",
+    "来源平台",
+    "资格要求出处",
+    "原文文件"
+  ],
+  "regions": [
+    {
+      "id": "310000",
+      "name": "上海",
+      "province": "310000",
+      "city": "",
+      "province_text": "上海市",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "110000",
+      "name": "北京",
+      "province": "110000",
+      "city": "",
+      "province_text": "北京市",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "440300",
+      "name": "深圳",
+      "province": "440000",
+      "city": "440300",
+      "province_text": "广东省",
+      "city_text": "深圳市",
+      "batch": 1,
+      "scope": "city"
+    },
+    {
+      "id": "440100",
+      "name": "广州",
+      "province": "440000",
+      "city": "440100",
+      "province_text": "广东省",
+      "city_text": "广州市",
+      "batch": 1,
+      "scope": "city"
+    },
+    {
+      "id": "320000",
+      "name": "江苏",
+      "province": "320000",
+      "city": "",
+      "province_text": "江苏省",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "330000",
+      "name": "浙江",
+      "province": "330000",
+      "city": "",
+      "province_text": "浙江省",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "420000",
+      "name": "湖北",
+      "province": "420000",
+      "city": "",
+      "province_text": "湖北省",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "510000",
+      "name": "四川",
+      "province": "510000",
+      "city": "",
+      "province_text": "四川省",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    },
+    {
+      "id": "370000",
+      "name": "山东",
+      "province": "370000",
+      "city": "",
+      "province_text": "山东省",
+      "city_text": "",
+      "batch": 1,
+      "scope": "province"
+    }
+  ],
+  "region_order": "newest_first",
+  "allow_network": true,
+  "delay": 3.5,
+  "max_pages": 100,
+  "max_api_calls": 1600,
+  "max_details": 1400,
+  "workbook_name": "分省医疗数字化采购_第1批_2024年至今.xlsx",
+  "node": "C:\\Users\\Jane\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "artifact_modules": "C:\\Users\\Jane\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules",
+  "code_sha256": {
+    "pipeline\\research\\province_update.py": "121f7a9e5bd6cd9d207593730f766b2b7ce062ac7721edb2ce70f16bb88c911a",
+    "pipeline\\research\\national_ggzy.py": "b098c38a40fd6a4a9c805a99c6b47a81b0ee17e76813a7384486553c3a356bde",
+    "pipeline\\research\\fetch.py": "591e62fa0815668cbc087aafe13e6359a57c92374d0419a571326b51557bb45b",
+    "pipeline\\research\\bid_common.py": "9230158913a73418fb13eb9de3f5e4a5bfa2f2631ebef67766912e466e15b0a4",
+    "pipeline\\research\\tender_fields.py": "d8ab57b8c11b698d0c25d729f063a1d7b951ca8e29230a8b2d8f270acd59e519",
+    "pipeline\\research\\zycg.py": "75102895fc0a17b29d1bdaa9585ccbc018530e4db3bcc242225f5260502ecf90",
+    "scripts\\export_province_workbook.mjs": "642669c8b4de5a7799c0ed0a8e41cc41429a0e22c16ad7b2c696d1c29a723f3e"
+  }
+}

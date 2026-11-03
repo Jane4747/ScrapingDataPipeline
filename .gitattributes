@@ -1,0 +1,4 @@
+# Preserve immutable archive bytes for SHA256 verification.
+idea-trees/** -text
+# The portable batch source manifest also records exact published bytes.
+scripts/batches_20261103/** -text

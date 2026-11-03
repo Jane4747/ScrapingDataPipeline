@@ -1,0 +1,49 @@
+{
+  "case_id": "puh3-digital-procurement-20261027",
+  "archive_status": "completed",
+  "coverage_status": "partial",
+  "tree_nodes": 35,
+  "unique_node_ids": true,
+  "valid_parents": true,
+  "tree_rendered_with": "existing scripts/idea_tree_writer.py",
+  "copied_files": 40,
+  "copied_file_hashes_match": true,
+  "evidence_zip_crc_ok": true,
+  "evidence_zip_entries_sha256_verified": 1130,
+  "workbook_checks": {
+    "summary": {
+      "since": "2024-01-01",
+      "until": "2026-10-27",
+      "status": "partial",
+      "ledger_rows": 60,
+      "source_notice_rows": 67,
+      "unique_source_urls": 66,
+      "dedup_notice_count": 65,
+      "award_ledger_rows": 9,
+      "priced_award_rows": 5,
+      "held_rows": 19,
+      "category_counts": {
+        "IT基础设施与运维": 17,
+        "临床数据与知识服务": 13,
+        "智慧后勤与安防": 5,
+        "临床与运营信息系统": 21,
+        "网络与数据安全": 4
+      },
+      "scheduled": false
+    },
+    "native_hyperlinks": 215,
+    "xlsx_formula_errors": 0,
+    "source_files": 1130,
+    "checks": [
+      "关键汇总缓存值60/9/5与独立JSON一致",
+      "所有项目成交总额逐行核对",
+      "缺失及单价结算总额为空",
+      "215条原生超链接存在",
+      "所有工作表无Excel错误单元格",
+      "全部引用原文文件存在"
+    ]
+  },
+  "new_crawl_performed": false,
+  "scheduled": false,
+  "git_commit_or_push_performed": false
+}

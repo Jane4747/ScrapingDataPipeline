@@ -1,0 +1,246 @@
+{
+  "id": "searchingagent-dagu-bjxa-20261029",
+  "created_at": "2026-10-29T16:56:14+08:00",
+  "updated_at": "2026-10-29T19:03:25+08:00",
+  "status": "partial",
+  "status_note": "本轮90入口处理与阶段表格交付完成，主表617条；历史覆盖partial，保留待补与待核验缺口。Dagu覆盖门禁exit 3表示历史全覆盖未获证明，不代表全部产出失败。",
+  "requirement": "以 Codex 为任务入口，采用 Dagu 显示真实执行进度，更新北京、雄安已有招标入口的医院自2024年1月1日起医疗数字化、信息化、通信网络及相关设备服务公告，输出含19个指定字段的可追溯表格。",
+  "theme": "SearchingAgent Dagu接入与北京雄安医院数字化招采更新",
+  "tool": "Codex＋Dagu v2.24.0＋既有医院采集器＋可追溯字段提取",
+  "delivery": "[正式工作簿](../../outputs/hospital-site-crawl-90-20261029/bjxa-20261029-170035/delivery/北京雄安医院招采公告_2024至今.xlsx)、[归档说明](../../outputs/hospital-site-crawl-90-20261029/bjxa-20261029-170035/ARCHIVE.md)、[最终交付验收](http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-185456)；历史执行：[hospital-tenders-20261029 / bjxa-20261029-170035](http://127.0.0.1:8097/dag-runs/hospital-tenders-20261029/bjxa-20261029-170035)、[hospital-tenders-backfill-20261029 / bf-20261029-180627](http://127.0.0.1:8097/dag-runs/hospital-tenders-backfill-20261029/bf-20261029-180627)、[hospital-tenders-backfill-20261029 / bf-20261029-181648](http://127.0.0.1:8097/dag-runs/hospital-tenders-backfill-20261029/bf-20261029-181648)、[hospital-tenders-finalize-20261029 / delivery-20261029-184359](http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-184359)",
+  "result": {
+    "dagu_offline_verified": true,
+    "parallel_processes": 3,
+    "parallel_overlap_seconds": 2.564,
+    "current_live_run_status": "partial",
+    "current_live_run_counts": {
+      "generated_at": "2026-10-29T10:58:45.293106+00:00",
+      "since": "2024-01-01",
+      "until": "2026-10-29",
+      "input_pages": 4478,
+      "records": 617,
+      "duplicate_urls": 0,
+      "excluded": 3861,
+      "qualification_rows": 210,
+      "prequalification_rows": 2,
+      "award_amount_rows": 79,
+      "status": "partial",
+      "scope": "本表包含已取得原文且日期与医院关联可核的公告，不代表全部网站历史完整覆盖。",
+      "requested_scope": "digital",
+      "main_table_entrance_count": 42,
+      "main_table_hospital_name_count": 42,
+      "main_table_hospital_name_note": "按入口对应医院名称字符串去重计数；组合名称不拆分，不等于唯一法人医院数",
+      "year_counts": {
+        "2024": 131,
+        "2025": 223,
+        "2026": 263
+      },
+      "announcement_type_counts": {
+        "采购公告": 358,
+        "中标或成交公告": 203,
+        "采购论证结果公示": 1,
+        "市场调研或征集": 12,
+        "中标候选人公示": 7,
+        "单一来源公示": 29,
+        "终止或废标公告": 5,
+        "采购意向": 1,
+        "更正公告": 1
+      },
+      "scope_review_sha256": "b987d8ce96e0aea60847d838f5391d914b07739d0e926d81658f5b44d5771bd7",
+      "scope_review_rows": 148,
+      "main_rows_with_matched_scope_review": 83
+    },
+    "entry_tasks": 90,
+    "linked_institution_records": 104,
+    "since": "2024-01-01",
+    "until": "2026-10-29",
+    "subject_scope": "仅医疗数字化、信息化、通信网络及相关设备服务公告",
+    "run_id": "delivery-20261029-185456",
+    "attempt_id": "db015d",
+    "dashboard_url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-185456",
+    "output_directory": "C:\\Users\\Jane\\.codex\\.chatgpt-projects\\g-p-6ad9720f1cd48191b33b188cf4398a78\\work\\hospital-tenders-20261029\\bjxa-20261029-170035",
+    "max_active_sites": 6,
+    "per_domain_concurrency": 1,
+    "full_history_coverage_verified": false,
+    "dagu_execution_status": "failed",
+    "archive_directory": "E:\\CAICTBigData\\coding\\outputs\\hospital-site-crawl-90-20261029\\bjxa-20261029-170035",
+    "workbook": "E:\\CAICTBigData\\coding\\outputs\\hospital-site-crawl-90-20261029\\bjxa-20261029-170035\\delivery\\北京雄安医院招采公告_2024至今.xlsx",
+    "source_run_id": "bjxa-20261029-170035",
+    "main_retry_attempt": "8f9a0a",
+    "execution_links": [
+      {
+        "workflow": "hospital-tenders-20261029",
+        "run_id": "bjxa-20261029-170035",
+        "last_attempt": "8f9a0a",
+        "status": "preliminary_export_rejected_pending_backfill",
+        "url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-20261029/bjxa-20261029-170035",
+        "note": "90 entrances processed; targeted C0089 retry completed. Preliminary 477-row export rejected by semantic QA."
+      },
+      {
+        "workflow": "hospital-tenders-backfill-20261029",
+        "run_id": "bf-20261029-180627",
+        "attempt": "fd8bc4",
+        "status": "candidate_collection_completed_offline_phase_stopped_for_final_scope",
+        "started_at": "2026-10-29T18:10:23+08:00",
+        "url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-backfill-20261029/bf-20261029-180627",
+        "scope": "305 already-discovered unvisited digital-title candidates across 17 entrances, followed by consolidation and final export.",
+        "candidate_result": {
+          "processed": 305,
+          "new_successful": 304,
+          "remaining_unvisited": 0
+        }
+      },
+      {
+        "workflow": "hospital-tenders-backfill-20261029",
+        "run_id": "bf-20261029-181648",
+        "attempt": "66f2ec",
+        "status": "collection_completed_preliminary_export_rejected",
+        "started_at": "2026-10-29T18:16:51+08:00",
+        "url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-backfill-20261029/bf-20261029-181648",
+        "scope": "Final semantic scope includes 509 total known digital-title candidates across 18 entrances; already-visited 305 candidates skipped, remaining 204 targeted before final export.",
+        "candidate_result": {
+          "targeted_candidates": 509,
+          "new_successful": 507,
+          "remaining_unvisited": 0
+        }
+      },
+      {
+        "workflow": "hospital-tenders-finalize-20261029",
+        "run_id": "delivery-20261029-184359",
+        "attempt": "73495a",
+        "status": "preliminary_export_rejected_pending_final_scope_batch",
+        "dagu_status_code": 2,
+        "started_at": "2026-10-29T18:44:17+08:00",
+        "finished_at": "2026-10-29T18:49:50+08:00",
+        "url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-184359",
+        "scope": "119 source reviews applied; 628-row candidate passed spreadsheet checks but 11 additional scope risks identified in full-table review. Replaced by the next reviewed delivery."
+      },
+      {
+        "workflow": "hospital-tenders-finalize-20261029",
+        "run_id": "delivery-20261029-185456",
+        "attempt": "db015d",
+        "status": "completed_with_coverage_gaps",
+        "dagu_status_code": 2,
+        "started_at": "2026-10-29T18:55:13+08:00",
+        "finished_at": "2026-10-29T19:00:08+08:00",
+        "url": "http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-185456",
+        "scope": "最终交付验收：148条原文范围逐条核验；83保留、48排除、17待核；使用4478条已存采集记录离线生成表格。",
+        "dagu_status": "failed",
+        "coverage_gate_exit_code": 3,
+        "artifact_quality": "passed",
+        "review_status": "accepted_as_partial_coverage_delivery"
+      }
+    ],
+    "scope_review_counts": {
+      "review": 17,
+      "keep": 83,
+      "exclude": 48
+    }
+  },
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "status": "open",
+      "at": "2026-10-29T17:01:31+08:00",
+      "text": "以 Codex 为任务入口，采用 Dagu 显示真实执行进度，更新北京、雄安已有招标入口的医院自2024年1月1日起医疗数字化、信息化、通信网络及相关设备服务公告，输出含19个指定字段的可追溯表格。"
+    },
+    {
+      "id": "architecture",
+      "parent": "need",
+      "kind": "框架决定",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "采用 Codex → 业务任务合同/来源/预算 → Dagu统一调度与网页 → 数据源、采集调度、解析抽取、数据治理、存储输出五层业务流水线。RSIHub作为独立候选实验与评测发布层；后者仍为架构设计。"
+    },
+    {
+      "id": "dagu",
+      "parent": "architecture",
+      "kind": "已完成接入",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "Dagu v2.24.0已在本机127.0.0.1:8097运行。固定官方Windows版本并校验SHA-256；现有流水线经本地命令接入。工作流执行队列、依赖、重试与取消统一由Dagu负责，业务中心保留范围合同与质量收据。"
+    },
+    {
+      "id": "offline-proof",
+      "parent": "dagu",
+      "kind": "验证证据",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "五个步骤Succeeded，三条真实本地流程（公共来源离线检索计划、厂商离线检索计划、一份保存原文的处理与交付）并行通过，共同运行2.564秒；任务状态、日志和输出均保留。[验证收据](offline-validation-receipt.json)。未执行联网采集或模型Agent，单页样本0条匹配线索/0个项目，不证明抽取准确率。"
+    },
+    {
+      "id": "scope",
+      "parent": "need",
+      "kind": "本轮范围",
+      "status": "completed",
+      "at": "2026-10-29T17:01:31+08:00",
+      "text": "沿用第一批90条栏目入口任务，关联104条机构记录；90是入口任务数，104是机构关联记录数，不合并为医院数量。公告日期2024-01-01至2026-10-29，日期不明单列。[结构化范围及字段](task-scope.json)。 Jane已明确本轮仅纳入医疗数字化、信息化、通信网络及相关设备服务公告，非相关采购排除，关联不明条目待核。"
+    },
+    {
+      "id": "history",
+      "parent": "scope",
+      "kind": "历史成果",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "[2026-10-28官网采集树](../hospital-site-crawl-90-20261028/tree.md)及其原始统计保留。历史存在入口不可达、JS分页、日期缺失和待正文复核等缺口；历史候选数不当成本轮新增成果。"
+    },
+    {
+      "id": "fields",
+      "parent": "scope",
+      "kind": "交付字段",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "固定19个字段：时间、项目名称、产品、招标单位、客户标签、中标单位、运营商类型、中标金额（万元）、场景、评审专家、网址、公告类型、省份、项目编号、中标金额原文、信息缺口、标签依据、响应人资格要求（对供应商基本要求）、资格预审资质要求。补充医院/入口任务ID、采集时间、原文位置、解析状态等追溯信息。"
+    },
+    {
+      "id": "quality",
+      "parent": "fields",
+      "kind": "字段规则",
+      "status": "completed",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "中标金额与预算分开，原币值保留并据单位换算万元；项目编号/采购人/分包用于显式关联，不能仅凭同名合并。响应人基本要求与资格预审条件分别摘录并标明证据位置；采购公告尚无中标方时注明阶段未产生，避免误报为解析失败。"
+    },
+    {
+      "id": "live-crawl",
+      "parent": "need",
+      "kind": "本轮执行",
+      "status": "partial",
+      "at": "2026-10-29T19:03:25+08:00",
+      "text": "本轮90入口处理与阶段表格交付完成，主表617条公告，业务覆盖partial。数据目录沿用bjxa-20261029-170035，最终交付验收delivery-20261029-185456 / attempt db015d，执行状态failed。清单最多关联104机构ID；历史全覆盖未验证，不能称为2024年以来全量完成。[最终交付验收](http://127.0.0.1:8097/dag-runs/hospital-tenders-finalize-20261029/delivery-20261029-185456)。"
+    },
+    {
+      "id": "progress",
+      "parent": "live-crawl",
+      "kind": "进度口径",
+      "status": "partial",
+      "at": "2026-10-29T19:03:25+08:00",
+      "text": "最多6站并行、同域串行；执行和业务覆盖分别记录。调度配置继承修复已通过实际enqueue工作流scheduler-config-check/configcheck-20261029-1716验证succeeded。Windows原子文件替换短占用已修复，C0089在原run中指定步骤重试。最终验收前三步Succeeded，覆盖门禁exit 3表示全历史覆盖未获证明，Dagu总体failed；已有表格通过技术与范围QA，不代表全部采集或交付失败。原attempt和重试历史保留。"
+    },
+    {
+      "id": "outputs",
+      "parent": "live-crawl",
+      "kind": "交付位置",
+      "status": "partial",
+      "at": "2026-10-29T19:03:25+08:00",
+      "text": "已归档正式[工作簿](../../outputs/hospital-site-crawl-90-20261029/bjxa-20261029-170035/delivery/北京雄安医院招采公告_2024至今.xlsx)、JSON/CSV、预览、最终状态、覆盖台账与程序快照至 `E:\\CAICTBigData\\coding\\outputs\\hospital-site-crawl-90-20261029\\bjxa-20261029-170035`。主表涉及42个入口；按年份分布为2024年131条、2025年223条、2026年263条。含响应人资格要求210条、资格预审2条、明确中标金额79条。24项回归、4张表格预览和全部30列读回通过，617条主表原文哈希通过核对。最终QA已放行为阶段交付。原文留在原运行目录，不重复复制；表格仍保留缺口与待核验声明。"
+    },
+    {
+      "id": "evolution",
+      "parent": "architecture",
+      "kind": "后续进化",
+      "status": "planned",
+      "at": "2026-10-29T16:56:14+08:00",
+      "text": "按政采公资、医院名录与采购入口、药械集采、厂商来源扩展适配器；失败证据进入RSIHub候选改进，独立固定样本评测及小范围联网验证通过后版本发布。当前不声称自进化闭环或多模型能力已部署。"
+    },
+    {
+      "id": "subject-scope-confirmed",
+      "parent": "scope",
+      "kind": "用户确认口径",
+      "status": "completed",
+      "at": "2026-10-29T17:01:31+08:00",
+      "text": "仅医疗数字化、信息化、通信网络及相关设备服务公告。以实际采购标的和正文内容判断医疗数字化、信息化、通信网络及其直接相关设备服务；记录纳入依据。非相关采购不纳入主表；不能仅因公告出现“信息”“系统”等泛词纳入。关联不明确的条目进入待核清单。"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "captured_at": "2026-10-28T14:42:31+08:00",
+  "job": {
+    "created_at": "2026-10-28T06:02:34.721Z",
+    "status": "running",
+    "supervisor_pid": 50132,
+    "current_phase": "government",
+    "collector_pid": 12556,
+    "workbook": "E:/CAICTBigData/coding/outputs/01a17c0d-96d1-79a3-9665-f4fc255ee0c7/全国公共资源交易平台_医疗数字化_2026.xlsx",
+    "max_batch_rounds": 12,
+    "api_calls_per_batch": 500,
+    "max_detail_calls_per_phase": 6000,
+    "refresh_seconds": 180,
+    "phases": [
+      {
+        "id": "government",
+        "title": "政府采购",
+        "status": "running",
+        "directory": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-v2"
+      },
+      {
+        "id": "engineering",
+        "title": "工程建设",
+        "status": "queued",
+        "directory": "E:\\CAICTBigData\\coding\\outputs\\national-ggzy-medical-digital-2026-20261028\\collection-engineering"
+      }
+    ],
+    "events": [],
+    "updated_at": "2026-10-28T06:42:27.969Z",
+    "last_export_at": "2026-10-28T06:22:29.464Z",
+    "last_export_error": "Command failed: C:/Users/Jane/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe E:\\CAICTBigData\\coding\\outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\build.mjs\nTraceback (most recent call last):\r\n  File \"E:\\CAICTBigData\\coding\\outputs\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\support\\native_links.py\", line 62, in <module>\r\n    os.replace(temporary,target)\r\nPermissionError: [WinError 5] 拒绝访问。: 'E:\\\\CAICTBigData\\\\coding\\\\outputs\\\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\\\全国公共资源交易平台_医疗数字化_2026.links.tmp' -> 'E:\\\\CAICTBigData\\\\coding\\\\outputs\\\\01a17c0d-96d1-79a3-9665-f4fc255ee0c7\\\\全国公共资源交易平台_医疗数字化_2026.xlsx'\r\nnode:internal/errors:986\r\n  const err = new Error(message);\r\n    ",
+    "current_round": 1,
+    "phase_progress": {
+      "records": 593,
+      "pending_windows": 355,
+      "status": "running"
+    }
+  },
+  "government_progress": {
+    "status": "running",
+    "updated_at": "2026-10-28T14:42:00+08:00",
+    "api_calls_total": 745,
+    "detail_calls_total": 603,
+    "medical_digital_candidates": 606,
+    "records": 593,
+    "pending_search_windows": 355,
+    "complete_windows": 82,
+    "failures": 29,
+    "last_search": {
+      "start": "2026-08-17",
+      "end": "2026-08-24",
+      "word": "医",
+      "source": "3",
+      "stage": "0201",
+      "page": 1
+    }
+  },
+  "successful_workbook": {
+    "updated_at": "2026-10-28T14:22:06+08:00",
+    "source_record_count": 439,
+    "deduplicated_notice_count": 422,
+    "award_records": 282,
+    "award_lot_rows": 80,
+    "tender_records": 140,
+    "scope_status": "partial"
+  },
+  "warning": "检查点计数与最后成功导出的Excel计数各有时间戳，不能混用。",
+  "workbook_lock_file_present": true
+}

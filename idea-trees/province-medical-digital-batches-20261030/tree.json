@@ -1,0 +1,131 @@
+{
+ "id": "province-medical-digital-batches-20261030",
+ "created_at": "2026-10-30T13:23:44+08:00",
+ "updated_at": "2026-10-30T13:23:44+08:00",
+ "status": "partial",
+ "status_note": "第一批正在续跑且整体partial；第二批已规划未入队。",
+ "requirement": "第一批（上海、北京、深圳、广州、江苏、浙江、湖北、四川、山东）与第二批（其余24个区域）按公告发布日2024-01-01至2026-10-29采集医疗数字化采购信息，统一22字段交付。",
+ "theme": "分省医疗数字化采购采集（两批共33个区域）",
+ "tool": "既有采集器＋Dagu＋共享节流＋Artifact Tool",
+ "delivery": "[代码总结](CODE_SUMMARY.md)、[快照清单](manifest.json)、[归档验证](validation.json)",
+ "result": {
+  "archive_status": "completed",
+  "coverage_status": "partial",
+  "batch1_regions": 9,
+  "batch2_regions": 24,
+  "batch1_records": 446,
+  "batch1_pending_windows": 3256,
+  "batch1_api_calls": 790,
+  "date_start": "2024-01-01",
+  "date_end": "2026-10-29",
+  "facts_verified": false,
+  "code_revision": 2,
+  "github_pushed": false
+ },
+ "nodes": [
+  {
+   "id": "need",
+   "parent": null,
+   "kind": "需求",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "第一批（上海、北京、深圳、广州、江苏、浙江、湖北、四川、山东）与第二批（其余24个区域）按公告发布日2024-01-01至2026-10-29采集医疗数字化采购信息，统一22字段交付。"
+  },
+  {
+   "id": "impl",
+   "parent": "need",
+   "kind": "代码实现",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "新增3个文件、修改1个采集器：分省编排、工作簿导出、启动脚本；见[代码总结](CODE_SUMMARY.md)与[源码快照](artifacts/code)。"
+  },
+  {
+   "id": "entry",
+   "parent": "impl",
+   "kind": "数据源层",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "入口为全国公共资源交易平台省级/市级检索：DEAL_PROVINCE 取省级、DEAL_CITY 取市级（深圳440300、广州440100）；SOURCE_TYPE=1 政采，结果公告0202+招标公告0201，六关键词逐词检索。"
+  },
+  {
+   "id": "schedule",
+   "parent": "impl",
+   "kind": "调度层",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "Dagu 图工作流：verify → 每区域一个 run-region 步骤 → summary → export；区域步骤 continue_on.failure，单省失败不拖垮整批；每区域独立目录、预算、来源锁。"
+  },
+  {
+   "id": "throttle",
+   "parent": "impl",
+   "kind": "风控治理",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "9并发首跑在每区域约79–101次请求后被 code 800 拦下（18分钟约700请求）。revision 2 改为跨进程共享节流（合计1请求/3.5秒）、900秒冷却重试1次、并发降到3；实测聚合0.30请求/秒，未再触发。"
+  },
+  {
+   "id": "fields",
+   "parent": "impl",
+   "kind": "字段层",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "复用 tender_fields 的22列契约，与三平台版本一致；省份按区域补写，来源平台标注为省级聚合入口，原文与行号哈希保留。"
+  },
+  {
+   "id": "export",
+   "parent": "impl",
+   "kind": "输出层",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "工作簿两页：数据页（22列、动态行数）与采集范围页（逐区域状态、记录数、缺口、说明）；summary.json 记录去重数与 city_unconfirmed。"
+  },
+  {
+   "id": "verify",
+   "parent": "need",
+   "kind": "验证",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "离线回归31项通过（含共享节流时序与DAG并发断言）；单省端到端小预算试跑验证了省级记录解析与工作簿版式；DAG 两次 validate 退出码0。"
+  },
+  {
+   "id": "coverage",
+   "parent": "need",
+   "kind": "采集覆盖",
+   "status": "in_progress",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "截至归档时刻第一批累计446条记录、api 790次、待检索窗口3256个，9区域全部 partial；第二批24区域契约与DAG已生成但未入队。"
+  },
+  {
+   "id": "gap-rate",
+   "parent": "coverage",
+   "kind": "缺口·速率",
+   "status": "completed",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "首跑 code 800 的根因是并发而非预算（1600/区域远未用尽）；已用共享节流修复，但代价是时长升到数小时量级。"
+  },
+  {
+   "id": "gap-city",
+   "parent": "coverage",
+   "kind": "缺口·市口径",
+   "status": "in_progress",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "深圳/广州为市级口径，城市名未在正文出现的记录单独计入 city_unconfirmed（当前深圳28、广州59），不当作已确认市数据。"
+  },
+  {
+   "id": "gap-entry",
+   "parent": "coverage",
+   "kind": "缺口·入口",
+   "status": "in_progress",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "省级聚合入口收录不等于各省门户全量；公告数不等于项目数，多标包与多类型公告会拆行。任何“某省N条”只读作该入口收录N条。"
+  },
+  {
+   "id": "next",
+   "parent": "need",
+   "kind": "后续开发",
+   "status": "pending",
+   "at": "2026-10-30T13:23:44+08:00",
+   "text": "第一批跑完后入队第二批（pt-province-b2-2024-20261029 已就绪）；再评估是否补各省门户与按地市细分；RSI自动改码评估与多模型协作仍未实现。"
+  }
+ ]
+}

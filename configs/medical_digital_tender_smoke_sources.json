@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "topic": "医疗数字化中标公告规则实测",
+  "sources": [
+    {
+      "id": "ccgp",
+      "name": "中国政府采购网详情样本",
+      "allowed_domains": [
+        "www.ccgp.gov.cn"
+      ],
+      "seeds": [
+        "https://www.ccgp.gov.cn/cggg/zygg/zbgg/202610/t20261027_27570032.htm",
+        "https://www.ccgp.gov.cn/cggg/zygg/zbgg/202610/t20261027_27569869.htm"
+      ]
+    }
+  ]
+}

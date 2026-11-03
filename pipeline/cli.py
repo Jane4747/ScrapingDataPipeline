@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from pipeline.catalog import PYTHON, TOOLS, runtime_env
-from pipeline.idea_tree import add_node, create_tree, load_tree, save_tree
+from pipeline.idea_tree import add_node, create_tree, load_tree, save_tree, upsert_node
 from pipeline.router import choose_tool
 from pipeline.runner import RunError, run_task
 
@@ -150,20 +150,23 @@ def cmd_run(args) -> int:
     tree["theme"] = args.theme
     tree["delivery"] = args.delivery
     tree["status"] = "running"
-    add_node(tree, "theme", "route", "decision", f"主题确认为：{args.theme}")
-    add_node(tree, "delivery", "theme", "decision", f"交付格式确认为：{args.delivery}")
+    upsert_node(tree, "theme", "route", "decision", f"主题确认为：{args.theme}")
+    upsert_node(tree, "delivery", "theme", "decision", f"交付格式确认为：{args.delivery}")
     save_tree(tree)
+    run_id = f"run-{sum(1 for n in tree['nodes'] if n['id'].startswith('run')) + 1}"
     try:
         result = run_task(tree, args)
     except Exception as exc:
         tree["status"] = "failed"
-        add_node(tree, "failure", "delivery", "error", str(exc), error_type=type(exc).__name__)
+        add_node(tree, f"{run_id}-failure", "delivery", "error", str(exc), error_type=type(exc).__name__)
         save_tree(tree)
         raise
     tree["status"] = result.get("status", "partial")
     if tree["status"] not in {"completed", "partial", "failed"}:
         tree["status"] = "failed"
-    add_node(tree, "run", "delivery", "action", "采集器已返回，成功与失败以结果统计为准。", result=result)
+    add_node(tree, run_id, "delivery", "action",
+             f"第{run_id.split('-')[-1]}次执行：成功{result.get('success_count', 0)}条、"
+             f"失败{result.get('failure_count', 0)}条。", result=result)
     save_tree(tree)
     print(json.dumps({"tree_id": tree["id"], "status": tree["status"], "result": result}, ensure_ascii=False, indent=2))
     return {"completed": 0, "partial": 3, "failed": 2}[tree["status"]]
