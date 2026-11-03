@@ -1,0 +1,9 @@
+{
+  "engine": "skyvern",
+  "embedded_runtime_imports": "passed",
+  "local_chrome_connection": "passed",
+  "browser_navigation_and_reading": "passed",
+  "source_url": "https://example.com",
+  "model_called": false,
+  "verified_at": "2026-10-27T15:11:52.338709+00:00"
+}

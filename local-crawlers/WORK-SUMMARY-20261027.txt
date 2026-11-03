@@ -1,0 +1,25 @@
+本次工作总结（2026-10-27）
+
+一、调研与方案
+检索 GitHub 爬虫智能体和 Harness 项目，核对主要功能、核心实现、自托管边界和部分授权说明。选定 browser-use、Skyvern、ScrapeGraphAI、Firecrawl 四个后端，由统一 MCP 入口提供给 Codex。
+
+二、已完成的本地部署
+browser-use 0.13.14、Skyvern 1.0.56、ScrapeGraphAI 2.3.1 已安装在独立 Python 环境。统一入口 local_crawlers 已注册到 Codex，提供状态检查、HTML 正文提取、JavaScript 页面渲染、采集任务提交、任务状态与结果查询、本地 Firecrawl URL 发现等六个工具。采集任务按需启动，默认并发一个，并保留来源、结果及日志。
+
+三、已做的验证
+三个框架已验证核心运行库、实际浏览器连接和页面读取；统一入口已验证 MCP 握手、工具发现、HTML 提取、JavaScript 渲染、后台任务查询和未配置模型时的明确错误提示。四个独立环境的依赖检查通过。迁移后重新运行三套框架和 MCP 验证，全部通过。目标代码库的 research 离线检查也通过。
+这些检查未调用模型，不代表已完成模型驱动的端到端采集验收。
+
+四、Firecrawl 系统准备
+已安装微软签名验证通过的 WSL 3.0.3，启用 Windows 的 WSL 和 VirtualMachinePlatform 功能。Ubuntu 24.04.5 镜像已通过摘要校验并预存 D:\CodexLocalCrawlers\installers。
+Windows 明确要求重启，遵照用户要求没有自动重启。Firecrawl 容器尚未运行；手动重启后继续 Complete-FirecrawlWSL.ps1，在专门的 CodexCrawlers 发行版内安装 Docker Engine 和 Compose，再启动并验证 Firecrawl。自托管基础接口不视为包含官方云端 Agent 的全部能力。
+
+五、代码迁移
+部署代码、配置、独立 Python 环境及相关文件已迁入 E:\CAICTBigData\coding\local-crawlers。复制校验覆盖 49,106 个文件；重建了虚拟环境启动脚本和命令入口。Codex 调用路径已更新到 E 盘并复测通过。
+旧 C 盘入口仅保留兼容目录联接；实际使用 E 盘代码。迁移前的状态与验收记录保存在 migration-history，已有研究项目文件和未提交改动均予以保留。
+Linux 镜像与后续容器数据继续使用 D:\CodexLocalCrawlers。
+
+六、待完成事项
+1. 用户手动重启 Windows 后，完成 Firecrawl 容器安装、启动和真实采集验证。
+2. 按用户要求，稍后接入 DeepSeek V4.1 Flash；实际模型标识、接口地址和密钥尚未配置。接入后再验证结构化输出、工具调用及视觉兼容性。
+3. 本组件目前独立通过 MCP 使用，尚未并入父项目的版本1研究任务协议。

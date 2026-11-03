@@ -1,0 +1,57 @@
+视觉伺服论文：全文、图片、系统架构（2026-11-01）
+
+代码位置：E:\CAICTBigData\coding\literature
+统一阅读入口：outputs\visual-servoing-library-20261101\architecture_report.html
+统一图片入口：outputs\visual-servoing-library-20261101\images\index.html
+
+已复用本库 pipeline.research.fetch.Fetcher 和 literature/extract_figures.py。
+不修改原 arXiv 收集器或原始PDF。各轮下载、图像提取和缺口分别保留。
+本任务100篇来自2026-10-27的清单；正式卷期年份与首发记录年份可能不同。
+
+运行环境
+  下载／导入／汇总：D:\Anaconda3\envs\BigData\python.exe
+  PDF图像处理：literature/figure-runtime.json 所指的已安装运行时
+  不安装新依赖，不调用付费API；代码不写入任何账号或密钥。
+
+采集（先dry-run）
+  python -B literature/doi_collector.py --spec literature/visual-servoing-20261101/spec.json --dry-run
+  python -B literature/doi_collector.py --spec literature/visual-servoing-20261101/spec.json --resume
+  resume校验已下载文件；不会默认重试已记录的失败。需要明确重试时增加--retry-failed。
+  新增候选或来源应使用新task_id、独立spec和output_dir，不改变旧任务快照。
+
+图片提取
+  python -B literature/run_doi_figures.py --root outputs/visual-servoing-20261101 --image-dir images-v3 --correct-captions --reuse-assets images-v2
+  上述命令使用图像运行时；--reuse-assets用于已有第二版素材时。
+  新任务首次提取去掉--reuse-assets，并使用新的独立image-dir。
+  文件按“论文名称__Figure_图号__图注简称.png”命名。
+  没有独立图名的素材按“论文名称__Page_页码_Image_序号.png”命名。
+  超长名称缩短；完整题名、完整图注、页码、像素与SHA256见image_catalog.csv/JSON。
+  编号图、内嵌素材和整页预览分别计数；同一Figure可能包含多个内嵌素材。
+  自动图注识别和裁剪不等于每张图均人工复核；逐页预览用于发现遗漏。
+  images为原算法结果，images-v2修复重复文字层，images-v3修复双栏文本混合并复用素材。
+  统一文献库再发布短路径图片副本，并保留source_file、original_filename与完整题名。
+  统一库的PDF、文本、图片、报告均在同一目录下，可整体复制；历史提取目录不修改。
+
+架构分析与汇总
+  python -B literature/doi_evidence.py --root outputs/visual-servoing-20261101
+  python -B literature/doi_library.py --metadata literature/visual-servoing-20261101/catalog.json --sources outputs/visual-servoing-20261101 outputs/visual-servoing-supplement-20261101 --notes literature/visual-servoing-20261101/architecture_notes.json --out outputs/visual-servoing-library-20261101 --image-dir images-v3
+  doi_evidence仅提取带页码的原文窗口，不自动判断论文架构。
+  architecture_notes.json记录实际阅读后的归纳与迁移建议，未知内容不填。
+  没有全文的文献标为fulltext_missing，不凭题名编造系统实现。
+
+补入机构或用户提供的PDF（纯离线）
+  将PDF复制到 outputs/visual-servoing-library-20261101/inbox。
+  python -B literature/doi_import.py --inbox outputs/visual-servoing-library-20261101/inbox --catalog literature/visual-servoing-20261101/catalog.json --out outputs/visual-servoing-local-新的日期或批次
+  程序核对题名/DOI，歧义和不匹配保留在unmatched.json，不移动或删除原文件。
+  对新批次执行图片提取、原文阅读后，把该批次目录追加到doi_library的--sources。
+
+核验
+  BigData环境：python -B -m unittest discover -s literature -p "test*collector.py" -v
+  图像环境：python -B -m unittest discover -s literature -p "test*extract_figures.py" -v
+  图像环境：python -B -m unittest discover -s literature -p test_doi_caption_layout.py -v
+  真实网络下载已实际运行；离线测试不能替代访问状态、裁剪质量或实物机器人验证。
+
+边界
+  访问被拒、robots限制、缺少开放全文均单列，未绕过登录或付费访问。
+  下载有作者预印本/接受稿；不能把它们自动标为正式出版社最终版本。
+  学术原图及原文保留来源版权与许可，本资料库用于本地研究整理。

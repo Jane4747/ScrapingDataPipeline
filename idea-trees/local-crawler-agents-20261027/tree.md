@@ -1,0 +1,102 @@
+# 想法树 local-crawler-agents-20261027
+
+- 状态：partial
+- 创建：2026-10-27T23:45:30+08:00
+- 更新：2026-10-27T23:45:30+08:00
+- 工具：现有idea_tree_writer + 本轮源码/依赖/验收快照 + SHA256与ZIP校验
+- 主题：本地爬虫智能体与Harness：browser-use、Skyvern、ScrapeGraphAI、Firecrawl及Codex MCP
+- 交付：[完整说明](DETAILS.md)、[代码索引](CODE-INDEX.md)、[代码与记录压缩包](local-crawlers-source-and-records-20261027.zip)、[任务模板](TASK-TEMPLATES.json)、[归档校验](ARCHIVE-VERIFICATION.json)
+
+## 节点
+
+- **需求** `need`：将本次本地爬虫部署的代码、能力、状态、决策和待办完整归档，便于以后检索与安排任务。归档已完成，部署整体仍为partial。
+  - **查找入口** `entry`：先读[完整说明](DETAILS.md)，找源码看[代码索引](CODE-INDEX.md)，直接备份用[压缩包](local-crawlers-source-and-records-20261027.zip)，安排任务参考[模板](TASK-TEMPLATES.json)。
+  - **用户决定** `decisions`：网页种类多；采集程序在本机，提供给Codex；代码迁往E:\CAICTBigData\coding；DeepSeek稍后配置；WSL现在准备但不得自动重启。
+    - **范围** `scope`：选择四后端+一个MCP入口+两个无需后端模型的基础工具。仅记录已安装版本和当前适配器；不把厂商云端能力当作本地已部署能力。
+  - **架构** `arch`：Codex→gateway.py→job_runner.py→独立环境worker.py→本地Chrome或Firecrawl API→runs结果。Harness负责统一调用、预算、后台进程、状态、日志和结构校验。
+    - **已实现** `harness-functions`：参数检查、URL格式校验、缺失模型/后端报错、默认单任务并发、时限、进程树超时清理、原子JSON保存、日志、结果预览、schema结构校验。
+    - **当前边界** `harness-limits`：尚无周期调度、统一取消、遗留running自动修复、代理池、通用OCR、共享登录态、验证码服务和父研究协议集成；URL校验不等于研究来源白名单/robots约束。
+    - **MCP接口** `tools`：已注册local_crawlers，共6个工具；精确参数、限制和返回字段见[完整说明第8节](DETAILS.md)。
+      - **crawler_status** `tool-status`：无参数；检查安装版本、模型配置标记、Firecrawl可达性及输出目录，不返回密钥。配置齐全不等于模型调用验证成功。
+      - **fetch_page** `tool-fetch`：同步HTTP读取HTML；支持CSS区域；保存完整正文、标题和最多100个链接。默认回复12000字符、最多50000；HTML最多5000000字节；不执行JS、不解析PDF。
+      - **render_page** `tool-render`：无需后端模型，用本地Chrome渲染JS页面；后台任务；保存正文、链接、HTML、整页截图。默认120秒，DOM加载后等1.5秒；不自动点击/滚动/翻页。
+      - **start_crawl** `tool-start`：engine四选一+task+urls+可选schema；默认20页、30步、900秒；范围分别1..500、1..200、30..1800。Skyvern/Firecrawl只接一个起始URL；三个模型后端当前会明确报未配置。
+      - **job_status** `tool-poll`：按16位后台job_id读取状态和结果预览，返回完整结果与日志路径；默认12000字符，100..50000夹限；fetch-*同步结果目录不用此接口。
+      - **firecrawl_map** `tool-map`：本机/v2/map链接发现；默认100，范围1..1000；Firecrawl尚未启动，暂不可用。
+  - **四后端能力** `engines`：按任务选择：交互→browser-use；单站多步骤流程→Skyvern；已知网址统一字段→ScrapeGraphAI；链接发现和批量原文→Firecrawl。
+    - **browser-use 0.13.14** `bu`：独立环境已安装，基础浏览器验证通过；模型驱动交互尚待DeepSeek配置后验收。
+      - **能力** `bu-functions`：依据页面状态完成搜索、点击、输入、筛选、翻页、展开、滚动、切换标签页和提取；任务内可下载文件；保存历史，可要求JSON并验证结构。上述自动决策待模型实测。
+      - **实现** `bu-code`：[worker.py](artifacts/code/worker.py)的browser_use_task，Agent+Browser+兼容模型；use_cloud=False；每任务新资料目录、下载目录；max_steps传入Agent，检查history成功。
+      - **产物** `bu-output`：通用result.json、browser-history.json、downloads和任务日志；结果来源URL保留。
+      - **边界** `bu-limit`：未统一暴露历史重放/文件上传；不继承日常Chrome登录；视觉默认关闭。max_pages不是实际访问页数硬限制，当前靠步数/时限。
+      - **任务例** `bu-example`：在医院采购栏目输入设备关键词，逐条进入详情，提取标题、发布日期、采购人、金额、依据、来源链接；明确记录数目标、步数和时限。
+    - **Skyvern 1.0.56 local** `sky`：嵌入式运行库+内存SQLite已安装，专用本地Chrome/CDP基础验证通过；模型多步骤任务未验收。
+      - **能力** `sky-functions`：将检索、筛选、选择年份/类型、导航、信息提取或下载串成自然语言任务；支持传提取schema。原项目有更完整的表单/登录/工作流能力，当前不等于全开放。
+      - **实现** `sky-code`：worker.py的skyvern_task，Skyvern.local(use_in_memory_db=True)，每任务随机回环CDP端口，本机Chrome；仅run_task、单起始URL、步数与时限；completed才接受结果。
+      - **产物** `sky-output`：result.json、skyvern-run.json、artifacts和任务日志。内存数据库不是跨任务状态存储。
+      - **边界** `sky-limit`：没有完整Web平台、命名工作流管理/调度/直播工具；凭据、验证码、视觉、实际多步业务流程都未验收；云端反自动化能力不计本地。
+      - **任务例** `sky-example`：从单个省采购站入口输入关键词、选公告类型和年份、读取详情，提取采购人、预算、日期、附件链接；先用少量记录验收流程。
+    - **ScrapeGraphAI 2.3.1** `sg`：核心库和ChromiumLoader真实页面读取已通过；单/多页模型字段提取待验收。
+      - **能力** `sg-functions`：给定一个或多个已知URL，用同一自然语言字段要求提取并汇总；可带schema作最终结构检查，适合排版不统一的详情页。
+      - **实现** `sg-code`：worker.py的scrapegraph_task；SmartScraperGraph/SmartScraperMultiGraph；loader_kwargs直接放executable_path；schema加入提示并在worker末尾验证。
+      - **边界** `sg-limit`：未开放SearchGraph、脚本/音频生成、本地文档/OCR；复杂按钮交互用其他浏览器后端。结构正确不等于事实核验正确。
+      - **任务例** `sg-example`：提供一组医院/企业/项目详情页，统一提取机构、项目、产品、日期、原文依据、来源；未知字段留空，后续核对原文。
+    - **Firecrawl** `fc`：本地map/crawl适配器与Compose已备；WSL和镜像准备完，容器未运行，等待手动重启后继续。
+      - **已写接口** `fc-functions`：站点URL发现/v2/map；单站批量/v2/crawl，设置limit、返回Markdown、轮询完成并取尽结果分页；目前未实际服务验收。
+      - **实现** `fc-code`：[Compose](artifacts/code/firecrawl/compose.yaml)五服务：api、playwright、Redis、RabbitMQ、PostgreSQL；API仅127.0.0.1:3002，适配器强制本机服务，无托管兜底。
+      - **边界** `fc-limit`：task不会转换为主题/年份/栏目过滤；不接受非空schema；不含云Agent/搜索/监控/托管反自动化；部分镜像latest尚未拉取固定digest。
+      - **任务例** `fc-example`：服务验收后，从一个政策/产品文档入口抓取最多100页，保存Markdown和来源，再由Codex筛选主题、提取字段。
+  - **预算与输出** `budget`：默认并发1、时限15分钟；交互默认30步；Firecrawl默认20页。结果写E盘runs，Excel/CSV由Codex后处理。
+    - **页数语义** `budget-pages`：max_pages约束输入URL数和Firecrawl limit，对browser-use/Skyvern不是访问页数硬上限；严格域名/累计页数/深度/频率管理需要另接约束。
+    - **后台状态** `budget-state`：queued→running→completed/failed；input/state/result/supervisor/worker日志留存；超时清理worker进程树；无自动遗留状态修复和统一取消入口。
+    - **安排任务所需** `task-fields`：目标、入口、站点/栏目范围、关键词/时间口径、字段、记录/页数目标、步数、时限、交付格式、原文/附件保留要求；未知字段留空、保留依据与来源。
+  - **代码归档** `code`：[代码索引](CODE-INDEX.md)列出每个文件用途、可浏览副本和原路径；[清单](SOURCE-MANIFEST.json)记录每个副本SHA256、字节数、来源、分类与脱敏变更。
+    - **源文件** `file-gateway-py`：[gateway.py](artifacts/code/gateway.py)：六个 MCP 工具、输入检查、并发入口和后台任务提交。
+    - **源文件** `file-common-py`：[common.py](artifacts/code/common.py)：相对目录定位、环境变量、模型配置检查、TLS、URL校验与原子写入。
+    - **源文件** `file-worker-py`：[worker.py](artifacts/code/worker.py)：browser-use / Skyvern / ScrapeGraphAI / Firecrawl 及渲染适配器。
+    - **源文件** `file-job-runner-py`：[job_runner.py](artifacts/code/job_runner.py)：后台监督、任务时限、日志和超时进程树清理。
+    - **源文件** `file-install-ps1`：[Install.ps1](artifacts/code/Install.ps1)：创建四个独立 Python 环境并安装固定顶层版本。
+    - **源文件** `file-register-codex-ps1`：[Register-Codex.ps1](artifacts/code/Register-Codex.ps1)：注册 local_crawlers MCP，不包含全局配置或密钥。
+    - **源文件** `file-start-firecrawl-ps1`：[Start-Firecrawl.ps1](artifacts/code/Start-Firecrawl.ps1)：Docker 或专用 WSL 环境中的服务启动/停止。
+    - **源文件** `file-complete-firecrawlwsl-ps1`：[Complete-FirecrawlWSL.ps1](artifacts/code/Complete-FirecrawlWSL.ps1)：手动重启后的专用 Ubuntu 导入、Docker 安装与容器启动。
+    - **源文件** `file-configure-wslhost-ps1`：[Configure-WSLHost.ps1](artifacts/code/Configure-WSLHost.ps1)：管理员系统准备，启用功能且不自动重启。
+    - **源文件** `file-download-wsl-py`：[download_wsl.py](artifacts/code/download_wsl.py)：WSL 安装包下载与摘要校验辅助。
+    - **源文件** `file-download-ubuntu-py`：[download_ubuntu.py](artifacts/code/download_ubuntu.py)：Ubuntu WSL 镜像下载与摘要校验辅助。
+    - **源文件** `file-migrate-runtime-py`：[migrate_runtime.py](artifacts/code/migrate_runtime.py)：E盘迁移后重新生成虚拟环境命令入口。
+    - **源文件** `file-migration-validation-py`：[migration_validation.py](artifacts/code/migration_validation.py)：迁移后依赖和功能验证辅助。
+    - **源文件** `file-report-status-py`：[report_status.py](artifacts/code/report_status.py)：生成部署状态报告，不返回密钥值。
+    - **源文件** `file-verify-stack-py`：[verify_stack.py](artifacts/code/verify_stack.py)：MCP握手、工具发现、HTML/JS渲染和缺失模型验证。
+    - **源文件** `file-verify-browser-use-py`：[verify_browser_use.py](artifacts/code/verify_browser_use.py)：browser-use 导入、本地浏览器启动和DOM读取验证。
+    - **源文件** `file-verify-skyvern-py`：[verify_skyvern.py](artifacts/code/verify_skyvern.py)：Skyvern嵌入式运行库、本地Chrome/CDP与页面读取验证。
+    - **源文件** `file-verify-scrapegraph-py`：[verify_scrapegraph.py](artifacts/code/verify_scrapegraph.py)：ScrapeGraphAI导入与上游ChromiumLoader验证。
+    - **源文件** `file-env-example`：[.env.example](artifacts/code/.env.example)：空配置模板；真实 .env 明确不归档。
+    - **源文件** `file-gitignore`：[.gitignore](artifacts/code/.gitignore)：部署目录运行数据、环境、缓存和密钥文件忽略规则。
+    - **源文件** `file-requirements-gateway-txt`：[requirements-gateway.txt](artifacts/code/requirements-gateway.txt)：MCP网关固定顶层依赖。
+    - **源文件** `file-firecrawl-compose-yaml`：[firecrawl/compose.yaml](artifacts/code/firecrawl/compose.yaml)：五服务自托管容器配置，API仅绑定回环地址。
+    - **源文件** `file-firecrawl-install-docker-wsl-sh`：[firecrawl/install-docker-wsl.sh](artifacts/code/firecrawl/install-docker-wsl.sh)：在专用Ubuntu内安装并启动Docker与Compose。
+    - **依赖记录** `deps`：四个环境的freeze快照在artifacts/dependencies；Install固定顶层版本，freeze仅为本次已测记录，不代表未来重新安装完全自动锁定传递依赖。
+    - **MCP配置** `config`：[空密钥配置示例](artifacts/config/codex-mcp.example.toml)只含local_crawlers命令/参数；真实.env和全局配置不归档。重新注册后加载MCP。
+  - **验证记录** `verification`：归档保留原始验收/状态JSON，区分安装、可导入、浏览器读取、模型配置、端到端任务；本次归档仅做离线完整性验证。
+    - **已通过** `verify-mcp`：MCP握手、6工具发现、HTML提取、JS渲染、后台任务与结果读取、未配置模型时明确报错。[报告](artifacts/evidence/verification.json)
+    - **已通过** `verify-engines`：三框架非模型基础验证：browser-use本地浏览器导航DOM，Skyvern本地Chrome/CDP读取，ScrapeGraph上游ChromiumLoader读取；各报告均model_called=false。
+    - **已通过** `verify-migration`：迁移后四套基础验证和四环境依赖检查均通过；父仓库research检查已在前轮通过。[迁移复测](artifacts/evidence/migration-verification.json)
+    - **未验收** `verify-ai-pending`：三个框架的模型驱动端到端、视觉、登录、验证码与真实业务流程未验收；不能用基础验证推导这些能力可用。
+  - **E盘迁移** `migration`：部署代码、配置、独立环境迁入E:\CAICTBigData\coding\local-crawlers；旧C盘目录为兼容联接；新Codex配置直接使用E盘。
+    - **复制和复测** `migration-proof`：复制49106个非pyc文件，共1688429339字节；missing和mismatch为空；重建92个环境命令入口。[迁移报告](artifacts/evidence/migration-report.json)
+    - **历史保留** `migration-history`：旧验收报告在运行目录migration-history/20261027-before-move，本树保存关键新报告；不覆盖历史失败来声称成功。
+    - **恢复边界** `migration-portability`：venv底层仍依赖C盘Codex Python；D盘Linux数据未迁到E；新电脑需重新安装环境并调整Python/Chrome/WSL路径，不能直接复制venv当完全便携。
+  - **WSL系统准备** `host`：已安装微软签名Valid的WSL3.0.3、启用Windows WSL和VirtualMachinePlatform；系统明确要求重启，用户要求不自动重启，实际未自动重启。
+    - **镜像** `host-image`：Ubuntu24.04.5镜像已校验SHA256并保存在D:\CodexLocalCrawlers\installers；[摘要记录](artifacts/evidence/ubuntu-image.json)。尚未导入发行版。
+    - **待手动重启后** `host-next`：执行Complete-FirecrawlWSL.ps1，导入专用CodexCrawlers至D盘WSL目录，安装Docker/Compose并启动Firecrawl；启动脚本不重启Windows。
+  - **DeepSeek接入** `model`：需求名DeepSeek V4.1 Flash；按用户指示稍后配置。MODEL_ID/BASE_URL/API_KEY未配置，视觉默认false。不得猜供应商实际模型ID。
+    - **待办** `model-next`：核实实际ID、接口、工具调用/JSON/图片兼容；密钥用环境变量，配置MCP透传；三框架分别做小规模端到端并核对依据、schema和失败记录。
+  - **研究流水线** `research-integration`：本组件当前独立MCP，尚未并入父仓库版本1任务协议；正式研究继续执行来源边界、证据留存、日期口径、核验规则。后续再设计适配器。
+  - **归档范围** `privacy`：保存本轮源码、配置空模板、四份依赖快照和关键JSON证据；排除真实.env、密码/密钥、Cookie/资料目录、全局配置、运行原文、venv和大安装包；原环境保留在E/D盘。
+    - **恢复方法** `restore`：[详细步骤](DETAILS.md)：解压artifacts/code到目标部署目录，重建环境，补非敏感配置与环境密钥，重新注册MCP；Windows/Chrome/WSL路径须按机器调整，历史报告不能替代新验收。
+  - **原始来源** `sources`：以下是本轮选型的四个上游仓库；当前能力以本地代码、安装版本和验收为准。
+    - **GitHub** `source-bu`：[browser-use](https://github.com/browser-use/browser-use)
+    - **GitHub** `source-sky`：[Skyvern](https://github.com/Skyvern-AI/skyvern)
+    - **GitHub** `source-sg`：[ScrapeGraphAI](https://github.com/ScrapeGraphAI/Scrapegraph-ai)
+    - **GitHub** `source-fc`：[Firecrawl](https://github.com/firecrawl/firecrawl)
+  - **关联工作** `related`：[历史本地采集部署](../20261015-deploy/tree.md)、[医院采购入口成果](../hospital-procurement-urls-20261027/tree.md)、[医卫中标来源规则](../medical-digital-tender-rules-20261027/tree.md)。本树记录爬虫基础设施，不把这些资料采集覆盖率算作本轮能力验收。
+  - **归档验收** `archive-check`：[归档校验报告](ARCHIVE-VERIFICATION.json)：树JSON/Markdown一致、父子节点有效、源码哈希/ZIP成员与文件一致、内部链接存在、真实敏感值未混入；归档交付completed，部署状态partial。

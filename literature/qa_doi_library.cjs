@@ -1,0 +1,24 @@
+const {chromium}=require('C:/Users/Jane/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('fs');const path=require('path');const {pathToFileURL}=require('url');
+(async()=>{
+ const root=path.resolve(process.argv[2]);const qa=path.join(root,'qa');fs.mkdirSync(qa,{recursive:true});
+ const browser=await chromium.launch({executablePath:'E:/CAICTBigData/coding/.playwright-browsers/chromium_headless_shell-1248/chrome-headless-shell-win64/chrome-headless-shell.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1360,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(pathToFileURL(path.join(root,'architecture_report.html')).href);
+ if(await page.locator('.paper').count()!==22)throw Error('Architecture card coverage');
+ if(await page.locator('tbody tr').count()!==100)throw Error('Catalog coverage');
+ const brokenReportImages=await page.locator('img').evaluateAll(xs=>xs.filter(x=>!x.complete||x.naturalWidth===0).map(x=>x.src));
+ if(brokenReportImages.length)throw Error('Broken report images: '+brokenReportImages.join(', '));
+ await page.screenshot({path:path.join(qa,'report-desktop.png')});
+ await page.locator('#q').fill('Cherry Tomato');if(await page.locator('tbody tr:visible').count()!==1)throw Error('Report search');
+ await page.locator('#q').fill('');await page.locator('#p2023-20').screenshot({path:path.join(qa,'tomato-architecture.png')});
+ await page.setViewportSize({width:390,height:844});await page.goto(pathToFileURL(path.join(root,'architecture_report.html')).href);await page.screenshot({path:path.join(qa,'report-mobile.png')});
+ if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))throw Error('Mobile overflow');
+ await page.setViewportSize({width:1360,height:1000});await page.goto(pathToFileURL(path.join(root,'images/index.html')).href);
+ if(await page.locator('section').count()!==22)throw Error('Gallery coverage');
+ await page.screenshot({path:path.join(qa,'gallery-desktop.png')});
+ await page.locator('#q').fill('Cherry Tomato');if(await page.locator('section:visible').count()!==1)throw Error('Gallery search');
+ if(errors.length)throw Error(errors.join('\n'));
+ fs.writeFileSync(path.join(qa,'browser-verification.json'),JSON.stringify({passed:true,architecture_cards:22,catalog_rows:100,gallery_papers:22,report_search:true,gallery_search:true,mobile_overflow:false,page_errors:errors},null,2));
+ await browser.close();console.log('Report and gallery browser verification passed');
+})().catch(e=>{console.error(e);process.exit(1)});

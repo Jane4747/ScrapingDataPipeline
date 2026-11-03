@@ -1,0 +1,784 @@
+{
+  "id": "local-crawler-agents-20261027",
+  "created_at": "2026-10-27T23:45:30+08:00",
+  "updated_at": "2026-10-27T23:45:30+08:00",
+  "status": "partial",
+  "status_note": "代码和能力归档完成；三个模型后端等待稍后配置DeepSeek；Firecrawl等待手动重启后完成容器安装和验收。",
+  "requirement": "把本次部署的代码、每个智能体的能力、使用入口、验证结果和详细待办保存到想法树，方便以后找到和安排任务。",
+  "theme": "本地爬虫智能体与Harness：browser-use、Skyvern、ScrapeGraphAI、Firecrawl及Codex MCP",
+  "delivery": "[完整说明](DETAILS.md)、[代码索引](CODE-INDEX.md)、[代码与记录压缩包](local-crawlers-source-and-records-20261027.zip)、[任务模板](TASK-TEMPLATES.json)、[归档校验](ARCHIVE-VERIFICATION.json)",
+  "tool": "现有idea_tree_writer + 本轮源码/依赖/验收快照 + SHA256与ZIP校验",
+  "tags": [
+    "本地爬虫",
+    "爬虫智能体",
+    "爬虫Harness",
+    "local_crawlers",
+    "Codex",
+    "MCP",
+    "browser-use",
+    "Skyvern",
+    "ScrapeGraphAI",
+    "Firecrawl",
+    "DeepSeek V4.1 Flash",
+    "E盘迁移",
+    "WSL",
+    "CodexCrawlers",
+    "医院采购",
+    "代码归档",
+    "任务分工"
+  ],
+  "live_directory": "E:\\CAICTBigData\\coding\\local-crawlers",
+  "nodes": [
+    {
+      "id": "need",
+      "parent": null,
+      "kind": "需求",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "将本次本地爬虫部署的代码、能力、状态、决策和待办完整归档，便于以后检索与安排任务。归档已完成，部署整体仍为partial。"
+    },
+    {
+      "id": "entry",
+      "parent": "need",
+      "kind": "查找入口",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "先读[完整说明](DETAILS.md)，找源码看[代码索引](CODE-INDEX.md)，直接备份用[压缩包](local-crawlers-source-and-records-20261027.zip)，安排任务参考[模板](TASK-TEMPLATES.json)。"
+    },
+    {
+      "id": "decisions",
+      "parent": "need",
+      "kind": "用户决定",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "网页种类多；采集程序在本机，提供给Codex；代码迁往E:\\CAICTBigData\\coding；DeepSeek稍后配置；WSL现在准备但不得自动重启。"
+    },
+    {
+      "id": "scope",
+      "parent": "decisions",
+      "kind": "范围",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "选择四后端+一个MCP入口+两个无需后端模型的基础工具。仅记录已安装版本和当前适配器；不把厂商云端能力当作本地已部署能力。"
+    },
+    {
+      "id": "arch",
+      "parent": "need",
+      "kind": "架构",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "Codex→gateway.py→job_runner.py→独立环境worker.py→本地Chrome或Firecrawl API→runs结果。Harness负责统一调用、预算、后台进程、状态、日志和结构校验。"
+    },
+    {
+      "id": "harness-functions",
+      "parent": "arch",
+      "kind": "已实现",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "参数检查、URL格式校验、缺失模型/后端报错、默认单任务并发、时限、进程树超时清理、原子JSON保存、日志、结果预览、schema结构校验。"
+    },
+    {
+      "id": "harness-limits",
+      "parent": "arch",
+      "kind": "当前边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "尚无周期调度、统一取消、遗留running自动修复、代理池、通用OCR、共享登录态、验证码服务和父研究协议集成；URL校验不等于研究来源白名单/robots约束。"
+    },
+    {
+      "id": "tools",
+      "parent": "arch",
+      "kind": "MCP接口",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "已注册local_crawlers，共6个工具；精确参数、限制和返回字段见[完整说明第8节](DETAILS.md)。"
+    },
+    {
+      "id": "tool-status",
+      "parent": "tools",
+      "kind": "crawler_status",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "无参数；检查安装版本、模型配置标记、Firecrawl可达性及输出目录，不返回密钥。配置齐全不等于模型调用验证成功。"
+    },
+    {
+      "id": "tool-fetch",
+      "parent": "tools",
+      "kind": "fetch_page",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "同步HTTP读取HTML；支持CSS区域；保存完整正文、标题和最多100个链接。默认回复12000字符、最多50000；HTML最多5000000字节；不执行JS、不解析PDF。"
+    },
+    {
+      "id": "tool-render",
+      "parent": "tools",
+      "kind": "render_page",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "无需后端模型，用本地Chrome渲染JS页面；后台任务；保存正文、链接、HTML、整页截图。默认120秒，DOM加载后等1.5秒；不自动点击/滚动/翻页。"
+    },
+    {
+      "id": "tool-start",
+      "parent": "tools",
+      "kind": "start_crawl",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "engine四选一+task+urls+可选schema；默认20页、30步、900秒；范围分别1..500、1..200、30..1800。Skyvern/Firecrawl只接一个起始URL；三个模型后端当前会明确报未配置。"
+    },
+    {
+      "id": "tool-poll",
+      "parent": "tools",
+      "kind": "job_status",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "按16位后台job_id读取状态和结果预览，返回完整结果与日志路径；默认12000字符，100..50000夹限；fetch-*同步结果目录不用此接口。"
+    },
+    {
+      "id": "tool-map",
+      "parent": "tools",
+      "kind": "firecrawl_map",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "本机/v2/map链接发现；默认100，范围1..1000；Firecrawl尚未启动，暂不可用。"
+    },
+    {
+      "id": "engines",
+      "parent": "need",
+      "kind": "四后端能力",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "按任务选择：交互→browser-use；单站多步骤流程→Skyvern；已知网址统一字段→ScrapeGraphAI；链接发现和批量原文→Firecrawl。"
+    },
+    {
+      "id": "bu",
+      "parent": "engines",
+      "kind": "browser-use 0.13.14",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "独立环境已安装，基础浏览器验证通过；模型驱动交互尚待DeepSeek配置后验收。",
+      "repository": "https://github.com/browser-use/browser-use"
+    },
+    {
+      "id": "bu-functions",
+      "parent": "bu",
+      "kind": "能力",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "依据页面状态完成搜索、点击、输入、筛选、翻页、展开、滚动、切换标签页和提取；任务内可下载文件；保存历史，可要求JSON并验证结构。上述自动决策待模型实测。"
+    },
+    {
+      "id": "bu-code",
+      "parent": "bu",
+      "kind": "实现",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[worker.py](artifacts/code/worker.py)的browser_use_task，Agent+Browser+兼容模型；use_cloud=False；每任务新资料目录、下载目录；max_steps传入Agent，检查history成功。"
+    },
+    {
+      "id": "bu-output",
+      "parent": "bu",
+      "kind": "产物",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "通用result.json、browser-history.json、downloads和任务日志；结果来源URL保留。"
+    },
+    {
+      "id": "bu-limit",
+      "parent": "bu",
+      "kind": "边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "未统一暴露历史重放/文件上传；不继承日常Chrome登录；视觉默认关闭。max_pages不是实际访问页数硬限制，当前靠步数/时限。"
+    },
+    {
+      "id": "bu-example",
+      "parent": "bu",
+      "kind": "任务例",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "在医院采购栏目输入设备关键词，逐条进入详情，提取标题、发布日期、采购人、金额、依据、来源链接；明确记录数目标、步数和时限。"
+    },
+    {
+      "id": "sky",
+      "parent": "engines",
+      "kind": "Skyvern 1.0.56 local",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "嵌入式运行库+内存SQLite已安装，专用本地Chrome/CDP基础验证通过；模型多步骤任务未验收。",
+      "repository": "https://github.com/Skyvern-AI/skyvern"
+    },
+    {
+      "id": "sky-functions",
+      "parent": "sky",
+      "kind": "能力",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "将检索、筛选、选择年份/类型、导航、信息提取或下载串成自然语言任务；支持传提取schema。原项目有更完整的表单/登录/工作流能力，当前不等于全开放。"
+    },
+    {
+      "id": "sky-code",
+      "parent": "sky",
+      "kind": "实现",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "worker.py的skyvern_task，Skyvern.local(use_in_memory_db=True)，每任务随机回环CDP端口，本机Chrome；仅run_task、单起始URL、步数与时限；completed才接受结果。"
+    },
+    {
+      "id": "sky-output",
+      "parent": "sky",
+      "kind": "产物",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "result.json、skyvern-run.json、artifacts和任务日志。内存数据库不是跨任务状态存储。"
+    },
+    {
+      "id": "sky-limit",
+      "parent": "sky",
+      "kind": "边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "没有完整Web平台、命名工作流管理/调度/直播工具；凭据、验证码、视觉、实际多步业务流程都未验收；云端反自动化能力不计本地。"
+    },
+    {
+      "id": "sky-example",
+      "parent": "sky",
+      "kind": "任务例",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "从单个省采购站入口输入关键词、选公告类型和年份、读取详情，提取采购人、预算、日期、附件链接；先用少量记录验收流程。"
+    },
+    {
+      "id": "sg",
+      "parent": "engines",
+      "kind": "ScrapeGraphAI 2.3.1",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "核心库和ChromiumLoader真实页面读取已通过；单/多页模型字段提取待验收。",
+      "repository": "https://github.com/ScrapeGraphAI/Scrapegraph-ai"
+    },
+    {
+      "id": "sg-functions",
+      "parent": "sg",
+      "kind": "能力",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "给定一个或多个已知URL，用同一自然语言字段要求提取并汇总；可带schema作最终结构检查，适合排版不统一的详情页。"
+    },
+    {
+      "id": "sg-code",
+      "parent": "sg",
+      "kind": "实现",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "worker.py的scrapegraph_task；SmartScraperGraph/SmartScraperMultiGraph；loader_kwargs直接放executable_path；schema加入提示并在worker末尾验证。"
+    },
+    {
+      "id": "sg-limit",
+      "parent": "sg",
+      "kind": "边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "未开放SearchGraph、脚本/音频生成、本地文档/OCR；复杂按钮交互用其他浏览器后端。结构正确不等于事实核验正确。"
+    },
+    {
+      "id": "sg-example",
+      "parent": "sg",
+      "kind": "任务例",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "提供一组医院/企业/项目详情页，统一提取机构、项目、产品、日期、原文依据、来源；未知字段留空，后续核对原文。"
+    },
+    {
+      "id": "fc",
+      "parent": "engines",
+      "kind": "Firecrawl",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "本地map/crawl适配器与Compose已备；WSL和镜像准备完，容器未运行，等待手动重启后继续。",
+      "repository": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "id": "fc-functions",
+      "parent": "fc",
+      "kind": "已写接口",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "站点URL发现/v2/map；单站批量/v2/crawl，设置limit、返回Markdown、轮询完成并取尽结果分页；目前未实际服务验收。"
+    },
+    {
+      "id": "fc-code",
+      "parent": "fc",
+      "kind": "实现",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Compose](artifacts/code/firecrawl/compose.yaml)五服务：api、playwright、Redis、RabbitMQ、PostgreSQL；API仅127.0.0.1:3002，适配器强制本机服务，无托管兜底。"
+    },
+    {
+      "id": "fc-limit",
+      "parent": "fc",
+      "kind": "边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "task不会转换为主题/年份/栏目过滤；不接受非空schema；不含云Agent/搜索/监控/托管反自动化；部分镜像latest尚未拉取固定digest。"
+    },
+    {
+      "id": "fc-example",
+      "parent": "fc",
+      "kind": "任务例",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "服务验收后，从一个政策/产品文档入口抓取最多100页，保存Markdown和来源，再由Codex筛选主题、提取字段。"
+    },
+    {
+      "id": "budget",
+      "parent": "need",
+      "kind": "预算与输出",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "默认并发1、时限15分钟；交互默认30步；Firecrawl默认20页。结果写E盘runs，Excel/CSV由Codex后处理。"
+    },
+    {
+      "id": "budget-pages",
+      "parent": "budget",
+      "kind": "页数语义",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "max_pages约束输入URL数和Firecrawl limit，对browser-use/Skyvern不是访问页数硬上限；严格域名/累计页数/深度/频率管理需要另接约束。"
+    },
+    {
+      "id": "budget-state",
+      "parent": "budget",
+      "kind": "后台状态",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "queued→running→completed/failed；input/state/result/supervisor/worker日志留存；超时清理worker进程树；无自动遗留状态修复和统一取消入口。"
+    },
+    {
+      "id": "task-fields",
+      "parent": "budget",
+      "kind": "安排任务所需",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "目标、入口、站点/栏目范围、关键词/时间口径、字段、记录/页数目标、步数、时限、交付格式、原文/附件保留要求；未知字段留空、保留依据与来源。"
+    },
+    {
+      "id": "code",
+      "parent": "need",
+      "kind": "代码归档",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[代码索引](CODE-INDEX.md)列出每个文件用途、可浏览副本和原路径；[清单](SOURCE-MANIFEST.json)记录每个副本SHA256、字节数、来源、分类与脱敏变更。"
+    },
+    {
+      "id": "file-gateway-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[gateway.py](artifacts/code/gateway.py)：六个 MCP 工具、输入检查、并发入口和后台任务提交。"
+    },
+    {
+      "id": "file-common-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[common.py](artifacts/code/common.py)：相对目录定位、环境变量、模型配置检查、TLS、URL校验与原子写入。"
+    },
+    {
+      "id": "file-worker-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[worker.py](artifacts/code/worker.py)：browser-use / Skyvern / ScrapeGraphAI / Firecrawl 及渲染适配器。"
+    },
+    {
+      "id": "file-job-runner-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[job_runner.py](artifacts/code/job_runner.py)：后台监督、任务时限、日志和超时进程树清理。"
+    },
+    {
+      "id": "file-install-ps1",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Install.ps1](artifacts/code/Install.ps1)：创建四个独立 Python 环境并安装固定顶层版本。"
+    },
+    {
+      "id": "file-register-codex-ps1",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Register-Codex.ps1](artifacts/code/Register-Codex.ps1)：注册 local_crawlers MCP，不包含全局配置或密钥。"
+    },
+    {
+      "id": "file-start-firecrawl-ps1",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Start-Firecrawl.ps1](artifacts/code/Start-Firecrawl.ps1)：Docker 或专用 WSL 环境中的服务启动/停止。"
+    },
+    {
+      "id": "file-complete-firecrawlwsl-ps1",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Complete-FirecrawlWSL.ps1](artifacts/code/Complete-FirecrawlWSL.ps1)：手动重启后的专用 Ubuntu 导入、Docker 安装与容器启动。"
+    },
+    {
+      "id": "file-configure-wslhost-ps1",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Configure-WSLHost.ps1](artifacts/code/Configure-WSLHost.ps1)：管理员系统准备，启用功能且不自动重启。"
+    },
+    {
+      "id": "file-download-wsl-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[download_wsl.py](artifacts/code/download_wsl.py)：WSL 安装包下载与摘要校验辅助。"
+    },
+    {
+      "id": "file-download-ubuntu-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[download_ubuntu.py](artifacts/code/download_ubuntu.py)：Ubuntu WSL 镜像下载与摘要校验辅助。"
+    },
+    {
+      "id": "file-migrate-runtime-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[migrate_runtime.py](artifacts/code/migrate_runtime.py)：E盘迁移后重新生成虚拟环境命令入口。"
+    },
+    {
+      "id": "file-migration-validation-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[migration_validation.py](artifacts/code/migration_validation.py)：迁移后依赖和功能验证辅助。"
+    },
+    {
+      "id": "file-report-status-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[report_status.py](artifacts/code/report_status.py)：生成部署状态报告，不返回密钥值。"
+    },
+    {
+      "id": "file-verify-stack-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[verify_stack.py](artifacts/code/verify_stack.py)：MCP握手、工具发现、HTML/JS渲染和缺失模型验证。"
+    },
+    {
+      "id": "file-verify-browser-use-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[verify_browser_use.py](artifacts/code/verify_browser_use.py)：browser-use 导入、本地浏览器启动和DOM读取验证。"
+    },
+    {
+      "id": "file-verify-skyvern-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[verify_skyvern.py](artifacts/code/verify_skyvern.py)：Skyvern嵌入式运行库、本地Chrome/CDP与页面读取验证。"
+    },
+    {
+      "id": "file-verify-scrapegraph-py",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[verify_scrapegraph.py](artifacts/code/verify_scrapegraph.py)：ScrapeGraphAI导入与上游ChromiumLoader验证。"
+    },
+    {
+      "id": "file-env-example",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[.env.example](artifacts/code/.env.example)：空配置模板；真实 .env 明确不归档。"
+    },
+    {
+      "id": "file-gitignore",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[.gitignore](artifacts/code/.gitignore)：部署目录运行数据、环境、缓存和密钥文件忽略规则。"
+    },
+    {
+      "id": "file-requirements-gateway-txt",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[requirements-gateway.txt](artifacts/code/requirements-gateway.txt)：MCP网关固定顶层依赖。"
+    },
+    {
+      "id": "file-firecrawl-compose-yaml",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[firecrawl/compose.yaml](artifacts/code/firecrawl/compose.yaml)：五服务自托管容器配置，API仅绑定回环地址。"
+    },
+    {
+      "id": "file-firecrawl-install-docker-wsl-sh",
+      "parent": "code",
+      "kind": "源文件",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[firecrawl/install-docker-wsl.sh](artifacts/code/firecrawl/install-docker-wsl.sh)：在专用Ubuntu内安装并启动Docker与Compose。"
+    },
+    {
+      "id": "deps",
+      "parent": "code",
+      "kind": "依赖记录",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "四个环境的freeze快照在artifacts/dependencies；Install固定顶层版本，freeze仅为本次已测记录，不代表未来重新安装完全自动锁定传递依赖。"
+    },
+    {
+      "id": "config",
+      "parent": "code",
+      "kind": "MCP配置",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[空密钥配置示例](artifacts/config/codex-mcp.example.toml)只含local_crawlers命令/参数；真实.env和全局配置不归档。重新注册后加载MCP。"
+    },
+    {
+      "id": "verification",
+      "parent": "need",
+      "kind": "验证记录",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "归档保留原始验收/状态JSON，区分安装、可导入、浏览器读取、模型配置、端到端任务；本次归档仅做离线完整性验证。"
+    },
+    {
+      "id": "verify-mcp",
+      "parent": "verification",
+      "kind": "已通过",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "MCP握手、6工具发现、HTML提取、JS渲染、后台任务与结果读取、未配置模型时明确报错。[报告](artifacts/evidence/verification.json)"
+    },
+    {
+      "id": "verify-engines",
+      "parent": "verification",
+      "kind": "已通过",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "三框架非模型基础验证：browser-use本地浏览器导航DOM，Skyvern本地Chrome/CDP读取，ScrapeGraph上游ChromiumLoader读取；各报告均model_called=false。"
+    },
+    {
+      "id": "verify-migration",
+      "parent": "verification",
+      "kind": "已通过",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "迁移后四套基础验证和四环境依赖检查均通过；父仓库research检查已在前轮通过。[迁移复测](artifacts/evidence/migration-verification.json)"
+    },
+    {
+      "id": "verify-ai-pending",
+      "parent": "verification",
+      "kind": "未验收",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "三个框架的模型驱动端到端、视觉、登录、验证码与真实业务流程未验收；不能用基础验证推导这些能力可用。"
+    },
+    {
+      "id": "migration",
+      "parent": "need",
+      "kind": "E盘迁移",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "部署代码、配置、独立环境迁入E:\\CAICTBigData\\coding\\local-crawlers；旧C盘目录为兼容联接；新Codex配置直接使用E盘。"
+    },
+    {
+      "id": "migration-proof",
+      "parent": "migration",
+      "kind": "复制和复测",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "复制49106个非pyc文件，共1688429339字节；missing和mismatch为空；重建92个环境命令入口。[迁移报告](artifacts/evidence/migration-report.json)"
+    },
+    {
+      "id": "migration-history",
+      "parent": "migration",
+      "kind": "历史保留",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "旧验收报告在运行目录migration-history/20261027-before-move，本树保存关键新报告；不覆盖历史失败来声称成功。"
+    },
+    {
+      "id": "migration-portability",
+      "parent": "migration",
+      "kind": "恢复边界",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "venv底层仍依赖C盘Codex Python；D盘Linux数据未迁到E；新电脑需重新安装环境并调整Python/Chrome/WSL路径，不能直接复制venv当完全便携。"
+    },
+    {
+      "id": "host",
+      "parent": "need",
+      "kind": "WSL系统准备",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "partial",
+      "text": "已安装微软签名Valid的WSL3.0.3、启用Windows WSL和VirtualMachinePlatform；系统明确要求重启，用户要求不自动重启，实际未自动重启。"
+    },
+    {
+      "id": "host-image",
+      "parent": "host",
+      "kind": "镜像",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "Ubuntu24.04.5镜像已校验SHA256并保存在D:\\CodexLocalCrawlers\\installers；[摘要记录](artifacts/evidence/ubuntu-image.json)。尚未导入发行版。"
+    },
+    {
+      "id": "host-next",
+      "parent": "host",
+      "kind": "待手动重启后",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "awaiting_jane",
+      "text": "执行Complete-FirecrawlWSL.ps1，导入专用CodexCrawlers至D盘WSL目录，安装Docker/Compose并启动Firecrawl；启动脚本不重启Windows。"
+    },
+    {
+      "id": "model",
+      "parent": "need",
+      "kind": "DeepSeek接入",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "需求名DeepSeek V4.1 Flash；按用户指示稍后配置。MODEL_ID/BASE_URL/API_KEY未配置，视觉默认false。不得猜供应商实际模型ID。"
+    },
+    {
+      "id": "model-next",
+      "parent": "model",
+      "kind": "待办",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "核实实际ID、接口、工具调用/JSON/图片兼容；密钥用环境变量，配置MCP透传；三框架分别做小规模端到端并核对依据、schema和失败记录。"
+    },
+    {
+      "id": "research-integration",
+      "parent": "need",
+      "kind": "研究流水线",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "planned",
+      "text": "本组件当前独立MCP，尚未并入父仓库版本1任务协议；正式研究继续执行来源边界、证据留存、日期口径、核验规则。后续再设计适配器。"
+    },
+    {
+      "id": "privacy",
+      "parent": "need",
+      "kind": "归档范围",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "保存本轮源码、配置空模板、四份依赖快照和关键JSON证据；排除真实.env、密码/密钥、Cookie/资料目录、全局配置、运行原文、venv和大安装包；原环境保留在E/D盘。"
+    },
+    {
+      "id": "restore",
+      "parent": "privacy",
+      "kind": "恢复方法",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[详细步骤](DETAILS.md)：解压artifacts/code到目标部署目录，重建环境，补非敏感配置与环境密钥，重新注册MCP；Windows/Chrome/WSL路径须按机器调整，历史报告不能替代新验收。"
+    },
+    {
+      "id": "sources",
+      "parent": "need",
+      "kind": "原始来源",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "以下是本轮选型的四个上游仓库；当前能力以本地代码、安装版本和验收为准。"
+    },
+    {
+      "id": "source-bu",
+      "parent": "sources",
+      "kind": "GitHub",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[browser-use](https://github.com/browser-use/browser-use)",
+      "url": "https://github.com/browser-use/browser-use"
+    },
+    {
+      "id": "source-sky",
+      "parent": "sources",
+      "kind": "GitHub",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Skyvern](https://github.com/Skyvern-AI/skyvern)",
+      "url": "https://github.com/Skyvern-AI/skyvern"
+    },
+    {
+      "id": "source-sg",
+      "parent": "sources",
+      "kind": "GitHub",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[ScrapeGraphAI](https://github.com/ScrapeGraphAI/Scrapegraph-ai)",
+      "url": "https://github.com/ScrapeGraphAI/Scrapegraph-ai"
+    },
+    {
+      "id": "source-fc",
+      "parent": "sources",
+      "kind": "GitHub",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[Firecrawl](https://github.com/firecrawl/firecrawl)",
+      "url": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "id": "related",
+      "parent": "need",
+      "kind": "关联工作",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[历史本地采集部署](../20261015-deploy/tree.md)、[医院采购入口成果](../hospital-procurement-urls-20261027/tree.md)、[医卫中标来源规则](../medical-digital-tender-rules-20261027/tree.md)。本树记录爬虫基础设施，不把这些资料采集覆盖率算作本轮能力验收。"
+    },
+    {
+      "id": "archive-check",
+      "parent": "need",
+      "kind": "归档验收",
+      "at": "2026-10-27T23:45:30+08:00",
+      "status": "completed",
+      "text": "[归档校验报告](ARCHIVE-VERIFICATION.json)：树JSON/Markdown一致、父子节点有效、源码哈希/ZIP成员与文件一致、内部链接存在、真实敏感值未混入；归档交付completed，部署状态partial。"
+    }
+  ],
+  "result": {
+    "archive_status": "completed",
+    "deployment_status": "partial",
+    "model_configured": false,
+    "ai_end_to_end_tested": false,
+    "firecrawl_running": false,
+    "automatic_windows_restart": false,
+    "mcp_tools": 6,
+    "source_zip": "local-crawlers-source-and-records-20261027.zip",
+    "archived_source_files": 23,
+    "dependency_snapshots": 4,
+    "evidence_reports": 12,
+    "snapshot_files_from_sources": 44,
+    "node_count": 91
+  }
+}

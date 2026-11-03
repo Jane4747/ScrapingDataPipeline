@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "reviewed_by": "Codex visual review of source PDF pages",
+  "coordinate_system": "PDF points, top-left origin",
+  "items": [
+    {
+      "arxiv_id": "2605.09423",
+      "number": "1",
+      "page": 1,
+      "crop": [
+        108,
+        239,
+        504,
+        447
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "number": "7",
+      "page": 9,
+      "crop": [
+        108,
+        70,
+        504,
+        563
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "number": "10",
+      "page": 31,
+      "crop": [
+        108,
+        70,
+        504,
+        571
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "number": "11",
+      "page": 41,
+      "crop": [
+        108,
+        154,
+        504,
+        408
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "number": "12",
+      "page": 42,
+      "crop": [
+        108,
+        98,
+        504,
+        363
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2605.09423",
+      "number": "13",
+      "page": 42,
+      "crop": [
+        108,
+        432,
+        504,
+        655
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2606.19980",
+      "number": "10",
+      "page": 18,
+      "crop": [
+        62,
+        88,
+        533,
+        209
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.18867",
+      "number": "14",
+      "page": 26,
+      "crop": [
+        70,
+        240,
+        541,
+        654
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.18792",
+      "number": "1",
+      "page": 1,
+      "crop": [
+        126,
+        202,
+        488,
+        443
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.18792",
+      "number": "11",
+      "page": 12,
+      "crop": [
+        107,
+        237,
+        506,
+        378
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.10498",
+      "number": "1",
+      "page": 1,
+      "crop": [
+        335,
+        438,
+        540,
+        693
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.10498",
+      "number": "7",
+      "page": 9,
+      "crop": [
+        92,
+        488,
+        516,
+        616
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2609.37583",
+      "number": "9",
+      "page": 20,
+      "crop": [
+        103,
+        277,
+        509,
+        409
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.20474",
+      "number": "4",
+      "page": 8,
+      "crop": [
+        58,
+        258,
+        300,
+        411
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.18842",
+      "number": "6",
+      "page": 15,
+      "crop": [
+        85,
+        465,
+        527,
+        596
+      ],
+      "reason": "Source-page visual check; preserve full multipanel/code figure or exclude adjacent prose/table/header."
+    },
+    {
+      "arxiv_id": "2610.10498",
+      "number": "5",
+      "page": 8,
+      "crop": [
+        290,
+        209,
+        547,
+        437
+      ],
+      "reason": "Exclude adjacent left-column prose from the wrapfigure; retain complete right-hand task panels."
+    },
+    {
+      "arxiv_id": "2610.18867",
+      "number": "6",
+      "page": 10,
+      "crop": [
+        110,
+        433,
+        500,
+        610
+      ],
+      "reason": "Exclude preceding Table 4 and retain the two bar-chart panels of Figure 6."
+    },
+    {
+      "arxiv_id": "2609.27612",
+      "number": "3",
+      "page": 11,
+      "crop": [
+        54,
+        414,
+        542,
+        719
+      ],
+      "reason": "Final pixel review excludes the last prose line above the rounded architecture panel while retaining its top border."
+    }
+  ],
+  "expected_labels": {
+    "2602.12063": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "2605.09423": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "2606.08610": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "2606.19980": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18"
+    ],
+    "2609.27612": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "2609.31760": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "2609.32069": [
+      "1",
+      "2",
+      "3"
+    ],
+    "2609.37583": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "2609.39685": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "2610.02204": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "2610.08995": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "2610.10498": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "2610.12369": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19"
+    ],
+    "2610.18792": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21"
+    ],
+    "2610.18842": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "2610.18867": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "2610.20474": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "2610.24464": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "2610.29677": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "2609.38905": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "B.1",
+      "C.1",
+      "C.2",
+      "C.3",
+      "E.1",
+      "E.2"
+    ],
+    "2610.07969": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "S1",
+      "S2"
+    ],
+    "2610.13376": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "Supplementary 1",
+      "Supplementary 2",
+      "Supplementary 3"
+    ]
+  }
+}

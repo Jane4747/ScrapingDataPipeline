@@ -1,0 +1,22 @@
+﻿{
+    "started_at":  "2026-10-27T22:50:06.9675000+08:00",
+    "automatic_restart":  false,
+    "status":  "waiting_for_manual_restart",
+    "features":  [
+                     {
+                         "before":  "Disabled",
+                         "name":  "Microsoft-Windows-Subsystem-Linux",
+                         "after":  "Enabled"
+                     },
+                     {
+                         "before":  "Disabled",
+                         "name":  "VirtualMachinePlatform",
+                         "after":  "Enabled"
+                     }
+                 ],
+    "restart_required":  true,
+    "installer_signature":  "Valid",
+    "installer_exit_code":  0,
+    "linux_data_directory":  "D:\\CodexLocalCrawlers\\WSL",
+    "finished_at":  "2026-10-27T22:51:04.2172037+08:00"
+}
