@@ -12,6 +12,7 @@
 | [采集器](#采集器) | 工具选择、异常处理、动态渲染、登录信息与会话处理 |
 | [调研调用指南](docs/GPT_RESEARCH_GUIDE.md) / [AGENTS.md](AGENTS.md) | 任务范围、证据纪律、恢复与协作约定 |
 | [命令与任务协议](docs/COMMANDS.md) | JSON 任务、参数、退出码与目录约定 |
+| [PDF 图表提数与可编辑 PPT](idea-trees/pdf-chart-to-editable-ppt-20261111/tree.md) | 图中数值核对、分组比例计算、Excel 与 PowerPoint 原生图表生成 |
 | [数据字典](docs/DATA_DICTIONARY.md) | 资料、证据、项目、日期及状态口径 |
 | [批次与工具使用手册](docs/USAGE_BATCHES.md) | 各采集链路的输入、命令、输出及依赖 |
 | [2026-11-03 增补批次](docs/BATCHES_20261103.md) | 后续批次的可复用工具与范围 |

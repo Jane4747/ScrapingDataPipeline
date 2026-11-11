@@ -1,0 +1,63 @@
+{
+  "schema": "pdf-percent-charts.v1",
+  "title": "工作组承担的业务",
+  "source": {
+    "path": "example-source.pdf",
+    "title": "示例调查（合成数据）",
+    "organization": "工作流示例"
+  },
+  "fontFamily": "Microsoft YaHei",
+  "colors": [
+    "#2E75B6",
+    "#D62728"
+  ],
+  "figures": [
+    {
+      "id": "1.1",
+      "name": "1.1 业务范围",
+      "subtitle": "按工作组分层",
+      "sourcePages": "1",
+      "pdfPages": [
+        1
+      ],
+      "countUnit": "人",
+      "multiResponse": true,
+      "categories": [
+        "运维",
+        "培训",
+        "分析"
+      ],
+      "series": [
+        {
+          "name": "甲组",
+          "n": 10,
+          "counts": [
+            7,
+            6,
+            0
+          ],
+          "values": [
+            0.7,
+            0.6,
+            0
+          ]
+        },
+        {
+          "name": "乙组",
+          "n": 8,
+          "counts": [
+            8,
+            2,
+            3
+          ],
+          "values": [
+            1,
+            0.25,
+            0.375
+          ]
+        }
+      ],
+      "note": "示例中同一人可承担多项业务，各项占比共用该组的样本量。"
+    }
+  ]
+}
